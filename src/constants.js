@@ -2,7 +2,7 @@
  * Global Constants
  */
 import { Platform } from "react-native";
-export const API_URL = "http://13.124.21.111/";
+export const API_URL = "http://13.124.21.111/api";
 
 export const theme = {
   pointColor: "#dd6871",

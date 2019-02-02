@@ -1,3 +1,4 @@
+import React from "react";
 import { Navigation } from "react-native-navigation";
 import { Provider } from "react-redux";
 import App from "./Screens/App";
@@ -5,7 +6,7 @@ import App from "./Screens/App";
 // import BrandScreen from "./Screens/BrandScreen";
 // import ProfileScreen from "./Screens/ProfileScreen";
 // import SignInScreen from "./Screens/SignInScreen";
-// import WelcomeScreen from "./Screens/WelcomeScreen";
+import WelcomeScreen from "./Screens/WelcomeScreen";
 // import GenderScreen from "./Screens/GenderScreen";
 // import RegisterNameScreen from "./Screens/RegisterNameScreen";
 // import PhoneVerifyScreen from "./Screens/PhoneVerifyScreen";
@@ -16,11 +17,17 @@ import App from "./Screens/App";
 
 import configureStore from "./configureStore";
 
-const initialState = {};
-const store = configureStore(initialState);
 const registerScreens = () => {
-  Navigation.registerComponentWithRedux("wave.app", () => App, Provider, store);
-  // // Tab Screens
+  const store = configureStore({});
+  Navigation.registerComponent(
+    "wave.app",
+    () => props => (
+      <Provider store={store}>
+        <App {...props} />
+      </Provider>
+    ),
+    () => App
+  ); // Tab Screens
   // Navigation.registerComponentWithRedux(
   //   "wave.home",
   //   () => HomeScreen,
@@ -40,12 +47,16 @@ const registerScreens = () => {
   //   store
   // );
   // // Auth Screens
-  // Navigation.registerComponentWithRedux(
-  //   "wave.welcome",
-  //   () => WelcomeScreen,
-  //   Provider,
-  //   store
-  // );
+  Navigation.registerComponent(
+    "wave.welcome",
+    () => props => (
+      <Provider store={store}>
+        <WelcomeScreen {...props} />
+      </Provider>
+    ),
+    () => WelcomeScreen
+  );
+
   // Navigation.registerComponentWithRedux(
   //   "wave.signIn",
   //   () => SignInScreen,
