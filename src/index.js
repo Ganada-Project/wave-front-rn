@@ -13,6 +13,7 @@ import PhoneVerifyScreen from './Screens/PhoneVerifyScreen';
 import PasswordScreen from './Screens/PasswordScreen';
 import FavStyleScreen from './Screens/FavStyleScreen';
 import PoseInfoScreen from './Screens/PoseInfoScreen';
+import CameraScreen from './Screens/CameraScreen';
 // import FinalRegisterScreen from "./Screens/FinalRegisterScreen";
 
 import configureStore from './configureStore';
@@ -116,6 +117,24 @@ const registerScreens = () => {
       </Provider>
     ),
     () => PoseInfoScreen,
+  );
+  Navigation.registerComponent(
+    'wave.poseInfo',
+    () => (props) => (
+      <Provider store={store}>
+        <PoseInfoScreen {...props} />
+      </Provider>
+    ),
+    () => PoseInfoScreen,
+  );
+  Navigation.registerComponent(
+    'wave.camera',
+    () => (props) => (
+      <Provider store={store}>
+        <CameraScreen {...props} />
+      </Provider>
+    ),
+    () => CameraScreen,
   );
 
   // Navigation.registerComponentWithRedux(

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
+import PropTypes from 'prop-types';
+import { Navigation } from 'react-native-navigation';
 import styles from './styles';
 import { FullWidthButton } from '../../Components';
 
@@ -8,6 +10,23 @@ class PoseInfoScreen extends Component {
     super(props);
     this.state = {};
   }
+
+  navigateToCamera = () => {
+    const {
+      componentId, name, nickname, phone, gender,
+    } = this.props;
+    Navigation.push(componentId, {
+      component: {
+        name: 'wave.camera',
+        passProps: {
+          name,
+          nickname,
+          phone,
+          gender,
+        },
+      },
+    });
+  };
 
   render() {
     return (
@@ -35,7 +54,7 @@ class PoseInfoScreen extends Component {
         </View>
         <View style={styles.footer}>
           <FullWidthButton
-            onPress={this.navigateTo}
+            onPress={this.navigateToCamera}
             invert
             content="촬영하기"
           />
@@ -44,5 +63,13 @@ class PoseInfoScreen extends Component {
     );
   }
 }
+
+PoseInfoScreen.propTypes = {
+  componentId: PropTypes.string,
+  gender: PropTypes.string,
+  name: PropTypes.string,
+  nickname: PropTypes.string,
+  phone: PropTypes.string,
+};
 
 export default PoseInfoScreen;

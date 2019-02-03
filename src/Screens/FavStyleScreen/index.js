@@ -86,7 +86,7 @@ class FavStyleScreen extends Component {
     return stylesArray;
   };
 
-  navigateToFinalRegister = () => {
+  navigateToPoseInfo = () => {
     const {
       componentId, phone, gender, nickname, name, password,
     } = this.props;
@@ -141,7 +141,7 @@ class FavStyleScreen extends Component {
         </View>
         <View style={styles.footer}>
           <FullWidthButton
-            onPress={this.navigateToFinalRegister}
+            onPress={this.navigateToPoseInfo}
             invert
             content="다음 단계"
           />
