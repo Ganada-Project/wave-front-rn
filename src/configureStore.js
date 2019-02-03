@@ -3,11 +3,11 @@
  * Application Name : Wave
  * Corpyright : Ganada Project
  */
-import { createStore, applyMiddleware } from "redux";
-import { fromJS } from "immutable";
-import createSagaMiddleware from "redux-saga";
-import { composeWithDevTools } from "redux-devtools-extension";
-import createReducer from "./reducers";
+import { createStore, applyMiddleware } from 'redux';
+import { fromJS } from 'immutable';
+import createSagaMiddleware from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import createReducer from './reducers';
 const sagaMiddleware = createSagaMiddleware();
 
 export default function configureStore(initialState = {}) {
@@ -24,7 +24,7 @@ export default function configureStore(initialState = {}) {
   const store = createStore(
     createReducer(),
     fromJS(initialState),
-    composeWithDevTools(applyMiddleware(...middlewares))
+    composeWithDevTools(applyMiddleware(...middlewares)),
   );
 
   // Extensions
@@ -35,7 +35,7 @@ export default function configureStore(initialState = {}) {
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */
   if (module.hot) {
-    module.hot.accept("./reducers", () => {
+    module.hot.accept('./reducers', () => {
       store.replaceReducer(createReducer(store.injectedReducers));
     });
   }

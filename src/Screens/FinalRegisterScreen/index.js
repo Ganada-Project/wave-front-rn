@@ -9,15 +9,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // react-native
-import {} from 'react-native';
+import {
+  View, Text, Image, TouchableOpacity,
+} from 'react-native';
 
 // react-native-photo-upload
 import PhotoUpload from 'react-native-photo-upload';
-
-// @shoutem-ui
-import {
-  View, Text, Image, TouchableOpacity,
-} from '@shoutem/ui';
 
 // react-native-navigation
 import { Navigation } from 'react-native-navigation';
@@ -30,8 +27,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 // injectSaga
-import injectSaga from '../../../utils/injectSaga';
-import DAEMON from '../../../utils/constants';
+import injectSaga from '../../utils/injectSaga';
+import DAEMON from '../../utils/constants';
 
 // local selectors
 import {} from './selectors';
@@ -175,7 +172,7 @@ const mapDispatchToProps = (dispatch) => ({
       weight,
       height,
       waist,
-    })
+    }),
   ),
 });
 
@@ -183,9 +180,9 @@ const withSaga = injectSaga({ key: 'finalRegister', saga });
 
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 );
 export default compose(
   withConnect,
-  withSaga
+  withSaga,
 )(FinalRegisterScreen);

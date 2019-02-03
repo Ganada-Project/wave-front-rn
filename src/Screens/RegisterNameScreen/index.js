@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import { KeyboardAvoidingView, Platform } from 'react-native';
+import {
+  KeyboardAvoidingView, Platform, Text, View,
+} from 'react-native';
 import PropTypes from 'prop-types';
-import { Text, View, Button } from '@shoutem/ui';
 import { Navigation } from 'react-native-navigation';
 import styles from './styles';
 import { RegisterForm, FullWidthButton } from '../../Components';
-import {
-  theme,
-  keyboardVerticalOffset,
-  keyboardBehavior,
-} from '../../constants';
+import { keyboardVerticalOffset, keyboardBehavior } from '../../constants';
 
 export class RegisterNameScreen extends Component {
   static options(passProps) {

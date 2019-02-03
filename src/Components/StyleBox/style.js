@@ -1,6 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { theme } from '../../constants';
-const window = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -12,12 +11,12 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   overlay: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    opacity: 0.5,
+    ...StyleSheet.absoluteFillObject,
+    opacity: 0.4,
   },
   text: {
+    position: 'absolute',
+    bottom: 5,
     fontWeight: '600',
     fontSize: 16,
     color: theme.whiteColor,

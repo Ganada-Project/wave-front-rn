@@ -3,10 +3,16 @@
  */
 
 import { createSelector } from 'reselect';
+import { initialState } from './reducer';
 
-const selectGlobal = (state) => state.get('global');
-const selectPhoneVerification = (state) => state.get('phoneVerificationReducer');
-const makeSelectVerifyNumber = () => createSelector(selectPhoneVerification, (phoneVerification) => phoneVerification.get('verifyNumber'));
-const makeSelectVerifyLoading = () => createSelector(selectPhoneVerification, (phoneVerification) => phoneVerification.get('verifyLoading'));
+const selectPhoneVerification = (state) => state.get('phoneVerify', initialState);
+const makeSelectVerifyNumber = () => createSelector(
+  selectPhoneVerification,
+  (phoneVerification) => phoneVerification.get('verifyNumber'),
+);
+const makeSelectVerifyLoading = () => createSelector(
+  selectPhoneVerification,
+  (phoneVerification) => phoneVerification.get('verifyLoading'),
+);
 
 export { makeSelectVerifyNumber, makeSelectVerifyLoading };

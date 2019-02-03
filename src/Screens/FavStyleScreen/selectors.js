@@ -3,9 +3,16 @@
  */
 
 import { createSelector } from 'reselect';
+import { initialState } from './reducer';
 
-const selectFavStyle = (state) => state.get('favScreenReducer');
-const makeSelectStyles = () => createSelector(selectFavStyle, (favStyle) => favStyle.get('styles'));
-const makeSelectStylesLoading = () => createSelector(selectFavStyle, (favStyle) => favStyle.get('stylesLoading'));
+const selectFavStyle = (state) => state.get('favStyle', initialState);
+const makeSelectStyles = () => createSelector(
+  selectFavStyle,
+  (favStyle) => favStyle.get('styles'),
+);
+const makeSelectStylesLoading = () => createSelector(
+  selectFavStyle,
+  (favStyle) => favStyle.get('stylesLoading'),
+);
 
 export { makeSelectStyles, makeSelectStylesLoading };

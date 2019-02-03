@@ -3,63 +3,64 @@
  * Application Name : Wave
  * Corpyright : Ganada Project
  */
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 // prop-types
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 // react-native
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet, Text, View, TouchableOpacity,
+} from 'react-native';
 
 // react-native-navigation
-import { Navigation } from "react-native-navigation";
+import { Navigation } from 'react-native-navigation';
 
 // redux
-import { compose } from "redux";
-import { connect } from "react-redux";
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 // reselect -> reducer에 있는 프로퍼티들 선택 툴
-import { createStructuredSelector } from "reselect";
+import { createStructuredSelector } from 'reselect';
 
 // injectSaga
-import injectSaga from "../../utils/injectSaga";
-import DAEMON from "../../utils/constants";
+import injectSaga from '../../utils/injectSaga';
 
-import { makeSelectUser } from "./selectors";
+import { makeSelectUser } from './selectors';
 
 // local action
-import { fetchUserAction, trySignOutAction } from "./actions";
+import { fetchUserAction, trySignOutAction } from './actions';
 
 // local saga
-import saga from "./saga";
+import saga from './saga';
 
-import { startTabScreens } from "../../index";
+import { startTabScreens } from '../../index';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF"
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
   welcome: {
     fontSize: 20,
-    textAlign: "center",
-    margin: 10
+    textAlign: 'center',
+    margin: 10,
   },
   instructions: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5
-  }
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
 });
 
 class App extends Component {
   static options(passProps) {
     return {
       topBar: {
-        visible: false
-      }
+        visible: false,
+      },
     };
   }
 
@@ -85,20 +86,19 @@ class App extends Component {
     const { componentId } = this.props;
     Navigation.push(componentId, {
       component: {
-        name: "wave.signIn",
+        name: 'wave.signIn',
         options: {
           topBar: {
             title: {
-              text: "로그인"
-            }
-          }
-        }
-      }
+              text: '로그인',
+            },
+          },
+        },
+      },
     });
   };
 
   render() {
-    console.log(this.props);
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={this.navigateToHome}>
@@ -111,29 +111,29 @@ class App extends Component {
 
 App.propTypes = {
   componentId: PropTypes.string,
-  fetchUser: PropTypes.func
+  fetchUser: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  user: makeSelectUser()
+  user: makeSelectUser(),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   fetchUser: ({ componentId }) => {
     dispatch(fetchUserAction({ componentId }));
   },
   onPressSignOut: ({ componentId }) => {
     dispatch(trySignOutAction({ componentId }));
-  }
+  },
 });
 
-const withSaga = injectSaga({ key: "app", saga });
+const withSaga = injectSaga({ key: 'app', saga });
 
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 );
 export default compose(
   withConnect,
-  withSaga
+  withSaga,
 )(App);

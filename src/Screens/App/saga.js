@@ -1,9 +1,10 @@
-import { AsyncStorage } from "react-native";
-import { Navigation } from "react-native-navigation";
-import { getRequest } from "../../utils/request";
-import { API_URL } from "../../constants";
-
-import { take, fork, call, put, takeLatest, all } from "redux-saga/effects";
+import { AsyncStorage } from 'react-native';
+import { Navigation } from 'react-native-navigation';
+import {
+  take, fork, call, put, takeLatest, all,
+} from 'redux-saga/effects';
+import { getRequest } from '../../utils/request';
+import { API_URL } from '../../constants';
 
 import {
   FETCH_USER_REQUESTING,
@@ -11,15 +12,15 @@ import {
   FETCH_USER_REQUESTING_SUCCESS,
   TRY_SIGN_OUT,
   TRY_SIGN_OUT_SUCCESS,
-  TRY_SIGN_OUT_FAIL
-} from "./constants";
+  TRY_SIGN_OUT_FAIL,
+} from './constants';
 
-import { startTabScreens } from "../../index";
+import { startTabScreens } from '../../index';
 
 const getUserToken = async () => {
   let idToken;
   try {
-    idToken = await AsyncStorage.getItem("wave.idToken");
+    idToken = await AsyncStorage.getItem('wave.idToken');
   } catch (error) {
     // Error retrieving data
     idToken = null;
@@ -40,27 +41,27 @@ export function* fetchUserFlow(action) {
           children: [
             {
               component: {
-                name: "wave.welcome",
+                name: 'wave.welcome',
                 statusBar: {
-                  style: "light"
+                  style: 'light',
                 },
                 options: {
                   topBar: {
-                    visible: false
-                  }
-                }
-              }
-            }
-          ]
-        }
-      }
+                    visible: false,
+                  },
+                },
+              },
+            },
+          ],
+        },
+      },
     });
   } else {
     try {
       const user = yield call(getRequest, { url });
       yield put({
         type: FETCH_USER_REQUESTING_SUCCESS,
-        payload: { user: user.result[0], idToken }
+        payload: { user: user.result[0], idToken },
       });
       // yield startTabScreens();
     } catch (error) {

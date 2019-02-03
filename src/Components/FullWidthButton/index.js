@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Text, View } from "react-native";
-import { Icon, Button } from "react-native-elements";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Platform
+} from "react-native";
+import { Button } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
 
 export class FullWidthButton extends Component {
@@ -11,6 +18,8 @@ export class FullWidthButton extends Component {
   }
 
   render() {
+    const Button =
+      Platform.OS === "ios" ? TouchableOpacity : TouchableWithoutFeedback;
     const { content, invert, icon, onPress, disabled } = this.props;
     if (disabled) {
       return (
@@ -33,12 +42,20 @@ export class FullWidthButton extends Component {
     }
     return (
       <Button
-        title={content}
-        icon={<Icon name={icon} />}
         onPress={onPress}
-        titleStyle={invert ? styles.invertText : styles.defaultText}
-        buttonStyle={invert ? styles.invertContainer : styles.defaultContainer}
-      />
+        style={invert ? styles.invertContainer : styles.defaultContainer}
+      >
+        {icon ? (
+          <Icon
+            size={16}
+            name={icon}
+            style={invert ? styles.invertIcon : styles.defaultIcon}
+          />
+        ) : null}
+        <Text style={invert ? styles.invertText : styles.defaultText}>
+          {content}
+        </Text>
+      </Button>
     );
   }
 }

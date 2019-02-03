@@ -1,32 +1,32 @@
-import React from "react";
-import { Navigation } from "react-native-navigation";
-import { Provider } from "react-redux";
-import App from "./Screens/App";
+import React from 'react';
+import { Navigation } from 'react-native-navigation';
+import { Provider } from 'react-redux';
+import App from './Screens/App';
 // import HomeScreen from "./Screens/HomeScreen";
 // import BrandScreen from "./Screens/BrandScreen";
 // import ProfileScreen from "./Screens/ProfileScreen";
 // import SignInScreen from "./Screens/SignInScreen";
-import WelcomeScreen from "./Screens/WelcomeScreen";
-// import GenderScreen from "./Screens/GenderScreen";
-// import RegisterNameScreen from "./Screens/RegisterNameScreen";
-// import PhoneVerifyScreen from "./Screens/PhoneVerifyScreen";
-// import PasswordScreen from "./Screens/PasswordScreen";
-// import FavStyleScreen from "./Screens/FavStyleScreen";
-// import PoseInfoScreen from "./Screens/PoseInfoScreen";
+import WelcomeScreen from './Screens/WelcomeScreen';
+import GenderScreen from './Screens/GenderScreen';
+import RegisterNameScreen from './Screens/RegisterNameScreen';
+import PhoneVerifyScreen from './Screens/PhoneVerifyScreen';
+import PasswordScreen from './Screens/PasswordScreen';
+import FavStyleScreen from './Screens/FavStyleScreen';
+import PoseInfoScreen from './Screens/PoseInfoScreen';
 // import FinalRegisterScreen from "./Screens/FinalRegisterScreen";
 
-import configureStore from "./configureStore";
+import configureStore from './configureStore';
 
 const registerScreens = () => {
   const store = configureStore({});
   Navigation.registerComponent(
-    "wave.app",
-    () => props => (
+    'wave.app',
+    () => (props) => (
       <Provider store={store}>
         <App {...props} />
       </Provider>
     ),
-    () => App
+    () => App,
   ); // Tab Screens
   // Navigation.registerComponentWithRedux(
   //   "wave.home",
@@ -48,13 +48,13 @@ const registerScreens = () => {
   // );
   // // Auth Screens
   Navigation.registerComponent(
-    "wave.welcome",
-    () => props => (
+    'wave.welcome',
+    () => (props) => (
       <Provider store={store}>
         <WelcomeScreen {...props} />
       </Provider>
     ),
-    () => WelcomeScreen
+    () => WelcomeScreen,
   );
 
   // Navigation.registerComponentWithRedux(
@@ -63,42 +63,61 @@ const registerScreens = () => {
   //   Provider,
   //   store
   // );
-  // Navigation.registerComponentWithRedux(
-  //   "wave.gender",
-  //   () => GenderScreen,
-  //   Provider,
-  //   store
-  // );
-  // Navigation.registerComponentWithRedux(
-  //   "wave.registerName",
-  //   () => RegisterNameScreen,
-  //   Provider,
-  //   store
-  // );
-  // Navigation.registerComponentWithRedux(
-  //   "wave.phoneVerify",
-  //   () => PhoneVerifyScreen,
-  //   Provider,
-  //   store
-  // );
-  // Navigation.registerComponentWithRedux(
-  //   "wave.password",
-  //   () => PasswordScreen,
-  //   Provider,
-  //   store
-  // );
-  // Navigation.registerComponentWithRedux(
-  //   "wave.favStyle",
-  //   () => FavStyleScreen,
-  //   Provider,
-  //   store
-  // );
-  // Navigation.registerComponentWithRedux(
-  //   "wave.poseInfo",
-  //   () => PoseInfoScreen,
-  //   Provider,
-  //   store
-  // );
+  Navigation.registerComponent(
+    'wave.gender',
+    () => (props) => (
+      <Provider store={store}>
+        <GenderScreen {...props} />
+      </Provider>
+    ),
+    () => GenderScreen,
+  );
+  Navigation.registerComponent(
+    'wave.registerName',
+    () => (props) => (
+      <Provider store={store}>
+        <RegisterNameScreen {...props} />
+      </Provider>
+    ),
+    () => RegisterNameScreen,
+  );
+  Navigation.registerComponent(
+    'wave.phoneVerify',
+    () => (props) => (
+      <Provider store={store}>
+        <PhoneVerifyScreen {...props} />
+      </Provider>
+    ),
+    () => PhoneVerifyScreen,
+  );
+  Navigation.registerComponent(
+    'wave.password',
+    () => (props) => (
+      <Provider store={store}>
+        <PasswordScreen {...props} />
+      </Provider>
+    ),
+    () => PasswordScreen,
+  );
+  Navigation.registerComponent(
+    'wave.favStyle',
+    () => (props) => (
+      <Provider store={store}>
+        <FavStyleScreen {...props} />
+      </Provider>
+    ),
+    () => FavStyleScreen,
+  );
+  Navigation.registerComponent(
+    'wave.poseInfo',
+    () => (props) => (
+      <Provider store={store}>
+        <PoseInfoScreen {...props} />
+      </Provider>
+    ),
+    () => PoseInfoScreen,
+  );
+
   // Navigation.registerComponentWithRedux(
   //   "wave.finalRegister",
   //   () => FinalRegisterScreen,

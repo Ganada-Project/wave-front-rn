@@ -1,18 +1,12 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
-  TextInput,
-  TouchableOpacity,
-  Dimensions,
-  Text,
-  Image,
-  View
-} from "react-native";
-import { Overlay } from "react-native-elements";
-import PropTypes from "prop-types";
+  TouchableOpacity, Dimensions, Text, Image, View,
+} from 'react-native';
+import PropTypes from 'prop-types';
 
-import styles from "./style";
-import { theme } from "../../constants";
-const window = Dimensions.get("window");
+import styles from './style';
+import { theme } from '../../constants';
+const window = Dimensions.get('window');
 
 export class StyleBox extends Component {
   constructor(props) {
@@ -21,43 +15,53 @@ export class StyleBox extends Component {
   }
 
   render() {
-    const { name, imgUrl, index, onPress, selected, divider } = this.props;
+    const {
+      name, imgUrl, index, onPress, selected, divider,
+    } = this.props;
 
     return (
-      <TouchableOpacity onPress={onPress}>
+      <TouchableOpacity
+        onPress={onPress}
+        style={{
+          ...styles.wrapper,
+          width: window.width / divider,
+          height: window.width / divider,
+          marginRight: index % 3 === 2 ? 0 : 10,
+          justifyContent: selected ? 'center' : 'flex-end',
+          position: 'relative',
+        }}
+      >
+        <Image
+          source={{ uri: imgUrl }}
+          borderRadius={1}
+          style={{ width: '100%', height: '100%' }}
+        />
         <View
           style={{
-            ...styles.wrapper,
-            width: window.width / divider,
-            height: window.width / divider,
-            marginRight: index % 3 === 2 ? 0 : 10,
-            justifyContent: selected ? "center" : "flex-end"
+            ...styles.overlay,
+            backgroundColor: selected ? theme.pointColor : 'black',
           }}
-          borderRadius={1}
-          source={{ uri: imgUrl }}
-        >
-          <Overlay
+        />
+        {selected ? (
+          <Image
             style={{
-              ...styles.overlay,
-              backgroundColor: selected ? theme.pointColor : "black"
+              width: 60,
+              height: 60,
+              position: 'absolute',
+              bottom: 10,
             }}
+            source={require('../../Assets/Icons/Register/style-check.png')}
           />
-          {selected ? (
-            <Image
-              style={{ width: 60, height: 60 }}
-              source={require("../../Assets/Icons/Register/style-check.png")}
-            />
-          ) : (
-            <Text
-              style={{
-                ...styles.text,
-                marginBottom: selected ? 0 : 10
-              }}
-            >
-              {name}
-            </Text>
-          )}
-        </View>
+        ) : (
+          <Text
+            style={{
+              ...styles.text,
+              marginBottom: selected ? 0 : 10,
+            }}
+          >
+            {name}
+          </Text>
+        )}
       </TouchableOpacity>
     );
   }
@@ -69,7 +73,7 @@ StyleBox.propTypes = {
   index: PropTypes.number,
   onPress: PropTypes.func,
   selected: PropTypes.bool,
-  divider: PropTypes.number
+  divider: PropTypes.number,
 };
 
 export default StyleBox;

@@ -11,16 +11,8 @@ import PropTypes from 'prop-types';
 // immutable
 import { List, is, fromJS } from 'immutable';
 
-// immutability-helper
-import update from 'immutability-helper';
-
 // react-native
-import {} from 'react-native';
-
-// @shoutem-ui
-import {
-  View, Text, GridRow, ListView,
-} from '@shoutem/ui';
+import { View, Text } from 'react-native';
 
 // react-native-navigation
 import { Navigation } from 'react-native-navigation';
@@ -32,8 +24,9 @@ import { connect } from 'react-redux';
 // reselect -> reducer에 있는 프로퍼티들 선택 툴
 import { createStructuredSelector } from 'reselect';
 
-// injectSaga
-import injectSaga from '../../../utils/injectSaga';
+// injectSaga, Reducer
+import injectSaga from '../../utils/injectSaga';
+import injectReducer from '../../utils/injectReducer';
 
 // local selectors
 import { makeSelectStyles, makeSelectStylesLoading } from './selectors';
@@ -44,8 +37,9 @@ import { FullWidthButton, StyleBox } from '../../Components';
 // local action
 import { getAllStylesAction } from './actions';
 
-// local saga
+// local saga, reducer
 import saga from './saga';
+import reducer from './reducer';
 
 // local styles
 import styles from './style';
@@ -75,6 +69,8 @@ class FavStyleScreen extends Component {
     return null;
   }
 
+
+
   componentDidMount() {
     const { getAllStyles } = this.props;
     getAllStyles();
@@ -83,7 +79,7 @@ class FavStyleScreen extends Component {
   filterStyleList = () => {
     const { stylesList } = this.state;
     const filteredArray = stylesList.filter(
-      (style) => style.get('selected') === true
+      (style) => style.get('selected') === true,
     );
     const stylesArray = [];
     filteredArray.map((style) => stylesArray.push(style.get('id')));
@@ -176,12 +172,14 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const withSaga = injectSaga({ key: 'favStyle', saga });
+const withReducer = injectReducer({ key: 'favStyle', reducer });
 
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 );
 export default compose(
   withConnect,
-  withSaga
+  withReducer,
+  withSaga,
 )(FavStyleScreen);

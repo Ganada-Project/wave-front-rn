@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
+
+// react-native
+import { KeyboardAvoidingView, Text, View } from 'react-native';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
 // redux-saga things
-import { Text, View, Button } from '@shoutem/ui';
 import { Navigation } from 'react-native-navigation';
-import injectSaga from '../../../utils/injectSaga';
+import injectSaga from '../../utils/injectSaga';
+import injectReducer from '../../utils/injectReducer';
 import styles from './styles';
 import { RegisterForm, FullWidthButton } from '../../Components';
-import {
-  theme,
-  keyboardBehavior,
-  keyboardVerticalOffset,
-} from '../../constants';
+import { keyboardBehavior, keyboardVerticalOffset } from '../../constants';
 import saga from './saga';
+import reducer from './reducer';
 import { makeSelectVerifyNumber, makeSelectVerifyLoading } from './selectors';
 import { verifyPhoneNumberAction } from './actions';
 
@@ -47,9 +46,9 @@ export class PhoneVerifyScreen extends Component {
   }
 
   sendPhoneNumber = () => {
-    const { number } = this.state;
+    const { phone } = this.state;
     const { verifyPhoneNumber } = this.props;
-    // verifyPhoneNumber({ number });
+    // verifyPhoneNumber({ number: phone });
     this.setState({ isSent: true });
   };
 
@@ -82,7 +81,7 @@ export class PhoneVerifyScreen extends Component {
 
   render() {
     const {
-      isSent, number, userVerifyNumber, errorText,
+      isSent, number, userVerifyNumber, errorText, phone,
     } = this.state;
     if (!isSent) {
       return (
@@ -129,7 +128,7 @@ export class PhoneVerifyScreen extends Component {
           <Text style={styles.header__title}>인증번호를 입력하세요.</Text>
         </View>
         <View style={styles.body}>
-          <Text style={styles.body__text}>{`${number}에 전송받은`}</Text>
+          <Text style={styles.body__text}>{`${phone}에 전송받은`}</Text>
           <Text style={styles.body__text__second}>
             4자리 인증번호를 입력하세요.
           </Text>
@@ -173,13 +172,15 @@ const mapDispatchToProps = (dispatch) => ({
   verifyPhoneNumber: ({ number }) => dispatch(verifyPhoneNumberAction({ number })),
 });
 
-const withSaga = injectSaga({ key: 'default', saga });
+const withSaga = injectSaga({ key: 'phoneVerify', saga });
+const withReducer = injectReducer({ key: 'phoneVerify', reducer });
 
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 );
 export default compose(
   withConnect,
-  withSaga
+  withSaga,
+  withReducer,
 )(PhoneVerifyScreen);

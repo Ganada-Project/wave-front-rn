@@ -3,18 +3,19 @@
  * Application Name : Wave
  * Corpyright : Ganada Project
  */
-import { YellowBox } from "react-native";
-import { Navigation } from "react-native-navigation";
-import registerScreens from "./src";
-import { theme } from "./src/constants";
-YellowBox.ignoreWarnings(["Require cycle:"]);
+import { YellowBox } from 'react-native';
+import { Navigation } from 'react-native-navigation';
+import registerScreens from './src';
+import { theme } from './src/constants';
+YellowBox.ignoreWarnings(['Require cycle:']);
+YellowBox.ignoreWarnings(['unknown call: "relay:check"']);
 registerScreens();
 
 Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setDefaultOptions({
     topBar: {
-      backButton: { color: theme.pointColor }
-    }
+      backButton: { color: theme.pointColor },
+    },
   });
   Navigation.setRoot({
     root: {
@@ -22,11 +23,11 @@ Navigation.events().registerAppLaunchedListener(() => {
         children: [
           {
             component: {
-              name: "wave.app"
-            }
-          }
-        ]
-      }
-    }
+              name: 'wave.favStyle',
+            },
+          },
+        ],
+      },
+    },
   });
 });
