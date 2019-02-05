@@ -9,6 +9,15 @@ import { theme } from '../../constants';
 import WaveLogoWhite from '../../Assets/Logos/wave-logo-white.png';
 
 export class WelcomeScreen extends Component {
+  static options(passProps) {
+    return {
+      topBar: {
+        visible: false,
+        drawBehind: true,
+      },
+    };
+  }
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -27,10 +36,7 @@ export class WelcomeScreen extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image
-            style={styles.logo}
-            source={require('../../Assets/Logos/wave-logo-white.png')}
-          />
+          <Image style={styles.logo} source={WaveLogoWhite} />
           <Text style={styles.header__title}>Surf in style.</Text>
           <Text style={styles.header__subtitle}>세상의 스타일, 내 손안에.</Text>
         </View>

@@ -1,13 +1,48 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
+import PropTypes from 'prop-types';
+import { Navigation } from 'react-native-navigation';
 import styles from './styles';
 import { FullWidthButton } from '../../Components';
 
 class PoseInfoScreen extends Component {
+  static options(passProps) {
+    return {
+      topBar: {
+        noBorder: true,
+      },
+    };
+  }
+
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  navigateToCamera = () => {
+    const {
+      componentId,
+      name,
+      nickname,
+      phone,
+      gender,
+      password,
+      stylesArray,
+    } = this.props;
+    Navigation.push(componentId, {
+      component: {
+        name: 'wave.camera',
+        passProps: {
+          phone,
+          gender,
+          nickname,
+          name,
+          password,
+          stylesArray,
+        },
+      },
+    });
+  };
 
   render() {
     return (
@@ -35,7 +70,7 @@ class PoseInfoScreen extends Component {
         </View>
         <View style={styles.footer}>
           <FullWidthButton
-            onPress={this.navigateTo}
+            onPress={this.navigateToCamera}
             invert
             content="촬영하기"
           />
@@ -44,5 +79,15 @@ class PoseInfoScreen extends Component {
     );
   }
 }
+
+PoseInfoScreen.propTypes = {
+  componentId: PropTypes.string,
+  gender: PropTypes.string,
+  name: PropTypes.string,
+  nickname: PropTypes.string,
+  phone: PropTypes.string,
+  password: PropTypes.string,
+  stylesArray: PropTypes.array,
+};
 
 export default PoseInfoScreen;

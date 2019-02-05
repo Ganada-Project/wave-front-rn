@@ -3,23 +3,12 @@
  */
 import { AsyncStorage } from 'react-native';
 import { Navigation } from 'react-native-navigation';
-import {
-  take,
-  fork,
-  cancel,
-  call,
-  put,
-  cancelled,
-  takeLatest,
-  takeEvery,
-  all,
-} from 'redux-saga/effects';
+import { put, takeLatest, all } from 'redux-saga/effects';
 import {
   TRY_SIGN_OUT,
   TRY_SIGN_OUT_FAIL,
   TRY_SIGN_OUT_SUCCESS,
 } from './constants';
-import { defaultApi } from './apis';
 
 const removeToken = async () => {
   try {
