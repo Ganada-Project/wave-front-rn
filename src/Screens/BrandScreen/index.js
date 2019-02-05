@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
-// @shoutem ui
 import { Button, View, Text } from 'react-native';
 
 // react-native-navigation
@@ -16,8 +15,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 // injectSaga
-import injectSaga from '../../../utils/injectSaga';
-import DAEMON from '../../../utils/constants';
+import injectSaga from '../../utils/injectSaga';
+import DAEMON from '../../utils/constants';
 
 // local saga
 // import saga from './saga';

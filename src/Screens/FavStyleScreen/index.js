@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import { List, is, fromJS } from 'immutable';
 
 // react-native
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
 // react-native-navigation
 import { Navigation } from 'react-native-navigation';
@@ -69,8 +69,6 @@ class FavStyleScreen extends Component {
     return null;
   }
 
-
-
   componentDidMount() {
     const { getAllStyles } = this.props;
     getAllStyles();
@@ -86,7 +84,7 @@ class FavStyleScreen extends Component {
     return stylesArray;
   };
 
-  navigateToFinalRegister = () => {
+  navigateToPoseInfo = () => {
     const {
       componentId, phone, gender, nickname, name, password,
     } = this.props;
@@ -124,7 +122,7 @@ class FavStyleScreen extends Component {
             이후 프로필 설정에서 변경할 수 있습니다.
           </Text>
         </View>
-        <View style={styles.body}>
+        <ScrollView style={styles.body}>
           <View style={styles.body__stylesWrapper}>
             {stylesList.map((style, index) => (
               <StyleBox
@@ -138,10 +136,10 @@ class FavStyleScreen extends Component {
               />
             ))}
           </View>
-        </View>
+        </ScrollView>
         <View style={styles.footer}>
           <FullWidthButton
-            onPress={this.navigateToFinalRegister}
+            onPress={this.navigateToPoseInfo}
             invert
             content="다음 단계"
           />

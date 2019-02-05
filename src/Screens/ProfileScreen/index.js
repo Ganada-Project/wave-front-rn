@@ -9,10 +9,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // react-native
-import {} from 'react-native';
+import { View, Text } from 'react-native';
 
-// @shoutem-ui
-import { View, Text, Button } from '@shoutem/ui';
+import { Button } from 'react-native-elements';
 
 // react-native-navigation
 import { Navigation } from 'react-native-navigation';
@@ -25,8 +24,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 // injectSaga
-import injectSaga from '../../../utils/injectSaga';
-import DAEMON from '../../../utils/constants';
+import injectSaga from '../../utils/injectSaga';
+import DAEMON from '../../utils/constants';
 
 // local selectors
 import {} from './selectors';
@@ -71,9 +70,7 @@ class ProfileScreen extends Component {
   render() {
     return (
       <View>
-        <Button onPress={this.onPressSignOut}>
-          <Text>로그아웃</Text>
-        </Button>
+        <Button onPress={this.onPressSignOut} title="로그아웃" />
       </View>
     );
   }
@@ -96,9 +93,9 @@ const withSaga = injectSaga({ key: 'profile', saga });
 
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 );
 export default compose(
   withConnect,
-  withSaga
+  withSaga,
 )(ProfileScreen);

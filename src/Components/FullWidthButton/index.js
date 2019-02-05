@@ -1,15 +1,14 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Text,
   View,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Platform
-} from "react-native";
-import { Button } from "react-native-elements";
-import Icon from "react-native-vector-icons/FontAwesome";
-import styles from "./style";
+  Platform,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import styles from './style';
 
 export class FullWidthButton extends Component {
   constructor(props) {
@@ -18,9 +17,10 @@ export class FullWidthButton extends Component {
   }
 
   render() {
-    const Button =
-      Platform.OS === "ios" ? TouchableOpacity : TouchableWithoutFeedback;
-    const { content, invert, icon, onPress, disabled } = this.props;
+    const Button = Platform.OS === 'ios' ? TouchableOpacity : TouchableWithoutFeedback;
+    const {
+      content, invert, icon, onPress, disabled,
+    } = this.props;
     if (disabled) {
       return (
         <View
@@ -41,20 +41,19 @@ export class FullWidthButton extends Component {
       );
     }
     return (
-      <Button
-        onPress={onPress}
-        style={invert ? styles.invertContainer : styles.defaultContainer}
-      >
-        {icon ? (
-          <Icon
-            size={16}
-            name={icon}
-            style={invert ? styles.invertIcon : styles.defaultIcon}
-          />
-        ) : null}
-        <Text style={invert ? styles.invertText : styles.defaultText}>
-          {content}
-        </Text>
+      <Button onPress={onPress} style={{ width: '100%' }}>
+        <View style={invert ? styles.invertContainer : styles.defaultContainer}>
+          {icon ? (
+            <Icon
+              size={16}
+              name={icon}
+              style={invert ? styles.invertIcon : styles.defaultIcon}
+            />
+          ) : null}
+          <Text style={invert ? styles.invertText : styles.defaultText}>
+            {content}
+          </Text>
+        </View>
       </Button>
     );
   }
@@ -65,7 +64,7 @@ FullWidthButton.propTypes = {
   icon: PropTypes.string,
   invert: PropTypes.bool,
   onPress: PropTypes.func,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
 };
 
 export default FullWidthButton;

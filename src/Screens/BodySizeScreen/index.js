@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { Navigation } from 'react-native-navigation';
 import styles from './styles';
 import { RegisterForm, FullWidthButton } from '../../Components';
-import { keyboardBehavior, keyboardVerticalOffset } from '../../constants';
+import { keyboardVerticalOffset, keyboardBehavior } from '../../constants';
 
-export class PasswordScreen extends Component {
+export class BodySizeScreen extends Component {
   static options(passProps) {
     return {
       topBar: {
@@ -18,30 +18,45 @@ export class PasswordScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      password: '',
+      height: '',
+      weight: '',
+      waist: '',
     };
   }
 
-  navigateToFavStyle = () => {
+  navigateTofinalRegister = () => {
+    const { height, weight, waist } = this.state;
     const {
-      componentId, phone, gender, name, nickname,
+      gender,
+      phone,
+      name,
+      nickname,
+      password,
+      stylesArray,
+      base64,
+      componentId,
     } = this.props;
-    const { password } = this.state;
     Navigation.push(componentId, {
       component: {
-        name: 'wave.favStyle',
+        name: 'wave.finalRegister',
         passProps: {
           phone,
           gender,
-          name,
           nickname,
+          name,
           password,
+          stylesArray,
+          base64,
+          height,
+          weight,
+          waist,
         },
       },
     });
   };
 
   render() {
+    const { height, weight, waist } = this.state;
     return (
       <KeyboardAvoidingView
         style={styles.container}
@@ -49,20 +64,26 @@ export class PasswordScreen extends Component {
         keyboardVerticalOffset={keyboardVerticalOffset}
       >
         <View style={styles.header}>
-          <Text style={styles.header__title}>비밀번호를 설정하세요.</Text>
+          <Text style={styles.header__title}>신체치수를 알려주세요.</Text>
         </View>
         <View style={styles.body}>
-          <Text style={styles.body__text}>
-            비밀번호를 8자 이상으로해주세요.
-          </Text>
           <RegisterForm
-            label="비밀번호"
-            onChangeText={(text) => this.setState({ password: text })}
+            label="신장(cm)"
+            onChangeText={(text) => this.setState({ height: text })}
+          />
+          <RegisterForm
+            label="체중(kg)"
+            onChangeText={(text) => this.setState({ weight: text })}
+          />
+          <RegisterForm
+            label="허리둘레(cm)"
+            onChangeText={(text) => this.setState({ waist: text })}
           />
         </View>
         <View style={styles.footer}>
           <FullWidthButton
-            onPress={this.navigateToFavStyle}
+            disabled={!!height === '' || weight === '' || waist === ''}
+            onPress={this.navigateTofinalRegister}
             invert
             content="다음 단계"
           />
@@ -72,12 +93,15 @@ export class PasswordScreen extends Component {
   }
 }
 
-PasswordScreen.propTypes = {
+BodySizeScreen.propTypes = {
   componentId: PropTypes.string,
   gender: PropTypes.string,
   name: PropTypes.string,
   nickname: PropTypes.string,
   phone: PropTypes.string,
+  password: PropTypes.string,
+  stylesArray: PropTypes.array,
+  base64: PropTypes.string,
 };
 
-export default PasswordScreen;
+export default BodySizeScreen;

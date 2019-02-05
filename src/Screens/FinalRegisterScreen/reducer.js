@@ -12,43 +12,28 @@
 import { fromJS } from 'immutable';
 
 import {
-  FETCH_DEFAULT_REQUESTING,
-  FETCH_DEFAULT_REQUESTING_SUCCESS,
-  FETCH_DEFAULT_REQUESTING_FAIL,
+  POST_REGISTER_REQUESTING,
+  POST_REGISTER_REQUESTING_FAIL,
+  POST_REGISTER_REQUESTING_SUCCESS,
 } from './constants';
 
 // The initial state of the App
-const initialState = fromJS({});
+export const initialState = fromJS({
+  registerLoading: false,
+});
 
-function defaultReducer(state = initialState, action) {
+function finalRegisterReducer(state = initialState, action) {
   switch (action.type) {
-    // start login
-    case FETCH_DEFAULT_REQUESTING:
-      return state
-        .set('loading', true)
-        .set('successful', false)
-        .set('errors', []);
-    case FETCH_DEFAULT_REQUESTING_SUCCESS:
-      return state
-        .set('loading', false)
-        .set('successful', true)
-        .set('messages', [])
-        .set('errors', []);
-    case FETCH_DEFAULT_REQUESTING_FAIL:
-      return state
-        .set('loading', false)
-        .set('successful', false)
-        .set('messages', [])
-        .set('errors', [
-          {
-            body: action.error.toString(),
-            time: new Date(),
-          },
-        ]);
+    case POST_REGISTER_REQUESTING:
+      return state.set('registerLoading', true);
+    case POST_REGISTER_REQUESTING_SUCCESS:
+      return state.set('registerLoading', false);
+    case POST_REGISTER_REQUESTING_FAIL:
+      return state.set('registerLoading', false);
 
     default:
       return state;
   }
 }
 
-export default defaultReducer;
+export default finalRegisterReducer;

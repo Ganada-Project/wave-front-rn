@@ -2,9 +2,9 @@ import React from 'react';
 import { Navigation } from 'react-native-navigation';
 import { Provider } from 'react-redux';
 import App from './Screens/App';
-// import HomeScreen from "./Screens/HomeScreen";
-// import BrandScreen from "./Screens/BrandScreen";
-// import ProfileScreen from "./Screens/ProfileScreen";
+import HomeScreen from './Screens/HomeScreen';
+import BrandScreen from './Screens/BrandScreen';
+import ProfileScreen from './Screens/ProfileScreen';
 // import SignInScreen from "./Screens/SignInScreen";
 import WelcomeScreen from './Screens/WelcomeScreen';
 import GenderScreen from './Screens/GenderScreen';
@@ -13,7 +13,9 @@ import PhoneVerifyScreen from './Screens/PhoneVerifyScreen';
 import PasswordScreen from './Screens/PasswordScreen';
 import FavStyleScreen from './Screens/FavStyleScreen';
 import PoseInfoScreen from './Screens/PoseInfoScreen';
-// import FinalRegisterScreen from "./Screens/FinalRegisterScreen";
+import CameraScreen from './Screens/CameraScreen';
+import BodySizeScreen from './Screens/BodySizeScreen';
+import FinalRegisterScreen from './Screens/FinalRegisterScreen';
 
 import configureStore from './configureStore';
 
@@ -28,24 +30,34 @@ const registerScreens = () => {
     ),
     () => App,
   ); // Tab Screens
-  // Navigation.registerComponentWithRedux(
-  //   "wave.home",
-  //   () => HomeScreen,
-  //   Provider,
-  //   store
-  // );
-  // Navigation.registerComponentWithRedux(
-  //   "wave.brand",
-  //   () => BrandScreen,
-  //   Provider,
-  //   store
-  // );
-  // Navigation.registerComponentWithRedux(
-  //   "wave.profile",
-  //   () => ProfileScreen,
-  //   Provider,
-  //   store
-  // );
+  Navigation.registerComponent(
+    'wave.home',
+    () => (props) => (
+      <Provider store={store}>
+        <HomeScreen {...props} />
+      </Provider>
+    ),
+    () => HomeScreen,
+  );
+  Navigation.registerComponent(
+    'wave.brand',
+    () => (props) => (
+      <Provider store={store}>
+        <BrandScreen {...props} />
+      </Provider>
+    ),
+    () => BrandScreen,
+  );
+  Navigation.registerComponent(
+    'wave.profile',
+    () => (props) => (
+      <Provider store={store}>
+        <ProfileScreen {...props} />
+      </Provider>
+    ),
+    () => ProfileScreen,
+  );
+
   // // Auth Screens
   Navigation.registerComponent(
     'wave.welcome',
@@ -117,79 +129,108 @@ const registerScreens = () => {
     ),
     () => PoseInfoScreen,
   );
-
-  // Navigation.registerComponentWithRedux(
-  //   "wave.finalRegister",
-  //   () => FinalRegisterScreen,
-  //   Provider,
-  //   store
-  // );
+  Navigation.registerComponent(
+    'wave.poseInfo',
+    () => (props) => (
+      <Provider store={store}>
+        <PoseInfoScreen {...props} />
+      </Provider>
+    ),
+    () => PoseInfoScreen,
+  );
+  Navigation.registerComponent(
+    'wave.camera',
+    () => (props) => (
+      <Provider store={store}>
+        <CameraScreen {...props} />
+      </Provider>
+    ),
+    () => CameraScreen,
+  );
+  Navigation.registerComponent(
+    'wave.bodySize',
+    () => (props) => (
+      <Provider store={store}>
+        <BodySizeScreen {...props} />
+      </Provider>
+    ),
+    () => BodySizeScreen,
+  );
+  Navigation.registerComponent(
+    'wave.finalRegister',
+    () => (props) => (
+      <Provider store={store}>
+        <FinalRegisterScreen {...props} />
+      </Provider>
+    ),
+    () => FinalRegisterScreen,
+  );
 };
 
-// export const startTabScreens = () => {
-//   Navigation.setRoot({
-//     root: {
-//       bottomTabs: {
-//         children: [
-//           {
-//             stack: {
-//               children: [
-//                 {
-//                   component: {
-//                     name: "wave.home"
-//                   }
-//                 }
-//               ],
-//               options: {
-//                 bottomTab: {
-//                   text: "홈",
-//                   selectedTextColor: "red",
-//                   icon: require("./Assets/Icons/TabIcons/tab_1.png"),
-//                   testID: "FIRST_TAB_BAR_BUTTON"
-//                 }
-//               }
-//             }
-//           },
-//           {
-//             stack: {
-//               children: [
-//                 {
-//                   component: {
-//                     name: "wave.brand",
-//                     options: {
-//                       bottomTab: {
-//                         text: "브랜드",
-//                         icon: require("./Assets/Icons/TabIcons/tab_2.png"),
-//                         testID: "SECOND_TAB_BAR_BUTTON"
-//                       }
-//                     }
-//                   }
-//                 }
-//               ]
-//             }
-//           },
-//           {
-//             stack: {
-//               children: [
-//                 {
-//                   component: {
-//                     name: "wave.profile",
-//                     options: {
-//                       bottomTab: {
-//                         text: "프로필",
-//                         icon: require("./Assets/Icons/TabIcons/tab_5.png"),
-//                         testID: "THIRD_TAB_BAR_BUTTON"
-//                       }
-//                     }
-//                   }
-//                 }
-//               ]
-//             }
-//           }
-//         ]
-//       }
-//     }
-//   });
-// };
+export const startTabScreens = () => {
+  Navigation.setRoot({
+    root: {
+      bottomTabs: {
+        children: [
+          {
+            stack: {
+              children: [
+                {
+                  component: {
+                    name: 'wave.home',
+                  },
+                },
+              ],
+              options: {
+                bottomTab: {
+                  text: '홈',
+                  selectedTextColor: 'red',
+                  icon: require('./Assets/Icons/TabIcons/tab_1.png'),
+                  testID: 'FIRST_TAB_BAR_BUTTON',
+                },
+              },
+            },
+          },
+          {
+            stack: {
+              children: [
+                {
+                  component: {
+                    name: 'wave.brand',
+                    options: {
+                      bottomTab: {
+                        text: '브랜드',
+                        icon: require('./Assets/Icons/TabIcons/tab_2.png'),
+                        testID: 'SECOND_TAB_BAR_BUTTON',
+                      },
+                    },
+                  },
+                },
+              ],
+            },
+          },
+          {
+            stack: {
+              children: [
+                {
+                  component: {
+                    name: 'wave.profile',
+                    options: {
+                      bottomTab: {
+                        text: '프로필',
+                        icon: require('./Assets/Icons/TabIcons/tab_5.png'),
+                        testID: 'THIRD_TAB_BAR_BUTTON',
+                      },
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  });
+};
 
 export default registerScreens;

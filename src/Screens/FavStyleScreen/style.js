@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     paddingVertical: 35,
   },
   header: {
-    flex: 0.5,
+    flex: 0.2,
   },
   body: {
     flex: 2,
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   footer: {
-    flex: 0.5,
+    flex: 0.3,
     alignItems: 'center',
     justifyContent: 'center',
   },
