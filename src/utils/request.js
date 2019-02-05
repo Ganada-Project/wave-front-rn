@@ -1,9 +1,9 @@
-import axios from "axios";
-import { AsyncStorage } from "react-native";
+import axios from 'axios';
+import { AsyncStorage } from 'react-native';
 const getUserToken = async () => {
   let idToken;
   try {
-    idToken = await AsyncStorage.getItem("wave.idToken");
+    idToken = await AsyncStorage.getItem('wave.idToken');
   } catch (error) {
     // Error retrieving data
     idToken = null;
@@ -50,43 +50,41 @@ function checkStatus(response) {
  *
  * @return {object}           The response data
  */
-export function getRequest({ url }) {
+export async function getRequest({ url }) {
   const headers = {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Headers": "x-access-token",
-    "Client-hostname": `${window.location.hostname}`
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Headers': 'x-access-token',
   };
-  const idToken = getUserToken();
+  const idToken = await getUserToken();
   if (idToken) {
-    headers[`x-access-token`] = idToken;
+    headers['x-access-token'] = idToken;
   }
   const options = {
-    method: "GET",
+    method: 'GET',
     headers,
-    url
+    url,
   };
   return axios(options)
     .then(checkStatus)
     .then(parseJSON);
 }
 
-export function postRequest({ url, payload }) {
+export async function postRequest({ url, payload }) {
   const headers = {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    "Client-hostname": `${window.location.hostname}`
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
   };
-  const idToken = localStorage.getItem("wm.idToken");
+  const idToken = await getUserToken();
   if (idToken) {
-    headers[`x-access-token`] = idToken;
+    headers['x-access-token'] = idToken;
   }
 
   const options = {
-    method: "POST",
+    method: 'POST',
     headers,
     url,
-    data: { ...payload }
+    data: { ...payload },
   };
 
   return axios(options)

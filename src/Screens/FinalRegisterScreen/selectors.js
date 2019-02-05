@@ -3,8 +3,12 @@
  */
 
 import { createSelector } from 'reselect';
+import { initialState } from './reducer';
 
-const selectGlobal = (state) => state.get('global');
-const makeSelectEmail = () => createSelector(selectGlobal, (globalState) => globalState.getIn(['userData', 'user', 'email']));
-const makeSelectUsername = () => createSelector(selectLogin, (LoginState) => LoginState.get('username'));
-export { makeSelectEmail, makeSelectUsername };
+const selectFinalRegister = (state) => state.get('finalRegister', initialState);
+const makeSelectRegisterLoading = () => createSelector(
+  selectFinalRegister,
+  (globalState) => globalState.get('registerLoading'),
+);
+
+export { makeSelectRegisterLoading };

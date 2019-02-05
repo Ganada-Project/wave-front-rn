@@ -1,25 +1,16 @@
 /**
  * Gets the repositories of the user from Github
  */
-import { AsyncStorage } from 'react-native';
 import {
-  take,
-  fork,
-  cancel,
-  call,
-  put,
-  cancelled,
-  takeLatest,
-  takeEvery,
-  all,
+  call, put, takeLatest, all,
 } from 'redux-saga/effects';
-import { getRequest } from '../../utils/request';
 import {
   FETCH_STYLES_REQUESTING,
   FETCH_STYLES_REQUESTING_SUCCESS,
   FETCH_STYLES_REQUESTING_FAIL,
 } from './constants';
 import { API_URL } from '../../constants';
+import { getRequest } from '../../utils/request';
 
 function* getAllStylesSaga() {
   const url = `${API_URL}/style`;

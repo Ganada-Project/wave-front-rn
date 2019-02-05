@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Alert } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import {
   take, fork, call, put, takeLatest, all,
@@ -58,13 +58,14 @@ export function* fetchUserFlow(action) {
     });
   } else {
     try {
-      const user = yield call(getRequest, { url });
+      user = yield call(getRequest, { url });
       yield put({
         type: FETCH_USER_REQUESTING_SUCCESS,
         payload: { user: user.result[0], idToken },
       });
-      // yield startTabScreens();
+      yield startTabScreens();
     } catch (error) {
+      console.log(error);
       yield put({ type: FETCH_USER_REQUESTING_FAIL });
     }
   }

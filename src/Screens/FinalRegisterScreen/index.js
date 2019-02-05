@@ -13,9 +13,6 @@ import {
   View, Text, Image, TouchableOpacity,
 } from 'react-native';
 
-// react-native-photo-upload
-import PhotoUpload from 'react-native-photo-upload';
-
 // react-native-navigation
 import { Navigation } from 'react-native-navigation';
 
@@ -28,16 +25,19 @@ import { createStructuredSelector } from 'reselect';
 
 // injectSaga
 import injectSaga from '../../utils/injectSaga';
+import injectReducer from '../../utils/injectReducer';
+
 import DAEMON from '../../utils/constants';
 
 // local selectors
-import {} from './selectors';
+import { makeSelectRegisterLoading } from './selectors';
 
 // local action
 import { registerUserAction } from './actions';
 
 // local saga
 import saga from './saga';
+import reducer from './reducer';
 
 // local styles
 import styles from './style';
@@ -45,34 +45,12 @@ import styles from './style';
 class FinalRegisterScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      imageBase: '',
-      isUploaded: false,
-    };
-    Navigation.events().bindComponent(this);
+    this.state = {};
   }
 
-  navigateTo = () => {
-    const { componentId } = this.props;
-    Navigation.push(componentId, {
-      component: {
-        name: 'wave.app',
-        options: {
-          topBar: {
-            title: {
-              text: 'sample',
-            },
-          },
-        },
-      },
-    });
-  };
-
-  handlePhoto = (avatar) => {
-    if (avatar) {
-      this.setState({ imageBase: avatar, isUploaded: true });
-    }
-  };
+  componentDidMount() {
+    this.postRegister();
+  }
 
   postRegister = () => {
     const {
@@ -86,8 +64,20 @@ class FinalRegisterScreen extends Component {
       height,
       waist,
       stylesArray,
+      base64,
+      componentId,
     } = this.props;
-    const { imageBase } = this.state;
+
+    console.log('성 :', gender);
+    console.log('휴대폰번호 :', phone);
+    console.log('이름 :', name);
+    console.log('닉네임 :', nickname);
+    console.log('패스워드 :', password);
+    console.log('몸무게 :', weight);
+    console.log('키 :', height);
+    console.log('허리 :', waist);
+    console.log('스타일 :', stylesArray);
+    console.log('이미지 :', base64);
 
     registerUser({
       gender,
@@ -99,36 +89,13 @@ class FinalRegisterScreen extends Component {
       height,
       waist,
       stylesArray,
-      imageBase,
+      componentId,
+      imageBase: base64,
     });
   };
 
   render() {
-    const { isUploaded, imageBase } = this.state;
-    console.log(imageBase);
-    return (
-      <View>
-        <PhotoUpload onPhotoSelect={this.handlePhoto}>
-          <Image
-            style={{
-              paddingVertical: 30,
-              width: 150,
-              height: 150,
-              borderRadius: 75,
-            }}
-            resizeMode="cover"
-            source={{
-              uri: !isUploaded
-                ? 'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg'
-                : imageBase,
-            }}
-          />
-        </PhotoUpload>
-        <TouchableOpacity onPress={this.postRegister}>
-          <Text>전송하기</Text>
-        </TouchableOpacity>
-      </View>
-    );
+    return <View />;
   }
 }
 
@@ -140,13 +107,16 @@ FinalRegisterScreen.propTypes = {
   password: PropTypes.string,
   nickname: PropTypes.string,
   stylesArray: PropTypes.array,
-  weight: PropTypes.number,
-  height: PropTypes.number,
-  waist: PropTypes.number,
-  phone: PropTypes.number,
+  weight: PropTypes.string,
+  height: PropTypes.string,
+  waist: PropTypes.string,
+  phone: PropTypes.string,
+  base64: PropTypes.string,
 };
 
-const mapStateToProps = createStructuredSelector({});
+const mapStateToProps = createStructuredSelector({
+  registerLoading: makeSelectRegisterLoading(),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   registerUser: ({
@@ -160,6 +130,7 @@ const mapDispatchToProps = (dispatch) => ({
     weight,
     height,
     waist,
+    componentId,
   }) => dispatch(
     registerUserAction({
       phone,
@@ -172,11 +143,13 @@ const mapDispatchToProps = (dispatch) => ({
       weight,
       height,
       waist,
+      componentId,
     }),
   ),
 });
 
 const withSaga = injectSaga({ key: 'finalRegister', saga });
+const withReducer = injectReducer({ key: 'finalRegister', reducer });
 
 const withConnect = connect(
   mapStateToProps,
@@ -184,5 +157,6 @@ const withConnect = connect(
 );
 export default compose(
   withConnect,
+  withReducer,
   withSaga,
 )(FinalRegisterScreen);

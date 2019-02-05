@@ -1,21 +1,54 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Text, View, StyleSheet, TouchableOpacity,
 } from 'react-native';
+import { Navigation } from 'react-native-navigation';
 import { RNCamera } from 'react-native-camera';
 
 class CameraScreen extends Component {
+  static options(passProps) {
+    return {
+      topBar: {
+        visible: false,
+        drawBehind: true,
+      },
+    };
+  }
+
   constructor(props) {
     super(props);
-
     this.state = {};
   }
 
   takePicture = async () => {
+    const {
+      componentId,
+      name,
+      nickname,
+      phone,
+      gender,
+      password,
+      stylesArray,
+    } = this.props;
     if (this.camera) {
       const options = { quality: 0.5, base64: true };
       const data = await this.camera.takePictureAsync(options);
-      console.log(data.uri);
+      const { base64 } = data;
+      Navigation.push(componentId, {
+        component: {
+          name: 'wave.bodySize',
+          passProps: {
+            phone,
+            gender,
+            nickname,
+            name,
+            password,
+            stylesArray,
+            base64,
+          },
+        },
+      });
     }
   };
 
@@ -67,5 +100,15 @@ const styles = StyleSheet.create({
     margin: 20,
   },
 });
+
+CameraScreen.propTypes = {
+  componentId: PropTypes.string,
+  gender: PropTypes.string,
+  name: PropTypes.string,
+  nickname: PropTypes.string,
+  phone: PropTypes.string,
+  password: PropTypes.string,
+  stylesArray: PropTypes.array,
+};
 
 export default CameraScreen;

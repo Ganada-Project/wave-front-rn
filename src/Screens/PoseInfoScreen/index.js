@@ -6,6 +6,14 @@ import styles from './styles';
 import { FullWidthButton } from '../../Components';
 
 class PoseInfoScreen extends Component {
+  static options(passProps) {
+    return {
+      topBar: {
+        noBorder: true,
+      },
+    };
+  }
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -13,16 +21,24 @@ class PoseInfoScreen extends Component {
 
   navigateToCamera = () => {
     const {
-      componentId, name, nickname, phone, gender,
+      componentId,
+      name,
+      nickname,
+      phone,
+      gender,
+      password,
+      stylesArray,
     } = this.props;
     Navigation.push(componentId, {
       component: {
         name: 'wave.camera',
         passProps: {
-          name,
-          nickname,
           phone,
           gender,
+          nickname,
+          name,
+          password,
+          stylesArray,
         },
       },
     });
@@ -70,6 +86,8 @@ PoseInfoScreen.propTypes = {
   name: PropTypes.string,
   nickname: PropTypes.string,
   phone: PropTypes.string,
+  password: PropTypes.string,
+  stylesArray: PropTypes.array,
 };
 
 export default PoseInfoScreen;
