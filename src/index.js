@@ -5,7 +5,7 @@ import App from './Screens/App';
 import HomeScreen from './Screens/HomeScreen';
 import BrandScreen from './Screens/BrandScreen';
 import ProfileScreen from './Screens/ProfileScreen';
-// import SignInScreen from "./Screens/SignInScreen";
+import SignInScreen from './Screens/SignInScreen';
 import WelcomeScreen from './Screens/WelcomeScreen';
 import GenderScreen from './Screens/GenderScreen';
 import RegisterNameScreen from './Screens/RegisterNameScreen';
@@ -17,7 +17,6 @@ import PoseInfoScreen from './Screens/PoseInfoScreen';
 import CameraScreen from './Screens/CameraScreen';
 import BodySizeScreen from './Screens/BodySizeScreen';
 import FinalRegisterScreen from './Screens/FinalRegisterScreen';
-
 import configureStore from './configureStore';
 
 const registerScreens = () => {
@@ -69,13 +68,15 @@ const registerScreens = () => {
     ),
     () => WelcomeScreen,
   );
-
-  // Navigation.registerComponentWithRedux(
-  //   "wave.signIn",
-  //   () => SignInScreen,
-  //   Provider,
-  //   store
-  // );
+  Navigation.registerComponent(
+    'wave.signIn',
+    () => (props) => (
+      <Provider store={store}>
+        <SignInScreen {...props} />
+      </Provider>
+    ),
+    () => SignInScreen,
+  );
   Navigation.registerComponent(
     'wave.gender',
     () => (props) => (

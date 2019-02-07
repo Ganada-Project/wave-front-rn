@@ -32,6 +32,15 @@ export class WelcomeScreen extends Component {
     });
   };
 
+  navigateToSignIn = () => {
+    const { componentId } = this.props;
+    Navigation.push(componentId, {
+      component: {
+        name: 'wave.signIn',
+      },
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -42,7 +51,12 @@ export class WelcomeScreen extends Component {
         </View>
         <View style={styles.footer}>
           <FullWidthButton icon="facebook-f" content="페이스북으로 로그인" />
-          <FullWidthButton icon="phone" invert content="휴대번호로 로그인" />
+          <FullWidthButton
+            icon="phone"
+            invert
+            content="휴대번호로 로그인"
+            onPress={this.navigateToSignIn}
+          />
           <Button
             onPress={this.navigateToGender}
             title="회원가입"

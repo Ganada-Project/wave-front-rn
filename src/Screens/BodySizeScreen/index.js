@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { KeyboardAvoidingView, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Navigation } from 'react-native-navigation';
-import styles from './styles';
+import styles, { HeightWeightWrapper, Height, Weight } from './styles';
 import { RegisterForm, FullWidthButton } from '../../Components';
 import { keyboardVerticalOffset, keyboardBehavior } from '../../constants';
 
@@ -67,14 +67,20 @@ export class BodySizeScreen extends Component {
           <Text style={styles.header__title}>신체치수를 알려주세요.</Text>
         </View>
         <View style={styles.body}>
-          <RegisterForm
-            label="신장(cm)"
-            onChangeText={(text) => this.setState({ height: text })}
-          />
-          <RegisterForm
-            label="체중(kg)"
-            onChangeText={(text) => this.setState({ weight: text })}
-          />
+          <HeightWeightWrapper>
+            <Height>
+              <RegisterForm
+                label="신장(cm)"
+                onChangeText={(text) => this.setState({ height: text })}
+              />
+            </Height>
+            <Weight>
+              <RegisterForm
+                label="체중(kg)"
+                onChangeText={(text) => this.setState({ weight: text })}
+              />
+            </Weight>
+          </HeightWeightWrapper>
           <RegisterForm
             label="허리둘레(cm)"
             onChangeText={(text) => this.setState({ waist: text })}

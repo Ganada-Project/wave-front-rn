@@ -3,19 +3,13 @@
  */
 
 import { createSelector } from 'reselect';
+import { initialState } from './reducer';
 
-const selectLogin = (state) => state.get('signInScreenReducer');
-const selectGlobal = (state) => state.get('global');
-const makeSelectLoading = () => createSelector(selectGlobal, (globalState) => globalState.getIn(['userData', 'loading']));
-const makeSelectEmail = () => createSelector(selectGlobal, (globalState) => globalState.getIn(['userData', 'user', 'email']));
-const makeSelectUsername = () => createSelector(selectLogin, (LoginState) => LoginState.get('username'));
+const selectSignIn = (state) => state.get('signIn', initialState);
 
-const makeSelectSuccessful = () => createSelector(selectLogin, (LoginState) => LoginState.get('successful'));
+const makeSelectErrors = () => createSelector(
+  selectSignIn,
+  (globalState) => globalState.get('errors'),
+);
 
-export {
-  selectLogin,
-  makeSelectEmail,
-  makeSelectUsername,
-  makeSelectLoading,
-  makeSelectSuccessful,
-};
+export { makeSelectErrors };

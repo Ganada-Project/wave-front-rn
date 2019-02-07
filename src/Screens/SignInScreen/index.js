@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 // react-native-navigation
 import { Navigation } from 'react-native-navigation';
 
-import {
-  Button, Icon, Text, View, TextInput,
-} from '@shoutem/ui';
+import { Button, Icon } from 'react-native-elements';
+
+import { Text, View, TextInput } from 'react-native';
 
 // redux
 import { compose } from 'redux';
@@ -17,28 +17,28 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 // injectSaga
-import injectSaga from '../../../utils/injectSaga';
-import DAEMON from '../../../utils/constants';
+import injectSaga from '../../utils/injectSaga';
+import DAEMON from '../../utils/constants';
+import injectReducer from '../../utils/injectReducer';
 
 // local saga
 import saga from './saga';
+import reducer from './reducer';
 
 // local actions
 import { requestLoginAction } from './actions';
 
 // local selectors
-import { makeSelectLoading, makeSelectSuccessful } from './selectors';
+import { makeSelectErrors } from './selectors';
 
 // local styles
 import styles from './style';
 
-import { startTabScreens } from '../../index';
-
-export class SignInScreen extends Component {
+class SignInScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      phone: '',
       password: '',
     };
   }
@@ -50,33 +50,26 @@ export class SignInScreen extends Component {
   //   }
   // }
 
-  onClickSignInWithEmail = () => {
-    const { email, password } = this.state;
+  onClickSignInWithphone = () => {
+    const { phone, password } = this.state;
     const { onClickTryLoginBtn } = this.props;
-    onClickTryLoginBtn({ email, password });
+    onClickTryLoginBtn({ phone, password });
   };
 
   render() {
     return (
       <View style={styles.container}>
         <TextInput
-          placeholder="이메일을 입력하세요"
+          placeholder="휴대폰번호를 입력하세요"
           auto
           autoCapitalize="none"
-          onChangeText={(email) => this.setState({ email })}
+          onChangeText={(phone) => this.setState({ phone })}
         />
         <TextInput
           placeholder="비밀번호를 입력하세요"
           onChangeText={(password) => this.setState({ password })}
         />
-        <Button onPress={this.onClickSignInWithEmail}>
-          <Icon name="call" />
-          <Text>휴대전화로 로그인</Text>
-        </Button>
-        <Button styleName="secondary">
-          <Icon name="facebook" />
-          <Text>페이스북으로 로그인</Text>
-        </Button>
+        <Button onPress={this.onClickSignInWithphone} title="로그인" />
       </View>
     );
   }
@@ -89,24 +82,25 @@ SignInScreen.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  loading: makeSelectLoading(),
-  successful: makeSelectSuccessful(),
+  erros: makeSelectErrors(),
 });
 const mapDispatchToProps = (dispatch) => ({
-  onClickTryLoginBtn: ({ email, password }) => dispatch(
+  onClickTryLoginBtn: ({ phone, password }) => dispatch(
     requestLoginAction({
-      email,
+      phone,
       password,
-    })
+    }),
   ),
 });
 const withSaga = injectSaga({ key: 'signIn', saga, mode: DAEMON });
+const withReducer = injectReducer({ key: 'signIn', reducer });
 
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 );
 export default compose(
   withConnect,
-  withSaga
+  withReducer,
+  withSaga,
 )(SignInScreen);

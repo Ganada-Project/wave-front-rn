@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components';
 import { theme } from '../../constants';
 
 const styles = StyleSheet.create({
@@ -6,7 +7,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.whiteColor,
     paddingHorizontal: 25,
-    paddingVertical: 30,
+    paddingTop: 10,
   },
   header: {
     flex: 0.3,
@@ -27,3 +28,21 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
+
+export const HeightWeightWrapper = styled.View`
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const Height = styled.View`
+  width: 47%;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Weight = styled.View`
+  width: 47%;
+  justify-content: center;
+  align-items: center;
+`;
