@@ -8,6 +8,8 @@ import {
   POST_REGISTER_REQUESTING_FAIL,
   POST_REGISTER_REQUESTING_SUCCESS,
 } from './constants';
+import { FETCH_USER_REQUESTING } from '../App/constants';
+import { fetchUserFlow } from '../App/saga';
 import { API_URL } from '../../constants';
 import { postRequest } from '../../utils/request';
 import { startTabScreens } from '../../index';
@@ -43,6 +45,7 @@ function* registerUserSaga(action) {
     const result = yield call(postRequest, { url, payload });
     yield put({ type: POST_REGISTER_REQUESTING_SUCCESS, payload: { result } });
     yield AsyncStorage.setItem('wave.idToken', result.token);
+    yield fetchUserFlow({ token: result.token });
     yield startTabScreens();
   } catch (error) {
     console.log(error);

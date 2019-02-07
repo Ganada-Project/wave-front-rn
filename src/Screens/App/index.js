@@ -9,9 +9,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // react-native
-import {
-  StyleSheet, Text, View, TouchableOpacity,
-} from 'react-native';
+import { View } from 'react-native';
 
 // react-native-navigation
 import { Navigation } from 'react-native-navigation';
@@ -25,35 +23,15 @@ import { createStructuredSelector } from 'reselect';
 
 // injectSaga
 import injectSaga from '../../utils/injectSaga';
+import DAEMON from '../../utils/constants';
 
 import { makeSelectUser } from './selectors';
 
 // local action
-import { fetchUserAction, trySignOutAction } from './actions';
+import { fetchUserAction } from './actions';
 
 // local saga
 import saga from './saga';
-
-import { startTabScreens } from '../../index';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 class App extends Component {
   static options(passProps) {
@@ -71,46 +49,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { fetchUser, componentId } = this.props;
-    fetchUser({ componentId });
+    const { fetchUser } = this.props;
+    fetchUser();
   }
 
-  navigateToHome = () => {
-    const { componentId, onPressSignOut } = this.props;
-    onPressSignOut({ componentId });
-    // trySignOutAction({ componentId });
-    // startTabScreens();
-  };
-
-  navigateToSignIn = () => {
-    const { componentId } = this.props;
-    Navigation.push(componentId, {
-      component: {
-        name: 'wave.signIn',
-        options: {
-          topBar: {
-            title: {
-              text: '로그인',
-            },
-          },
-        },
-      },
-    });
-  };
-
   render() {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity onPress={this.navigateToHome}>
-          <Text style={styles.welcome}>Welcome to Wave</Text>
-        </TouchableOpacity>
-      </View>
-    );
+    return <View />;
   }
 }
 
 App.propTypes = {
-  componentId: PropTypes.string,
   fetchUser: PropTypes.func,
 };
 
@@ -119,15 +67,12 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchUser: ({ componentId }) => {
-    dispatch(fetchUserAction({ componentId }));
-  },
-  onPressSignOut: ({ componentId }) => {
-    dispatch(trySignOutAction({ componentId }));
+  fetchUser: () => {
+    dispatch(fetchUserAction());
   },
 });
 
-const withSaga = injectSaga({ key: 'app', saga });
+const withSaga = injectSaga({ key: 'app', saga, mode: DAEMON });
 
 const withConnect = connect(
   mapStateToProps,

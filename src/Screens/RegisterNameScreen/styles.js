@@ -6,13 +6,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.whiteColor,
     paddingHorizontal: 25,
-    paddingVertical: 30,
+    paddingTop: 10,
   },
   header: {
-    flex: 0.3,
+    flex: 0.2,
   },
   body: {
     flex: 1.5,
+    paddingTop: 10,
   },
   header__title: {
     fontSize: 28,

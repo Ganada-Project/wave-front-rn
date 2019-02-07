@@ -12,6 +12,7 @@ import RegisterNameScreen from './Screens/RegisterNameScreen';
 import PhoneVerifyScreen from './Screens/PhoneVerifyScreen';
 import PasswordScreen from './Screens/PasswordScreen';
 import FavStyleScreen from './Screens/FavStyleScreen';
+import BrandRecommendScreen from './Screens/BrandRecommendScreen';
 import PoseInfoScreen from './Screens/PoseInfoScreen';
 import CameraScreen from './Screens/CameraScreen';
 import BodySizeScreen from './Screens/BodySizeScreen';
@@ -119,6 +120,15 @@ const registerScreens = () => {
       </Provider>
     ),
     () => FavStyleScreen,
+  );
+  Navigation.registerComponent(
+    'wave.brandRecommend',
+    () => (props) => (
+      <Provider store={store}>
+        <BrandRecommendScreen {...props} />
+      </Provider>
+    ),
+    () => BrandRecommendScreen,
   );
   Navigation.registerComponent(
     'wave.poseInfo',

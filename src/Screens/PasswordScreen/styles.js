@@ -6,12 +6,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.whiteColor,
     paddingHorizontal: 25,
-    paddingVertical: 35,
+    paddingTop: 10,
   },
   header: {
-    flex: 0.3,
+    flex: 0.2,
   },
   body: {
+    paddingTop: 10,
     flex: 1.5,
   },
   body__text: {

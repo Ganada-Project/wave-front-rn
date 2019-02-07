@@ -8,7 +8,7 @@ import {
   TRY_SIGN_OUT,
   TRY_SIGN_OUT_FAIL,
   TRY_SIGN_OUT_SUCCESS,
-} from './constants';
+} from '../App/constants';
 
 const removeToken = async () => {
   try {
@@ -18,7 +18,7 @@ const removeToken = async () => {
   }
 };
 
-function* trySignOutSaga(action) {
+function* trySignOutSaga() {
   try {
     yield put({ type: TRY_SIGN_OUT_SUCCESS });
     yield removeToken();
@@ -49,9 +49,5 @@ function* trySignOutSaga(action) {
 }
 
 export default function* rootSaga() {
-  yield all([
-    takeLatest(TRY_SIGN_OUT, trySignOutSaga),
-    // takeLatest(LOGIN_ERROR, logout),
-    // loginWatcher(),
-  ]);
+  yield all([takeLatest(TRY_SIGN_OUT, trySignOutSaga)]);
 }

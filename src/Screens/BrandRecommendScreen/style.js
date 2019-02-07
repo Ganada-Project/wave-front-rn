@@ -12,25 +12,22 @@ const styles = StyleSheet.create({
     flex: 0.2,
   },
   body: {
-    flex: 1.5,
     paddingTop: 10,
+    flex: 2,
   },
-  body__text: {
-    marginBottom: 10,
-  },
-  body__text__second: {
-    marginBottom: 30,
-  },
-  body__text__third: {
-    marginTop: 30,
+  body__stylesWrapper: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
   },
   header__title: {
-    fontSize: 28,
+    fontSize: 24,
     color: theme.pointColor,
     fontWeight: 'bold',
+    marginBottom: 10,
   },
   footer: {
-    flex: 0.5,
+    flex: 0.3,
     alignItems: 'center',
     justifyContent: 'center',
   },

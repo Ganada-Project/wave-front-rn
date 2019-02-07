@@ -29,13 +29,13 @@ import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 
 // local selectors
-import { makeSelectStyles, makeSelectStylesLoading } from './selectors';
+import { makeSelectBrands, makeSelectRecommendLoading } from './selectors';
 
 // local components;
-import { FullWidthButton, StyleBox } from '../../Components';
+import { FullWidthButton, BrandBox } from '../../Components';
 
 // local action
-import { getAllStylesAction } from './actions';
+import { getBrandRecommendAction } from './actions';
 
 // local saga, reducer
 import saga from './saga';
@@ -44,7 +44,7 @@ import reducer from './reducer';
 // local styles
 import styles from './style';
 
-class FavStyleScreen extends Component {
+class BrandRecommendScreen extends Component {
   static options(passProps) {
     return {
       topBar: {
@@ -55,33 +55,33 @@ class FavStyleScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { stylesList: fromJS([]) };
+    this.state = { brands: fromJS([]) };
     Navigation.events().bindComponent(this);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.stylesList.size === 0) {
-      return { stylesList: nextProps.stylesList };
+    if (prevState.brands.size === 0) {
+      return { brands: nextProps.brands };
     }
-    if (!is(nextProps.stylesList, prevState.stylesList)) {
-      return { stylesList: prevState.stylesList };
+    if (!is(nextProps.brands, prevState.brands)) {
+      return { brands: prevState.brands };
     }
     return null;
   }
 
   componentDidMount() {
-    const { getAllStyles } = this.props;
-    getAllStyles();
+    const { getBrandRecommend } = this.props;
+    getBrandRecommend();
   }
 
   filterStyleList = () => {
-    const { stylesList } = this.state;
-    const filteredArray = stylesList.filter(
+    const { brands } = this.state;
+    const filteredArray = brands.filter(
       (style) => style.get('selected') === true,
     );
-    const stylesArray = [];
-    filteredArray.map((style) => stylesArray.push(style.get('id')));
-    return stylesArray;
+    const brandArray = [];
+    filteredArray.map((style) => brandArray.push(style.get('id')));
+    return brandArray;
   };
 
   navigateToPoseInfo = () => {
@@ -91,7 +91,7 @@ class FavStyleScreen extends Component {
     const stylesArray = this.filterStyleList();
     Navigation.push(componentId, {
       component: {
-        name: 'wave.brandRecommend',
+        name: 'wave.poseInfo',
         passProps: {
           phone,
           gender,
@@ -105,36 +105,22 @@ class FavStyleScreen extends Component {
   };
 
   onPressStyleBox = (index) => () => {
-    const { stylesList } = this.state;
-    // const newStylesList = stylesList.setIn([index, 'selected'], true);
-    const newStylesList = stylesList.update(index, (style) => style.set('selected', !style.get('selected')));
-    this.setState({ stylesList: newStylesList });
+    const { brands } = this.state;
+    const newBrands = brands.update(index, (style) => style.set('selected', !style.get('selected')));
+    this.setState({ brands: newBrands });
   };
 
   render() {
-    const { stylesList } = this.state;
-
+    const { brands } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.header__title}>선호하는 스타일은?</Text>
-          <Text style={styles.body__text}>
-            이후 프로필 설정에서 변경할 수 있습니다.
-          </Text>
+          <Text style={styles.header__title}>추천할 만한 브랜드를 모아봤어요!</Text>
+          <Text>브랜드를 팔로우 하면 최신 소식을 받아 볼 수 있습니다</Text>
         </View>
         <ScrollView style={styles.body}>
           <View style={styles.body__stylesWrapper}>
-            {stylesList.map((style, index) => (
-              <StyleBox
-                key={`favStyle-${style.get('id')}`}
-                name={style.get('name')}
-                selected={style.get('selected')}
-                index={index}
-                divider={3.8}
-                onPress={this.onPressStyleBox(index)}
-                imgUrl={style.get('image_url')}
-              />
-            ))}
+            <BrandBox />
           </View>
         </ScrollView>
         <View style={styles.footer}>
@@ -149,10 +135,10 @@ class FavStyleScreen extends Component {
   }
 }
 
-FavStyleScreen.propTypes = {
+BrandRecommendScreen.propTypes = {
   componentId: PropTypes.string,
-  getAllStyles: PropTypes.func,
-  stylesList: PropTypes.instanceOf(List),
+  getBrandRecommend: PropTypes.func,
+  brands: PropTypes.instanceOf(List),
   phone: PropTypes.string,
   gender: PropTypes.string,
   name: PropTypes.string,
@@ -161,16 +147,16 @@ FavStyleScreen.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  stylesList: makeSelectStyles(),
-  stylesLoading: makeSelectStylesLoading(),
+  brands: makeSelectBrands(),
+  recommendLoading: makeSelectRecommendLoading(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getAllStyles: () => dispatch(getAllStylesAction()),
+  getBrandRecommend: () => dispatch(getBrandRecommendAction()),
 });
 
-const withSaga = injectSaga({ key: 'favStyle', saga });
-const withReducer = injectReducer({ key: 'favStyle', reducer });
+const withSaga = injectSaga({ key: 'brandRecommend', saga });
+const withReducer = injectReducer({ key: 'brandRecommend', reducer });
 
 const withConnect = connect(
   mapStateToProps,
@@ -180,4 +166,4 @@ export default compose(
   withConnect,
   withReducer,
   withSaga,
-)(FavStyleScreen);
+)(BrandRecommendScreen);

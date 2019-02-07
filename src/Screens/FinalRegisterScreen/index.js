@@ -16,6 +16,8 @@ import {
 // react-native-navigation
 import { Navigation } from 'react-native-navigation';
 
+import { BarIndicator } from 'react-native-indicators';
+
 // redux
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -41,6 +43,8 @@ import reducer from './reducer';
 
 // local styles
 import styles from './style';
+
+import { theme } from '../../constants';
 
 class FinalRegisterScreen extends Component {
   constructor(props) {
@@ -95,7 +99,11 @@ class FinalRegisterScreen extends Component {
   };
 
   render() {
-    return <View />;
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <BarIndicator size={40} color={theme.pointColor} count={6} />
+      </View>
+    );
   }
 }
 

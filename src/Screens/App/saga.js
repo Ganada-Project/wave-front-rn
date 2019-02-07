@@ -1,7 +1,7 @@
-import { AsyncStorage, Alert } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import {
-  take, fork, call, put, takeLatest, all,
+  call, put, takeLatest, all,
 } from 'redux-saga/effects';
 import { getRequest } from '../../utils/request';
 import { API_URL } from '../../constants';
@@ -10,9 +10,6 @@ import {
   FETCH_USER_REQUESTING,
   FETCH_USER_REQUESTING_FAIL,
   FETCH_USER_REQUESTING_SUCCESS,
-  TRY_SIGN_OUT,
-  TRY_SIGN_OUT_SUCCESS,
-  TRY_SIGN_OUT_FAIL,
 } from './constants';
 
 import { startTabScreens } from '../../index';
@@ -28,12 +25,12 @@ const getUserToken = async () => {
   return idToken;
 };
 
-export function* fetchUserFlow(action) {
+export function* fetchUserFlow({ token }) {
   let user;
-  const { componentId } = action;
   const url = `${API_URL}/user`;
-  const idToken = yield getUserToken();
-  if (!idToken) {
+  const idToken = yield getUserToken() || token;
+  if (!idToken || idToken === null || idToken === undefined) {
+    user = { result: null };
     yield put({ type: FETCH_USER_REQUESTING_FAIL });
     yield Navigation.setRoot({
       root: {
@@ -61,24 +58,16 @@ export function* fetchUserFlow(action) {
       user = yield call(getRequest, { url });
       yield put({
         type: FETCH_USER_REQUESTING_SUCCESS,
-        payload: { user: user.result[0], idToken },
+        payload: { user: user.result, idToken },
       });
       yield startTabScreens();
     } catch (error) {
-      console.log(error);
-      yield put({ type: FETCH_USER_REQUESTING_FAIL });
+      user = { result: null };
+      yield put({ type: FETCH_USER_REQUESTING_FAIL, error });
     }
   }
-  return user;
+  return user.result;
 }
-
-// export function* fetchUserWatcher() {
-//   while (true) {
-//     // eslint-disable-line no-constant-condition
-//     const { idToken } = yield take(FETCH_USER_REQUESTING);
-//     yield fork(fetchUserFlow, idToken);
-//   }
-// }
 
 export default function* rootSaga() {
   yield all([takeLatest(FETCH_USER_REQUESTING, fetchUserFlow)]);

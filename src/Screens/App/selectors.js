@@ -4,14 +4,13 @@
  * Corpyright : Ganada Project
  */
 
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect';
 
-const selectGlobal = state => state.get("global");
+const selectGlobal = (state) => state.get('global');
 
-const makeSelectUser = () =>
-  createSelector(
-    selectGlobal,
-    globalState => globalState.getIn(["userData", "user"])
-  );
+const makeSelectUser = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.get('userData'),
+);
 
 export { selectGlobal, makeSelectUser };

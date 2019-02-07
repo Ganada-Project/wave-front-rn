@@ -10,38 +10,36 @@
  *   return state.set('yourStateVariable', true);
  */
 
-import { fromJS } from "immutable";
+import { fromJS } from 'immutable';
 
 import {
-  GET_USER_INFO_FAIL,
-  GET_USER_INFO_REQUEST,
-  GET_USER_INFO_SUCCESS,
-  SIGN_OUT
-} from "./constants";
+  FETCH_USER_REQUESTING,
+  FETCH_USER_REQUESTING_FAIL,
+  FETCH_USER_REQUESTING_SUCCESS,
+  TRY_SIGN_OUT_SUCCESS,
+} from './constants';
 
 // The initial state of the App
 const initialState = fromJS({
   loading: false,
   error: false,
-  idToken: "",
-  userData: {
-    brand_name: ""
-  }
+  idToken: '',
+  userData: null,
 });
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_USER_INFO_REQUEST:
-      return state.set("loading", true);
-    case GET_USER_INFO_SUCCESS:
+    case FETCH_USER_REQUESTING:
+      return state.set('loading', true);
+    case FETCH_USER_REQUESTING_SUCCESS:
       return state
-        .set("userData", fromJS({ ...action.user }))
-        .set("idToken", action.token)
-        .set("loading", false);
-    case GET_USER_INFO_FAIL:
-      return state.set("loading", false);
-    case SIGN_OUT:
-      return state.set("userData", null).set("idToken", null);
+        .set('userData', fromJS({ ...action.payload.user }))
+        .set('idToken', action.payload.idToken)
+        .set('loading', false);
+    case FETCH_USER_REQUESTING_FAIL:
+      return state.set('loading', false).set('error', action.error);
+    case TRY_SIGN_OUT_SUCCESS:
+      return state.set('userData', null).set('idToken', null);
     default:
       return state;
   }

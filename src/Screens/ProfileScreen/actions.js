@@ -3,7 +3,7 @@
  *
  */
 
-import { TRY_SIGN_OUT } from './constants';
+import { TRY_SIGN_OUT } from '../App/constants';
 
 export function trySignOutAction({ componentId }) {
   return {
