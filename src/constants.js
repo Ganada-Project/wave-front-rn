@@ -5,7 +5,7 @@ import { Platform } from 'react-native';
 export const API_URL = 'http://13.124.21.111/api';
 
 export const theme = {
-  pointColor: '#dd6871',
+  pointColor: '#dd6770',
   whiteColor: '#ffffff',
   grayColor: '#d8d8d8',
   textColor: '#5b5e6d',

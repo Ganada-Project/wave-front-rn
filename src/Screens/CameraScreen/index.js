@@ -30,6 +30,7 @@ class CameraScreen extends Component {
       gender,
       password,
       stylesArray,
+      brandsArray,
     } = this.props;
     if (this.camera) {
       const options = { quality: 0.5, base64: true };
@@ -45,6 +46,7 @@ class CameraScreen extends Component {
             name,
             password,
             stylesArray,
+            brandsArray,
             base64,
           },
         },
@@ -109,6 +111,7 @@ CameraScreen.propTypes = {
   phone: PropTypes.string,
   password: PropTypes.string,
   stylesArray: PropTypes.array,
+  brandsArray: PropTypes.array,
 };
 
 export default CameraScreen;

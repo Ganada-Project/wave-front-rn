@@ -18,6 +18,7 @@ import CameraScreen from './Screens/CameraScreen';
 import BodySizeScreen from './Screens/BodySizeScreen';
 import FinalRegisterScreen from './Screens/FinalRegisterScreen';
 import configureStore from './configureStore';
+import { theme } from './constants';
 
 const registerScreens = () => {
   const store = configureStore({});
@@ -194,10 +195,19 @@ export const startTabScreens = () => {
               ],
               options: {
                 bottomTab: {
-                  text: '홈',
-                  selectedTextColor: 'red',
                   icon: require('./Assets/Icons/TabIcons/tab_1.png'),
+                  text: '',
                   testID: 'FIRST_TAB_BAR_BUTTON',
+                  selectedIconColor: theme.pointColor,
+                  iconInsets: {
+                    top: 0,
+                    left: 0,
+                    bottom: -12,
+                    right: 0,
+                  },
+                },
+                bottomTabs: {
+                  titleDisplayMode: 'alwaysHide',
                 },
               },
             },
@@ -210,9 +220,18 @@ export const startTabScreens = () => {
                     name: 'wave.brand',
                     options: {
                       bottomTab: {
-                        text: '브랜드',
                         icon: require('./Assets/Icons/TabIcons/tab_2.png'),
                         testID: 'SECOND_TAB_BAR_BUTTON',
+                        selectedIconColor: theme.pointColor,
+                        iconInsets: {
+                          top: 0,
+                          left: 0,
+                          bottom: -12,
+                          right: 0,
+                        },
+                      },
+                      bottomTabs: {
+                        titleDisplayMode: 'alwaysHide',
                       },
                     },
                   },
@@ -228,9 +247,18 @@ export const startTabScreens = () => {
                     name: 'wave.profile',
                     options: {
                       bottomTab: {
-                        text: '프로필',
                         icon: require('./Assets/Icons/TabIcons/tab_5.png'),
                         testID: 'THIRD_TAB_BAR_BUTTON',
+                        selectedIconColor: theme.pointColor,
+                        iconInsets: {
+                          top: 0,
+                          left: 0,
+                          bottom: -12,
+                          right: 0,
+                        },
+                      },
+                      bottomTabs: {
+                        titleDisplayMode: 'alwaysHide',
                       },
                     },
                   },

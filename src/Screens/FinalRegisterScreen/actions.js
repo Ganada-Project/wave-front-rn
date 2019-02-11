@@ -15,6 +15,7 @@ export function registerUserAction({
   name,
   nickname,
   stylesArray,
+  brandsArray,
   imageBase,
 }) {
   return {
@@ -29,6 +30,7 @@ export function registerUserAction({
       phone,
       nickname,
       stylesArray,
+      brandsArray,
       imageBase,
     },
   };

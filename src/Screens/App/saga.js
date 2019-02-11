@@ -58,7 +58,7 @@ export function* fetchUserFlow({ token }) {
       user = yield call(getRequest, { url });
       yield put({
         type: FETCH_USER_REQUESTING_SUCCESS,
-        payload: { user: user.result, idToken },
+        payload: { user, idToken },
       });
       yield startTabScreens();
     } catch (error) {

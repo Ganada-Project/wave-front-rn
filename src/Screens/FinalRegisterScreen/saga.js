@@ -26,6 +26,7 @@ function* registerUserSaga(action) {
     imageBase,
     nickname,
     stylesArray,
+    brandsArray,
     phone,
   } = action.payload;
   const payload = {
@@ -36,6 +37,7 @@ function* registerUserSaga(action) {
     name,
     phone,
     styles: stylesArray,
+    brands: brandsArray,
     bodyImageBase64: imageBase,
     weight,
     height,

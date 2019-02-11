@@ -28,6 +28,7 @@ class PoseInfoScreen extends Component {
       gender,
       password,
       stylesArray,
+      brandsArray,
     } = this.props;
     Navigation.push(componentId, {
       component: {
@@ -39,6 +40,7 @@ class PoseInfoScreen extends Component {
           name,
           password,
           stylesArray,
+          brandsArray,
         },
       },
     });
@@ -88,6 +90,7 @@ PoseInfoScreen.propTypes = {
   phone: PropTypes.string,
   password: PropTypes.string,
   stylesArray: PropTypes.array,
+  brandsArray: PropTypes.array,
 };
 
 export default PoseInfoScreen;

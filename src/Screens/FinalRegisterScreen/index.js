@@ -47,6 +47,15 @@ import styles from './style';
 import { theme } from '../../constants';
 
 class FinalRegisterScreen extends Component {
+  static options(passProps) {
+    return {
+      topBar: {
+        visible: false,
+        drawBehind: true,
+      },
+    };
+  }
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -68,6 +77,7 @@ class FinalRegisterScreen extends Component {
       height,
       waist,
       stylesArray,
+      brandsArray,
       base64,
       componentId,
     } = this.props;
@@ -81,6 +91,7 @@ class FinalRegisterScreen extends Component {
     console.log('키 :', height);
     console.log('허리 :', waist);
     console.log('스타일 :', stylesArray);
+    console.log('브랜드', brandsArray);
     console.log('이미지 :', base64);
 
     registerUser({
@@ -93,6 +104,7 @@ class FinalRegisterScreen extends Component {
       height,
       waist,
       stylesArray,
+      brandsArray,
       componentId,
       imageBase: base64,
     });
@@ -115,6 +127,7 @@ FinalRegisterScreen.propTypes = {
   password: PropTypes.string,
   nickname: PropTypes.string,
   stylesArray: PropTypes.array,
+  brandsArray: PropTypes.array,
   weight: PropTypes.string,
   height: PropTypes.string,
   waist: PropTypes.string,
@@ -134,6 +147,7 @@ const mapDispatchToProps = (dispatch) => ({
     nickname,
     password,
     stylesArray,
+    brandsArray,
     imageBase,
     weight,
     height,
@@ -147,6 +161,7 @@ const mapDispatchToProps = (dispatch) => ({
       name,
       nickname,
       stylesArray,
+      brandsArray,
       imageBase,
       weight,
       height,

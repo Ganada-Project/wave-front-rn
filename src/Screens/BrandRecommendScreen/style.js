@@ -16,8 +16,7 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   body__stylesWrapper: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: 'column',
     justifyContent: 'center',
   },
   header__title: {

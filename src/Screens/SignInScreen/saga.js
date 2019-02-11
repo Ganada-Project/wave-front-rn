@@ -44,6 +44,7 @@ function* loginFlow(action) {
     yield fetchUserFlow({ token: result.token });
     yield startTabScreens();
   } catch (error) {
+    console.log(error);
     // error? send it to redux
     yield removeIdToken();
     yield put({ type: LOGIN_ERROR, error });

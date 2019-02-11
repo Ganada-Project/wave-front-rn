@@ -33,6 +33,7 @@ export class BodySizeScreen extends Component {
       nickname,
       password,
       stylesArray,
+      brandsArray,
       base64,
       componentId,
     } = this.props;
@@ -46,6 +47,7 @@ export class BodySizeScreen extends Component {
           name,
           password,
           stylesArray,
+          brandsArray,
           base64,
           height,
           weight,
@@ -107,6 +109,7 @@ BodySizeScreen.propTypes = {
   phone: PropTypes.string,
   password: PropTypes.string,
   stylesArray: PropTypes.array,
+  brandsArray: PropTypes.array,
   base64: PropTypes.string,
 };
 

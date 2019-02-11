@@ -70,11 +70,11 @@ class BrandRecommendScreen extends Component {
   }
 
   componentDidMount() {
-    const { getBrandRecommend } = this.props;
-    getBrandRecommend();
+    const { getBrandRecommend, stylesArray } = this.props;
+    getBrandRecommend({ stylesArray });
   }
 
-  filterStyleList = () => {
+  filterBrandList = () => {
     const { brands } = this.state;
     const filteredArray = brands.filter(
       (style) => style.get('selected') === true,
@@ -86,9 +86,10 @@ class BrandRecommendScreen extends Component {
 
   navigateToPoseInfo = () => {
     const {
-      componentId, phone, gender, nickname, name, password,
+      componentId, phone, gender, nickname, name, password, stylesArray,
     } = this.props;
-    const stylesArray = this.filterStyleList();
+    const brandsArray = this.filterBrandList();
+    console.log(brandsArray);
     Navigation.push(componentId, {
       component: {
         name: 'wave.poseInfo',
@@ -99,14 +100,15 @@ class BrandRecommendScreen extends Component {
           name,
           password,
           stylesArray,
+          brandsArray,
         },
       },
     });
   };
 
-  onPressStyleBox = (index) => () => {
+  onPressBrandBox = (index) => () => {
     const { brands } = this.state;
-    const newBrands = brands.update(index, (style) => style.set('selected', !style.get('selected')));
+    const newBrands = brands.update(index, (brand) => brand.set('selected', !brand.get('selected')));
     this.setState({ brands: newBrands });
   };
 
@@ -120,7 +122,7 @@ class BrandRecommendScreen extends Component {
         </View>
         <ScrollView style={styles.body}>
           <View style={styles.body__stylesWrapper}>
-            <BrandBox />
+            {brands.map((brand, index) => <BrandBox onPress={this.onPressBrandBox(index)} key={brand.get('id')} brand={brand} />)}
           </View>
         </ScrollView>
         <View style={styles.footer}>
@@ -138,12 +140,12 @@ class BrandRecommendScreen extends Component {
 BrandRecommendScreen.propTypes = {
   componentId: PropTypes.string,
   getBrandRecommend: PropTypes.func,
-  brands: PropTypes.instanceOf(List),
   phone: PropTypes.string,
   gender: PropTypes.string,
   name: PropTypes.string,
   nickname: PropTypes.string,
   password: PropTypes.string,
+  stylesArray: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -152,7 +154,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getBrandRecommend: () => dispatch(getBrandRecommendAction()),
+  getBrandRecommend: ({ stylesArray }) => dispatch(getBrandRecommendAction({ stylesArray })),
 });
 
 const withSaga = injectSaga({ key: 'brandRecommend', saga });

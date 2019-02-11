@@ -10,17 +10,17 @@ import {
   GET_BRAND_RECOMMEND_SUCCESS,
 } from './constants';
 import { API_URL } from '../../constants';
-import { getRequest } from '../../utils/request';
+import { postRequest } from '../../utils/request';
 
-function* getBrandRecommendSaga() {
-  const url = `${API_URL}/style`;
+function* getBrandRecommendSaga(action) {
+  const { stylesArray } = action;
+  const url = `${API_URL}/style/recommend`;
+  const payload = {
+    styles: stylesArray,
+  };
   try {
-    let brands = yield call(getRequest, { url });
-    brands = brands.result.map((style) => {
-      const o = Object.assign({}, style);
-      o.selected = false;
-      return o;
-    });
+    const data = yield call(postRequest, { url, payload });
+    const brands = data.result.map((brand) => ({ ...brand, selected: false }));
     yield put({
       type: GET_BRAND_RECOMMEND_SUCCESS,
       payload: { brands },

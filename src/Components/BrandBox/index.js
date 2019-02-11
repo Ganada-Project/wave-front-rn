@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import PropTypes from 'prop-types';
 import {
   Wrapper, ImageArea, TextArea, BrandImage, BrandTitle,
 } from './style';
@@ -12,21 +12,29 @@ class BrandBox extends Component {
   }
 
   render() {
+    const { brand, onPress } = this.props;
     return (
-      <Wrapper>
+      <Wrapper onPress={onPress}>
         <ImageArea>
           <BrandImage
             source={{
-              uri: 'https://i.ytimg.com/vi/DEIUzqLFNPM/maxresdefault.jpg',
+              uri: brand.get('brand_profile_img'),
             }}
           />
         </ImageArea>
-        <TextArea>
-          <BrandTitle> textInComponent </BrandTitle>
+        <TextArea selected={brand.get('selected')}>
+          <BrandTitle selected={brand.get('selected')}>
+            {brand.get('brand_name')}
+          </BrandTitle>
         </TextArea>
       </Wrapper>
     );
   }
 }
+
+BrandBox.propTypes = {
+  brand: PropTypes.object,
+  onPress: PropTypes.func,
+};
 
 export default BrandBox;
