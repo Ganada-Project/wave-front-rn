@@ -3,13 +3,35 @@ import {
   KeyboardAvoidingView, Platform, Text, View,
 } from 'react-native';
 import PropTypes from 'prop-types';
+
+// redux
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+
+// reselect -> reducer에 있는 프로퍼티들 선택 툴
+import { createStructuredSelector } from 'reselect';
+
+// injectSaga
 import { Navigation } from 'react-native-navigation';
+import injectSaga from '../../utils/injectSaga';
+import injectReducer from '../../utils/injectReducer';
+
+// react-native-navigation
 import styles from './styles';
+
+// global components
 import { RegisterForm, FullWidthButton } from '../../Components';
 import { keyboardVerticalOffset, keyboardBehavior } from '../../constants';
 
+// local actions
+import { checkNicknameAction } from './actions';
+
+import saga from './saga';
+import reducer from './reducer';
+import { makeSelectChecking, makeSelectOverlap } from './selectors';
+
 export class RegisterNameScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
         noBorder: true,
@@ -17,11 +39,25 @@ export class RegisterNameScreen extends Component {
     };
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (!prevState.overlap && nextProps.overlap) {
+      return { errorText: '닉네임이 이미 존재합니다', overlap: true };
+    }
+    if (prevState.overlap && !nextProps.overlap) {
+      return { errorText: null, overlap: false };
+    }
+    return null;
+  }
+
   constructor(props) {
+    console.log(props);
+    const { overlap } = props;
     super(props);
     this.state = {
       nickname: '',
       name: '',
+      overlap,
+      errorText: null,
     };
   }
 
@@ -36,8 +72,16 @@ export class RegisterNameScreen extends Component {
     });
   };
 
+  checkNickname = (text) => {
+    const { checkNickname } = this.props;
+    this.setState({ nickname: text }, () => {
+      checkNickname({ nickname: text });
+    });
+  };
+
   render() {
-    const { nickname, name } = this.state;
+    const { checking } = this.props;
+    const { nickname, name, errorText } = this.state;
     return (
       <KeyboardAvoidingView
         style={styles.container}
@@ -50,7 +94,9 @@ export class RegisterNameScreen extends Component {
         <View style={styles.body}>
           <RegisterForm
             label="닉네임"
-            onChangeText={(text) => this.setState({ nickname: text })}
+            onChangeText={this.checkNickname}
+            loading={checking}
+            errorText={errorText}
           />
           <RegisterForm
             label="이름"
@@ -73,6 +119,31 @@ export class RegisterNameScreen extends Component {
 RegisterNameScreen.propTypes = {
   componentId: PropTypes.string,
   gender: PropTypes.string,
+  checking: PropTypes.bool,
+  checkNickname: PropTypes.func,
+  overlap: PropTypes.bool,
 };
 
-export default RegisterNameScreen;
+const mapStateToProps = createStructuredSelector({
+  checking: makeSelectChecking(),
+  overlap: makeSelectOverlap(),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  checkNickname: ({ nickname }) => {
+    dispatch(checkNicknameAction({ nickname }));
+  },
+});
+
+const withSaga = injectSaga({ key: 'registerName', saga });
+const withReducer = injectReducer({ key: 'registerName', reducer });
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+export default compose(
+  withConnect,
+  withSaga,
+  withReducer,
+)(RegisterNameScreen);
