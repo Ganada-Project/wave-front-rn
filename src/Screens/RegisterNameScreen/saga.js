@@ -18,10 +18,8 @@ function* checkNicknameSaga(action) {
   };
   try {
     const result = yield call(postRequest, { url, payload });
-    console.log(result);
     yield put({ type: CHECK_NICKNAME_SUCCESS, overlap: result.overlap });
   } catch (error) {
-    console.log(error);
     // error? send it to redux
     yield put({ type: CHECK_NICKNAME_FAIL, error });
   }

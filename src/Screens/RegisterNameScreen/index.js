@@ -81,7 +81,9 @@ export class RegisterNameScreen extends Component {
 
   render() {
     const { checking } = this.props;
-    const { nickname, name, errorText } = this.state;
+    const {
+      nickname, name, errorText, overlap,
+    } = this.state;
     return (
       <KeyboardAvoidingView
         style={styles.container}
@@ -105,7 +107,7 @@ export class RegisterNameScreen extends Component {
         </View>
         <View style={styles.footer}>
           <FullWidthButton
-            disabled={!!(nickname === '' || name === '')}
+            disabled={!!(nickname === '' || name === '') || overlap}
             onPress={this.navigateToPhoneVerify}
             invert
             content="다음 단계"

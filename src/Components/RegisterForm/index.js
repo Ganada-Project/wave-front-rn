@@ -25,17 +25,25 @@ export class RegisterForm extends Component {
         style={{
           marginBottom: 30,
           height: 50,
-          width: '100%',
           flexDirection: 'column',
+          width: '100%',
         }}
       >
-        <View style={{ flexDirection: 'row', width: '20%' }}>
+        <View style={{ flexDirection: 'row' }}>
           <Text
-            style={{ color: theme.textColor, fontSize: 16, fontWeight: '700' }}
+            style={{
+              color: theme.textColor,
+              fontSize: 16,
+              fontWeight: '700',
+            }}
           >
             {label}
           </Text>
-          {loading ? <BarIndicator size={10} color={theme.pointColor} /> : null}
+          {loading ? (
+            <View style={{ marginLeft: 10 }}>
+              <BarIndicator size={10} color={theme.pointColor} />
+            </View>
+          ) : null}
         </View>
         <TextInput
           onChangeText={onChangeText}
