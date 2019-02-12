@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import FastImage from 'react-native-fast-image';
 import {
-  Wrapper, ImageArea, TextArea, BrandImage, BrandTitle,
+  Wrapper, ImageArea, TextArea, BrandTitle,
 } from './style';
 
 class BrandBox extends Component {
@@ -16,10 +17,12 @@ class BrandBox extends Component {
     return (
       <Wrapper onPress={onPress}>
         <ImageArea>
-          <BrandImage
+          <FastImage
             source={{
               uri: brand.get('brand_profile_img'),
             }}
+            style={{ width: '100%', height: '100%' }}
+            resizeMode={FastImage.resizeMode.cover}
           />
         </ImageArea>
         <TextArea selected={brand.get('selected')}>

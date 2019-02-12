@@ -150,6 +150,7 @@ configurations.all {
 }
 
 dependencies {
+    implementation project(':react-native-fast-image')
     implementation project(':react-native-camera')
     implementation project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])
