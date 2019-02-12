@@ -5,6 +5,7 @@ import { KeyboardAvoidingView, Text, View } from 'react-native';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { TextInputMask } from 'react-native-masked-text';
 import PropTypes from 'prop-types';
 // redux-saga things
 import { Navigation } from 'react-native-navigation';
@@ -100,6 +101,7 @@ export class PhoneVerifyScreen extends Component {
             </Text>
             <RegisterForm
               label="휴대폰 번호"
+              phone
               value={number}
               onChangeText={(text) => this.setState({ phone: text })}
             />
