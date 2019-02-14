@@ -15,12 +15,17 @@ import {
   VERIFY_PHONE_NUMBER,
   VERIFY_PHONE_NUMBER_FAIL,
   VERIFY_PHONE_NUMBER_SUCCESS,
+  CHECK_PHONE_NUMBER_FAIL,
+  CHECK_PHONE_NUMBER_REQUEST,
+  CHECK_PHONE_NUMBER_SUCCESS,
 } from './constants';
 
 // The initial state of the App
 export const initialState = fromJS({
   verifyLoading: false,
   verifyNumber: '',
+  checking: false,
+  overlap: false,
 });
 
 function phoneVerificationReducer(state = initialState, action) {
@@ -40,6 +45,12 @@ function phoneVerificationReducer(state = initialState, action) {
           time: new Date(),
         },
       ]);
+    case CHECK_PHONE_NUMBER_REQUEST:
+      return state.set('checking', true);
+    case CHECK_PHONE_NUMBER_SUCCESS:
+      return state.set('checking', false).set('overlap', action.overlap);
+    case CHECK_PHONE_NUMBER_FAIL:
+      return state.set('checking', false);
 
     default:
       return state;

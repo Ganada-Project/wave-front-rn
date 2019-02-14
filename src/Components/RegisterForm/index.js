@@ -17,8 +17,10 @@ export class RegisterForm extends Component {
       label,
       placeholder,
       onChangeText,
+      onChangePhoneText,
       errorText,
       value,
+      phoneValue,
       loading,
       phone,
     } = this.props;
@@ -52,6 +54,8 @@ export class RegisterForm extends Component {
             ref={(ref) => (this.myDateText = ref)}
             type="custom"
             keyboardType="numeric"
+            value={phoneValue}
+            onChangeText={onChangePhoneText}
             style={styles.input}
             options={{
               mask: '999-9999-9999',
@@ -77,8 +81,10 @@ RegisterForm.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string,
   onChangeText: PropTypes.func,
+  onChangePhoneText: PropTypes.func,
   errorText: PropTypes.string,
   value: PropTypes.string,
+  phoneValue: PropTypes.string,
   loading: PropTypes.bool,
   phone: PropTypes.bool,
 };

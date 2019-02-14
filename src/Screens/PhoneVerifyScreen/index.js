@@ -5,7 +5,6 @@ import { KeyboardAvoidingView, Text, View } from 'react-native';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { TextInputMask } from 'react-native-masked-text';
 import PropTypes from 'prop-types';
 // redux-saga things
 import { Navigation } from 'react-native-navigation';
@@ -16,8 +15,13 @@ import { RegisterForm, FullWidthButton } from '../../Components';
 import { keyboardBehavior, keyboardVerticalOffset } from '../../constants';
 import saga from './saga';
 import reducer from './reducer';
-import { makeSelectVerifyNumber, makeSelectVerifyLoading } from './selectors';
-import { verifyPhoneNumberAction } from './actions';
+import {
+  makeSelectVerifyNumber,
+  makeSelectVerifyLoading,
+  makeSelectChecking,
+  makeSelectOverlap,
+} from './selectors';
+import { verifyPhoneNumberAction, checkPhoneNumberAction } from './actions';
 
 export class PhoneVerifyScreen extends Component {
   static options(passProps) {
@@ -32,6 +36,12 @@ export class PhoneVerifyScreen extends Component {
     if (prevState.verifyLoading && !nextProps.verifyLoading) {
       return { isSent: true };
     }
+    if (!prevState.overlap && nextProps.overlap) {
+      return { errorText: '닉네임이 이미 존재합니다', overlap: true };
+    }
+    if (prevState.overlap && !nextProps.overlap) {
+      return { errorText: null, overlap: false };
+    }
     return { verifyLoading: nextProps.verifyLoading };
   }
 
@@ -43,6 +53,7 @@ export class PhoneVerifyScreen extends Component {
       userVerifyNumber: '',
       verifyLoading: false,
       errorText: null,
+      overlap: props.overlap,
     };
   }
 
@@ -51,6 +62,13 @@ export class PhoneVerifyScreen extends Component {
     const { verifyPhoneNumber } = this.props;
     // verifyPhoneNumber({ number: phone });
     this.setState({ isSent: true });
+  };
+
+  handlePhoneNumber = (text) => {
+    const { checkPhoneNumber } = this.props;
+    this.setState({ phone: text }, () => {
+      checkPhoneNumber({ number: text });
+    });
   };
 
   navigateToPassword = () => {
@@ -81,6 +99,7 @@ export class PhoneVerifyScreen extends Component {
   };
 
   render() {
+    const { checking } = this.props;
     const {
       isSent, number, userVerifyNumber, errorText, phone,
     } = this.state;
@@ -100,10 +119,12 @@ export class PhoneVerifyScreen extends Component {
               인공지능은 우리만 필요해요.
             </Text>
             <RegisterForm
-              label="휴대폰 번호"
               phone
-              value={number}
-              onChangeText={(text) => this.setState({ phone: text })}
+              label="휴대폰 번호"
+              phoneValue={phone}
+              loading={checking}
+              onChangePhoneText={this.handlePhoneNumber}
+              errorText={errorText}
             />
             <Text style={styles.body__text__third}>
               해당번호를 4자리의 인증번호를 보내드립니다.
@@ -158,20 +179,26 @@ export class PhoneVerifyScreen extends Component {
 PhoneVerifyScreen.propTypes = {
   componentId: PropTypes.string,
   verifyPhoneNumber: PropTypes.func,
+  checkPhoneNumber: PropTypes.func,
   verifyLoading: PropTypes.bool,
   verifyNumber: PropTypes.string,
   name: PropTypes.string,
   gender: PropTypes.string,
   nickname: PropTypes.string,
+  overlap: PropTypes.bool,
+  checking: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   verifyNumber: makeSelectVerifyNumber(),
   verifyLoading: makeSelectVerifyLoading(),
+  checking: makeSelectChecking(),
+  overlap: makeSelectOverlap(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   verifyPhoneNumber: ({ number }) => dispatch(verifyPhoneNumberAction({ number })),
+  checkPhoneNumber: ({ number }) => dispatch(checkPhoneNumberAction({ number })),
 });
 
 const withSaga = injectSaga({ key: 'phoneVerify', saga });
