@@ -1,9 +1,19 @@
-import { Dimensions } from 'react-native';
+import {
+  Dimensions,
+  Platform,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import styled from 'styled-components/native';
 import { theme } from '../../constants';
 const window = Dimensions.get('window');
+const Button = Platform.OS === 'ios' ? TouchableOpacity : TouchableWithoutFeedback;
 
-export const Wrapper = styled.TouchableOpacity`
+export const Wrapper = styled(Button)`
+  /* overflow: hidden; */
+`;
+
+export const Content = styled.View`
   width: 100%;
   height: ${window.height / 4.5};
   flex: 1;
@@ -11,7 +21,6 @@ export const Wrapper = styled.TouchableOpacity`
   background-color: white;
   border-radius: 15px;
   margin-bottom: 15px;
-  /* overflow: hidden; */
 `;
 
 export const ImageArea = styled.View`

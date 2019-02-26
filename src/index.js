@@ -3,7 +3,7 @@ import { Navigation } from 'react-native-navigation';
 import { Provider } from 'react-redux';
 import App from './Screens/App';
 import HomeScreen from './Screens/HomeScreen';
-import BrandScreen from './Screens/BrandScreen';
+import CatalogScreen from './Screens/CatalogScreen';
 import ProfileScreen from './Screens/ProfileScreen';
 import SignInScreen from './Screens/SignInScreen';
 import WelcomeScreen from './Screens/WelcomeScreen';
@@ -44,10 +44,10 @@ const registerScreens = () => {
     'wave.brand',
     () => (props) => (
       <Provider store={store}>
-        <BrandScreen {...props} />
+        <CatalogScreen {...props} />
       </Provider>
     ),
-    () => BrandScreen,
+    () => CatalogScreen,
   );
   Navigation.registerComponent(
     'wave.profile',
@@ -218,25 +218,25 @@ export const startTabScreens = () => {
                 {
                   component: {
                     name: 'wave.brand',
-                    options: {
-                      bottomTab: {
-                        icon: require('./Assets/Icons/TabIcons/tab_2.png'),
-                        testID: 'SECOND_TAB_BAR_BUTTON',
-                        selectedIconColor: theme.pointColor,
-                        iconInsets: {
-                          top: 0,
-                          left: 0,
-                          bottom: -12,
-                          right: 0,
-                        },
-                      },
-                      bottomTabs: {
-                        titleDisplayMode: 'alwaysHide',
-                      },
-                    },
                   },
                 },
               ],
+              options: {
+                bottomTab: {
+                  icon: require('./Assets/Icons/TabIcons/tab_2.png'),
+                  testID: 'SECOND_TAB_BAR_BUTTON',
+                  selectedIconColor: theme.pointColor,
+                  iconInsets: {
+                    top: 0,
+                    left: 0,
+                    bottom: -12,
+                    right: 0,
+                  },
+                },
+                bottomTabs: {
+                  titleDisplayMode: 'alwaysHide',
+                },
+              },
             },
           },
           {
@@ -245,25 +245,25 @@ export const startTabScreens = () => {
                 {
                   component: {
                     name: 'wave.profile',
-                    options: {
-                      bottomTab: {
-                        icon: require('./Assets/Icons/TabIcons/tab_5.png'),
-                        testID: 'THIRD_TAB_BAR_BUTTON',
-                        selectedIconColor: theme.pointColor,
-                        iconInsets: {
-                          top: 0,
-                          left: 0,
-                          bottom: -12,
-                          right: 0,
-                        },
-                      },
-                      bottomTabs: {
-                        titleDisplayMode: 'alwaysHide',
-                      },
-                    },
                   },
                 },
               ],
+              options: {
+                bottomTab: {
+                  icon: require('./Assets/Icons/TabIcons/tab_5.png'),
+                  testID: 'THIRD_TAB_BAR_BUTTON',
+                  selectedIconColor: theme.pointColor,
+                  iconInsets: {
+                    top: 0,
+                    left: 0,
+                    bottom: -12,
+                    right: 0,
+                  },
+                },
+                bottomTabs: {
+                  titleDisplayMode: 'alwaysHide',
+                },
+              },
             },
           },
         ],

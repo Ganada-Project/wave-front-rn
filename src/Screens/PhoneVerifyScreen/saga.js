@@ -26,12 +26,11 @@ function* verifyPhoneNumberSaga(action) {
 function* checkPhoneNumberSaga(action) {
   const { number } = action;
   const url = `${API_URL}/auth/check/user/phone`;
-  const paylaod = {
+  const payload = {
     phonenumber: number,
   };
   try {
-    const result = yield call(postRequest, { url, paylaod });
-    console.log(result);
+    const result = yield call(postRequest, { url, payload });
     yield put({ type: CHECK_PHONE_NUMBER_SUCCESS, overlap: result.overlap });
   } catch (error) {
     console.log(error);
