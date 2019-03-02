@@ -27,7 +27,7 @@ export class WelcomeScreen extends Component {
     const { componentId } = this.props;
     Navigation.push(componentId, {
       component: {
-        name: 'wave.gender',
+        name: 'wave.phoneVerify',
       },
     });
   };
@@ -47,7 +47,7 @@ export class WelcomeScreen extends Component {
         <View style={styles.header}>
           <Image style={styles.logo} source={WaveLogoWhite} />
           <Text style={styles.header__title}>Surf in style.</Text>
-          <Text style={styles.header__subtitle}>세상의 스타일, 내 손안에.</Text>
+          <Text style={styles.header__subtitle}>웨이브</Text>
         </View>
         <View style={styles.footer}>
           <FullWidthButton icon="facebook-f" content="페이스북으로 로그인" />

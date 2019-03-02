@@ -16,8 +16,9 @@ const styles = StyleSheet.create({
     flex: 1.5,
   },
   header__title: {
-    fontSize: 28,
-    color: theme.pointColor,
+    fontSize: 20,
+    marginBottom: 10,
+    color: theme.textColor,
     fontWeight: 'bold',
   },
   footer: {

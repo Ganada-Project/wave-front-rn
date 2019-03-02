@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
   },
 
   header__title: {
-    fontSize: 28,
-    color: theme.pointColor,
+    fontSize: 20,
+    color: theme.textColor,
     fontWeight: 'bold',
   },
 });

@@ -22,17 +22,16 @@ export class PasswordScreen extends Component {
     };
   }
 
-  navigateToFavStyle = () => {
+  navigateToGender = () => {
     const {
-      componentId, phone, gender, name, nickname,
+      componentId, phone, name, nickname,
     } = this.props;
     const { password } = this.state;
     Navigation.push(componentId, {
       component: {
-        name: 'wave.favStyle',
+        name: 'wave.gender',
         passProps: {
           phone,
-          gender,
           name,
           nickname,
           password,
@@ -49,7 +48,7 @@ export class PasswordScreen extends Component {
         keyboardVerticalOffset={keyboardVerticalOffset}
       >
         <View style={styles.header}>
-          <Text style={styles.header__title}>비밀번호를 설정하세요.</Text>
+          <Text style={styles.header__title}>보안</Text>
         </View>
         <View style={styles.body}>
           <Text style={styles.body__text}>
@@ -62,7 +61,7 @@ export class PasswordScreen extends Component {
         </View>
         <View style={styles.footer}>
           <FullWidthButton
-            onPress={this.navigateToFavStyle}
+            onPress={this.navigateToGender}
             invert
             content="다음 단계"
           />
@@ -74,7 +73,6 @@ export class PasswordScreen extends Component {
 
 PasswordScreen.propTypes = {
   componentId: PropTypes.string,
-  gender: PropTypes.string,
   name: PropTypes.string,
   nickname: PropTypes.string,
   phone: PropTypes.string,

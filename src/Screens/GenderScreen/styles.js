@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   header__title: {
-    fontSize: 28,
-    color: theme.pointColor,
+    fontSize: 20,
+    color: theme.textColor,
     fontWeight: 'bold',
   },
   footer: {

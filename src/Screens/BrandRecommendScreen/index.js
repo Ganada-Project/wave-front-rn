@@ -86,7 +86,13 @@ class BrandRecommendScreen extends Component {
 
   navigateToPoseInfo = () => {
     const {
-      componentId, phone, gender, nickname, name, password, stylesArray,
+      componentId,
+      phone,
+      gender,
+      nickname,
+      name,
+      password,
+      stylesArray,
     } = this.props;
     const brandsArray = this.filterBrandList();
     console.log(brandsArray);
@@ -108,7 +114,7 @@ class BrandRecommendScreen extends Component {
 
   onPressBrandBox = (index) => () => {
     const { brands } = this.state;
-    const newBrands = brands.update(index, (brand) => brand.set('selected', !brand.get('selected')));
+    const newBrands = brands.update(index, (brand) => brand.set('selected', !brand.get('selected')), );
     this.setState({ brands: newBrands });
   };
 
@@ -117,12 +123,17 @@ class BrandRecommendScreen extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.header__title}>추천할 만한 브랜드를 모아봤어요!</Text>
-          <Text>브랜드를 팔로우 하면 최신 소식을 받아 볼 수 있습니다</Text>
+          <Text style={styles.header__title}>추천 브랜드</Text>
         </View>
         <ScrollView style={styles.body}>
           <View style={styles.body__stylesWrapper}>
-            {brands.map((brand, index) => <BrandBox onPress={this.onPressBrandBox(index)} key={brand.get('id')} brand={brand} />)}
+            {brands.map((brand, index) => (
+              <BrandBox
+                onPress={this.onPressBrandBox(index)}
+                key={brand.get('id')}
+                brand={brand}
+              />
+            ))}
           </View>
         </ScrollView>
         <View style={styles.footer}>

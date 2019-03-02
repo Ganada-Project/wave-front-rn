@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   header__title: {
-    fontSize: 24,
-    color: theme.pointColor,
+    fontSize: 20,
+    color: theme.textColor,
     fontWeight: 'bold',
     marginBottom: 10,
   },

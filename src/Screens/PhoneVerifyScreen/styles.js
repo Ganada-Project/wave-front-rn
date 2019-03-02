@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   header: {
-    flex: 0.2,
+    flex: 0.1,
   },
   body: {
     flex: 1.5,
@@ -23,10 +23,11 @@ const styles = StyleSheet.create({
   },
   body__text__third: {
     marginTop: 30,
+    color: theme.pointColor,
   },
   header__title: {
-    fontSize: 28,
-    color: theme.pointColor,
+    fontSize: 20,
+    color: theme.textColor,
     fontWeight: 'bold',
   },
   footer: {

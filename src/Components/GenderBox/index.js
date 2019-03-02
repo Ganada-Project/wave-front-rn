@@ -31,6 +31,7 @@ export class GenderBox extends Component {
           width: window.width / divider,
           height: window.width / divider,
           borderWidth: 1,
+          borderRadius: window.width / divider / 2,
           borderColor:
             selectedGenderId !== id ? theme.grayColor : theme.pointColor,
           backgroundColor:
@@ -38,10 +39,6 @@ export class GenderBox extends Component {
         }}
         onPress={() => onPress(id)}
       >
-        <Image
-          source={selectedGenderId !== id ? icon : iconWhite}
-          style={{ width: 60, height: 60 }}
-        />
         <Text
           style={{
             ...styles.text,

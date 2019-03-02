@@ -37,14 +37,22 @@ export class GenderScreen extends Component {
     };
   }
 
-  navigateToRegisterName = () => {
-    const { componentId } = this.props;
+  navigateToFavStyle = () => {
+    const {
+      componentId, name, nickname, phone, password,
+    } = this.props;
     const { selectedGenderId } = this.state;
     const gender = selectedGenderId === 1 ? 'M' : 'W';
     Navigation.push(componentId, {
       component: {
-        name: 'wave.registerName',
-        passProps: { gender },
+        name: 'wave.favStyle',
+        passProps: {
+          gender,
+          name,
+          nickname,
+          phone,
+          password,
+        },
       },
     });
   };
@@ -62,7 +70,7 @@ export class GenderScreen extends Component {
         keyboardVerticalOffset={keyboardVerticalOffset}
       >
         <View style={styles.header}>
-          <Text style={styles.header__title}>패션에는 성별이 필수에요</Text>
+          <Text style={styles.header__title}>성별</Text>
         </View>
         <View style={styles.body}>
           {genderData.map((gender) => (
@@ -80,7 +88,7 @@ export class GenderScreen extends Component {
         </View>
         <View style={styles.footer}>
           <FullWidthButton
-            onPress={this.navigateToRegisterName}
+            onPress={this.navigateToFavStyle}
             disabled={selectedGenderId === 0}
             invert
             content="다음 단계"
@@ -93,6 +101,10 @@ export class GenderScreen extends Component {
 
 GenderScreen.propTypes = {
   componentId: PropTypes.string,
+  name: PropTypes.string,
+  nickname: PropTypes.string,
+  password: PropTypes.string,
+  phone: PropTypes.string,
 };
 
 export default GenderScreen;

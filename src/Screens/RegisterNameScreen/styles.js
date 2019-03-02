@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   header__title: {
-    fontSize: 28,
-    color: theme.pointColor,
+    fontSize: 20,
+    color: theme.textColor,
     fontWeight: 'bold',
   },
   footer: {

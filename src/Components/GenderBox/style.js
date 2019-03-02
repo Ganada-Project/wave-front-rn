@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 10,
     flexDirection: 'column',
-    borderRadius: 10,
+    borderRadius: 50,
     overflow: 'hidden',
   },
   overlay: {
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: '600',
-    fontSize: 16,
+    fontSize: 20,
     marginTop: 10,
   },
 });

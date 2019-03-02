@@ -66,7 +66,10 @@ export class BodySizeScreen extends Component {
         keyboardVerticalOffset={keyboardVerticalOffset}
       >
         <View style={styles.header}>
-          <Text style={styles.header__title}>신체치수를 알려주세요.</Text>
+          <Text style={styles.header__title}>회원님의 신체</Text>
+          <Text>
+            정확한 신체를 알고 있을 수록, 정확한 치수계산이 진행됩니다.
+          </Text>
         </View>
         <View style={styles.body}>
           <HeightWeightWrapper>

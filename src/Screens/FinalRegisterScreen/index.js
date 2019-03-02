@@ -94,20 +94,20 @@ class FinalRegisterScreen extends Component {
     console.log('브랜드', brandsArray);
     console.log('이미지 :', base64);
 
-    registerUser({
-      gender,
-      name,
-      phone,
-      nickname,
-      password,
-      weight,
-      height,
-      waist,
-      stylesArray,
-      brandsArray,
-      componentId,
-      imageBase: base64,
-    });
+    // registerUser({
+    //   gender,
+    //   name,
+    //   phone,
+    //   nickname,
+    //   password,
+    //   weight,
+    //   height,
+    //   waist,
+    //   stylesArray,
+    //   brandsArray,
+    //   componentId,
+    //   imageBase: base64,
+    // });
   };
 
   render() {

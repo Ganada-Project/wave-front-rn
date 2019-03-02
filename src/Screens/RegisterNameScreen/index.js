@@ -50,7 +50,6 @@ export class RegisterNameScreen extends Component {
   }
 
   constructor(props) {
-    console.log(props);
     const { overlap } = props;
     super(props);
     this.state = {
@@ -61,13 +60,13 @@ export class RegisterNameScreen extends Component {
     };
   }
 
-  navigateToPhoneVerify = () => {
+  navigateToPassword = () => {
     const { nickname, name } = this.state;
-    const { componentId, gender } = this.props;
+    const { componentId, phone } = this.props;
     Navigation.push(componentId, {
       component: {
-        name: 'wave.phoneVerify',
-        passProps: { gender, nickname, name },
+        name: 'wave.password',
+        passProps: { nickname, name, phone },
       },
     });
   };
@@ -91,7 +90,7 @@ export class RegisterNameScreen extends Component {
         keyboardVerticalOffset={keyboardVerticalOffset}
       >
         <View style={styles.header}>
-          <Text style={styles.header__title}>어떻게 부르면 될까요?</Text>
+          <Text style={styles.header__title}>로그인 정보</Text>
         </View>
         <View style={styles.body}>
           <RegisterForm
@@ -108,7 +107,7 @@ export class RegisterNameScreen extends Component {
         <View style={styles.footer}>
           <FullWidthButton
             disabled={!!(nickname === '' || name === '') || overlap}
-            onPress={this.navigateToPhoneVerify}
+            onPress={this.navigateToPassword}
             invert
             content="다음 단계"
           />
@@ -120,7 +119,7 @@ export class RegisterNameScreen extends Component {
 
 RegisterNameScreen.propTypes = {
   componentId: PropTypes.string,
-  gender: PropTypes.string,
+  phone: PropTypes.string,
   checking: PropTypes.bool,
   checkNickname: PropTypes.func,
   overlap: PropTypes.bool,

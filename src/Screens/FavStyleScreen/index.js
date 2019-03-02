@@ -117,10 +117,7 @@ class FavStyleScreen extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.header__title}>선호하는 스타일은?</Text>
-          <Text style={styles.body__text}>
-            이후 프로필 설정에서 변경할 수 있습니다.
-          </Text>
+          <Text style={styles.header__title}>선호하는 스타일은</Text>
         </View>
         <ScrollView style={styles.body}>
           <View style={styles.body__stylesWrapper}>
