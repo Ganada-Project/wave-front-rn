@@ -52,7 +52,7 @@ export class PasswordScreen extends Component {
         </View>
         <View style={styles.body}>
           <Text style={styles.body__text}>
-            비밀번호를 8자 이상으로해주세요.
+            비밀번호는 영문 숫자 혼합 8자 이상입니다.
           </Text>
           <RegisterForm
             label="비밀번호"

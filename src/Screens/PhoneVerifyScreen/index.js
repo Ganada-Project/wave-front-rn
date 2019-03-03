@@ -8,6 +8,7 @@ import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 // redux-saga things
 import { Navigation } from 'react-native-navigation';
+import TimerCountdown from 'react-native-timer-countdown';
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import styles from './styles';
@@ -37,7 +38,7 @@ export class PhoneVerifyScreen extends Component {
       return { isSent: true };
     }
     if (!prevState.overlap && nextProps.overlap) {
-      return { errorText: '닉네임이 이미 존재합니다', overlap: true };
+      return { errorText: '휴대폰번호가 이미 존재합니다', overlap: true };
     }
     if (prevState.overlap && !nextProps.overlap) {
       return { errorText: null, overlap: false };
@@ -69,6 +70,10 @@ export class PhoneVerifyScreen extends Component {
     this.setState({ phone: text }, () => {
       checkPhoneNumber({ number: text });
     });
+  };
+
+  handleTimeOut = () => {
+    this.setState({ isSent: false, phone: '', userVerifyNumber: '' });
   };
 
   navigateToPassword = () => {
@@ -160,7 +165,27 @@ export class PhoneVerifyScreen extends Component {
             onChangeText={(text) => this.setState({ userVerifyNumber: text })}
             errorText={errorText}
           />
-          <Text style={styles.body__text__third}>인증번호가 안오는 경우</Text>
+          <TimerCountdown
+            initialSecondsRemaining={2000 * 60}
+            onTimeElapsed={this.handleTimeOut}
+            formatSecondsRemaining={(milliseconds) => {
+              const remainingSec = Math.round(milliseconds / 1000);
+              const seconds = parseInt((remainingSec % 60).toString(), 10);
+              const minutes = parseInt(
+                ((remainingSec / 60) % 60).toString(),
+                10,
+              );
+              const hours = parseInt((remainingSec / 3600).toString(), 10);
+              const s = seconds < 10 ? `0${seconds}` : seconds;
+              const m = minutes < 10 ? `0${minutes}` : minutes;
+              let h = hours < 10 ? `0${hours}` : hours;
+              h = h === '00' ? '' : `${h}:`;
+              return `${h + m}:${s}`;
+            }}
+            allowFontScaling
+            style={styles.timerText}
+          />
+          <Text style={styles.body__text__third}>인증번호 다시받기</Text>
         </View>
         <View style={styles.footer}>
           <FullWidthButton

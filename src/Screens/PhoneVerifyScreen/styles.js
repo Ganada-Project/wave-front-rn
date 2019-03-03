@@ -30,6 +30,11 @@ const styles = StyleSheet.create({
     color: theme.textColor,
     fontWeight: 'bold',
   },
+  timerText: {
+    fontSize: 16,
+    color: theme.pointColor,
+    alignSelf: 'flex-end',
+  },
   footer: {
     flex: 0.5,
     alignItems: 'center',
