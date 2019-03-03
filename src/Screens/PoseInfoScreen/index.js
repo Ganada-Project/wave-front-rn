@@ -10,6 +10,12 @@ class PoseInfoScreen extends Component {
     return {
       topBar: {
         noBorder: true,
+        rightButtons: [
+          {
+            id: 'poseInfoSkipButton',
+            text: '다음에 하기',
+          },
+        ],
       },
     };
   }
@@ -17,6 +23,7 @@ class PoseInfoScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    Navigation.events().bindComponent(this);
   }
 
   navigateToCamera = () => {
@@ -45,6 +52,35 @@ class PoseInfoScreen extends Component {
       },
     });
   };
+
+  navigationButtonPressed({ buttonId }) {
+    if (buttonId === 'poseInfoSkipButton') {
+      const {
+        componentId,
+        name,
+        nickname,
+        phone,
+        gender,
+        password,
+        stylesArray,
+        brandsArray,
+      } = this.props;
+      Navigation.push(componentId, {
+        component: {
+          name: 'wave.bodySize',
+          passProps: {
+            phone,
+            gender,
+            nickname,
+            name,
+            password,
+            stylesArray,
+            brandsArray,
+          },
+        },
+      });
+    }
+  }
 
   render() {
     return (

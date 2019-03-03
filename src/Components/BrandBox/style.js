@@ -9,28 +9,20 @@ import { theme } from '../../constants';
 const window = Dimensions.get('window');
 const Button = Platform.OS === 'ios' ? TouchableOpacity : TouchableWithoutFeedback;
 
-export const Wrapper = styled(Button)`
-  /* overflow: hidden; */
-`;
+export const Wrapper = styled.View``;
 
 export const Content = styled.View`
   width: 100%;
-  height: ${window.height / 4.5};
   flex: 1;
-  box-shadow: 2px 2px 5px ${theme.grayColor};
   background-color: white;
-  border-radius: 15px;
   margin-bottom: 15px;
+  flex-direction: column;
 `;
 
 export const ImageArea = styled.View`
-  width: 100%;
-  height: 70%;
-  border-top-left-radius: 15;
-  border-top-right-radius: 15;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  overflow: hidden;
+  width: ${window.width / 3};
+  height: ${window.width / 3};
+  margin-right: 15px;
 `;
 
 export const BrandImage = styled.Image`
@@ -38,19 +30,18 @@ export const BrandImage = styled.Image`
   height: 100%;
 `;
 
-export const TextArea = styled.View`
+export const BrandInfo = styled.View`
   width: 100%;
-  height: 30%;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  background-color: ${(props) => (props.selected ? theme.pointColor : 'white')};
-  opacity: ${(props) => (props.selected ? '0.8' : '1')};
+  justify-content: space-between;
 `;
 
+export const ItemArea = styled.ScrollView``;
+
 export const BrandTitle = styled.Text`
-  color: ${(props) => (props.selected ? '#ffffff' : theme.textColor)};
+  color: ${(props) => (props.selected ? theme.pointColor : theme.textColor)};
   font-size: 16px;
+  margin-bottom: 5px;
   font-weight: bold;
 `;

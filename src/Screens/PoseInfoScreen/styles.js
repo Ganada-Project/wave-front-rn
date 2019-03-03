@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     paddingVertical: 35,
   },
   header: {
-    flex: 0.3,
+    flex: 0.5,
   },
   body: {
     flex: 1.5,
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   footer: {
-    flex: 0.5,
+    flex: 0.3,
     flexDirection: 'column',
   },
 

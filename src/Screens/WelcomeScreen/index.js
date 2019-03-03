@@ -46,8 +46,8 @@ export class WelcomeScreen extends Component {
       <View style={styles.container}>
         <View style={styles.header}>
           <Image style={styles.logo} source={WaveLogoWhite} />
-          <Text style={styles.header__title}>Surf in style.</Text>
-          <Text style={styles.header__subtitle}>웨이브</Text>
+          <Text style={styles.header__title}>웨이브</Text>
+          <Text style={styles.header__subtitle}>나만을 위한 편집샵</Text>
         </View>
         <View style={styles.footer}>
           <FullWidthButton icon="facebook-f" content="페이스북으로 로그인" />

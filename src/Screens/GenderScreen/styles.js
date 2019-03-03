@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   footer: {
-    flex: 1,
+    flex: 0.5,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -102,6 +102,7 @@ export class RegisterNameScreen extends Component {
           <RegisterForm
             label="이름"
             onChangeText={(text) => this.setState({ name: text })}
+            autoFocus={false}
           />
         </View>
         <View style={styles.footer}>

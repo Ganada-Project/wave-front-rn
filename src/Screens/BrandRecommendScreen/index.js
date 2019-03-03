@@ -95,7 +95,6 @@ class BrandRecommendScreen extends Component {
       stylesArray,
     } = this.props;
     const brandsArray = this.filterBrandList();
-    console.log(brandsArray);
     Navigation.push(componentId, {
       component: {
         name: 'wave.poseInfo',
@@ -114,7 +113,7 @@ class BrandRecommendScreen extends Component {
 
   onPressBrandBox = (index) => () => {
     const { brands } = this.state;
-    const newBrands = brands.update(index, (brand) => brand.set('selected', !brand.get('selected')), );
+    const newBrands = brands.update(index, (brand) => brand.set('selected', !brand.get('selected')));
     this.setState({ brands: newBrands });
   };
 
@@ -125,12 +124,12 @@ class BrandRecommendScreen extends Component {
         <View style={styles.header}>
           <Text style={styles.header__title}>추천 브랜드</Text>
         </View>
-        <ScrollView style={styles.body}>
+        <ScrollView style={styles.body} showsScrollIndicator={false}>
           <View style={styles.body__stylesWrapper}>
             {brands.map((brand, index) => (
               <BrandBox
                 onPress={this.onPressBrandBox(index)}
-                key={brand.get('id')}
+                key={`brandBox-${brand.get('id')}`}
                 brand={brand}
               />
             ))}

@@ -67,27 +67,29 @@ export class BodySizeScreen extends Component {
       >
         <View style={styles.header}>
           <Text style={styles.header__title}>회원님의 신체</Text>
-          <Text>
-            정확한 신체를 알고 있을 수록, 정확한 치수계산이 진행됩니다.
-          </Text>
         </View>
         <View style={styles.body}>
           <HeightWeightWrapper>
             <Height>
               <RegisterForm
                 label="신장(cm)"
+                keyboardType="numeric"
                 onChangeText={(text) => this.setState({ height: text })}
               />
             </Height>
             <Weight>
               <RegisterForm
                 label="체중(kg)"
+                keyboardType="numeric"
+                autoFocus={false}
                 onChangeText={(text) => this.setState({ weight: text })}
               />
             </Weight>
           </HeightWeightWrapper>
           <RegisterForm
             label="허리둘레(cm)"
+            keyboardType="numeric"
+            autoFocus={false}
             onChangeText={(text) => this.setState({ waist: text })}
           />
         </View>

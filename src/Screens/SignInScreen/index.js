@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
-// react-native-navigation
-import { Navigation } from 'react-native-navigation';
-
-import { Button, Icon } from 'react-native-elements';
-
-import { Text, View, TextInput } from 'react-native';
+import { Text, View, KeyboardAvoidingView } from 'react-native';
 
 // redux
 import { compose } from 'redux';
@@ -34,7 +29,19 @@ import { makeSelectErrors } from './selectors';
 // local styles
 import styles from './style';
 
+// global components
+import { RegisterForm, FullWidthButton } from '../../Components';
+import { keyboardVerticalOffset, keyboardBehavior } from '../../constants';
+
 class SignInScreen extends Component {
+  static options() {
+    return {
+      topBar: {
+        noBorder: true,
+      },
+    };
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -57,28 +64,43 @@ class SignInScreen extends Component {
   };
 
   render() {
+    const { phone, password } = this.state;
+
     return (
-      <View style={styles.container}>
-        <TextInput
-          placeholder="휴대폰번호를 입력하세요"
-          auto
-          autoCapitalize="none"
-          onChangeText={(phone) => this.setState({ phone })}
-        />
-        <TextInput
-          placeholder="비밀번호를 입력하세요"
-          onChangeText={(password) => this.setState({ password })}
-        />
-        <Button onPress={this.onClickSignInWithphone} title="로그인" />
-      </View>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={keyboardBehavior}
+        keyboardVerticalOffset={keyboardVerticalOffset}
+      >
+        <View style={styles.header}>
+          <Text style={styles.header__title}>로그인 정보</Text>
+        </View>
+        <View style={styles.body}>
+          <RegisterForm
+            label="휴대폰번호"
+            onChangeText={(text) => this.setState({ phone: text })}
+          />
+          <RegisterForm
+            label="비밀번호"
+            onChangeText={(text) => this.setState({ password: text })}
+          />
+          <Text>계정을 잊으셨나요?</Text>
+        </View>
+        <View style={styles.footer}>
+          <FullWidthButton
+            disabled={!!(phone === '' || password === '')}
+            onPress={this.onClickSignInWithphone}
+            invert
+            content="로그인"
+          />
+        </View>
+      </KeyboardAvoidingView>
     );
   }
 }
 
 SignInScreen.propTypes = {
-  componentId: PropTypes.string,
   onClickTryLoginBtn: PropTypes.func,
-  loading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

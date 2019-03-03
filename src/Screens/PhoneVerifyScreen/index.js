@@ -155,6 +155,7 @@ export class PhoneVerifyScreen extends Component {
           </Text>
           <RegisterForm
             label="인증 번호"
+            keyboardType="numeric"
             value={userVerifyNumber}
             onChangeText={(text) => this.setState({ userVerifyNumber: text })}
             errorText={errorText}
