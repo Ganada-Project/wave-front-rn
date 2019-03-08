@@ -1,10 +1,19 @@
 import React from 'react';
 import { Navigation } from 'react-native-navigation';
 import { Provider } from 'react-redux';
+
 import App from './Screens/App';
+// Tab Screens
 import HomeScreen from './Screens/HomeScreen';
 import CatalogScreen from './Screens/CatalogScreen';
 import ProfileScreen from './Screens/ProfileScreen';
+
+// Photo Related Screens
+import CameraScreen from './Screens/CameraScreen';
+import UploadInfoScreen from './Screens/UploadInfoScreen';
+import UploadScreen from './Screens/UploadScreen';
+
+// Auth Related Screens
 import SignInScreen from './Screens/SignInScreen';
 import WelcomeScreen from './Screens/WelcomeScreen';
 import GenderScreen from './Screens/GenderScreen';
@@ -14,7 +23,6 @@ import PasswordScreen from './Screens/PasswordScreen';
 import FavStyleScreen from './Screens/FavStyleScreen';
 import BrandRecommendScreen from './Screens/BrandRecommendScreen';
 import PoseInfoScreen from './Screens/PoseInfoScreen';
-import CameraScreen from './Screens/CameraScreen';
 import BodySizeScreen from './Screens/BodySizeScreen';
 import FinalRegisterScreen from './Screens/FinalRegisterScreen';
 import configureStore from './configureStore';
@@ -142,15 +150,6 @@ const registerScreens = () => {
     () => PoseInfoScreen,
   );
   Navigation.registerComponent(
-    'wave.poseInfo',
-    () => (props) => (
-      <Provider store={store}>
-        <PoseInfoScreen {...props} />
-      </Provider>
-    ),
-    () => PoseInfoScreen,
-  );
-  Navigation.registerComponent(
     'wave.camera',
     () => (props) => (
       <Provider store={store}>
@@ -158,6 +157,24 @@ const registerScreens = () => {
       </Provider>
     ),
     () => CameraScreen,
+  );
+  Navigation.registerComponent(
+    'wave.uploadInfo',
+    () => (props) => (
+      <Provider store={store}>
+        <UploadInfoScreen {...props} />
+      </Provider>
+    ),
+    () => UploadInfoScreen,
+  );
+  Navigation.registerComponent(
+    'wave.upload',
+    () => (props) => (
+      <Provider store={store}>
+        <UploadScreen {...props} />
+      </Provider>
+    ),
+    () => UploadScreen,
   );
   Navigation.registerComponent(
     'wave.bodySize',
@@ -222,9 +239,37 @@ export const startTabScreens = () => {
                 },
               ],
               options: {
+                modalPresentationStyle: 'overCurrentContext',
                 bottomTab: {
                   icon: require('./Assets/Icons/TabIcons/tab_2.png'),
                   testID: 'SECOND_TAB_BAR_BUTTON',
+                  selectedIconColor: theme.pointColor,
+                  iconInsets: {
+                    top: 0,
+                    left: 0,
+                    bottom: -12,
+                    right: 0,
+                  },
+                },
+                bottomTabs: {
+                  titleDisplayMode: 'alwaysHide',
+                },
+              },
+            },
+          },
+          {
+            stack: {
+              children: [
+                {
+                  component: {
+                    name: 'wave.uploadInfo',
+                  },
+                },
+              ],
+              options: {
+                bottomTab: {
+                  icon: require('./Assets/Icons/TabIcons/post.png'),
+                  testID: 'THIRD_TAB_BAR_BUTTON',
                   selectedIconColor: theme.pointColor,
                   iconInsets: {
                     top: 0,
@@ -251,7 +296,7 @@ export const startTabScreens = () => {
               options: {
                 bottomTab: {
                   icon: require('./Assets/Icons/TabIcons/tab_5.png'),
-                  testID: 'THIRD_TAB_BAR_BUTTON',
+                  testID: 'FIFTH_TAB_BAR_BUTTON',
                   selectedIconColor: theme.pointColor,
                   iconInsets: {
                     top: 0,

@@ -83,6 +83,7 @@ class SignInScreen extends Component {
           <RegisterForm
             label="비밀번호"
             onChangeText={(text) => this.setState({ password: text })}
+            autoFocus={false}
           />
           <Text>계정을 잊으셨나요?</Text>
         </View>
