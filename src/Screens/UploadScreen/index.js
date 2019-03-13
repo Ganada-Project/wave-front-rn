@@ -12,6 +12,7 @@ class UploadScreen extends Component {
     super(props);
     this.state = {
       photos: [],
+      selectedPhoto: [],
     };
   }
 
@@ -22,10 +23,14 @@ class UploadScreen extends Component {
     this.getPhotos();
   }
 
+  handlePhoto = ({ item }) => () => {
+    console.log(item);
+  };
+
   keyExtractor = (item) => item.node.timestamp.toString();
 
   renderItem = ({ item, index }) => (
-    <PhotoButton>
+    <PhotoButton onPress={this.handlePhoto({ item })}>
       <PhotoItem
         index={index}
         id={item.id}
