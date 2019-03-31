@@ -23,6 +23,8 @@ import {
   makeSelectOverlap,
 } from './selectors';
 import { verifyPhoneNumberAction, checkPhoneNumberAction } from './actions';
+import Form from './Form';
+import Button from './Button';
 
 export class PhoneVerifyScreen extends Component {
   static options(passProps) {
@@ -51,7 +53,6 @@ export class PhoneVerifyScreen extends Component {
     this.state = {
       isSent: false,
       phone: '',
-      userVerifyNumber: '',
       verifyLoading: false,
       errorText: null,
       overlap: props.overlap,
@@ -73,35 +74,13 @@ export class PhoneVerifyScreen extends Component {
   };
 
   handleTimeOut = () => {
-    this.setState({ isSent: false, phone: '', userVerifyNumber: '' });
-  };
-
-  navigateToPassword = () => {
-    const { componentId, verifyNumber } = this.props;
-    const { userVerifyNumber, phone } = this.state;
-    // Navigation.push(componentId, {
-    //   component: {
-    //     name: 'wave.password',
-    //   },
-    // });
-    if (verifyNumber !== userVerifyNumber) {
-      this.setState({ errorText: '인증번호가 올바르지 않습니다' });
-    } else {
-      Navigation.push(componentId, {
-        component: {
-          name: 'wave.registerName',
-          passProps: {
-            phone,
-          },
-        },
-      });
-    }
+    this.setState({ isSent: false, phone: '' });
   };
 
   render() {
-    const { checking } = this.props;
+    const { checking, componentId } = this.props;
     const {
-      isSent, number, userVerifyNumber, errorText, phone,
+      isSent, number, errorText, phone,
     } = this.state;
     if (!isSent) {
       return (
@@ -158,13 +137,7 @@ export class PhoneVerifyScreen extends Component {
           <Text style={styles.body__text__second}>
             4자리 인증번호를 입력하세요.
           </Text>
-          <RegisterForm
-            label="인증 번호"
-            keyboardType="numeric"
-            value={userVerifyNumber}
-            onChangeText={(text) => this.setState({ userVerifyNumber: text })}
-            errorText={errorText}
-          />
+          <Form errorText={errorText} />
           <TimerCountdown
             initialSecondsRemaining={2000 * 60}
             onTimeElapsed={this.handleTimeOut}
@@ -188,12 +161,7 @@ export class PhoneVerifyScreen extends Component {
           <Text style={styles.body__text__third}>인증번호 다시받기</Text>
         </View>
         <View style={styles.footer}>
-          <FullWidthButton
-            onPress={this.navigateToPassword}
-            // disabled={userVerifyNumber === ''}
-            invert
-            content="다음 단계"
-          />
+          <Button Navigation={Navigation} componentId={componentId} />
         </View>
       </KeyboardAvoidingView>
     );
@@ -204,11 +172,6 @@ PhoneVerifyScreen.propTypes = {
   componentId: PropTypes.string,
   verifyPhoneNumber: PropTypes.func,
   checkPhoneNumber: PropTypes.func,
-  verifyLoading: PropTypes.bool,
-  verifyNumber: PropTypes.string,
-  name: PropTypes.string,
-  gender: PropTypes.string,
-  nickname: PropTypes.string,
   overlap: PropTypes.bool,
   checking: PropTypes.bool,
 };

@@ -18,12 +18,14 @@ import {
   CHECK_PHONE_NUMBER_FAIL,
   CHECK_PHONE_NUMBER_REQUEST,
   CHECK_PHONE_NUMBER_SUCCESS,
+  ON_CHANGE_USER_VERIFY_NUMBER,
 } from './constants';
 
 // The initial state of the App
 export const initialState = fromJS({
   verifyLoading: false,
-  verifyNumber: '',
+  verifyNumber: '0',
+  userVerifyNumber: null,
   checking: false,
   overlap: false,
 });
@@ -51,6 +53,9 @@ function phoneVerificationReducer(state = initialState, action) {
       return state.set('checking', false).set('overlap', action.overlap);
     case CHECK_PHONE_NUMBER_FAIL:
       return state.set('checking', false);
+
+    case ON_CHANGE_USER_VERIFY_NUMBER:
+      return state.set('userVerifyNumber', action.number);
 
     default:
       return state;

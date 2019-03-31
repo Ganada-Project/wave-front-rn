@@ -5,14 +5,23 @@ import {
   PermissionsAndroid,
   Platform,
 } from 'react-native';
-import { Wrapper, PhotoItem, PhotoButton } from './styles';
+import { Icon } from 'react-native-elements';
+import RNFetchBlob from 'rn-fetch-blob';
+import {
+  Wrapper,
+  PhotoItem,
+  PhotoButton,
+  SelectedPhoto,
+  PhotoItemWrapper,
+  PhotoCheck,
+} from './styles';
 
 class UploadScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       photos: [],
-      selectedPhoto: [],
+      selectedPhoto: '',
     };
   }
 
@@ -25,17 +34,27 @@ class UploadScreen extends Component {
 
   handlePhoto = ({ item }) => () => {
     console.log(item);
+    RNFetchBlob.fs.readFile(item.node.image.uri, 'base64').then((data) => {
+      console.log(data);
+    });
+
+    this.setState({ selectedPhoto: item.node.image.uri });
   };
 
   keyExtractor = (item) => item.node.timestamp.toString();
 
   renderItem = ({ item, index }) => (
     <PhotoButton onPress={this.handlePhoto({ item })}>
-      <PhotoItem
-        index={index}
-        id={item.id}
-        source={{ uri: item.node.image.uri }}
-      />
+      <PhotoItemWrapper>
+        <PhotoCheck>
+          <Icon name="check" type="simple-line-icon" />
+        </PhotoCheck>
+        <PhotoItem
+          index={index}
+          id={item.id}
+          source={{ uri: item.node.image.uri }}
+        />
+      </PhotoItemWrapper>
     </PhotoButton>
   );
 
@@ -70,9 +89,13 @@ class UploadScreen extends Component {
   }
 
   render() {
-    const { photos } = this.state;
+    const { photos, selectedPhoto } = this.state;
+    console.log(selectedPhoto);
     return (
       <Wrapper>
+        {selectedPhoto === '' ? null : (
+          <SelectedPhoto source={{ uri: selectedPhoto }} />
+        )}
         <FlatList
           data={photos}
           numColumns={3}
