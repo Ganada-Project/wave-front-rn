@@ -38,7 +38,7 @@ class CameraScreen extends Component {
       const { base64 } = data;
       Navigation.push(componentId, {
         component: {
-          name: 'wave.bodySize',
+          name: 'wave.bodySlider',
           passProps: {
             phone,
             gender,

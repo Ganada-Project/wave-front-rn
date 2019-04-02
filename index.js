@@ -27,7 +27,7 @@ Navigation.events().registerAppLaunchedListener(() => {
         children: [
           {
             component: {
-              name: 'wave.app',
+              name: 'wave.bodySlider',
             },
           },
         ],
