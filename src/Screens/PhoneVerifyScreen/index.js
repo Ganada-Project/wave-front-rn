@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 // react-native
-import { KeyboardAvoidingView, Text, View } from 'react-native';
+import {
+  KeyboardAvoidingView, Text, View, Image,
+} from 'react-native';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';

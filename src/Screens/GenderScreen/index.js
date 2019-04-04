@@ -37,7 +37,7 @@ export class GenderScreen extends Component {
     };
   }
 
-  navigateToFavStyle = () => {
+  navigateToPoseInfo = () => {
     const {
       componentId, name, nickname, phone, password,
     } = this.props;
@@ -45,7 +45,7 @@ export class GenderScreen extends Component {
     const gender = selectedGenderId === 1 ? 'M' : 'W';
     Navigation.push(componentId, {
       component: {
-        name: 'wave.favStyle',
+        name: 'wave.poseInfo',
         passProps: {
           gender,
           name,
@@ -88,7 +88,7 @@ export class GenderScreen extends Component {
         </View>
         <View style={styles.footer}>
           <FullWidthButton
-            onPress={this.navigateToFavStyle}
+            onPress={this.navigateToPoseInfo}
             disabled={selectedGenderId === 0}
             invert
             content="다음 단계"

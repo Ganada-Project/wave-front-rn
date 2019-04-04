@@ -35,6 +35,7 @@ class CameraScreen extends Component {
     if (this.camera) {
       const options = { quality: 0.5, base64: true };
       const data = await this.camera.takePictureAsync(options);
+      console.log(data);
       const { base64 } = data;
       Navigation.push(componentId, {
         component: {
@@ -63,7 +64,7 @@ class CameraScreen extends Component {
           }}
           style={styles.preview}
           type={RNCamera.Constants.Type.back}
-          flashMode={RNCamera.Constants.FlashMode.on}
+          flashMode={RNCamera.Constants.FlashMode.off}
           permissionDialogTitle="Permission to use camera"
           permissionDialogMessage="We need your permission to use your camera phone"
           onGoogleVisionBarcodesDetected={({ barcodes }) => {
