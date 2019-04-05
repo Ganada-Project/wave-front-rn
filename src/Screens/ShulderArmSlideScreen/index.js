@@ -148,7 +148,11 @@ export class ShulderArmSlideScreen extends Component {
           toValue: 0,
         }).start();
       },
-      onPanResponderTerminate: () => {},
+      onPanResponderTerminate: () => {
+        Animated.timing(guideOpacity, {
+          toValue: 0,
+        }).start();
+      },
       onShouldBlockNativeResponder: () => true,
     });
     // 왼쪽 어깨 슬라이더 이벤트
