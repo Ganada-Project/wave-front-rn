@@ -23,7 +23,7 @@ import PasswordScreen from './Screens/PasswordScreen';
 import FavStyleScreen from './Screens/FavStyleScreen';
 import BrandRecommendScreen from './Screens/BrandRecommendScreen';
 import PoseInfoScreen from './Screens/PoseInfoScreen';
-import BodySliderScreen from './Screens/BodySliderScreen';
+import ShulderArmSlideScreen from './Screens/ShulderArmSlideScreen';
 import BodySizeScreen from './Screens/BodySizeScreen';
 import FinalRegisterScreen from './Screens/FinalRegisterScreen';
 import configureStore from './configureStore';
@@ -178,13 +178,13 @@ const registerScreens = () => {
     () => UploadScreen,
   );
   Navigation.registerComponent(
-    'wave.bodySlider',
+    'wave.shulderArmSlide',
     () => (props) => (
       <Provider store={store}>
-        <BodySliderScreen {...props} />
+        <ShulderArmSlideScreen {...props} />
       </Provider>
     ),
-    () => BodySliderScreen,
+    () => ShulderArmSlideScreen,
   );
   Navigation.registerComponent(
     'wave.bodySize',
