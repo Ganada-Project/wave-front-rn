@@ -5,27 +5,36 @@ import {
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Button } from 'react-native-elements';
-import { Container, ImageContainer } from './styles';
-import { theme } from '../../constants';
+import {
+  Container,
+  ImageContainer,
+  MagnifierContainer,
+  Slider,
+} from './styles';
+import {
+  leftShulderOffset,
+  leftElbowOffset,
+  maginifierContainerSize,
+  sliderSize,
+  halfsliderSize,
+} from './constants';
 const window = Dimensions.get('window');
+const imageWidth = window.width;
 const imageHeight = window.height - 150;
-const xOffset = 100;
-const yOffset = 200;
-const maginifierContainerSize = 100 / 2;
-const maginifierSize = 26;
-const halfMaginifierSize = 26 / 2;
-const outputXStart = -(xOffset - maginifierContainerSize) - halfMaginifierSize;
-const outputYStart = -(yOffset - maginifierContainerSize) - halfMaginifierSize;
-const outputXEnd = -(
-  window.width
-  + (xOffset - maginifierContainerSize)
-  + maginifierSize
-);
-const outputYEnd = -(
-  imageHeight
-  + (yOffset - maginifierContainerSize)
-  + maginifierSize
-);
+
+const outputX = ({ xOffset, isStart, zoom }) => {
+  if (isStart) {
+    return -(xOffset - maginifierContainerSize) - halfsliderSize;
+  }
+  return -(imageWidth + (xOffset - maginifierContainerSize) + sliderSize);
+};
+
+const outputY = ({ yOffset, isStart, zoom }) => {
+  if (isStart) {
+    return -(yOffset - maginifierContainerSize) - halfsliderSize;
+  }
+  return -(imageHeight + (yOffset - maginifierContainerSize) + sliderSize);
+};
 
 export class BodySliderScreen extends Component {
   static options(passProps) {
@@ -36,105 +45,152 @@ export class BodySliderScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.pan = new Animated.ValueXY();
-    this.tobBarHeight = 0;
-    this.reverseXValue = this.pan.x.interpolate({
-      inputRange: [0, window.width],
-      outputRange: [outputXStart, outputXEnd],
+    this.leftShulderPan = new Animated.ValueXY();
+    this.leftShulderScale = new Animated.Value(1);
+    this.leftElbowScale = new Animated.Value(1);
+    this.leftElbowPan = new Animated.ValueXY();
+    this.reverseXValue = this.leftShulderPan.x.interpolate({
+      inputRange: [0, imageWidth],
+      outputRange: [
+        outputX({ xOffset: leftShulderOffset.x, isStart: true }),
+        outputX({ xOffset: leftShulderOffset.x }),
+      ],
     });
-    this.reverseYValue = this.pan.y.interpolate({
+    this.reverseYValue = this.leftShulderPan.y.interpolate({
       inputRange: [0, imageHeight],
-      outputRange: [outputYStart, outputYEnd],
+      outputRange: [
+        outputY({ yOffset: leftShulderOffset.y, isStart: true }),
+        outputY({ yOffset: leftShulderOffset.y }),
+      ],
     });
     this.state = {
-      scale: new Animated.Value(1),
       magnifierOpacity: new Animated.Value(0),
     };
-    const { scale, magnifierOpacity } = this.state;
+    const { leftShulderScale, leftElbowScale } = this;
+    const { magnifierOpacity } = this.state;
 
-    this.panResponder = PanResponder.create({
+    this.leftShulderPanResponder = PanResponder.create({
       // Ask to be the responder:
-      onStartShouldSetPanResponder: (evt, gestureState) => true,
-      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-      onMoveShouldSetPanResponder: (evt, gestureState) => true,
-      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
-
-      onPanResponderGrant: (evt, gestureState) => {
-        // The gesture has started. Show visual feedback so the user knows
-        // what is happening!
-        // gestureState.d{x,y} will be set to zero now
-        this.pan.setOffset({
-          x: this.pan.x._value,
-          y: this.pan.y._value,
+      onStartShouldSetPanResponder: () => true,
+      onStartShouldSetPanResponderCapture: () => true,
+      onMoveShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponderCapture: () => true,
+      onPanResponderGrant: () => {
+        this.leftShulderPan.setOffset({
+          x: this.leftShulderPan.x._value,
+          y: this.leftShulderPan.y._value,
         });
-        this.pan.setValue({ x: 0, y: 0 });
+        this.leftShulderPan.setValue({ x: 0, y: 0 });
         Animated.parallel([
-          Animated.spring(scale, { toValue: 1.5, friction: 3 }),
-          Animated.timing(
-            // Animate over time
-            magnifierOpacity, // The animated value to drive
-            {
-              toValue: 1, // Animate to opacity: 1 (opaque)
-            },
-          ),
+          Animated.spring(leftShulderScale, { toValue: 1.5, friction: 3 }),
+          Animated.timing(magnifierOpacity, {
+            toValue: 1,
+          }),
         ]).start();
       },
       onPanResponderMove: this.onDragging(),
-      onPanResponderTerminationRequest: (evt, gestureState) => true,
-      onPanResponderRelease: (evt, gestureState) => {
-        // The user has released all touches while this view is the
-        // responder. This typically means a gesture has succeeded
-        this.pan.flattenOffset();
-        Animated.spring(scale, { toValue: 1, friction: 3 }).start();
-        Animated.timing(
-          // Animate over time
-          magnifierOpacity, // The animated value to drive
-          {
-            toValue: 0, // Animate to opacity: 1 (opaque)
-          },
-        ).start();
+      onPanResponderTerminationRequest: () => true,
+      onPanResponderRelease: () => {
+        this.leftShulderPan.flattenOffset();
+        Animated.parallel([
+          Animated.spring(leftShulderScale, { toValue: 1, friction: 3 }),
+          Animated.timing(magnifierOpacity, {
+            toValue: 0,
+          }),
+        ]).start();
       },
-      onPanResponderTerminate: (evt, gestureState) => {
-        // Another component has become the responder, so this gesture
-        // should be cancelled
+      onPanResponderTerminate: () => {},
+      onShouldBlockNativeResponder: () => true,
+    });
+
+    this.leftElbowPanResponder = PanResponder.create({
+      // Ask to be the responder:
+
+      onStartShouldSetPanResponder: () => true,
+      onStartShouldSetPanResponderCapture: () => true,
+      onMoveShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponderCapture: () => true,
+      onPanResponderGrant: () => {
+        this.leftElbowPan.setOffset({
+          x: this.leftElbowPan.x._value,
+          y: this.leftElbowPan.y._value,
+        });
+        this.leftElbowPan.setValue({ x: 0, y: 0 });
+        Animated.parallel([
+          Animated.spring(leftElbowScale, { toValue: 1.5, friction: 3 }),
+          Animated.timing(magnifierOpacity, {
+            toValue: 1,
+          }),
+        ]).start();
       },
-      onShouldBlockNativeResponder: (evt, gestureState) => true,
+      onPanResponderMove: this.onDraggingLeftElbow(),
+      onPanResponderTerminationRequest: () => true,
+      onPanResponderRelease: () => {
+        this.leftElbowPan.flattenOffset();
+        Animated.parallel([
+          Animated.spring(leftElbowScale, { toValue: 1, friction: 3 }),
+          Animated.timing(magnifierOpacity, {
+            toValue: 0,
+          }),
+        ]).start();
+      },
+      onPanResponderTerminate: () => {},
+      onShouldBlockNativeResponder: () => true,
     });
   }
 
   checkPosition = () => {};
 
   onDragging = () => {
-    const { pan } = this;
-    return Animated.event([null, { dx: pan.x, dy: pan.y }]);
+    const { leftShulderPan } = this;
+    return Animated.event([
+      null,
+      { dx: leftShulderPan.x, dy: leftShulderPan.y },
+    ]);
+  };
+
+  onDraggingLeftElbow = () => {
+    const { leftElbowPan } = this;
+    return Animated.event([null, { dx: leftElbowPan.x, dy: leftElbowPan.y }]);
   };
 
   render() {
     // Destructure the value of pan from the state
-    const { pan, reverseXValue, reverseYValue } = this;
-    const { scale, magnifierOpacity } = this.state;
+    const {
+      leftShulderPan,
+      leftShulderScale,
+      leftElbowPan,
+      leftElbowScale,
+      reverseXValue,
+      reverseYValue,
+    } = this;
+    const { magnifierOpacity } = this.state;
     const { base64 } = this.props;
 
-    // Calculate the x and y transform from the pan value
-    const [translateX, translateY] = [pan.x, pan.y];
+    const leftShulderSlide = {
+      transform: [
+        { translateX: leftShulderPan.x },
+        { translateY: leftShulderPan.y },
+        { scale: leftShulderScale },
+      ],
+      top: leftShulderOffset.y,
+      left: leftShulderOffset.x,
+    };
 
-    const sliderStyle = {
-      transform: [{ translateX }, { translateY }, { scale }],
-      position: 'absolute',
-      width: maginifierSize,
-      height: maginifierSize,
-      borderRadius: halfMaginifierSize,
-      borderColor: theme.pointColor,
-      borderWidth: 1,
-      top: yOffset,
-      left: xOffset,
-      backgroundColor: '#ffffff',
+    const leftElbowSlide = {
+      transform: [
+        { translateX: leftElbowPan.x },
+        { translateY: leftElbowPan.y },
+        { scale: leftElbowScale },
+      ],
+      top: leftElbowOffset.y,
+      left: leftElbowOffset.x,
     };
 
     const magnifierImageStyle = {
       top: reverseYValue,
       left: reverseXValue,
-      width: window.width,
+      width: imageWidth,
       height: imageHeight,
       resizeMode: 'cover',
       borderWidth: 1,
@@ -143,34 +199,20 @@ export class BodySliderScreen extends Component {
     return (
       <Container>
         <ImageContainer
-          style={{
-            position: 'relative',
-            width: window.width,
-            height: imageHeight,
-          }}
+          imageHeight={imageHeight}
           imageStyle={{
             resizeMode: 'cover',
             borderWidth: 1,
             borderColor: 'blue',
           }}
           source={{
-            uri: `data:image/gif;base64,${base64}`,
-            // uri:
-            //   'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=962&q=80',
+            // uri: `data:image/gif;base64,${base64}`,
+            uri:
+              'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=962&q=80',
           }}
         >
-          <Animated.View
+          <MagnifierContainer
             style={{
-              position: 'relative',
-              top: 0,
-              left: 0,
-              width: 100,
-              height: 100,
-              borderWidth: 3,
-              borderRadius: 50,
-              backgroundColor: 'black',
-              overflow: 'hidden',
-              borderColor: theme.pointColor,
               opacity: magnifierOpacity,
             }}
           >
@@ -187,16 +229,20 @@ export class BodySliderScreen extends Component {
             />
             <Animated.Image
               source={{
-                uri: `data:image/gif;base64,${base64}`,
-                // uri:
-                //   'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=962&q=80',
+                // uri: `data:image/gif;base64,${base64}`,
+                uri:
+                  'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=962&q=80',
               }}
               style={magnifierImageStyle}
             />
-          </Animated.View>
-          <Animated.View
-            style={sliderStyle}
-            {...this.panResponder.panHandlers}
+          </MagnifierContainer>
+          <Slider
+            style={leftShulderSlide}
+            {...this.leftShulderPanResponder.panHandlers}
+          />
+          <Slider
+            style={leftElbowSlide}
+            {...this.leftElbowPanResponder.panHandlers}
           />
         </ImageContainer>
       </Container>
