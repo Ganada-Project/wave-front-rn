@@ -68,3 +68,21 @@ export const Slider = styled(Animated.View)`
   border: 1px solid ${theme.pointColor};
   border-radius: ${HALF_SLIDER_SIZE};
 `;
+
+export const HelpWrapper = styled.View`
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 10;
+  bottom: 10;
+  height: 50px;
+  width: 50px;
+  background: ${theme.pointColor};
+  border-radius: 25px;
+`;
+
+export const GuideImage = styled(Animated.Image)`
+  position: absolute;
+  width: ${IMAGE_WIDTH};
+  height: ${IMAGE_HEIGHT};
+`;

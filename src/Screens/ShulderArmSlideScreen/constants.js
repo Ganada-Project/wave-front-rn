@@ -26,3 +26,23 @@ export const LEFT_HAND_OFFSET = {
   x: 100,
   y: 360,
 };
+
+export const RIGHT_NECK_OFFSET = {
+  x: 200,
+  y: 140,
+};
+
+export const RIGHT_SHULDER_OFFSET = {
+  x: 230,
+  y: 200,
+};
+
+export const RIGHT_ELBOW_OFFSET = {
+  x: 230,
+  y: 280,
+};
+
+export const RIGHT_HAND_OFFSET = {
+  x: 230,
+  y: 360,
+};
