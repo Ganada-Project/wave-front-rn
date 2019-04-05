@@ -6,6 +6,7 @@ import {
   HALF_SLIDER_SIZE,
   IMAGE_WIDTH,
   IMAGE_HEIGHT,
+  ZOOM,
 } from './constants';
 
 export const Container = styled.View`
@@ -41,8 +42,8 @@ export const MagnifierContainer = styled(Animated.View)`
 `;
 
 export const MagnifierImage = styled(Animated.Image)`
-  width: ${IMAGE_WIDTH};
-  height: ${IMAGE_HEIGHT};
+  width: ${IMAGE_WIDTH * ZOOM};
+  height: ${IMAGE_HEIGHT * ZOOM};
 `;
 
 export const MagnifierText = styled.Text`
