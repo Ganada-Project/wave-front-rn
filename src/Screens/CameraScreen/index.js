@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { RNCamera } from 'react-native-camera';
+import { gyroscope } from 'react-native-sensors';
 
 class CameraScreen extends Component {
   static options(passProps) {
@@ -39,7 +40,7 @@ class CameraScreen extends Component {
       const { base64 } = data;
       Navigation.push(componentId, {
         component: {
-          name: 'wave.shulderArmSlide',
+          name: 'wave.heightSlide',
           passProps: {
             phone,
             gender,

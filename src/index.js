@@ -23,6 +23,7 @@ import PasswordScreen from './Screens/PasswordScreen';
 import FavStyleScreen from './Screens/FavStyleScreen';
 import BrandRecommendScreen from './Screens/BrandRecommendScreen';
 import PoseInfoScreen from './Screens/PoseInfoScreen';
+import HeightSlideScreen from './Screens/HeightSlideScreen';
 import ShulderArmSlideScreen from './Screens/ShulderArmSlideScreen';
 import BodySizeScreen from './Screens/BodySizeScreen';
 import FinalRegisterScreen from './Screens/FinalRegisterScreen';
@@ -176,6 +177,15 @@ const registerScreens = () => {
       </Provider>
     ),
     () => UploadScreen,
+  );
+  Navigation.registerComponent(
+    'wave.heightSlide',
+    () => (props) => (
+      <Provider store={store}>
+        <HeightSlideScreen {...props} />
+      </Provider>
+    ),
+    () => HeightSlideScreen,
   );
   Navigation.registerComponent(
     'wave.shulderArmSlide',

@@ -709,6 +709,7 @@ export class ShulderArmSlideScreen extends Component {
   }
 
   render() {
+    console.log(this.props.height);
     // 각 슬라이더에 따라 돋보기 오프셋 설정
     this.adjustMagnifierOffset();
     const {

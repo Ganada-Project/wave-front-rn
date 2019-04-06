@@ -28,6 +28,7 @@
     "react-native-indicators": "^0.13.0",
     "react-native-masked-text": "^1.10.1",
     "react-native-navigation": "^2.8.0",
+    "react-native-sensors": "^5.1.8",
     "react-native-timer-countdown": "^2.1.2",
     "react-native-vector-icons": "^6.2.0",
     "react-redux": "5.0.7",
