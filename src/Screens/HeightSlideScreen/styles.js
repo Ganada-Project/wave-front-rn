@@ -52,8 +52,8 @@ export const MagnifierText = styled.Text`
 `;
 
 export const MagifierCross = styled.View`
-  top: 50;
-  left: 50;
+  top: 47;
+  left: 47;
   width: 6px;
   height: 6px;
   border-radius: 3px;
