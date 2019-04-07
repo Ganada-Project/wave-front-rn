@@ -104,6 +104,10 @@ android {
         missingDimensionStrategy "RNN.reactNativeVersion", "reactNative57_5"
         versionCode 1
         versionName "1.0"
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

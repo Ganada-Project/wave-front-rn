@@ -7,6 +7,7 @@ import App from './Screens/App';
 import HomeScreen from './Screens/HomeScreen';
 import CatalogScreen from './Screens/CatalogScreen';
 import ProfileScreen from './Screens/ProfileScreen';
+import StoryScreen from './Screens/StoryScreen';
 
 // Photo Related Screens
 import CameraScreen from './Screens/CameraScreen';
@@ -67,6 +68,15 @@ const registerScreens = () => {
       </Provider>
     ),
     () => ProfileScreen,
+  );
+  Navigation.registerComponent(
+    'wave.story',
+    () => (props) => (
+      <Provider store={store}>
+        <StoryScreen {...props} />
+      </Provider>
+    ),
+    () => StoryScreen,
   );
 
   // // Auth Screens
