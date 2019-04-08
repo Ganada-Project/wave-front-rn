@@ -54,14 +54,8 @@ public class MainApplication extends NavigationApplication {
             new VectorIconsPackage(),
             new RNSensorsPackage(),
             new PickerPackage(),
-            new RNFetchBlobPackage(),
             new FastImageViewPackage(),
-            new RNCameraPackage(),
-            new RNSensorsPackage(),
-            new RNFetchBlobPackage(),
-            new FastImageViewPackage(),
-            new RNCameraPackage(),
-            new VectorIconsPackage()
+            new RNCameraPackage()
       );
     }
 
