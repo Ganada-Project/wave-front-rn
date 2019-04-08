@@ -1,5 +1,16 @@
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 import { theme } from '../../constants';
+
+export const GenderWrapper = styled.View`
+  flex-direction: row;
+  margin-bottom: 10px;
+`;
+
+export const LabelText = styled.Text`
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
 
 const styles = StyleSheet.create({
   container: {
@@ -9,12 +20,10 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   header: {
-    flex: 1,
+    flex: 0.2,
   },
   body: {
     flex: 1.5,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   header__title: {
     fontSize: 20,

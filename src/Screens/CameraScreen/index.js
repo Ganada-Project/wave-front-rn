@@ -30,8 +30,7 @@ class CameraScreen extends Component {
       phone,
       gender,
       password,
-      stylesArray,
-      brandsArray,
+      age,
     } = this.props;
     if (this.camera) {
       const options = { quality: 0.5, base64: true };
@@ -44,11 +43,10 @@ class CameraScreen extends Component {
           passProps: {
             phone,
             gender,
+            age,
             nickname,
             name,
             password,
-            stylesArray,
-            brandsArray,
             base64,
           },
         },
@@ -66,8 +64,8 @@ class CameraScreen extends Component {
           style={styles.preview}
           type={RNCamera.Constants.Type.back}
           flashMode={RNCamera.Constants.FlashMode.off}
-          permissionDialogTitle="Permission to use camera"
-          permissionDialogMessage="We need your permission to use your camera phone"
+          permissionDialogTitle="카메라 접근 허용"
+          permissionDialogMessage="회원님의 휴대폰 카메라 사용을 위해 접근 허용이 필요합니다"
           onGoogleVisionBarcodesDetected={({ barcodes }) => {
             console.log(barcodes);
           }}
@@ -112,8 +110,7 @@ CameraScreen.propTypes = {
   nickname: PropTypes.string,
   phone: PropTypes.string,
   password: PropTypes.string,
-  stylesArray: PropTypes.array,
-  brandsArray: PropTypes.array,
+  age: PropTypes.string,
 };
 
 export default CameraScreen;

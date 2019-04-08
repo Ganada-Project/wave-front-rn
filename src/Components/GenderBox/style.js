@@ -7,8 +7,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 10,
     flexDirection: 'column',
-    borderRadius: 50,
+    borderRadius: 10,
     overflow: 'hidden',
+    marginRight: 10,
   },
   overlay: {
     justifyContent: 'center',
@@ -18,8 +19,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: '600',
-    fontSize: 20,
-    marginTop: 10,
+    fontSize: 18,
   },
 });
 

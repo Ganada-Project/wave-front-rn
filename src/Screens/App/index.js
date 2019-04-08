@@ -33,13 +33,13 @@ import { fetchUserAction } from './actions';
 
 // local saga
 import saga from './saga';
-import { fonts } from '../../constants';
+import { fonts, theme } from '../../constants';
 
 const customTextProps = {
   style: {
     fontSize: 16,
     fontFamily: fonts.NanumGothic,
-    color: 'black',
+    color: theme.textColor,
   },
 };
 

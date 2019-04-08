@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
     height: 70,
   },
   header__subtitle: {
-    fontSize: 20,
-    marginTop: 5,
+    fontSize: 18,
+    marginTop: 10,
     color: '#ffffff',
     fontWeight: 'bold',
     fontFamily: fonts.NanumGothic,

@@ -28,7 +28,15 @@ class PoseInfoScreen extends Component {
 
   navigateToCamera = () => {
     const {
-      componentId, name, nickname, phone, gender, password,
+      componentId,
+      name,
+      nickname,
+      phone,
+      gender,
+      password,
+      height,
+      weight,
+      age,
     } = this.props;
     Navigation.push(componentId, {
       component: {
@@ -37,8 +45,11 @@ class PoseInfoScreen extends Component {
           phone,
           gender,
           nickname,
+          age,
           name,
           password,
+          height,
+          weight,
         },
       },
     });
@@ -112,6 +123,8 @@ PoseInfoScreen.propTypes = {
   nickname: PropTypes.string,
   phone: PropTypes.string,
   password: PropTypes.string,
+  height: PropTypes.string,
+  weight: PropTypes.string,
 };
 
 export default PoseInfoScreen;

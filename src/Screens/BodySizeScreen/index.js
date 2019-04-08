@@ -20,38 +20,32 @@ export class BodySizeScreen extends Component {
     this.state = {
       height: '',
       weight: '',
-      waist: '',
     };
   }
 
-  navigateTofinalRegister = () => {
-    const { height, weight, waist } = this.state;
+  navigateToPoseInfo = () => {
+    const { height, weight } = this.state;
     const {
       gender,
       phone,
       name,
       nickname,
       password,
-      stylesArray,
-      brandsArray,
-      base64,
+      age,
       componentId,
     } = this.props;
     Navigation.push(componentId, {
       component: {
-        name: 'wave.finalRegister',
+        name: 'wave.poseInfo',
         passProps: {
           phone,
           gender,
           nickname,
           name,
+          age,
           password,
-          stylesArray,
-          brandsArray,
-          base64,
           height,
           weight,
-          waist,
         },
       },
     });
@@ -66,37 +60,25 @@ export class BodySizeScreen extends Component {
         keyboardVerticalOffset={keyboardVerticalOffset}
       >
         <View style={styles.header}>
-          <Text style={styles.header__title}>회원님의 신체</Text>
+          <Text style={styles.header__title}>기본 신체정보</Text>
         </View>
         <View style={styles.body}>
-          <HeightWeightWrapper>
-            <Height>
-              <RegisterForm
-                label="신장(cm)"
-                keyboardType="numeric"
-                onChangeText={(text) => this.setState({ height: text })}
-              />
-            </Height>
-            <Weight>
-              <RegisterForm
-                label="체중(kg)"
-                keyboardType="numeric"
-                autoFocus={false}
-                onChangeText={(text) => this.setState({ weight: text })}
-              />
-            </Weight>
-          </HeightWeightWrapper>
           <RegisterForm
-            label="허리둘레(cm)"
+            label="신장(cm)"
+            keyboardType="numeric"
+            onChangeText={(text) => this.setState({ height: text })}
+          />
+          <RegisterForm
+            label="체중(kg)"
             keyboardType="numeric"
             autoFocus={false}
-            onChangeText={(text) => this.setState({ waist: text })}
+            onChangeText={(text) => this.setState({ weight: text })}
           />
         </View>
         <View style={styles.footer}>
           <FullWidthButton
             disabled={!!height === '' || weight === '' || waist === ''}
-            onPress={this.navigateTofinalRegister}
+            onPress={this.navigateToPoseInfo}
             invert
             content="다음 단계"
           />
@@ -113,9 +95,7 @@ BodySizeScreen.propTypes = {
   nickname: PropTypes.string,
   phone: PropTypes.string,
   password: PropTypes.string,
-  stylesArray: PropTypes.array,
-  brandsArray: PropTypes.array,
-  base64: PropTypes.string,
+  age: PropTypes.string,
 };
 
 export default BodySizeScreen;

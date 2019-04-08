@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { KeyboardAvoidingView, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Navigation } from 'react-native-navigation';
-import styles from './styles';
-import { FullWidthButton, GenderBox } from '../../Components';
+import styles, { GenderWrapper, LabelText } from './styles';
+import { FullWidthButton, GenderBox, RegisterForm } from '../../Components';
 import { keyboardVerticalOffset, keyboardBehavior } from '../../constants';
 
 const genderData = [
@@ -34,6 +34,7 @@ export class GenderScreen extends Component {
     super(props);
     this.state = {
       selectedGenderId: 0,
+      age: '',
     };
   }
 
@@ -41,17 +42,18 @@ export class GenderScreen extends Component {
     const {
       componentId, name, nickname, phone, password,
     } = this.props;
-    const { selectedGenderId } = this.state;
+    const { selectedGenderId, age } = this.state;
     const gender = selectedGenderId === 1 ? 'M' : 'W';
     Navigation.push(componentId, {
       component: {
-        name: 'wave.poseInfo',
+        name: 'wave.bodySize',
         passProps: {
           gender,
           name,
           nickname,
           phone,
           password,
+          age,
         },
       },
     });
@@ -62,7 +64,7 @@ export class GenderScreen extends Component {
   };
 
   render() {
-    const { selectedGenderId } = this.state;
+    const { selectedGenderId, age } = this.state;
     return (
       <KeyboardAvoidingView
         style={styles.container}
@@ -70,26 +72,34 @@ export class GenderScreen extends Component {
         keyboardVerticalOffset={keyboardVerticalOffset}
       >
         <View style={styles.header}>
-          <Text style={styles.header__title}>성별</Text>
+          <Text style={styles.header__title}>개인정보</Text>
         </View>
         <View style={styles.body}>
-          {genderData.map((gender) => (
-            <GenderBox
-              onPress={this.handleGender}
-              icon={gender.icon}
-              iconWhite={gender.iconWhite}
-              id={gender.id}
-              selectedGenderId={selectedGenderId}
-              key={`gender-${gender.id}`}
-              name={gender.name}
-              divider={2.5}
-            />
-          ))}
+          <LabelText>성별을 선택해 주세요</LabelText>
+          <GenderWrapper>
+            {genderData.map((gender) => (
+              <GenderBox
+                onPress={this.handleGender}
+                icon={gender.icon}
+                iconWhite={gender.iconWhite}
+                id={gender.id}
+                selectedGenderId={selectedGenderId}
+                key={`gender-${gender.id}`}
+                name={gender.name}
+                divider={4.5}
+              />
+            ))}
+          </GenderWrapper>
+          <RegisterForm
+            label="나이를 입력해 주세요"
+            keyboardType="numeric"
+            onChangeText={(text) => this.setState({ age: text })}
+          />
         </View>
         <View style={styles.footer}>
           <FullWidthButton
             onPress={this.navigateToPoseInfo}
-            disabled={selectedGenderId === 0}
+            disabled={selectedGenderId === 0 || age === ''}
             invert
             content="다음 단계"
           />
