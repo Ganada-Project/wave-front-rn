@@ -3,6 +3,13 @@ package com.wavern;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.sensors.RNSensorsPackage;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.dylanvann.fastimage.FastImageViewPackage;
+import org.reactnative.camera.RNCameraPackage;
 import com.sensors.RNSensorsPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.dylanvann.fastimage.FastImageViewPackage;
@@ -43,6 +50,13 @@ public class MainApplication extends NavigationApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFetchBlobPackage(),
+            new VectorIconsPackage(),
+            new RNSensorsPackage(),
+            new PickerPackage(),
+            new RNFetchBlobPackage(),
+            new FastImageViewPackage(),
+            new RNCameraPackage(),
             new RNSensorsPackage(),
             new RNFetchBlobPackage(),
             new FastImageViewPackage(),

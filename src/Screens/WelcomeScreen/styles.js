@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { theme } from '../../constants';
+import { theme, fonts } from '../../constants';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,11 +15,13 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color: '#ffffff',
     fontWeight: 'bold',
+    fontFamily: fonts.NanumGothic,
   },
   registerText: {
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+    fontFamily: fonts.NanumGothic,
   },
   logo: {
     width: 100,
@@ -30,6 +32,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     color: '#ffffff',
     fontWeight: 'bold',
+    fontFamily: fonts.NanumGothic,
   },
   footer: {
     flex: 1,
@@ -39,6 +42,7 @@ const styles = StyleSheet.create({
   footer__register: {
     color: '#ffffff',
     fontSize: 14,
+    fontFamily: fonts.NanumGothic,
   },
 });
 

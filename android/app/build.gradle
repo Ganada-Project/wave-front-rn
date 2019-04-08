@@ -155,6 +155,8 @@ configurations.all {
 
 dependencies {
     implementation project(':react-native-sensors')
+    implementation project(':react-native-image-crop-picker')
+    implementation project(':react-native-sensors')
     implementation project(':rn-fetch-blob')
     implementation project(':react-native-fast-image')
     implementation project(':react-native-camera')
