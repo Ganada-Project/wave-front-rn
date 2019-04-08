@@ -22,6 +22,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 // injectSaga
+import { setCustomText } from 'react-native-global-props';
 import injectSaga from '../../utils/injectSaga';
 import DAEMON from '../../utils/constants';
 
@@ -32,6 +33,17 @@ import { fetchUserAction } from './actions';
 
 // local saga
 import saga from './saga';
+import { fonts } from '../../constants';
+
+const customTextProps = {
+  style: {
+    fontSize: 16,
+    fontFamily: fonts.NanumGothic,
+    color: 'black',
+  },
+};
+
+setCustomText(customTextProps);
 
 class App extends Component {
   static options(passProps) {

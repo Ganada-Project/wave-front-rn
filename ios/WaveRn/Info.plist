@@ -53,15 +53,14 @@
 			</dict>
 		</dict>
 	</dict>
-  <key>NSCameraUsageDescription</key>
-  <string>Your message to user when the camera is accessed for the first time</string>
-  <key>NSPhotoLibraryUsageDescription</key>
-  <string>Your message to user when the photo library is accessed for the first time</string>
-  <key>NSMicrophoneUsageDescription</key>
-  <string>Your message to user when the microphone is accessed for the first time</string>
-
-  <key>NSPhotoLibraryAddUsageDescription</key>
-  <string>require access</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Your message to user when the camera is accessed for the first time</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Your message to user when the photo library is accessed for the first time</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Your message to user when the microphone is accessed for the first time</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>require access</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -79,6 +78,8 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>NanumGothic-Bold.ttf</string>
+		<string>NanumGothic-Regular.ttf</string>
 	</array>
 </dict>
 </plist>
