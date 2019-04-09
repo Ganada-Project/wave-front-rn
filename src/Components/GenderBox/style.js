@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: '600',
-    fontSize: 18,
+    fontSize: 16,
   },
 });
 

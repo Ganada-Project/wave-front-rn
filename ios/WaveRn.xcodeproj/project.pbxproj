@@ -47,7 +47,6 @@
 		2DCD954D1E0B4F2C00145EB5 /* WaveRnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* WaveRnTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		37E79FDE39B24981AE19C232 /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66A2AD75A14D43A6B4BE8012 /* libRNCamera.a */; };
-		4A943ED3373E4872A640C4BA /* libimageCropPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 735623BC444343CDBD7F62DF /* libimageCropPicker.a */; };
 		600ACBEF191D41C58849C65F /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7645B2423A4E48FEB4240154 /* SimpleLineIcons.ttf */; };
 		611C8A05149A4CD0A6FBF4C4 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 456D0EAD228C43F99F1C60D4 /* Octicons.ttf */; };
 		6F866FD236674E5E8B472184 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75ECED99E5DE47B5B9A6F99E /* FontAwesome5_Regular.ttf */; };
@@ -377,13 +376,6 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNSensors;
 		};
-		EDC36059225B2C2F00994EEC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B627DB7893AC40B6861155AD /* imageCropPicker.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3400A8081CEB54A6008A0BC7;
-			remoteInfo = imageCropPicker;
-		};
 		EDD3016A222E6E3D00DEE097 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EDD30160222E6E3C00DEE097 /* RCTCameraRoll.xcodeproj */;
@@ -464,7 +456,6 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B0D8406694C149B0825035AD /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		B3F3901E47E54AB4AA69DB38 /* RNSensors.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSensors.xcodeproj; path = "../node_modules/react-native-sensors/ios/RNSensors.xcodeproj"; sourceTree = "<group>"; };
-		B627DB7893AC40B6861155AD /* imageCropPicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = imageCropPicker.xcodeproj; path = "../node_modules/react-native-image-crop-picker/ios/imageCropPicker.xcodeproj"; sourceTree = "<group>"; };
 		C29810F92BE147888BE1DCFD /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		C4687F04A57640518A0A7B4B /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -510,7 +501,6 @@
 				37E79FDE39B24981AE19C232 /* libRNCamera.a in Frameworks */,
 				1F9E7951537B46CCB0ED3032 /* libRNFetchBlob.a in Frameworks */,
 				F654B419ADD3494385FA8DB5 /* libRNSensors.a in Frameworks */,
-				4A943ED3373E4872A640C4BA /* libimageCropPicker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -732,7 +722,6 @@
 				0CEFFB6B7C2A4B6987C995AD /* FastImage.xcodeproj */,
 				061B6D5E6EC04461864DCD4B /* RNFetchBlob.xcodeproj */,
 				B3F3901E47E54AB4AA69DB38 /* RNSensors.xcodeproj */,
-				B627DB7893AC40B6861155AD /* imageCropPicker.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -825,14 +814,6 @@
 			isa = PBXGroup;
 			children = (
 				EDC35EB62257B96100994EEC /* libRNSensors.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		EDC36056225B2C2E00994EEC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EDC3605A225B2C2F00994EEC /* libimageCropPicker.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -952,7 +933,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = ZENR98L2G5;
+						DevelopmentTeam = 2Q7389MPSH;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -981,10 +962,6 @@
 				{
 					ProductGroup = EDBF5D3E22118119006FFEB8 /* Products */;
 					ProjectRef = 0CEFFB6B7C2A4B6987C995AD /* FastImage.xcodeproj */;
-				},
-				{
-					ProductGroup = EDC36056225B2C2E00994EEC /* Products */;
-					ProjectRef = B627DB7893AC40B6861155AD /* imageCropPicker.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -1364,13 +1341,6 @@
 			remoteRef = EDC35EB52257B96100994EEC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EDC3605A225B2C2F00994EEC /* libimageCropPicker.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libimageCropPicker.a;
-			remoteRef = EDC36059225B2C2F00994EEC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		EDD3016B222E6E3D00DEE097 /* libRCTCameraRoll.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1631,7 +1601,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = ZENR98L2G5;
+				DEVELOPMENT_TEAM = 2Q7389MPSH;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1663,7 +1633,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZENR98L2G5;
+				DEVELOPMENT_TEAM = 2Q7389MPSH;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",

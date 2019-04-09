@@ -6,15 +6,9 @@ import com.facebook.react.ReactApplication;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.sensors.RNSensorsPackage;
-import com.reactnative.ivpusic.imagepicker.PickerPackage;
-import com.RNFetchBlob.RNFetchBlobPackage;
+
 import com.dylanvann.fastimage.FastImageViewPackage;
 import org.reactnative.camera.RNCameraPackage;
-import com.sensors.RNSensorsPackage;
-import com.RNFetchBlob.RNFetchBlobPackage;
-import com.dylanvann.fastimage.FastImageViewPackage;
-import org.reactnative.camera.RNCameraPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -50,10 +44,9 @@ public class MainApplication extends NavigationApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNFetchBlobPackage(),
             new VectorIconsPackage(),
             new RNSensorsPackage(),
-            new PickerPackage(),
+            new RNFetchBlobPackage(),
             new FastImageViewPackage(),
             new RNCameraPackage()
       );

@@ -29,7 +29,7 @@ export class GenderBox extends Component {
         style={{
           ...styles.wrapper,
           width: window.width / divider,
-          height: 50,
+          height: 40,
           borderWidth: 1,
           borderRadius: window.width / divider / 2,
           borderColor:

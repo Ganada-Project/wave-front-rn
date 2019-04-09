@@ -35,7 +35,6 @@ class CameraScreen extends Component {
     if (this.camera) {
       const options = { quality: 0.5, base64: true };
       const data = await this.camera.takePictureAsync(options);
-      console.log(data);
       const { base64 } = data;
       Navigation.push(componentId, {
         component: {

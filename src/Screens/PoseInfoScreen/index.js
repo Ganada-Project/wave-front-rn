@@ -125,6 +125,7 @@ PoseInfoScreen.propTypes = {
   password: PropTypes.string,
   height: PropTypes.string,
   weight: PropTypes.string,
+  age: PropTypes.string,
 };
 
 export default PoseInfoScreen;
