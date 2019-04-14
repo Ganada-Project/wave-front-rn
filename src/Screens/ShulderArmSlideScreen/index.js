@@ -38,7 +38,7 @@ export class ShulderArmSlideScreen extends Component {
     return {
       topBar: {
         title: {
-          text: '어깨/팔 치수 측정',
+          text: '어깨/팔',
           color: theme.pointColor,
         },
         noBorder: true,
@@ -681,35 +681,52 @@ export class ShulderArmSlideScreen extends Component {
         phone,
         gender,
         password,
+        base64,
+        height,
+        weight,
+        headOffset,
+        footOffset,
       } = this.props;
-      const { leftShulderOffset, leftElbowOffset, leftHandOffset } = this.state;
-      const shulderElbowDistance = distanceBetween2Offset({
-        offset1: leftShulderOffset,
-        offset2: leftElbowOffset,
-      });
-      const elbowHandDistance = distanceBetween2Offset({
-        offset1: leftElbowOffset,
-        offset2: leftHandOffset,
-      });
-      console.log(shulderElbowDistance);
+      const {
+        leftNeckOffset,
+        leftShulderOffset,
+        leftElbowOffset,
+        leftHandOffset,
+        rightNeckOffset,
+        rightShulderOffset,
+        rightElbowOffset,
+        rightHandOffset,
+      } = this.state;
 
-      // Navigation.push(componentId, {
-      //   component: {
-      //     name: 'wave.bodySize',
-      //     passProps: {
-      //       phone,
-      //       gender,
-      //       nickname,
-      //       name,
-      //       password,
-      //     },
-      //   },
-      // });
+      Navigation.push(componentId, {
+        component: {
+          name: 'wave.upperBodySlide',
+          passProps: {
+            phone,
+            gender,
+            nickname,
+            name,
+            password,
+            base64,
+            height,
+            weight,
+            headOffset,
+            footOffset,
+            leftNeckOffset,
+            leftShulderOffset,
+            leftElbowOffset,
+            leftHandOffset,
+            rightNeckOffset,
+            rightShulderOffset,
+            rightElbowOffset,
+            rightHandOffset,
+          },
+        },
+      });
     }
   }
 
   render() {
-    console.log(this.props.height);
     // 각 슬라이더에 따라 돋보기 오프셋 설정
     this.adjustMagnifierOffset();
     const {
@@ -908,8 +925,12 @@ ShulderArmSlideScreen.propTypes = {
   password: PropTypes.string,
   phone: PropTypes.string,
   gender: PropTypes.string,
+  height: PropTypes.string,
+  weight: PropTypes.string,
   name: PropTypes.string,
   nickname: PropTypes.string,
+  headOffset: PropTypes.object,
+  footOffset: PropTypes.object,
 };
 
 export default ShulderArmSlideScreen;

@@ -1,4 +1,5 @@
 import { Dimensions } from 'react-native';
+import { BaseHeightOffset } from '../../constants';
 export const MAGINIFIER_CONTAINER_SIZE = 100 / 2;
 export const SLIDER_SIZE = 100;
 export const SLIDER_HEIGHT = 14;
@@ -11,10 +12,10 @@ export const IMAGE_HEIGHT = window.height - 44;
 
 export const HEAD_OFFSET = {
   x: IMAGE_WIDTH / 2 - SLIDER_SIZE / 2,
-  y: 150,
+  y: BaseHeightOffset.head,
 };
 
 export const FOOT_OFFSET = {
   x: IMAGE_WIDTH / 2 - SLIDER_SIZE / 2,
-  y: 600,
+  y: BaseHeightOffset.foot,
 };

@@ -163,7 +163,7 @@ export class PhoneVerifyScreen extends Component {
           <Text style={styles.body__text__third}>인증번호 다시받기</Text>
         </View>
         <View style={styles.footer}>
-          <Button Navigation={Navigation} componentId={componentId} />
+          <Button Navigation={Navigation} componentId={componentId} phone={phone} errotText={errorText} />
         </View>
       </KeyboardAvoidingView>
     );

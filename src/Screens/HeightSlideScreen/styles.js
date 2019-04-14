@@ -35,7 +35,6 @@ export const MagnifierContainer = styled(Animated.View)`
   position: relative;
   width: 100px;
   height: 100px;
-  border-radius: 50px;
   border: 3px solid ${theme.pointColor};
   background-color: black;
   overflow: hidden;

@@ -26,6 +26,8 @@ import BrandRecommendScreen from './Screens/BrandRecommendScreen';
 import PoseInfoScreen from './Screens/PoseInfoScreen';
 import HeightSlideScreen from './Screens/HeightSlideScreen';
 import ShulderArmSlideScreen from './Screens/ShulderArmSlideScreen';
+import UpperBodySlideScreen from './Screens/UpperBodySlideScreen';
+import LowerBodySlideScreen from './Screens/LowerBodySlideScreen';
 import BodySizeScreen from './Screens/BodySizeScreen';
 import FinalRegisterScreen from './Screens/FinalRegisterScreen';
 import configureStore from './configureStore';
@@ -205,6 +207,24 @@ const registerScreens = () => {
       </Provider>
     ),
     () => ShulderArmSlideScreen,
+  );
+  Navigation.registerComponent(
+    'wave.upperBodySlide',
+    () => (props) => (
+      <Provider store={store}>
+        <UpperBodySlideScreen {...props} />
+      </Provider>
+    ),
+    () => UpperBodySlideScreen,
+  );
+  Navigation.registerComponent(
+    'wave.lowerBodySlide',
+    () => (props) => (
+      <Provider store={store}>
+        <LowerBodySlideScreen {...props} />
+      </Provider>
+    ),
+    () => LowerBodySlideScreen,
   );
   Navigation.registerComponent(
     'wave.bodySize',

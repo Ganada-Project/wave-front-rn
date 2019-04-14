@@ -7,6 +7,11 @@ export const fonts = {
   NanumGothic: 'NanumGothic',
 };
 
+export const BaseHeightOffset = {
+  head: 120,
+  foot: 550,
+};
+
 export const theme = {
   pointColor: '#dd6770',
   whiteColor: '#ffffff',

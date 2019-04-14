@@ -18,11 +18,6 @@ export class Button extends Component {
       verifyNumber,
       userVerifyNumber,
     } = this.props;
-    // Navigation.push(componentId, {
-    //   component: {
-    //     name: 'wave.password',
-    //   },
-    // });
     if (verifyNumber !== userVerifyNumber) {
       console.log('틀림');
     } else {
@@ -39,7 +34,6 @@ export class Button extends Component {
 
   render() {
     const { userVerifyNumber } = this.props;
-    console.log(userVerifyNumber);
     return (
       <FullWidthButton
         onPress={this.navigateToPassword}
@@ -56,7 +50,7 @@ Button.propTypes = {
   Navigation: PropTypes.object,
   verifyNumber: PropTypes.string,
   userVerifyNumber: PropTypes.string,
-  phone: PropTypes.number,
+  phone: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

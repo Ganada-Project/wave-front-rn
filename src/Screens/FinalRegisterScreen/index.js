@@ -75,11 +75,28 @@ class FinalRegisterScreen extends Component {
       password,
       weight,
       height,
-      waist,
-      stylesArray,
-      brandsArray,
       base64,
       componentId,
+      headOffset,
+      footOffset,
+      leftNeckOffset,
+      leftShulderOffset,
+      leftElbowOffset,
+      leftHandOffset,
+      rightNeckOffset,
+      rightShulderOffset,
+      rightElbowOffset,
+      rightHandOffset,
+      leftChestOffset,
+      leftWaistOffset,
+      leftPelvisOffset,
+      rightChestOffset,
+      rightWaistOffset,
+      rightPelvisOffset,
+      leftThighOffset,
+      leftAnkleOffset,
+      rightThighOffset,
+      rightAnkleOffset,
     } = this.props;
 
     console.log('성 :', gender);
@@ -87,12 +104,29 @@ class FinalRegisterScreen extends Component {
     console.log('이름 :', name);
     console.log('닉네임 :', nickname);
     console.log('패스워드 :', password);
-    console.log('몸무게 :', weight);
     console.log('키 :', height);
-    console.log('허리 :', waist);
-    console.log('스타일 :', stylesArray);
-    console.log('브랜드', brandsArray);
-    console.log('이미지 :', base64);
+    console.log('몸무게 :', weight);
+    console.log('이미지 :', base64.length);
+    console.log('정수리: ', headOffset);
+    console.log('발끝: ', footOffset);
+    console.log('왼쪽 목', leftNeckOffset);
+    console.log('왼쪽 어깨', leftShulderOffset);
+    console.log('왼쪽 팔꿈치', leftElbowOffset);
+    console.log('왼쪽 손', leftHandOffset);
+    console.log('오른쪽 목', rightNeckOffset);
+    console.log('오른쪽 어깨', rightShulderOffset);
+    console.log('오른쪽 팔꿈치', rightElbowOffset);
+    console.log('오른쪽 손', rightHandOffset);
+    console.log('왼쪽 가슴', leftChestOffset);
+    console.log('왼쪽 허리', leftWaistOffset);
+    console.log('왼쪽 골반', leftPelvisOffset);
+    console.log('오른쪽 가슴', rightChestOffset);
+    console.log('오른쪽 허리', rightWaistOffset);
+    console.log('오른쪽 골반', rightPelvisOffset);
+    console.log('왼쪽 허벅지', leftThighOffset);
+    console.log('왼쪽 발목', leftAnkleOffset);
+    console.log('오른쪽 허벅지', rightThighOffset);
+    console.log('오른쪽 발목', rightAnkleOffset);
 
     // registerUser({
     //   gender,
@@ -126,13 +160,30 @@ FinalRegisterScreen.propTypes = {
   name: PropTypes.string,
   password: PropTypes.string,
   nickname: PropTypes.string,
-  stylesArray: PropTypes.array,
-  brandsArray: PropTypes.array,
-  weight: PropTypes.string,
-  height: PropTypes.string,
-  waist: PropTypes.string,
   phone: PropTypes.string,
   base64: PropTypes.string,
+  height: PropTypes.string,
+  weight: PropTypes.string,
+  headOffset: PropTypes.object,
+  footOffset: PropTypes.object,
+  leftNeckOffset: PropTypes.object,
+  leftShulderOffset: PropTypes.object,
+  leftElbowOffset: PropTypes.object,
+  leftHandOffset: PropTypes.object,
+  rightNeckOffset: PropTypes.object,
+  rightShulderOffset: PropTypes.object,
+  rightElbowOffset: PropTypes.object,
+  rightHandOffset: PropTypes.object,
+  leftChestOffset: PropTypes.object,
+  leftWaistOffset: PropTypes.object,
+  leftPelvisOffset: PropTypes.object,
+  rightChestOffset: PropTypes.object,
+  rightWaistOffset: PropTypes.object,
+  rightPelvisOffset: PropTypes.object,
+  leftAnkleOffset: PropTypes.object,
+  leftThighOffset: PropTypes.object,
+  rightAnkleOffset: PropTypes.object,
+  rightThighOffset: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

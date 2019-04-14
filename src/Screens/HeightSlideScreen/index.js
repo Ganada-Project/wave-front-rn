@@ -32,7 +32,7 @@ export class HeightSlideScreen extends Component {
     return {
       topBar: {
         title: {
-          text: '신장 측정',
+          text: '신장',
           color: theme.pointColor,
         },
         noBorder: true,
@@ -246,7 +246,6 @@ export class HeightSlideScreen extends Component {
         weight,
       } = this.props;
       const { headOffset, footOffset } = this.state;
-      const heightDistance = distanceBetween2Offset({ offset1: headOffset, offset2: footOffset });
       Navigation.push(componentId, {
         component: {
           name: 'wave.shulderArmSlide',
@@ -260,6 +259,8 @@ export class HeightSlideScreen extends Component {
             weight,
             base64,
             age,
+            headOffset,
+            footOffset
           },
         },
       });

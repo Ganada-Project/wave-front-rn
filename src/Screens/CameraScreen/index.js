@@ -6,14 +6,13 @@ import {
 import { Navigation } from 'react-native-navigation';
 import { RNCamera } from 'react-native-camera';
 import { gyroscope } from 'react-native-sensors';
+import { Button } from 'react-native-elements';
+import { HeadLine, FootLine, TakeButtonWrapper } from './styles';
 
 class CameraScreen extends Component {
   static options(passProps) {
     return {
-      topBar: {
-        visible: false,
-        drawBehind: true,
-      },
+      topBar: {},
     };
   }
 
@@ -31,6 +30,8 @@ class CameraScreen extends Component {
       gender,
       password,
       age,
+      height,
+      weight,
     } = this.props;
     if (this.camera) {
       const options = { quality: 0.5, base64: true };
@@ -47,6 +48,8 @@ class CameraScreen extends Component {
             name,
             password,
             base64,
+            height,
+            weight,
           },
         },
       });
@@ -69,13 +72,11 @@ class CameraScreen extends Component {
             console.log(barcodes);
           }}
         />
-        <View
-          style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}
-        >
-          <TouchableOpacity onPress={this.takePicture} style={styles.capture}>
-            <Text style={{ fontSize: 14 }}> SNAP </Text>
-          </TouchableOpacity>
-        </View>
+        <HeadLine />
+        <FootLine />
+        <TakeButtonWrapper>
+          <Button title="촬영" onPress={this.takePicture} />
+        </TakeButtonWrapper>
       </View>
     );
   }
@@ -110,6 +111,8 @@ CameraScreen.propTypes = {
   phone: PropTypes.string,
   password: PropTypes.string,
   age: PropTypes.string,
+  height: PropTypes.string,
+  weight: PropTypes.string,
 };
 
 export default CameraScreen;
