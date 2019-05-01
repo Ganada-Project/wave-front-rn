@@ -260,7 +260,7 @@ export class HeightSlideScreen extends Component {
             base64,
             age,
             headOffset,
-            footOffset
+            footOffset,
           },
         },
       });
@@ -364,7 +364,7 @@ HeightSlideScreen.propTypes = {
   componentId: PropTypes.string,
   password: PropTypes.string,
   phone: PropTypes.string,
-  gender: PropTypes.string,
+  gender: PropTypes.number,
   name: PropTypes.string,
   age: PropTypes.string,
   nickname: PropTypes.string,

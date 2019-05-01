@@ -679,6 +679,7 @@ export class ShulderArmSlideScreen extends Component {
         name,
         nickname,
         phone,
+        age,
         gender,
         password,
         base64,
@@ -701,7 +702,7 @@ export class ShulderArmSlideScreen extends Component {
       Navigation.push(componentId, {
         component: {
           name: 'wave.upperBodySlide',
-          passProps: {
+          passProps: {            
             phone,
             gender,
             nickname,
@@ -709,6 +710,7 @@ export class ShulderArmSlideScreen extends Component {
             password,
             base64,
             height,
+            age,
             weight,
             headOffset,
             footOffset,
@@ -924,10 +926,11 @@ ShulderArmSlideScreen.propTypes = {
   componentId: PropTypes.string,
   password: PropTypes.string,
   phone: PropTypes.string,
-  gender: PropTypes.string,
+  gender: PropTypes.number,
   height: PropTypes.string,
   weight: PropTypes.string,
   name: PropTypes.string,
+  age: PropTypes.string,
   nickname: PropTypes.string,
   headOffset: PropTypes.object,
   footOffset: PropTypes.object,

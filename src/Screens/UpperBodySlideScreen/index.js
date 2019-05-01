@@ -374,7 +374,7 @@ export class UpperBodySlideScreen extends Component {
             toValue: 1,
           }),
         ]).start();
-        this.setState({ type: 'righPelvis', typeText: '오른쪽 골반' });
+        this.setState({ type: 'rightPelvis', typeText: '오른쪽 골반' });
       },
       onPanResponderMove: this.onDraggingRightPelvis(),
       onPanResponderTerminationRequest: () => true,
@@ -544,6 +544,7 @@ export class UpperBodySlideScreen extends Component {
         nickname,
         phone,
         gender,
+        age,
         password,
         base64,
         height,
@@ -576,6 +577,7 @@ export class UpperBodySlideScreen extends Component {
             gender,
             nickname,
             name,
+            age,
             password,
             base64,
             height,
@@ -768,7 +770,8 @@ UpperBodySlideScreen.propTypes = {
   componentId: PropTypes.string,
   password: PropTypes.string,
   phone: PropTypes.string,
-  gender: PropTypes.string,
+  age: PropTypes.string,
+  gender: PropTypes.number,
   name: PropTypes.string,
   nickname: PropTypes.string,
   height: PropTypes.string,

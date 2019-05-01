@@ -4,12 +4,16 @@ import PropTypes from 'prop-types';
 import { Navigation } from 'react-native-navigation';
 import styles from './styles';
 import { FullWidthButton } from '../../Components';
+import { theme } from '../../constants';
 
 class PoseInfoScreen extends Component {
   static options(passProps) {
     return {
       topBar: {
         noBorder: true,
+        background: {
+          color: theme.pointColor,
+        },
         rightButtons: [
           {
             id: 'poseInfoSkipButton',
@@ -62,6 +66,7 @@ class PoseInfoScreen extends Component {
         name,
         nickname,
         phone,
+        age,
         gender,
         password,
       } = this.props;
@@ -71,6 +76,7 @@ class PoseInfoScreen extends Component {
           passProps: {
             phone,
             gender,
+            age,
             nickname,
             name,
             password,
@@ -118,7 +124,7 @@ class PoseInfoScreen extends Component {
 
 PoseInfoScreen.propTypes = {
   componentId: PropTypes.string,
-  gender: PropTypes.string,
+  gender: PropTypes.number,
   name: PropTypes.string,
   nickname: PropTypes.string,
   phone: PropTypes.string,

@@ -47,7 +47,7 @@ import styles from './style';
 import { theme } from '../../constants';
 
 class FinalRegisterScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
         visible: false,
@@ -71,6 +71,7 @@ class FinalRegisterScreen extends Component {
       gender,
       phone,
       name,
+      age,
       nickname,
       password,
       weight,
@@ -106,6 +107,7 @@ class FinalRegisterScreen extends Component {
     console.log('패스워드 :', password);
     console.log('키 :', height);
     console.log('몸무게 :', weight);
+    console.log('나이: ', age);
     console.log('이미지 :', base64.length);
     console.log('정수리: ', headOffset);
     console.log('발끝: ', footOffset);
@@ -128,20 +130,38 @@ class FinalRegisterScreen extends Component {
     console.log('오른쪽 허벅지', rightThighOffset);
     console.log('오른쪽 발목', rightAnkleOffset);
 
-    // registerUser({
-    //   gender,
-    //   name,
-    //   phone,
-    //   nickname,
-    //   password,
-    //   weight,
-    //   height,
-    //   waist,
-    //   stylesArray,
-    //   brandsArray,
-    //   componentId,
-    //   imageBase: base64,
-    // });
+    registerUser({
+      gender,
+      name,
+      phone,
+      age,
+      nickname,
+      password,
+      weight,
+      height,
+      headOffset,
+      footOffset,
+      leftNeckOffset,
+      leftShulderOffset,
+      leftElbowOffset,
+      leftHandOffset,
+      rightNeckOffset,
+      rightShulderOffset,
+      rightElbowOffset,
+      rightHandOffset,
+      leftChestOffset,
+      leftWaistOffset,
+      leftPelvisOffset,
+      rightChestOffset,
+      rightWaistOffset,
+      rightPelvisOffset,
+      leftThighOffset,
+      leftAnkleOffset,
+      rightThighOffset,
+      rightAnkleOffset,
+      componentId,
+      imageBase: base64,
+    });
   };
 
   render() {
@@ -156,10 +176,11 @@ class FinalRegisterScreen extends Component {
 FinalRegisterScreen.propTypes = {
   componentId: PropTypes.string,
   registerUser: PropTypes.func,
-  gender: PropTypes.string,
+  gender: PropTypes.number,
   name: PropTypes.string,
   password: PropTypes.string,
   nickname: PropTypes.string,
+  age: PropTypes.string,
   phone: PropTypes.string,
   base64: PropTypes.string,
   height: PropTypes.string,
@@ -195,14 +216,32 @@ const mapDispatchToProps = (dispatch) => ({
     phone,
     gender,
     name,
+    age,
     nickname,
     password,
-    stylesArray,
-    brandsArray,
+    headOffset,
+    footOffset,
+    leftNeckOffset,
+    leftShulderOffset,
+    leftElbowOffset,
+    leftHandOffset,
+    rightNeckOffset,
+    rightShulderOffset,
+    rightElbowOffset,
+    rightHandOffset,
+    leftChestOffset,
+    leftWaistOffset,
+    leftPelvisOffset,
+    rightChestOffset,
+    rightWaistOffset,
+    rightPelvisOffset,
+    leftThighOffset,
+    leftAnkleOffset,
+    rightThighOffset,
+    rightAnkleOffset,
     imageBase,
     weight,
     height,
-    waist,
     componentId,
   }) => dispatch(
     registerUserAction({
@@ -210,13 +249,31 @@ const mapDispatchToProps = (dispatch) => ({
       gender,
       password,
       name,
+      age,
       nickname,
-      stylesArray,
-      brandsArray,
+      headOffset,
+      footOffset,
+      leftNeckOffset,
+      leftShulderOffset,
+      leftElbowOffset,
+      leftHandOffset,
+      rightNeckOffset,
+      rightShulderOffset,
+      rightElbowOffset,
+      rightHandOffset,
+      leftChestOffset,
+      leftWaistOffset,
+      leftPelvisOffset,
+      rightChestOffset,
+      rightWaistOffset,
+      rightPelvisOffset,
+      leftThighOffset,
+      leftAnkleOffset,
+      rightThighOffset,
+      rightAnkleOffset,
       imageBase,
       weight,
       height,
-      waist,
       componentId,
     }),
   ),

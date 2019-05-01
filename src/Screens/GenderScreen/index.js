@@ -4,20 +4,24 @@ import PropTypes from 'prop-types';
 import { Navigation } from 'react-native-navigation';
 import styles, { GenderWrapper, LabelText } from './styles';
 import { FullWidthButton, GenderBox, RegisterForm } from '../../Components';
-import { keyboardVerticalOffset, keyboardBehavior } from '../../constants';
+import {
+  keyboardVerticalOffset,
+  keyboardBehavior,
+  theme,
+} from '../../constants';
 
 const genderData = [
-  {
-    id: 1,
-    name: '남성',
-    icon: require('../../Assets/Icons/Register/man.png'),
-    iconWhite: require('../../Assets/Icons/Register/man-white.png'),
-  },
   {
     id: 2,
     name: '여성',
     icon: require('../../Assets/Icons/Register/woman.png'),
     iconWhite: require('../../Assets/Icons/Register/woman-white.png'),
+  },
+  {
+    id: 1,
+    name: '남성',
+    icon: require('../../Assets/Icons/Register/man.png'),
+    iconWhite: require('../../Assets/Icons/Register/man-white.png'),
   },
 ];
 
@@ -26,6 +30,9 @@ export class GenderScreen extends Component {
     return {
       topBar: {
         noBorder: true,
+        background: {
+          color: theme.pointColor,
+        },
       },
     };
   }
@@ -33,17 +40,17 @@ export class GenderScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedGenderId: 0,
+      selectedGenderId: null,
       age: '',
     };
   }
 
-  navigateToPoseInfo = () => {
+  navigateToBodySize = () => {
     const {
       componentId, name, nickname, phone, password,
     } = this.props;
     const { selectedGenderId, age } = this.state;
-    const gender = selectedGenderId === 1 ? 'M' : 'W';
+    const gender = selectedGenderId === 1 ? 1 : 0;
     Navigation.push(componentId, {
       component: {
         name: 'wave.bodySize',
@@ -98,7 +105,7 @@ export class GenderScreen extends Component {
         </View>
         <View style={styles.footer}>
           <FullWidthButton
-            onPress={this.navigateToPoseInfo}
+            onPress={this.navigateToBodySize}
             disabled={selectedGenderId === 0 || age === ''}
             invert
             content="다음 단계"

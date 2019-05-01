@@ -151,7 +151,7 @@ BrandRecommendScreen.propTypes = {
   componentId: PropTypes.string,
   getBrandRecommend: PropTypes.func,
   phone: PropTypes.string,
-  gender: PropTypes.string,
+  gender: PropTypes.number,
   name: PropTypes.string,
   nickname: PropTypes.string,
   password: PropTypes.string,

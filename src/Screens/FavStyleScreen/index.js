@@ -154,7 +154,7 @@ FavStyleScreen.propTypes = {
   getAllStyles: PropTypes.func,
   stylesLoading: PropTypes.bool,
   phone: PropTypes.string,
-  gender: PropTypes.string,
+  gender: PropTypes.number,
   name: PropTypes.string,
   nickname: PropTypes.string,
   password: PropTypes.string,

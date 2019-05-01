@@ -33,16 +33,17 @@ export class GenderBox extends Component {
           borderWidth: 1,
           borderRadius: window.width / divider / 2,
           borderColor:
-            selectedGenderId !== id ? theme.grayColor : theme.pointColor,
+            selectedGenderId !== id ? theme.whiteColor : theme.whiteColor,
           backgroundColor:
-            selectedGenderId !== id ? theme.whiteColor : theme.pointColor,
+            selectedGenderId !== id ? theme.pointColor : theme.whiteColor,
         }}
         onPress={() => onPress(id)}
       >
         <Text
           style={{
             ...styles.text,
-            color: selectedGenderId !== id ? theme.textColor : theme.whiteColor,
+            color:
+              selectedGenderId !== id ? theme.whiteColor : theme.pointColor,
           }}
         >
           {name}

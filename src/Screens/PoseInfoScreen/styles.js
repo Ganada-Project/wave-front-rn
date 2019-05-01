@@ -4,7 +4,7 @@ import { theme } from '../../constants';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.whiteColor,
+    backgroundColor: theme.pointColor,
     paddingHorizontal: 25,
     paddingVertical: 35,
   },
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   body__text: {
-    color: theme.textColor,
+    color: theme.whiteColor,
     fontSize: 18,
     marginBottom: 5,
   },
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 
   header__title: {
     fontSize: 20,
-    color: theme.textColor,
+    color: theme.whiteColor,
     fontWeight: 'bold',
   },
 });

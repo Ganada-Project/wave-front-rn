@@ -39,7 +39,6 @@ const customTextProps = {
   style: {
     fontSize: 16,
     fontFamily: fonts.NanumGothic,
-    color: theme.textColor,
   },
 };
 

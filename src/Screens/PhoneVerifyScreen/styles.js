@@ -4,7 +4,7 @@ import { theme } from '../../constants';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.whiteColor,
+    backgroundColor: theme.pointColor,
     paddingHorizontal: 25,
     paddingTop: 10,
   },
@@ -17,22 +17,24 @@ const styles = StyleSheet.create({
   },
   body__text: {
     marginBottom: 10,
+    color: theme.whiteColor,
   },
   body__text__second: {
     marginBottom: 30,
+    color: theme.whiteColor,
   },
   body__text__third: {
     marginTop: 30,
-    color: theme.pointColor,
+    color: theme.whiteColor,
   },
   header__title: {
     fontSize: 20,
-    color: theme.textColor,
+    color: theme.whiteColor,
     fontWeight: 'bold',
   },
   timerText: {
     fontSize: 16,
-    color: theme.pointColor,
+    color: theme.whiteColor,
     alignSelf: 'flex-end',
   },
   footer: {

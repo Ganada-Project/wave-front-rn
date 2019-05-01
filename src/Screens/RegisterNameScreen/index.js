@@ -21,7 +21,11 @@ import styles from './styles';
 
 // global components
 import { RegisterForm, FullWidthButton } from '../../Components';
-import { keyboardVerticalOffset, keyboardBehavior } from '../../constants';
+import {
+  keyboardVerticalOffset,
+  keyboardBehavior,
+  theme,
+} from '../../constants';
 
 // local actions
 import { checkNicknameAction } from './actions';
@@ -35,6 +39,9 @@ export class RegisterNameScreen extends Component {
     return {
       topBar: {
         noBorder: true,
+        background: {
+          color: theme.pointColor,
+        },
       },
     };
   }

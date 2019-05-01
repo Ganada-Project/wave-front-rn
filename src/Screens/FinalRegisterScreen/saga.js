@@ -22,28 +22,70 @@ function* registerUserSaga(action) {
     name,
     gender,
     height,
-    waist,
     imageBase,
     nickname,
-    stylesArray,
-    brandsArray,
     phone,
+    age,
+    headOffset,
+    footOffset,
+    leftNeckOffset,
+    leftShulderOffset,
+    leftElbowOffset,
+    leftHandOffset,
+    rightNeckOffset,
+    rightShulderOffset,
+    rightElbowOffset,
+    rightHandOffset,
+    leftChestOffset,
+    leftWaistOffset,
+    leftPelvisOffset,
+    rightChestOffset,
+    rightWaistOffset,
+    rightPelvisOffset,
+    leftThighOffset,
+    leftAnkleOffset,
+    rightThighOffset,
+    rightAnkleOffset,
   } = action.payload;
   const payload = {
-    email: phone,
+    username: nickname,
     password,
-    sex: gender,
-    nickname,
     name,
     phone,
-    styles: stylesArray,
-    brands: brandsArray,
-    bodyImageBase64: imageBase,
+    gender,
+    address: '',
+    base64: imageBase,
     weight,
     height,
-    waist,
+    foot: '',
+    age,
+    profile_img_url:
+      'https://s3.ap-northeast-2.amazonaws.com/wave-bucket-seoul/user+(1).svg',
+    body_points: [
+      { ...headOffset },
+      { ...footOffset },
+      { ...leftNeckOffset },
+      { ...leftShulderOffset },
+      { ...leftElbowOffset },
+      { ...leftHandOffset },
+      { ...rightNeckOffset },
+      { ...rightShulderOffset },
+      { ...rightElbowOffset },
+      { ...rightHandOffset },
+      { ...leftChestOffset },
+      { ...leftWaistOffset },
+      { ...leftPelvisOffset },
+      { ...rightChestOffset },
+      { ...rightWaistOffset },
+      { ...rightPelvisOffset },
+      { ...leftThighOffset },
+      { ...leftAnkleOffset },
+      { ...rightThighOffset },
+      { ...rightAnkleOffset },
+    ],
   };
   try {
+    console.log(payload);
     const result = yield call(postRequest, { url, payload });
     yield put({ type: POST_REGISTER_REQUESTING_SUCCESS, payload: { result } });
     yield AsyncStorage.setItem('wave.idToken', result.token);
@@ -56,9 +98,5 @@ function* registerUserSaga(action) {
 }
 
 export default function* rootSaga() {
-  yield all([
-    takeLatest(POST_REGISTER_REQUESTING, registerUserSaga),
-    // takeLatest(LOGIN_ERROR, logout),
-    // loginWatcher(),
-  ]);
+  yield all([takeLatest(POST_REGISTER_REQUESTING, registerUserSaga)]);
 }

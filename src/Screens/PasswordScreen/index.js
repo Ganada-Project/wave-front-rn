@@ -4,13 +4,20 @@ import PropTypes from 'prop-types';
 import { Navigation } from 'react-native-navigation';
 import styles from './styles';
 import { RegisterForm, FullWidthButton } from '../../Components';
-import { keyboardBehavior, keyboardVerticalOffset } from '../../constants';
+import {
+  keyboardBehavior,
+  keyboardVerticalOffset,
+  theme,
+} from '../../constants';
 
 export class PasswordScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
         noBorder: true,
+        background: {
+          color: theme.pointColor,
+        },
       },
     };
   }

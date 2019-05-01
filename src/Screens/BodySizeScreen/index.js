@@ -4,13 +4,20 @@ import PropTypes from 'prop-types';
 import { Navigation } from 'react-native-navigation';
 import styles, { HeightWeightWrapper, Height, Weight } from './styles';
 import { RegisterForm, FullWidthButton } from '../../Components';
-import { keyboardVerticalOffset, keyboardBehavior } from '../../constants';
+import {
+  keyboardVerticalOffset,
+  keyboardBehavior,
+  theme,
+} from '../../constants';
 
 export class BodySizeScreen extends Component {
   static options(passProps) {
     return {
       topBar: {
         noBorder: true,
+        background: {
+          color: theme.pointColor,
+        },
       },
     };
   }
@@ -90,7 +97,7 @@ export class BodySizeScreen extends Component {
 
 BodySizeScreen.propTypes = {
   componentId: PropTypes.string,
-  gender: PropTypes.string,
+  gender: PropTypes.number,
   name: PropTypes.string,
   nickname: PropTypes.string,
   phone: PropTypes.string,

@@ -7,12 +7,18 @@ import { Navigation } from 'react-native-navigation';
 import { RNCamera } from 'react-native-camera';
 import { gyroscope } from 'react-native-sensors';
 import { Button } from 'react-native-elements';
+import { theme } from '../../constants';
 import { HeadLine, FootLine, TakeButtonWrapper } from './styles';
 
 class CameraScreen extends Component {
   static options(passProps) {
     return {
-      topBar: {},
+      topBar: {
+        title: {
+          text: '신장',
+          color: theme.pointColor,
+        },
+      },
     };
   }
 
@@ -34,7 +40,7 @@ class CameraScreen extends Component {
       weight,
     } = this.props;
     if (this.camera) {
-      const options = { quality: 0.5, base64: true };
+      const options = { quality: 0.1, base64: true };
       const data = await this.camera.takePictureAsync(options);
       const { base64 } = data;
       Navigation.push(componentId, {
@@ -92,20 +98,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  capture: {
-    flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    padding: 15,
-    paddingHorizontal: 20,
-    alignSelf: 'center',
-    margin: 20,
-  },
 });
 
 CameraScreen.propTypes = {
   componentId: PropTypes.string,
-  gender: PropTypes.string,
+  gender: PropTypes.number,
   name: PropTypes.string,
   nickname: PropTypes.string,
   phone: PropTypes.string,

@@ -15,7 +15,11 @@ import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import styles from './styles';
 import { RegisterForm, FullWidthButton } from '../../Components';
-import { keyboardBehavior, keyboardVerticalOffset } from '../../constants';
+import {
+  keyboardBehavior,
+  keyboardVerticalOffset,
+  theme,
+} from '../../constants';
 import saga from './saga';
 import reducer from './reducer';
 import {
@@ -29,10 +33,13 @@ import Form from './Form';
 import Button from './Button';
 
 export class PhoneVerifyScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
         noBorder: true,
+        background: {
+          color: theme.pointColor,
+        },
       },
     };
   }
@@ -163,7 +170,12 @@ export class PhoneVerifyScreen extends Component {
           <Text style={styles.body__text__third}>인증번호 다시받기</Text>
         </View>
         <View style={styles.footer}>
-          <Button Navigation={Navigation} componentId={componentId} phone={phone} errotText={errorText} />
+          <Button
+            Navigation={Navigation}
+            componentId={componentId}
+            phone={phone}
+            errotText={errorText}
+          />
         </View>
       </KeyboardAvoidingView>
     );

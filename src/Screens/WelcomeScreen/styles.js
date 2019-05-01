@@ -4,7 +4,7 @@ import { theme, fonts } from '../../constants';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.pointColor,
+    // backgroundColor: theme.pointColor,
     padding: 25,
   },
   header: {
