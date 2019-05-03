@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import { Text, View, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Navigation } from 'react-native-navigation';
-import AnimatedLinearGradient, {
-  presetColors,
-} from 'react-native-animated-linear-gradient';
+import AnimatedLinearGradient from 'react-native-animated-linear-gradient';
 import styles from './styles';
 import { FullWidthButton } from '../../Components';
-import { theme } from '../../constants';
+import { gradientPreset, gradientSpeed } from '../../constants';
 import WaveLogoWhite from '../../Assets/Logos/wave-logo-white.png';
 
 export class WelcomeScreen extends Component {
@@ -17,6 +15,9 @@ export class WelcomeScreen extends Component {
       topBar: {
         visible: false,
         drawBehind: true,
+      },
+      statusBar: {
+        style: 'light',
       },
     };
   }
@@ -47,8 +48,8 @@ export class WelcomeScreen extends Component {
   render() {
     return (
       <AnimatedLinearGradient
-        customColors={presetColors.instagram}
-        speed={4000}
+        customColors={gradientPreset}
+        speed={gradientSpeed}
       >
         <View style={styles.container}>
           <View style={styles.header}>

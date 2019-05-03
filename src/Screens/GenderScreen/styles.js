@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
-import { theme } from '../../constants';
+import { theme, TopBarHeight } from '../../constants';
 
 export const GenderWrapper = styled.View`
   flex-direction: row;
@@ -16,9 +16,8 @@ export const LabelText = styled.Text`
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.pointColor,
     paddingHorizontal: 25,
-    paddingTop: 10,
+    paddingTop: TopBarHeight,
   },
   header: {
     flex: 0.2,

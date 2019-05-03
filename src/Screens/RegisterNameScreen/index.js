@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 // reselect -> reducer에 있는 프로퍼티들 선택 툴
 import { createStructuredSelector } from 'reselect';
 
+import AnimatedLinearGradient from 'react-native-animated-linear-gradient';
+
 // injectSaga
 import { Navigation } from 'react-native-navigation';
 import injectSaga from '../../utils/injectSaga';
@@ -24,7 +26,9 @@ import { RegisterForm, FullWidthButton } from '../../Components';
 import {
   keyboardVerticalOffset,
   keyboardBehavior,
-  theme,
+  gradientPreset,
+  gradientSpeed,
+  AuthTopBarOption,
 } from '../../constants';
 
 // local actions
@@ -38,10 +42,7 @@ export class RegisterNameScreen extends Component {
   static options() {
     return {
       topBar: {
-        noBorder: true,
-        background: {
-          color: theme.pointColor,
-        },
+        ...AuthTopBarOption,
       },
     };
   }
@@ -91,36 +92,41 @@ export class RegisterNameScreen extends Component {
       nickname, name, errorText, overlap,
     } = this.state;
     return (
-      <KeyboardAvoidingView
-        style={styles.container}
-        behavior={keyboardBehavior}
-        keyboardVerticalOffset={keyboardVerticalOffset}
+      <AnimatedLinearGradient
+        customColors={gradientPreset}
+        speed={gradientSpeed}
       >
-        <View style={styles.header}>
-          <Text style={styles.header__title}>로그인 정보</Text>
-        </View>
-        <View style={styles.body}>
-          <RegisterForm
-            label="닉네임"
-            onChangeText={this.checkNickname}
-            loading={checking}
-            errorText={errorText}
-          />
-          <RegisterForm
-            label="이름"
-            onChangeText={(text) => this.setState({ name: text })}
-            autoFocus={false}
-          />
-        </View>
-        <View style={styles.footer}>
-          <FullWidthButton
-            disabled={!!(nickname === '' || name === '') || overlap}
-            onPress={this.navigateToPassword}
-            invert
-            content="다음 단계"
-          />
-        </View>
-      </KeyboardAvoidingView>
+        <KeyboardAvoidingView
+          style={styles.container}
+          behavior={keyboardBehavior}
+          keyboardVerticalOffset={keyboardVerticalOffset}
+        >
+          <View style={styles.header}>
+            <Text style={styles.header__title}>로그인 정보</Text>
+          </View>
+          <View style={styles.body}>
+            <RegisterForm
+              label="닉네임"
+              onChangeText={this.checkNickname}
+              loading={checking}
+              errorText={errorText}
+            />
+            <RegisterForm
+              label="이름"
+              onChangeText={(text) => this.setState({ name: text })}
+              autoFocus={false}
+            />
+          </View>
+          <View style={styles.footer}>
+            <FullWidthButton
+              disabled={!!(nickname === '' || name === '') || overlap}
+              onPress={this.navigateToPassword}
+              invert
+              content="다음 단계"
+            />
+          </View>
+        </KeyboardAvoidingView>
+      </AnimatedLinearGradient>
     );
   }
 }

@@ -2,22 +2,23 @@ import React, { Component } from 'react';
 import { KeyboardAvoidingView, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Navigation } from 'react-native-navigation';
+import AnimatedLinearGradient from 'react-native-animated-linear-gradient';
+
 import styles from './styles';
 import { RegisterForm, FullWidthButton } from '../../Components';
 import {
   keyboardBehavior,
   keyboardVerticalOffset,
-  theme,
+  gradientPreset,
+  gradientSpeed,
+  AuthTopBarOption,
 } from '../../constants';
 
 export class PasswordScreen extends Component {
   static options() {
     return {
       topBar: {
-        noBorder: true,
-        background: {
-          color: theme.pointColor,
-        },
+        ...AuthTopBarOption,
       },
     };
   }
@@ -49,31 +50,36 @@ export class PasswordScreen extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView
-        style={styles.container}
-        behavior={keyboardBehavior}
-        keyboardVerticalOffset={keyboardVerticalOffset}
+      <AnimatedLinearGradient
+        customColors={gradientPreset}
+        speed={gradientSpeed}
       >
-        <View style={styles.header}>
-          <Text style={styles.header__title}>보안</Text>
-        </View>
-        <View style={styles.body}>
-          <Text style={styles.body__text}>
-            비밀번호는 영문 숫자 혼합 8자 이상입니다.
-          </Text>
-          <RegisterForm
-            label="비밀번호"
-            onChangeText={(text) => this.setState({ password: text })}
-          />
-        </View>
-        <View style={styles.footer}>
-          <FullWidthButton
-            onPress={this.navigateToGender}
-            invert
-            content="다음 단계"
-          />
-        </View>
-      </KeyboardAvoidingView>
+        <KeyboardAvoidingView
+          style={styles.container}
+          behavior={keyboardBehavior}
+          keyboardVerticalOffset={keyboardVerticalOffset}
+        >
+          <View style={styles.header}>
+            <Text style={styles.header__title}>보안</Text>
+          </View>
+          <View style={styles.body}>
+            <Text style={styles.body__text}>
+              비밀번호는 영문 숫자 혼합 8자 이상입니다.
+            </Text>
+            <RegisterForm
+              label="비밀번호"
+              onChangeText={(text) => this.setState({ password: text })}
+            />
+          </View>
+          <View style={styles.footer}>
+            <FullWidthButton
+              onPress={this.navigateToGender}
+              invert
+              content="다음 단계"
+            />
+          </View>
+        </KeyboardAvoidingView>
+      </AnimatedLinearGradient>
     );
   }
 }

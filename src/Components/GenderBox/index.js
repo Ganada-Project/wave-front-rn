@@ -35,7 +35,7 @@ export class GenderBox extends Component {
           borderColor:
             selectedGenderId !== id ? theme.whiteColor : theme.whiteColor,
           backgroundColor:
-            selectedGenderId !== id ? theme.pointColor : theme.whiteColor,
+            selectedGenderId !== id ? 'transparent' : theme.whiteColor,
         }}
         onPress={() => onPress(id)}
       >

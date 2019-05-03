@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   disabledInvertContainer: {
-    backgroundColor: theme.pointColor,
+    backgroundColor: 'transparent',
     width: '100%',
     borderRadius: 30,
     marginBottom: 10,
@@ -53,9 +53,9 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   invertContainer: {
-    backgroundColor: theme.pointColor,
+    backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: theme.whiteColor,
     width: '100%',
     borderRadius: 30,
     marginBottom: 10,
