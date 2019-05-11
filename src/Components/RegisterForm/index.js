@@ -25,6 +25,7 @@ export class RegisterForm extends Component {
       loading,
       phone,
       autoFocus,
+      defaultRef,
     } = this.props;
     return (
       <View
@@ -68,6 +69,7 @@ export class RegisterForm extends Component {
           <TextInput
             onChangeText={onChangeText}
             value={value}
+            ref={defaultRef}
             autoFocus={autoFocus}
             autoCapitalize="none"
             autoCorrect={false}
@@ -96,6 +98,7 @@ RegisterForm.propTypes = {
   phone: PropTypes.bool,
   keyboardType: PropTypes.string,
   autoFocus: PropTypes.bool,
+  ref: PropTypes.object,
 };
 
 RegisterForm.defaultProps = {

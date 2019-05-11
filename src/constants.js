@@ -37,5 +37,5 @@ export const gradientPreset = [
 ];
 
 export const gradientSpeed = 5000;
-export const keyboardVerticalOffset = Platform.OS === 'ios' ? 70 : 0;
+export const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
 export const keyboardBehavior = Platform.OS === 'ios' ? 'padding' : null;

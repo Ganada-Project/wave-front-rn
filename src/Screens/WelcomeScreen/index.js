@@ -54,7 +54,7 @@ export class WelcomeScreen extends Component {
         <View style={styles.container}>
           <View style={styles.header}>
             <Image style={styles.logo} source={WaveLogoWhite} />
-            <Text style={styles.header__title}>Hangerfly</Text>
+            <Text style={styles.header__title}>웨어비</Text>
             <Text style={styles.header__subtitle}>
               이제는 나만의 옷장을 구독하세요.
             </Text>

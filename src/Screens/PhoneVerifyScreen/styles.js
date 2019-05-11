@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     paddingTop: TopBarHeight,
   },
   header: {
-    flex: 0.1,
+    flex: 0.3,
   },
   body: {
     flex: 1.5,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   footer: {
-    flex: 0.5,
+    flex: 0.2,
     alignItems: 'center',
     justifyContent: 'center',
   },

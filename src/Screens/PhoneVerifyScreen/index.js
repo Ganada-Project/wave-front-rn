@@ -21,7 +21,6 @@ import {
   gradientPreset,
   gradientSpeed,
   AuthTopBarOption,
-
 } from '../../constants';
 import saga from './saga';
 import reducer from './reducer';
@@ -68,6 +67,8 @@ export class PhoneVerifyScreen extends Component {
     };
   }
 
+  componentDidMount() {}
+
   sendPhoneNumber = () => {
     const { phone } = this.state;
     const { verifyPhoneNumber } = this.props;
@@ -93,7 +94,10 @@ export class PhoneVerifyScreen extends Component {
     } = this.state;
     if (!isSent) {
       return (
-        <AnimatedLinearGradient customColors={gradientPreset} speed={gradientSpeed}>
+        <AnimatedLinearGradient
+          customColors={gradientPreset}
+          speed={gradientSpeed}
+        >
           <KeyboardAvoidingView
             behavior={keyboardBehavior}
             style={styles.container}
@@ -135,7 +139,10 @@ export class PhoneVerifyScreen extends Component {
       );
     }
     return (
-      <AnimatedLinearGradient customColors={gradientPreset} speed={gradientSpeed}>
+      <AnimatedLinearGradient
+        customColors={gradientPreset}
+        speed={gradientSpeed}
+      >
         <KeyboardAvoidingView
           style={styles.container}
           behavior={keyboardBehavior}
