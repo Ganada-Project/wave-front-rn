@@ -314,33 +314,33 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
-		EDBF5C092205B872006FFEB8 /* PBXContainerItemProxy */ = {
+		ED754DC7228BCA69003A9DAC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 3D3CD90B1DE5FBD600167DC4;
-			remoteInfo = jschelpers;
+			remoteGlobalIDString = EDEBC6D6214B3E7000DD5AC8;
+			remoteInfo = jsi;
 		};
-		EDBF5C0B2205B872006FFEB8 /* PBXContainerItemProxy */ = {
+		ED754DC9228BCA69003A9DAC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
-			remoteInfo = "jschelpers-tvOS";
+			remoteGlobalIDString = EDEBC73B214B45A300DD5AC8;
+			remoteInfo = jsiexecutor;
 		};
-		EDBF5C0D2205B872006FFEB8 /* PBXContainerItemProxy */ = {
+		ED754DCB228BCA69003A9DAC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9936F3131F5F2E4B0010BF04;
-			remoteInfo = privatedata;
+			remoteGlobalIDString = ED296FB6214C9A0900B7C4FE;
+			remoteInfo = "jsi-tvOS";
 		};
-		EDBF5C0F2205B872006FFEB8 /* PBXContainerItemProxy */ = {
+		ED754DCD228BCA69003A9DAC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
-			remoteInfo = "privatedata-tvOS";
+			remoteGlobalIDString = ED296FEE214C9CF800B7C4FE;
+			remoteInfo = "jsiexecutor-tvOS";
 		};
 		EDBF5C172205B873006FFEB8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -498,8 +498,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDD30191222E6E5100DEE097 /* libRCTCameraRoll.a in Frameworks */,
 				EDD5D9EC2204898200C63784 /* libReactNativeNavigation.a in Frameworks */,
+				EDD30191222E6E5100DEE097 /* libRCTCameraRoll.a in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
@@ -652,16 +652,16 @@
 				3DAD3EA71DF850E9000B6D8A /* libyoga.a */,
 				3DAD3EA91DF850E9000B6D8A /* libcxxreact.a */,
 				3DAD3EAB1DF850E9000B6D8A /* libcxxreact.a */,
-				EDBF5C0A2205B872006FFEB8 /* libjschelpers.a */,
-				EDBF5C0C2205B872006FFEB8 /* libjschelpers.a */,
 				2DF0FFDF2056DD460020B375 /* libjsinspector.a */,
 				2DF0FFE12056DD460020B375 /* libjsinspector-tvOS.a */,
 				2DF0FFE32056DD460020B375 /* libthird-party.a */,
 				2DF0FFE52056DD460020B375 /* libthird-party.a */,
 				2DF0FFE72056DD460020B375 /* libdouble-conversion.a */,
 				2DF0FFE92056DD460020B375 /* libdouble-conversion.a */,
-				EDBF5C0E2205B872006FFEB8 /* libprivatedata.a */,
-				EDBF5C102205B872006FFEB8 /* libprivatedata-tvOS.a */,
+				ED754DC8228BCA69003A9DAC /* libjsi.a */,
+				ED754DCA228BCA69003A9DAC /* libjsiexecutor.a */,
+				ED754DCC228BCA69003A9DAC /* libjsi-tvOS.a */,
+				ED754DCE228BCA69003A9DAC /* libjsiexecutor-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1311,32 +1311,32 @@
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EDBF5C0A2205B872006FFEB8 /* libjschelpers.a */ = {
+		ED754DC8228BCA69003A9DAC /* libjsi.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libjschelpers.a;
-			remoteRef = EDBF5C092205B872006FFEB8 /* PBXContainerItemProxy */;
+			path = libjsi.a;
+			remoteRef = ED754DC7228BCA69003A9DAC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EDBF5C0C2205B872006FFEB8 /* libjschelpers.a */ = {
+		ED754DCA228BCA69003A9DAC /* libjsiexecutor.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libjschelpers.a;
-			remoteRef = EDBF5C0B2205B872006FFEB8 /* PBXContainerItemProxy */;
+			path = libjsiexecutor.a;
+			remoteRef = ED754DC9228BCA69003A9DAC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EDBF5C0E2205B872006FFEB8 /* libprivatedata.a */ = {
+		ED754DCC228BCA69003A9DAC /* libjsi-tvOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libprivatedata.a;
-			remoteRef = EDBF5C0D2205B872006FFEB8 /* PBXContainerItemProxy */;
+			path = "libjsi-tvOS.a";
+			remoteRef = ED754DCB228BCA69003A9DAC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EDBF5C102205B872006FFEB8 /* libprivatedata-tvOS.a */ = {
+		ED754DCE228BCA69003A9DAC /* libjsiexecutor-tvOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libprivatedata-tvOS.a";
-			remoteRef = EDBF5C0F2205B872006FFEB8 /* PBXContainerItemProxy */;
+			path = "libjsiexecutor-tvOS.a";
+			remoteRef = ED754DCD228BCA69003A9DAC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		EDBF5C182205B873006FFEB8 /* libRNVectorIcons.a */ = {
