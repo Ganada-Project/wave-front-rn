@@ -1,7 +1,7 @@
 /**
  * Gets the repositories of the user from Github
  */
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { Navigation } from 'react-native-navigation';
 import { put, takeLatest, all } from 'redux-saga/effects';
 import {

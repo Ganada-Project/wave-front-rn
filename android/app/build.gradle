@@ -154,6 +154,8 @@ configurations.all {
 }
 
 dependencies {
+    implementation project(':react-native-firebase')
+    implementation project(':@react-native-community_async-storage')
     compile project(':react-native-linear-gradient')
     implementation project(':react-native-sensors')
     implementation project(':rn-fetch-blob')

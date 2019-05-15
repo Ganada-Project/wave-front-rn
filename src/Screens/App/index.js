@@ -14,6 +14,8 @@ import { View } from 'react-native';
 // react-native-navigation
 import { Navigation } from 'react-native-navigation';
 
+// import { firebase } from '@';
+
 // redux
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -23,6 +25,7 @@ import { createStructuredSelector } from 'reselect';
 
 // injectSaga
 import { setCustomText } from 'react-native-global-props';
+import firebase from 'react-native-firebase';
 import injectSaga from '../../utils/injectSaga';
 import DAEMON from '../../utils/constants';
 
@@ -59,9 +62,17 @@ class App extends Component {
     Navigation.events().bindComponent(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { fetchUser } = this.props;
     fetchUser();
+    const fcmToken = await firebase.messaging().getToken();
+    if (fcmToken) {
+      // user has a device token
+      console.log(fcmToken);
+    } else {
+      console.log('not have token');
+      // user doesn't have a device token yet
+    }
   }
 
   render() {

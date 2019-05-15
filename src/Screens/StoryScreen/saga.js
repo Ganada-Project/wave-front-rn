@@ -1,7 +1,7 @@
 /**
  * Gets the repositories of the user from Github
  */
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import {
   take,
   fork,
@@ -16,15 +16,14 @@ import {
 import {
   GET_STYLES_REQUESTING,
   GET_STYLES_REQUESTING_FAIL,
-  GET_STYLES_REQUESTING_SUCCESS
+  GET_STYLES_REQUESTING_SUCCESS,
 } from './constants';
 import { startTabScreens } from '../../index';
-import { getRequest} from '../../utils/request';
-import  { API_URL } from '../../constants';
-
+import { getRequest } from '../../utils/request';
+import { API_URL } from '../../constants';
 
 function* getStylesSaga(action) {
-  console.log("Saga");
+  console.log('Saga');
   try {
     // try to call to our loginApi() function.  Redux Saga
     // will pause here until we either are successful or
