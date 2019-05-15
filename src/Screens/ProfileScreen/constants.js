@@ -9,3 +9,11 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  * Copyright : Ganada Project
  */
+import { Dimensions } from 'react-native';
+import { BaseHeightOffset } from '../../constants';
+
+const window = Dimensions.get('window');
+
+export const IMAGE_WIDTH = 60;
+export const IMAGE_HEIGHT = 60;
+export const IMAGE_RADIUS = 30;

@@ -24,7 +24,7 @@ const initialState = fromJS({
   loading: false,
   error: false,
   idToken: '',
-  userData: null,
+  userData: "",
 });
 
 function appReducer(state = initialState, action) {
@@ -33,7 +33,7 @@ function appReducer(state = initialState, action) {
       return state.set('loading', true);
     case FETCH_USER_REQUESTING_SUCCESS:
       return state
-        .set('userData', fromJS({ ...action.payload.user }))
+        .set('userData', fromJS({ ...action.payload.user.user }))
         .set('idToken', action.payload.idToken)
         .set('loading', false);
     case FETCH_USER_REQUESTING_FAIL:

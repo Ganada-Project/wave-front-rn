@@ -27,8 +27,11 @@ const getUserToken = async () => {
 
 export function* fetchUserFlow({ token }) {
   let user;
-  const url = `${API_URL}/user`;
+  const url = `${API_URL}/user/me`;
   const idToken = yield getUserToken() || token;
+  const test = yield getUserToken();
+  console.log("App/saga");
+  console.log(test);
   if (!idToken || idToken === null || idToken === undefined) {
     user = { result: null };
     yield put({ type: FETCH_USER_REQUESTING_FAIL });
@@ -54,13 +57,18 @@ export function* fetchUserFlow({ token }) {
       },
     });
   } else {
+    console.log(idToken);
     try {
       user = yield call(getRequest, { url });
+      console.log('App/Saga/user');
+      console.log(user);
+      
       yield put({
         type: FETCH_USER_REQUESTING_SUCCESS,
         payload: { user, idToken },
       });
       yield startTabScreens();
+      console.log(this.props.userData.user.toJS());
     } catch (error) {
       user = { result: null };
       yield put({ type: FETCH_USER_REQUESTING_FAIL, error });

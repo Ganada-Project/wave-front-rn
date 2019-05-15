@@ -4,7 +4,7 @@ import { theme } from '../../constants';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.whiteColor,
+    backgroundColor: theme.pointColor,
     paddingHorizontal: 25,
     paddingTop: 10,
   },
