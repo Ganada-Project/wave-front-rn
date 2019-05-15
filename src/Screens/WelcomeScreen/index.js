@@ -97,14 +97,18 @@ export class WelcomeScreen extends Component {
               icon="phone"
               invert
               content="휴대번호로 로그인"
+              onPress={this.navigateToSignIn}
+            />
+            <FullWidthButton
+              icon="facebook-f"
+              content="카카오로 로그인"
               onPress={this.kakaoLogin}
             />
-            <FullWidthButton icon="facebook-f" content="카카오로 로그인" />
             <Button
-              onPress={this.navigateToGender}
               title="회원가입"
               type="clear"
               titleStyle={styles.registerText}
+              onPress={this.navigateToGender}
             />
           </View>
         </View>
