@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, Image } from 'react-native';
+import {
+  Text, View, Image, Alert,
+} from 'react-native';
 import { Button } from 'react-native-elements';
 import { Navigation } from 'react-native-navigation';
 import AnimatedLinearGradient from 'react-native-animated-linear-gradient';
+import RNKakaoLogins from 'react-native-kakao-logins';
 import styles from './styles';
 import { FullWidthButton } from '../../Components';
 import { gradientPreset, gradientSpeed } from '../../constants';
@@ -24,7 +27,11 @@ export class WelcomeScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isKakaoLogging: false,
+      token: 'token has not fetched',
+      profile: null,
+    };
   }
 
   navigateToGender = () => {
@@ -45,7 +52,33 @@ export class WelcomeScreen extends Component {
     });
   };
 
+  kakaoLogin = () => {
+    console.log('   kakaoLogin   ');
+    RNKakaoLogins.login((err, result) => {
+      if (err) {
+        console.log(JSON.stringify(err));
+        return;
+      }
+      this.setState({ token: result.token }, () => {
+        this.getProfile();
+      });
+    });
+  };
+
+  getProfile = () => {
+    console.log('getKakaoProfile');
+    RNKakaoLogins.getProfile((err, result) => {
+      if (err) {
+        console.log(err.toString());
+        return;
+      }
+      this.setState({ profile: result });
+    });
+  };
+
   render() {
+    console.log(this.state.token);
+    console.log(this.state.profile);
     return (
       <AnimatedLinearGradient
         customColors={gradientPreset}
@@ -60,18 +93,22 @@ export class WelcomeScreen extends Component {
             </Text>
           </View>
           <View style={styles.footer}>
-            <FullWidthButton icon="facebook-f" content="페이스북으로 로그인" />
             <FullWidthButton
               icon="phone"
               invert
               content="휴대번호로 로그인"
               onPress={this.navigateToSignIn}
             />
+            <FullWidthButton
+              icon="facebook-f"
+              content="카카오로 로그인"
+              onPress={this.kakaoLogin}
+            />
             <Button
-              onPress={this.navigateToGender}
               title="회원가입"
               type="clear"
               titleStyle={styles.registerText}
+              onPress={this.navigateToGender}
             />
           </View>
         </View>
