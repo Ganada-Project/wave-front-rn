@@ -1,14 +1,13 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
 import {
-  call, put, takeLatest, all,
+  call, put, takeLatest, all, select,
 } from 'redux-saga/effects';
 import {
   POST_REGISTER_REQUESTING,
   POST_REGISTER_REQUESTING_FAIL,
   POST_REGISTER_REQUESTING_SUCCESS,
 } from './constants';
-import { FETCH_USER_REQUESTING } from '../App/constants';
 import { fetchUserFlow } from '../App/saga';
 import { API_URL } from '../../constants';
 import { postRequest } from '../../utils/request';
@@ -16,6 +15,10 @@ import { startTabScreens } from '../../index';
 
 function* registerUserSaga(action) {
   const url = `${API_URL}/auth/register`;
+  const selectGlobal = (state) => state.get('global');
+  const globalRedcuer = yield select(selectGlobal);
+  const fcmToken = globalRedcuer.get('fcmToken');
+  console.log(fcmToken);
   const {
     password,
     weight,
@@ -58,6 +61,7 @@ function* registerUserSaga(action) {
     weight,
     height,
     foot: '',
+    fcm_token: fcmToken,
     age,
     profile_img_url:
       'https://s3.ap-northeast-2.amazonaws.com/wave-bucket-seoul/user+(1).svg',
@@ -85,7 +89,6 @@ function* registerUserSaga(action) {
     ],
   };
   try {
-    console.log(payload);
     const result = yield call(postRequest, { url, payload });
     yield put({ type: POST_REGISTER_REQUESTING_SUCCESS, payload: { result } });
     yield AsyncStorage.setItem('wave.idToken', result.token);

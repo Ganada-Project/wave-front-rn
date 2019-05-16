@@ -3,6 +3,7 @@ import { Navigation } from 'react-native-navigation';
 import {
   call, put, takeLatest, all,
 } from 'redux-saga/effects';
+import firebase from 'react-native-firebase';
 import { getRequest } from '../../utils/request';
 import { API_URL } from '../../constants';
 
@@ -10,6 +11,7 @@ import {
   FETCH_USER_REQUESTING,
   FETCH_USER_REQUESTING_FAIL,
   FETCH_USER_REQUESTING_SUCCESS,
+  GET_FCM_TOKEN_SUCCESS,
 } from './constants';
 
 import { startTabScreens } from '../../index';
@@ -29,6 +31,8 @@ export function* fetchUserFlow({ token }) {
   let user;
   const url = `${API_URL}/user`;
   const idToken = yield getUserToken() || token;
+  const fcmToken = yield firebase.messaging().getToken();
+  yield put({ type: GET_FCM_TOKEN_SUCCESS, fcmToken });
   if (!idToken || idToken === null || idToken === undefined) {
     user = { result: null };
     yield put({ type: FETCH_USER_REQUESTING_FAIL });
