@@ -74,12 +74,14 @@ class ProfileScreen extends Component {
   };
 
   render() {
-    console.log(this.props.userData);
+    const { userData } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.header_profile}>
           <View style={styles.header_text_container}>
-            <Text style={styles.header_text}>text</Text>
+            <Text style={styles.header_text}>
+              {userData.getIn(['bio', 'name'])}
+            </Text>
             <Text style={styles.text_sub}>4회 이용 / 20</Text>
 
             <Text style={styles.text_subsub}>
@@ -137,6 +139,7 @@ class ProfileScreen extends Component {
 
 ProfileScreen.propTypes = {
   componentId: PropTypes.string,
+  userData: PropTypes.instanceOf(Object),
   onPressSignOut: PropTypes.func,
 };
 

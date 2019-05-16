@@ -45,7 +45,7 @@ import reducer from './reducer';
 import styles from './style';
 
 class BrandRecommendScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
         noBorder: true,
@@ -71,7 +71,7 @@ class BrandRecommendScreen extends Component {
 
   componentDidMount() {
     const { getBrandRecommend, stylesArray } = this.props;
-    getBrandRecommend({ stylesArray });
+    // getBrandRecommend({ stylesArray });
   }
 
   filterBrandList = () => {

@@ -19,8 +19,6 @@ const getUserToken = async () => {
  * @return {object}          The parsed JSON from the request
  */
 function parseJSON(response) {
-  console.log('parseJSON');
-  console.log(response);
   if (response.status === 204 || response.status === 205) {
     return null;
   }
@@ -67,7 +65,6 @@ export async function getRequest({ url }) {
     headers,
     url,
   };
-  console.log(options);
   return axios(options)
     .then(checkStatus)
     .then(parseJSON);
