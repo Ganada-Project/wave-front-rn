@@ -29,10 +29,10 @@ const removeIdToken = async () => {
 };
 
 function* loginFlow(action) {
-  const url = `${API_URL}/auth/login/user`;
+  const url = `${API_URL}/auth/login`;
   const { phone, password } = action.payload;
   const payload = {
-    phone,
+    username: phone,
     password,
   };
   let result;

@@ -14,7 +14,7 @@ export const theme = {
 };
 
 export const TopBarHeight = 120;
-export const AuthTopBarOption = {
+export const AuthTopBarOption = Platform.OS === 'ios' ? {
   noBorder: true,
   background: {
     translucent: true,
@@ -22,6 +22,12 @@ export const AuthTopBarOption = {
   drawBehind: true,
   backButton: {
     color: theme.whiteColor,
+  },
+} : {
+  noBorder: true,
+  drawBehind: true,
+  backButton: {
+    color: theme.pointColor,
   },
 };
 
