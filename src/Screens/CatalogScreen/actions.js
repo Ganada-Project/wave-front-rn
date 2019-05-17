@@ -1,7 +1,7 @@
-import { GET_BRAND_RECOMMEND_REQUESTING } from './constants';
+import { GET_ITEMS_REQUESTING } from './constants';
 
-export function getBrandRecommendAction() {
+export function getItemsAction() {
   return {
-    type: GET_BRAND_RECOMMEND_REQUESTING,
+    type: GET_ITEMS_REQUESTING,
   };
 }

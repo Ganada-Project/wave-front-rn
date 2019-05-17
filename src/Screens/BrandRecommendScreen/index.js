@@ -35,7 +35,7 @@ import { makeSelectBrands, makeSelectRecommendLoading } from './selectors';
 import { FullWidthButton, BrandBox } from '../../Components';
 
 // local action
-import { getBrandRecommendAction } from './actions';
+import { getItemsAction } from './actions';
 
 // local saga, reducer
 import saga from './saga';
@@ -70,8 +70,8 @@ class BrandRecommendScreen extends Component {
   }
 
   componentDidMount() {
-    const { getBrandRecommend, stylesArray } = this.props;
-    // getBrandRecommend({ stylesArray });
+    const { getItems, stylesArray } = this.props;
+    // getItems({ stylesArray });
   }
 
   filterBrandList = () => {
@@ -149,7 +149,7 @@ class BrandRecommendScreen extends Component {
 
 BrandRecommendScreen.propTypes = {
   componentId: PropTypes.string,
-  getBrandRecommend: PropTypes.func,
+  getItems: PropTypes.func,
   phone: PropTypes.string,
   gender: PropTypes.number,
   name: PropTypes.string,
@@ -164,7 +164,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getBrandRecommend: ({ stylesArray }) => dispatch(getBrandRecommendAction({ stylesArray })),
+  getItems: ({ stylesArray }) => dispatch(getItemsAction({ stylesArray })),
 });
 
 const withSaga = injectSaga({ key: 'brandRecommend', saga });

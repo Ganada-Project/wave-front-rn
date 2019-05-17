@@ -13,9 +13,9 @@
 import { fromJS, List } from 'immutable';
 
 import {
-  GET_BRAND_RECOMMEND_REQUESTING,
-  GET_BRAND_RECOMMEND_FAIL,
-  GET_BRAND_RECOMMEND_SUCCESS,
+  GET_ITEMS_REQUESTING,
+  GET_ITEMS_FAIL,
+  GET_ITEMS_SUCCESS,
 } from './constants';
 
 // The initial state of the App
@@ -26,11 +26,11 @@ export const initialState = fromJS({
 
 function catalogReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_BRAND_RECOMMEND_REQUESTING:
+    case GET_ITEMS_REQUESTING:
       return state.set('loading', true);
-    case GET_BRAND_RECOMMEND_SUCCESS:
+    case GET_ITEMS_SUCCESS:
       return state.set('loading', false).set('brands', List(action.brands));
-    case GET_BRAND_RECOMMEND_FAIL:
+    case GET_ITEMS_FAIL:
       return state.set('loading', false).set('error', action.error);
 
     default:

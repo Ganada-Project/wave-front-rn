@@ -1,11 +1,7 @@
 import styled from 'styled-components/native';
 import { StyleSheet, Image } from 'react-native';
 import { theme, TopBarHeight } from '../../constants';
-import {
-  IMAGE_WIDTH,
-  IMAGE_HEIGHT,
-  IMAGE_RADIUS
-} from './constants';
+import { IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_RADIUS } from './constants';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,14 +12,14 @@ const styles = StyleSheet.create({
   header_profile: {
     width: '100%',
     height: '22%',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
 
   header_text_container: {
     flex: 2,
     paddingLeft: '5%',
     paddingTop: '5%',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   header_text: {
     fontSize: 30,
@@ -31,27 +27,27 @@ const styles = StyleSheet.create({
   },
   text_sub: {
     color: theme.textColor,
-    fontSize: 15
+    fontSize: 15,
   },
 
   text_subsub: {
-    fontSize: 12
+    fontSize: 12,
   },
 
   profile_image_container: {
     flex: 1,
     paddingLeft: '5%',
-    paddingTop: '5%'
+    paddingTop: '5%',
   },
 
   case1: {
     flex: 1,
-    backgroundColor: 'red'  
+    backgroundColor: 'red',
   },
   case2: {
     flex: 3,
-    backgroundColor: 'green'
-  }
+    backgroundColor: 'green',
+  },
 });
 
 export const ImageContainer = styled(Image)`

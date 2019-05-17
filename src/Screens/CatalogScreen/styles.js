@@ -1,5 +1,25 @@
 import styled from 'styled-components/native';
+import {
+  Dimensions,
+  StyleSheet,
+  Platform,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+} from 'react-native';
 import { theme } from '../../constants';
+const window = Dimensions.get('window');
+
+export const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'space-between',
+  },
+  itemImage: {
+    width: '100%',
+    height: 140,
+  },
+});
+
+export const ItemWrapperButton = Platform.OS === 'ios' ? TouchableOpacity : TouchableWithoutFeedback;
 
 export const Wrapper = styled.View`
   flex: 1;
@@ -21,9 +41,17 @@ export const SearchBar = styled.TouchableOpacity`
   border-radius: 5px;
 `;
 
-export const Body = styled.ScrollView`
+export const Body = styled.View`
   flex: 10;
   padding-top: 20px;
+`;
+
+export const ItemLeft = styled.View`
+  width: ${window.width / 2.5};
+`;
+
+export const ItemRight = styled.View`
+  width: ${window.width / 2.5};
 `;
 
 export const BodyBrandArea = styled.ScrollView``;

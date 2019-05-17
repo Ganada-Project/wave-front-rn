@@ -4,7 +4,9 @@ import { List } from 'immutable';
 
 import PropTypes from 'prop-types';
 
-import { Button, View, Text } from 'react-native';
+import {
+  Button, View, Text, FlatList,
+} from 'react-native';
 
 // react-native-navigation
 import { Navigation } from 'react-native-navigation';
@@ -15,6 +17,7 @@ import { connect } from 'react-redux';
 
 // reducer
 import { createStructuredSelector } from 'reselect';
+import FastImage from 'react-native-fast-image';
 import reducer from './reducer';
 import injectReducer from '../../utils/injectReducer';
 // reselect -> reducer에 있는 프로퍼티들 선택 툴
@@ -28,7 +31,7 @@ import saga from './saga';
 // import saga from './saga';
 
 import { startTabScreens } from '../../index';
-import { getBrandRecommendAction } from './actions';
+import { getItemsAction } from './actions';
 
 import {
   Wrapper,
@@ -37,12 +40,16 @@ import {
   SearchBar,
   BodySubjectText,
   BodyBrandArea,
+  ItemLeft,
+  styles,
+  ItemWrapperButton,
+  ItemRight,
 } from './styles';
 import { makeSelectBrands } from './selectors';
 import { BrandTile } from '../../Components';
 
 class CatalogScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
         visible: false,
@@ -58,9 +65,40 @@ class CatalogScreen extends Component {
   }
 
   componentDidMount() {
-    const { getBrandRecommend } = this.props;
-    getBrandRecommend();
+    const { getItems } = this.props;
+    getItems();
   }
+
+  keyExtractor = (item, index) => item._id.toString();
+
+  renderItem = ({ item, index }) => {
+    if ((index + 1) % 2 !== 0) {
+      return (
+        <ItemWrapperButton onPress={() => onPress(item)}>
+          <ItemLeft>
+            <FastImage
+              style={styles.itemImage}
+              resizeMode={FastImage.resizeMode.cover}
+              source={{ uri: item.images[0] }}
+            />
+          </ItemLeft>
+          <Text>{item.name}</Text>
+        </ItemWrapperButton>
+      );
+    }
+    return (
+      <ItemWrapperButton onPress={() => onPress(item)}>
+        <ItemRight>
+          <FastImage
+            style={styles.itemImage}
+            resizeMode={FastImage.resizeMode.cover}
+            source={{ uri: item.images[0] }}
+          />
+          <Text>{item.name}</Text>
+        </ItemRight>
+      </ItemWrapperButton>
+    );
+  };
 
   render() {
     const { brands } = this.props;
@@ -70,12 +108,17 @@ class CatalogScreen extends Component {
           <SearchBar />
         </Header>
         <Body>
-          <BodySubjectText>회원님을 위한 브랜드</BodySubjectText>
-          <BodyBrandArea horizontal showsHorizontalScrollIndicator={false}>
-            {brands.map((brand) => (
-              <BrandTile key={`catalog-${brand.id}`} brand={brand} />
-            ))}
-          </BodyBrandArea>
+          <FlatList
+            contentContainerStyle={styles.container}
+            horizontal={false}
+            numColumns={2}
+            keyExtractor={this.keyExtractor}
+            data={brands.toJS()}
+            renderItem={this.renderItem}
+            // onEndReached={onEndReached}
+            // onMomentumScrollBegin={onMomentumScrollBegin}
+            onEndReachedThreshold={0}
+          />
         </Body>
       </Wrapper>
     );
@@ -84,7 +127,7 @@ class CatalogScreen extends Component {
 
 CatalogScreen.propTypes = {
   componentId: PropTypes.string,
-  getBrandRecommend: PropTypes.func,
+  getItems: PropTypes.func,
   brands: PropTypes.instanceOf(List),
 };
 
@@ -93,8 +136,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getBrandRecommend: () => {
-    dispatch(getBrandRecommendAction());
+  getItems: () => {
+    dispatch(getItemsAction());
   },
 });
 

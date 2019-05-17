@@ -10,6 +10,6 @@
  * Copyright : Ganada Project
  */
 
-export const GET_BRAND_RECOMMEND_REQUEST = 'Wave/brandRecommend/GET_BRAND_RECOMMEND_REQUEST';
-export const GET_BRAND_RECOMMEND_FAIL = 'Wave/brandRecommend/GET_BRAND_RECOMMEND_FAIL';
-export const GET_BRAND_RECOMMEND_SUCCESS = 'Wave/brandRecommend/FETCH_STYLES_REQUESTING_SUCCESS';
+export const GET_ITEMS_REQUEST = 'Wave/brandRecommend/GET_ITEMS_REQUEST';
+export const GET_ITEMS_FAIL = 'Wave/brandRecommend/GET_ITEMS_FAIL';
+export const GET_ITEMS_SUCCESS = 'Wave/brandRecommend/FETCH_STYLES_REQUESTING_SUCCESS';
