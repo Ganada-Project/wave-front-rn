@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
   itemImage: {
     width: '100%',
     height: 140,
+    borderRadius: 10,
   },
 });
 
@@ -48,10 +49,16 @@ export const Body = styled.View`
 
 export const ItemLeft = styled.View`
   width: ${window.width / 2.5};
+  margin-left: 15px;
+  margin-right: 5px;
+  margin-top: 25px;
 `;
 
 export const ItemRight = styled.View`
   width: ${window.width / 2.5};
+  margin-left: 5px;
+  margin-right: 15px;
+  margin-top: 25px;
 `;
 
 export const BodyBrandArea = styled.ScrollView``;

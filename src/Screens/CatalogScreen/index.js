@@ -82,7 +82,6 @@ class CatalogScreen extends Component {
               source={{ uri: item.images[0] }}
             />
           </ItemLeft>
-          <Text>{item.name}</Text>
         </ItemWrapperButton>
       );
     }
@@ -94,7 +93,6 @@ class CatalogScreen extends Component {
             resizeMode={FastImage.resizeMode.cover}
             source={{ uri: item.images[0] }}
           />
-          <Text>{item.name}</Text>
         </ItemRight>
       </ItemWrapperButton>
     );
@@ -111,6 +109,7 @@ class CatalogScreen extends Component {
           <FlatList
             contentContainerStyle={styles.container}
             horizontal={false}
+            showsVerticalScrollIndicator={false}
             numColumns={2}
             keyExtractor={this.keyExtractor}
             data={brands.toJS()}
