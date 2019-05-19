@@ -9,6 +9,9 @@ import CatalogScreen from './Screens/CatalogScreen';
 import ProfileScreen from './Screens/ProfileScreen';
 import StoryScreen from './Screens/StoryScreen';
 
+// Item Related Screens
+import ItemDetailScreen from './Screens/ItemDetailScreen';
+
 // Photo Related Screens
 import CameraScreen from './Screens/CameraScreen';
 import UploadInfoScreen from './Screens/UploadInfoScreen';
@@ -144,6 +147,15 @@ const registerScreens = () => {
       </Provider>
     ),
     () => FavStyleScreen,
+  );
+  Navigation.registerComponent(
+    'wave.itemDetail',
+    () => (props) => (
+      <Provider store={store}>
+        <ItemDetailScreen {...props} />
+      </Provider>
+    ),
+    () => ItemDetailScreen,
   );
   Navigation.registerComponent(
     'wave.brandRecommend',

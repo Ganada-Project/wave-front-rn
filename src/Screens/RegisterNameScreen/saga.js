@@ -8,16 +8,13 @@ import {
   CHECK_NICKNAME_SUCCESS,
 } from './constants';
 import { API_URL } from '../../constants';
-import { postRequest } from '../../utils/request';
+import { getRequest } from '../../utils/request';
 
 function* checkNicknameSaga(action) {
-  const url = `${API_URL}/auth/check/nickname`;
   const { nickname } = action;
-  const payload = {
-    nickname,
-  };
+  const url = `${API_URL}/auth/username?username=${nickname}`;
   try {
-    const result = yield call(postRequest, { url, payload });
+    const result = yield call(getRequest, { url });
     yield put({ type: CHECK_NICKNAME_SUCCESS, overlap: result.overlap });
   } catch (error) {
     // error? send it to redux

@@ -51,14 +51,14 @@ export const ItemLeft = styled.View`
   width: ${window.width / 2.5};
   margin-left: 15px;
   margin-right: 5px;
-  margin-top: 25px;
+  margin-top: 20px;
 `;
 
 export const ItemRight = styled.View`
   width: ${window.width / 2.5};
   margin-left: 5px;
   margin-right: 15px;
-  margin-top: 25px;
+  margin-top: 20px;
 `;
 
 export const BodyBrandArea = styled.ScrollView``;

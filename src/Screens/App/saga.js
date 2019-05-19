@@ -58,18 +58,13 @@ export function* fetchUserFlow({ token }) {
       },
     });
   } else {
-    console.log(idToken);
     try {
       user = yield call(getRequest, { url });
-      console.log('App/Saga/user');
-      console.log(user);
-      
       yield put({
         type: FETCH_USER_REQUESTING_SUCCESS,
         payload: { user, idToken },
       });
       yield startTabScreens();
-      console.log(this.props.userData.user.toJS());
     } catch (error) {
       user = { result: null };
       yield put({ type: FETCH_USER_REQUESTING_FAIL, error });
