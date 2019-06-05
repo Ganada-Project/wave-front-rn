@@ -14,7 +14,7 @@ import {
 
 function* verifyPhoneNumberSaga(action) {
   const { number } = action.payload;
-  const url = `${API_URL}/auth/phone?phone=${number}`;
+  const url = `${API_URL}/auth/check/user/phone`;
   try {
     const result = yield call(getRequest, { url });
     yield put({ type: VERIFY_PHONE_NUMBER_SUCCESS, payload: { result } });
@@ -25,12 +25,9 @@ function* verifyPhoneNumberSaga(action) {
 
 function* checkPhoneNumberSaga(action) {
   const { number } = action;
-  const url = `${API_URL}/auth/check/user/phone`;
-  const payload = {
-    phonenumber: number,
-  };
+  const url = `${API_URL}/auth/phone?phone=${number}`;
   try {
-    const result = yield call(postRequest, { url, payload });
+    const result = yield call(getRequest, { url });
     yield put({ type: CHECK_PHONE_NUMBER_SUCCESS, overlap: result.overlap });
   } catch (error) {
     console.log(error);

@@ -20,8 +20,6 @@ export const styles = StyleSheet.create({
   },
 });
 
-export const ItemWrapperButton = Platform.OS === 'ios' ? TouchableOpacity : TouchableWithoutFeedback;
-
 export const Wrapper = styled.View`
   flex: 1;
   flex-direction: column;
@@ -45,20 +43,6 @@ export const SearchBar = styled.TouchableOpacity`
 export const Body = styled.View`
   flex: 10;
   padding-top: 20px;
-`;
-
-export const ItemLeft = styled.View`
-  width: ${window.width / 2.5};
-  margin-left: 15px;
-  margin-right: 5px;
-  margin-top: 20px;
-`;
-
-export const ItemRight = styled.View`
-  width: ${window.width / 2.5};
-  margin-left: 5px;
-  margin-right: 15px;
-  margin-top: 20px;
 `;
 
 export const BodyBrandArea = styled.ScrollView``;

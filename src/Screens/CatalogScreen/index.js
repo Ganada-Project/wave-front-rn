@@ -4,10 +4,6 @@ import { List } from 'immutable';
 
 import PropTypes from 'prop-types';
 
-import {
-  Button, View, Text, FlatList,
-} from 'react-native';
-
 // react-native-navigation
 import { Navigation } from 'react-native-navigation';
 
@@ -17,7 +13,6 @@ import { connect } from 'react-redux';
 
 // reducer
 import { createStructuredSelector } from 'reselect';
-import FastImage from 'react-native-fast-image';
 import reducer from './reducer';
 import injectReducer from '../../utils/injectReducer';
 // reselect -> reducer에 있는 프로퍼티들 선택 툴
@@ -34,19 +29,10 @@ import { startTabScreens } from '../../index';
 import { getItemsAction } from './actions';
 
 import {
-  Wrapper,
-  Header,
-  Body,
-  SearchBar,
-  BodySubjectText,
-  BodyBrandArea,
-  ItemLeft,
-  styles,
-  ItemWrapperButton,
-  ItemRight,
+  Wrapper, Header, Body, SearchBar,
 } from './styles';
 import { makeSelectBrands } from './selectors';
-import { BrandTile } from '../../Components';
+import { ItemFlatList } from '../../Components';
 
 class CatalogScreen extends Component {
   static options() {
@@ -69,33 +55,17 @@ class CatalogScreen extends Component {
     getItems();
   }
 
-  keyExtractor = (item, index) => item._id.toString();
-
-  renderItem = ({ item, index }) => {
-    if ((index + 1) % 2 !== 0) {
-      return (
-        <ItemWrapperButton onPress={() => onPress(item)}>
-          <ItemLeft>
-            <FastImage
-              style={styles.itemImage}
-              resizeMode={FastImage.resizeMode.cover}
-              source={{ uri: item.images[0] }}
-            />
-          </ItemLeft>
-        </ItemWrapperButton>
-      );
-    }
-    return (
-      <ItemWrapperButton onPress={() => onPress(item)}>
-        <ItemRight>
-          <FastImage
-            style={styles.itemImage}
-            resizeMode={FastImage.resizeMode.cover}
-            source={{ uri: item.images[0] }}
-          />
-        </ItemRight>
-      </ItemWrapperButton>
-    );
+  // navigateToItemDetail
+  onPressItem = (item) => {
+    const { componentId } = this.props;
+    Navigation.push(componentId, {
+      component: {
+        name: 'wave.itemDetail',
+        passProps: {
+          item,
+        },
+      },
+    });
   };
 
   render() {
@@ -106,18 +76,7 @@ class CatalogScreen extends Component {
           <SearchBar />
         </Header>
         <Body>
-          <FlatList
-            contentContainerStyle={styles.container}
-            horizontal={false}
-            showsVerticalScrollIndicator={false}
-            numColumns={2}
-            keyExtractor={this.keyExtractor}
-            data={brands.toJS()}
-            renderItem={this.renderItem}
-            // onEndReached={onEndReached}
-            // onMomentumScrollBegin={onMomentumScrollBegin}
-            onEndReachedThreshold={0}
-          />
+          <ItemFlatList data={brands.toJS()} onPressItem={this.onPressItem} />
         </Body>
       </Wrapper>
     );

@@ -5,6 +5,7 @@ import GenderBox from './GenderBox';
 import BrandBox from './BrandBox';
 import BrandTile from './BrandTile';
 import BarLoading from './BarLoading';
+import ItemFlatList from './ItemFlatList';
 export {
   FullWidthButton,
   RegisterForm,
@@ -13,4 +14,5 @@ export {
   BrandBox,
   BrandTile,
   BarLoading,
+  ItemFlatList,
 };
