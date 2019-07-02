@@ -39,7 +39,6 @@ import { fonts, theme } from '../../constants';
 
 const customTextProps = {
   style: {
-    fontSize: 16,
     fontFamily: fonts.NanumGothic,
   },
 };

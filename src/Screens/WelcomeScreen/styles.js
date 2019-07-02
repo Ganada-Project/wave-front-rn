@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     padding: 25,
   },
   header: {
-    flex: 1,
+    flex: 0.6,
     justifyContent: 'center',
   },
   header__title: {
@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontWeight: 'bold',
     fontFamily: fonts.NanumGothic,
+    marginBottom: 10,
   },
   registerText: {
     color: 'white',
@@ -24,14 +25,13 @@ const styles = StyleSheet.create({
     fontFamily: fonts.NanumGothic,
   },
   logo: {
-    width: 100,
-    height: 70,
+    width: 70,
+    height: 60,
   },
   header__subtitle: {
-    fontSize: 18,
+    fontSize: 16,
     marginTop: 10,
     color: '#ffffff',
-    fontWeight: 'bold',
     fontFamily: fonts.NanumGothic,
   },
   footer: {

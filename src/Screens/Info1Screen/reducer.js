@@ -23,7 +23,7 @@ export const initialState = fromJS({
   overlap: false,
 });
 
-function registerNameReducer(state = initialState, action) {
+function info1ScreenReducer(state = initialState, action) {
   switch (action.type) {
     case CHECK_NICKNAME_REQUEST:
       return state.set('checking', true);
@@ -36,4 +36,4 @@ function registerNameReducer(state = initialState, action) {
   }
 }
 
-export default registerNameReducer;
+export default info1ScreenReducer;

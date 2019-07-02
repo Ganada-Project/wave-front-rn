@@ -11,8 +11,6 @@ import { connect } from 'react-redux';
 // reselect -> reducer에 있는 프로퍼티들 선택 툴
 import { createStructuredSelector } from 'reselect';
 
-import AnimatedLinearGradient from 'react-native-animated-linear-gradient';
-
 // injectSaga
 import { Navigation } from 'react-native-navigation';
 import injectSaga from '../../utils/injectSaga';
@@ -26,8 +24,6 @@ import { RegisterForm, FullWidthButton } from '../../Components';
 import {
   keyboardVerticalOffset,
   keyboardBehavior,
-  gradientPreset,
-  gradientSpeed,
   AuthTopBarOption,
 } from '../../constants';
 
@@ -38,7 +34,7 @@ import saga from './saga';
 import reducer from './reducer';
 import { makeSelectChecking, makeSelectOverlap } from './selectors';
 
-export class RegisterNameScreen extends Component {
+export class Info1Screen extends Component {
   static options() {
     return {
       topBar: {
@@ -61,8 +57,8 @@ export class RegisterNameScreen extends Component {
     const { overlap } = props;
     super(props);
     this.state = {
-      nickname: '',
       name: '',
+      age: '',
       overlap,
       errorText: null,
     };
@@ -89,49 +85,42 @@ export class RegisterNameScreen extends Component {
   render() {
     const { checking } = this.props;
     const {
-      nickname, name, errorText, overlap,
+      nickname, name, errorText, overlap, age,
     } = this.state;
     return (
-      <AnimatedLinearGradient
-        customColors={gradientPreset}
-        speed={gradientSpeed}
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={keyboardBehavior}
+        keyboardVerticalOffset={keyboardVerticalOffset}
       >
-        <KeyboardAvoidingView
-          style={styles.container}
-          behavior={keyboardBehavior}
-          keyboardVerticalOffset={keyboardVerticalOffset}
-        >
-          <View style={styles.header}>
-            <Text style={styles.header__title}>로그인 정보</Text>
-          </View>
-          <View style={styles.body}>
-            <RegisterForm
-              label="닉네임"
-              onChangeText={this.checkNickname}
-              loading={checking}
-              errorText={errorText}
-            />
-            <RegisterForm
-              label="이름"
-              onChangeText={(text) => this.setState({ name: text })}
-              autoFocus={false}
-            />
-          </View>
-          <View style={styles.footer}>
-            <FullWidthButton
-              disabled={!!(nickname === '' || name === '') || overlap}
-              onPress={this.navigateToPassword}
-              invert
-              content="다음 단계"
-            />
-          </View>
-        </KeyboardAvoidingView>
-      </AnimatedLinearGradient>
+        <View style={styles.header}>
+          <Text style={styles.header__title}>로그인 정보</Text>
+        </View>
+        <View style={styles.body}>
+          <RegisterForm
+            label="사이즈 카드 이름"
+            onChangeText={(text) => this.setState({ name: text })}
+            autoFocus={false}
+          />
+          <RegisterForm
+            label="나이"
+            onChangeText={(text) => this.setState({ age: text })}
+            autoFocus={false}
+          />
+        </View>
+        <View style={styles.footer}>
+          <FullWidthButton
+            disabled={!!(age === '' || name === '') || overlap}
+            onPress={this.navigateToPassword}
+            content="다음 단계"
+          />
+        </View>
+      </KeyboardAvoidingView>
     );
   }
 }
 
-RegisterNameScreen.propTypes = {
+Info1Screen.propTypes = {
   componentId: PropTypes.string,
   phone: PropTypes.string,
   checking: PropTypes.bool,
@@ -150,8 +139,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-const withSaga = injectSaga({ key: 'registerName', saga });
-const withReducer = injectReducer({ key: 'registerName', reducer });
+const withSaga = injectSaga({ key: 'info1', saga });
+const withReducer = injectReducer({ key: 'info1', reducer });
 
 const withConnect = connect(
   mapStateToProps,
@@ -161,4 +150,4 @@ export default compose(
   withConnect,
   withSaga,
   withReducer,
-)(RegisterNameScreen);
+)(Info1Screen);

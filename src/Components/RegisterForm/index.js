@@ -39,7 +39,7 @@ export class RegisterForm extends Component {
         <View style={{ flexDirection: 'row' }}>
           <Text
             style={{
-              color: theme.whiteColor,
+              color: theme.textColor,
               fontSize: 16,
               fontWeight: '700',
             }}
@@ -48,7 +48,7 @@ export class RegisterForm extends Component {
           </Text>
           {loading ? (
             <View style={{ marginLeft: 10 }}>
-              <BarIndicator size={10} color={theme.whiteColor} />
+              <BarIndicator size={10} color={theme.pointColor} />
             </View>
           ) : null}
         </View>

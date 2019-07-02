@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   defaultContainer: {
-    backgroundColor: '#ffffff',
     width: '100%',
     borderRadius: 30,
     marginBottom: 10,
@@ -40,7 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   defaultText: {
-    color: theme.pointColor,
+    color: theme.whiteColor,
     fontSize: 16,
     fontWeight: '700',
   },
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   invertText: {
-    color: '#ffffff',
+    color: theme.pointColor,
     fontSize: 16,
     fontWeight: '700',
   },

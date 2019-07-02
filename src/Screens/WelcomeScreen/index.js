@@ -8,6 +8,7 @@ import styles from './styles';
 import { FullWidthButton } from '../../Components';
 import { gradientPreset, gradientSpeed } from '../../constants';
 import WaveLogoWhite from '../../Assets/Logos/wave-logo-white.png';
+import SizeCardAddButton from './SizeCardAddButton';
 
 export class WelcomeScreen extends Component {
   static options(passProps) {
@@ -27,11 +28,16 @@ export class WelcomeScreen extends Component {
     this.state = {};
   }
 
-  navigateToGender = () => {
-    const { componentId } = this.props;
-    Navigation.push(componentId, {
-      component: {
-        name: 'wave.phoneVerify',
+  navigateToInfo1 = () => {
+    Navigation.showModal({
+      stack: {
+        children: [
+          {
+            component: {
+              name: 'wave.registerName',
+            },
+          },
+        ],
       },
     });
   };
@@ -54,25 +60,14 @@ export class WelcomeScreen extends Component {
         <View style={styles.container}>
           <View style={styles.header}>
             <Image style={styles.logo} source={WaveLogoWhite} />
-            <Text style={styles.header__title}>웨어비</Text>
+            {/* <Text style={styles.header__title}>웨어비</Text> */}
+            <Text style={styles.header__title}>혹시 아시나요?</Text>
             <Text style={styles.header__subtitle}>
-              이제는 나만의 옷장을 구독하세요.
+              패션 브랜드마다 사이즈 측정법이 다르데요.
             </Text>
           </View>
           <View style={styles.footer}>
-            <FullWidthButton icon="facebook-f" content="페이스북으로 로그인" />
-            <FullWidthButton
-              icon="phone"
-              invert
-              content="휴대번호로 로그인"
-              onPress={this.navigateToSignIn}
-            />
-            <Button
-              onPress={this.navigateToGender}
-              title="회원가입"
-              type="clear"
-              titleStyle={styles.registerText}
-            />
+            <SizeCardAddButton onPressAdd={this.navigateToInfo1} />
           </View>
         </View>
       </AnimatedLinearGradient>

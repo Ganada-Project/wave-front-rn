@@ -6,6 +6,7 @@ import BrandBox from './BrandBox';
 import BrandTile from './BrandTile';
 import BarLoading from './BarLoading';
 import ItemFlatList from './ItemFlatList';
+import ContainerButton from './ContainerButton';
 export {
   FullWidthButton,
   RegisterForm,
@@ -15,4 +16,5 @@ export {
   BrandTile,
   BarLoading,
   ItemFlatList,
+  ContainerButton,
 };

@@ -8,7 +8,10 @@ import {
   Platform,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AnimatedGradient from 'react-native-animated-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient';
 import styles from './style';
+import { gradientPreset } from '../../constants';
 
 export class FullWidthButton extends Component {
   constructor(props) {
@@ -34,15 +37,25 @@ export class FullWidthButton extends Component {
               name={icon}
             />
           ) : null}
-          <Text style={invert ? styles.invertText : styles.defaultText}>
-            {content}
-          </Text>
+          <Text style={styles.invertText}>{content}</Text>
         </View>
       );
     }
     return (
-      <Button onPress={onPress} style={{ width: '100%' }}>
-        <View style={invert ? styles.invertContainer : styles.defaultContainer}>
+      <LinearGradient
+        style={styles.defaultContainer}
+        colors={gradientPreset}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+      >
+        <Button
+          onPress={onPress}
+          style={{
+            width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           {icon ? (
             <Icon
               size={16}
@@ -53,8 +66,16 @@ export class FullWidthButton extends Component {
           <Text style={invert ? styles.invertText : styles.defaultText}>
             {content}
           </Text>
-        </View>
-      </Button>
+        </Button>
+      </LinearGradient>
+      // <Button >
+      //   <AnimatedGradient
+      //     customColors={gradientPreset}
+      //     speed={gradientSpeed}
+      //   >
+
+    //   </AnimatedGradient>
+    // </Button>
     );
   }
 }

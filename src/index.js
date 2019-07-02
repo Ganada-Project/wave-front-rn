@@ -21,7 +21,7 @@ import UploadScreen from './Screens/UploadScreen';
 import SignInScreen from './Screens/SignInScreen';
 import WelcomeScreen from './Screens/WelcomeScreen';
 import GenderScreen from './Screens/GenderScreen';
-import RegisterNameScreen from './Screens/RegisterNameScreen';
+import Info1Screen from './Screens/Info1Screen';
 import PhoneVerifyScreen from './Screens/PhoneVerifyScreen';
 import PasswordScreen from './Screens/PasswordScreen';
 import FavStyleScreen from './Screens/FavStyleScreen';
@@ -116,10 +116,10 @@ const registerScreens = () => {
     'wave.registerName',
     () => (props) => (
       <Provider store={store}>
-        <RegisterNameScreen {...props} />
+        <Info1Screen {...props} />
       </Provider>
     ),
-    () => RegisterNameScreen,
+    () => Info1Screen,
   );
   Navigation.registerComponent(
     'wave.phoneVerify',
