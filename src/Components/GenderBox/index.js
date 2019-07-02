@@ -42,8 +42,7 @@ export class GenderBox extends Component {
         <Text
           style={{
             ...styles.text,
-            color:
-              selectedGenderId !== id ? theme.whiteColor : theme.pointColor,
+            color: selectedGenderId !== id ? theme.textColor : theme.pointColor,
           }}
         >
           {name}

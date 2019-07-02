@@ -22,7 +22,7 @@ export const AuthTopBarOption = Platform.OS === 'ios'
     },
     drawBehind: true,
     backButton: {
-      color: theme.whiteColor,
+      color: theme.pointColor,
     },
   }
   : {

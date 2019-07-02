@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   header__title: {
-    fontSize: 28,
+    fontSize: 24,
     color: '#ffffff',
     fontWeight: 'bold',
     fontFamily: fonts.NanumGothic,

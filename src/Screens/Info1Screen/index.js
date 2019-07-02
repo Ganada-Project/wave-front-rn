@@ -20,7 +20,7 @@ import injectReducer from '../../utils/injectReducer';
 import styles from './styles';
 
 // global components
-import { RegisterForm, FullWidthButton } from '../../Components';
+import { RegisterForm, FullWidthButton, GenderBox } from '../../Components';
 import {
   keyboardVerticalOffset,
   keyboardBehavior,
@@ -33,6 +33,21 @@ import { checkNicknameAction } from './actions';
 import saga from './saga';
 import reducer from './reducer';
 import { makeSelectChecking, makeSelectOverlap } from './selectors';
+
+const genderData = [
+  {
+    id: 2,
+    name: '여성',
+    icon: require('../../Assets/Icons/Register/woman.png'),
+    iconWhite: require('../../Assets/Icons/Register/woman-white.png'),
+  },
+  {
+    id: 1,
+    name: '남성',
+    icon: require('../../Assets/Icons/Register/man.png'),
+    iconWhite: require('../../Assets/Icons/Register/man-white.png'),
+  },
+];
 
 export class Info1Screen extends Component {
   static options() {
@@ -60,6 +75,7 @@ export class Info1Screen extends Component {
       name: '',
       age: '',
       overlap,
+      selectedGenderId: 0,
       errorText: null,
     };
   }
@@ -82,10 +98,19 @@ export class Info1Screen extends Component {
     });
   };
 
+  handleGender = (id) => {
+    this.setState({ selectedGenderId: id });
+  };
+
   render() {
     const { checking } = this.props;
     const {
-      nickname, name, errorText, overlap, age,
+      nickname,
+      name,
+      errorText,
+      overlap,
+      age,
+      selectedGenderId,
     } = this.state;
     return (
       <KeyboardAvoidingView
@@ -106,7 +131,22 @@ export class Info1Screen extends Component {
             label="나이"
             onChangeText={(text) => this.setState({ age: text })}
             autoFocus={false}
+            keyboardType="numeric"
           />
+          <View style={{ flexDirection: 'row' }}>
+            {genderData.map((gender) => (
+              <GenderBox
+                onPress={this.handleGender}
+                icon={gender.icon}
+                iconWhite={gender.iconWhite}
+                id={gender.id}
+                selectedGenderId={selectedGenderId}
+                key={`gender-${gender.id}`}
+                name={gender.name}
+                divider={6.5}
+              />
+            ))}
+          </View>
         </View>
         <View style={styles.footer}>
           <FullWidthButton
