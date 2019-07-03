@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 // reselect -> reducer에 있는 프로퍼티들 선택 툴
 import { createStructuredSelector } from 'reselect';
 
+import { Icon } from 'react-native-elements';
+
 // injectSaga
 import { Navigation } from 'react-native-navigation';
 import injectSaga from '../../utils/injectSaga';
@@ -20,11 +22,17 @@ import injectReducer from '../../utils/injectReducer';
 import styles from './styles';
 
 // global components
-import { RegisterForm, FullWidthButton, GenderBox } from '../../Components';
+import {
+  RegisterForm,
+  FullWidthButton,
+  GenderBox,
+  ContainerButton,
+} from '../../Components';
 import {
   keyboardVerticalOffset,
   keyboardBehavior,
   AuthTopBarOption,
+  theme,
 } from '../../constants';
 
 // local actions
@@ -80,13 +88,13 @@ export class Info1Screen extends Component {
     };
   }
 
-  navigateToPassword = () => {
-    const { nickname, name } = this.state;
-    const { componentId, phone } = this.props;
+  navigateToInfo2 = () => {
+    const { name, age, selectedGenderId } = this.state;
+    const { componentId } = this.props;
     Navigation.push(componentId, {
       component: {
-        name: 'wave.password',
-        passProps: { nickname, name, phone },
+        name: 'wave.bodySize',
+        passProps: { name, age, gender: selectedGenderId },
       },
     });
   };
@@ -100,6 +108,11 @@ export class Info1Screen extends Component {
 
   handleGender = (id) => {
     this.setState({ selectedGenderId: id });
+  };
+
+  onPressClose = () => {
+    const { componentId } = this.props;
+    Navigation.dismissModal(componentId);
   };
 
   render() {
@@ -119,7 +132,14 @@ export class Info1Screen extends Component {
         keyboardVerticalOffset={keyboardVerticalOffset}
       >
         <View style={styles.header}>
-          <Text style={styles.header__title}>로그인 정보</Text>
+          <ContainerButton onPress={this.onPressClose}>
+            <Icon
+              name="close"
+              size={30}
+              type="simple-line-icon"
+              color={theme.textColor}
+            />
+          </ContainerButton>
         </View>
         <View style={styles.body}>
           <RegisterForm
@@ -150,8 +170,10 @@ export class Info1Screen extends Component {
         </View>
         <View style={styles.footer}>
           <FullWidthButton
-            disabled={!!(age === '' || name === '') || overlap}
-            onPress={this.navigateToPassword}
+            disabled={
+              !!(age === '' || name === '') || overlap || selectedGenderId === 0
+            }
+            onPress={this.navigateToInfo2}
             content="다음 단계"
           />
         </View>

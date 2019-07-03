@@ -33,6 +33,17 @@ export const AuthTopBarOption = Platform.OS === 'ios'
     },
   };
 
+export const InvertOption = {
+  noBorder: true,
+  background: {
+    translucent: true,
+  },
+  drawBehind: true,
+  backButton: {
+    color: 'white',
+  },
+};
+
 export const BaseHeightOffset = {
   head: 120,
   foot: 550,

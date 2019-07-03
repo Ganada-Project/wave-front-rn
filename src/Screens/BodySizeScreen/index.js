@@ -34,24 +34,15 @@ export class BodySizeScreen extends Component {
   navigateToPoseInfo = () => {
     const { height, weight } = this.state;
     const {
-      gender,
-      phone,
-      name,
-      nickname,
-      password,
-      age,
-      componentId,
+      gender, name, age, componentId,
     } = this.props;
     Navigation.push(componentId, {
       component: {
         name: 'wave.poseInfo',
         passProps: {
-          phone,
           gender,
-          nickname,
           name,
           age,
-          password,
           height,
           weight,
         },
@@ -62,38 +53,35 @@ export class BodySizeScreen extends Component {
   render() {
     const { height, weight, waist } = this.state;
     return (
-      <AnimatedGradient customColors={gradientPreset} speed={gradientSpeed}>
-        <KeyboardAvoidingView
-          style={styles.container}
-          behavior={keyboardBehavior}
-          keyboardVerticalOffset={keyboardVerticalOffset}
-        >
-          <View style={styles.header}>
-            <Text style={styles.header__title}>기본 신체정보</Text>
-          </View>
-          <View style={styles.body}>
-            <RegisterForm
-              label="신장(cm)"
-              keyboardType="numeric"
-              onChangeText={(text) => this.setState({ height: text })}
-            />
-            <RegisterForm
-              label="체중(kg)"
-              keyboardType="numeric"
-              autoFocus={false}
-              onChangeText={(text) => this.setState({ weight: text })}
-            />
-          </View>
-          <View style={styles.footer}>
-            <FullWidthButton
-              disabled={!!height === '' || weight === '' || waist === ''}
-              onPress={this.navigateToPoseInfo}
-              invert
-              content="다음 단계"
-            />
-          </View>
-        </KeyboardAvoidingView>
-      </AnimatedGradient>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={keyboardBehavior}
+        keyboardVerticalOffset={keyboardVerticalOffset}
+      >
+        <View style={styles.header}>
+          <Text style={styles.header__title}>기본 신체정보</Text>
+        </View>
+        <View style={styles.body}>
+          <RegisterForm
+            label="신장(cm)"
+            keyboardType="numeric"
+            onChangeText={(text) => this.setState({ height: text })}
+          />
+          <RegisterForm
+            label="체중(kg)"
+            keyboardType="numeric"
+            autoFocus={false}
+            onChangeText={(text) => this.setState({ weight: text })}
+          />
+        </View>
+        <View style={styles.footer}>
+          <FullWidthButton
+            disabled={!!height === '' || weight === ''}
+            onPress={this.navigateToPoseInfo}
+            content="다음 단계"
+          />
+        </View>
+      </KeyboardAvoidingView>
     );
   }
 }

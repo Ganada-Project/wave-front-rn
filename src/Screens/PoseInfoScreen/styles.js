@@ -10,6 +10,16 @@ const styles = StyleSheet.create({
   header: {
     flex: 0.4,
   },
+  activeDot: {
+    backgroundColor: theme.pointColor,
+    width: 45,
+    height: 8,
+    borderRadius: 4,
+    marginLeft: 3,
+    marginRight: 3,
+    marginTop: 3,
+    marginBottom: 3,
+  },
   header__title: {
     fontSize: 20,
     color: theme.whiteColor,
@@ -27,22 +37,29 @@ const styles = StyleSheet.create({
   },
   swiper__container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 40,
-    paddingVertical: 20,
-    marginHorizontal: 5,
-    paddingHorizontal: 20,
-    backgroundColor: 'rgba(255,255,255,0.9)',
+    flexDirection: 'column',
   },
   swiper__headerInfo: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
-    color: theme.pointColor,
+    color: theme.textColor,
   },
   swiper__subInfo: {
     fontSize: 14,
     color: theme.pointColor,
+  },
+  swiper__imageArea: {
+    flex: 1.5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  swiper__descArea: {
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
   guideImage: {
     width: '100%',
