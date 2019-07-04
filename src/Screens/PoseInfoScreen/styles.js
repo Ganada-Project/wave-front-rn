@@ -58,12 +58,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    paddingHorizontal: 25,
   },
   guideImage: {
     width: '100%',
-    height: 115,
+    height: 500,
     marginVertical: 30,
   },
   footer: {

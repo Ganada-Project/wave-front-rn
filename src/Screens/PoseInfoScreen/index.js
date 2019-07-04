@@ -100,63 +100,66 @@ class PoseInfoScreen extends Component {
         >
           <View style={styles.swiper__container}>
             <View style={styles.swiper__imageArea}>
-              <Text>굳바이</Text>
+              <Image
+                style={styles.guideImage}
+                resizeMode="contain"
+                source={require('./images/guide1.png')}
+              />
             </View>
             <View style={styles.swiper__descArea}>
               <Text style={styles.swiper__headerInfo}>앞 모습 전신을 촬영</Text>
             </View>
           </View>
           <View style={styles.swiper__container}>
-            <Text style={styles.swiper__headerInfo}>
-              자세는 이렇게 하면 좋아요.
-            </Text>
-            <Text style={styles.swiper__subInfo}>
-              손바닥을 카메라에 보여주세요.
-            </Text>
-            <Image
-              style={styles.guideImage}
-              source={require('./images/guide2.png')}
-            />
-            <Text style={{ ...styles.swiper__subInfo, textAlign: 'center' }}>
-              <Text style={{ fontWeight: 'bold' }}>허리를 펴고 </Text>
-              서있어야 더 정확해 집니다.
-            </Text>
+            <View style={styles.swiper__imageArea}>
+              <Image
+                resizeMode="contain"
+                style={styles.guideImage}
+                source={require('./images/guide2.png')}
+              />
+            </View>
+            <View style={styles.swiper__descArea}>
+              <Text style={styles.swiper__headerInfo}>
+                카메라는 90으로 유지
+              </Text>
+            </View>
           </View>
           <View style={styles.swiper__container}>
-            <Text style={styles.swiper__headerInfo}>
-              간편하게 지정된 부위를 짚어주세요.
-            </Text>
-            <Text style={styles.swiper__subInfo}>
-              얇은 옷을 입는 걸 추천해요.
-            </Text>
-            <Image
-              style={styles.guideImage}
-              source={require('./images/guide3.png')}
-            />
-            <Text style={{ ...styles.swiper__subInfo, textAlign: 'center' }}>
-              <Text style={{ fontWeight: 'bold' }}>물음표를 누르면 </Text>
-              가이드 화면이 나타납니다.
-            </Text>
+            <View style={styles.swiper__imageArea}>
+              <Image
+                style={styles.guideImage}
+                resizeMode="contain"
+                source={require('./images/guide3.png')}
+              />
+            </View>
+            <View style={styles.swiper__descArea}>
+              <Text style={styles.swiper__headerInfo}>재미난 시간</Text>
+            </View>
           </View>
           <View style={styles.swiper__container}>
-            <Text style={styles.swiper__headerInfo}>
-              치수는 자동으로 계산됩니다.
-            </Text>
-
-            <Image
-              style={styles.guideImage}
-              source={require('./images/guide4.png')}
-            />
-            <Text style={{ ...styles.swiper__subInfo, textAlign: 'center' }}>
-              측정되는 신체 치수는
-              <Text style={{ fontWeight: 'bold' }}> 비공개</Text>
-              입니다
-            </Text>
-            <View style={styles.footer}>
+            <View style={styles.swiper__imageArea}>
+              <Image
+                style={styles.guideImage}
+                resizeMode="contain"
+                source={require('./images/guide4.png')}
+              />
+            </View>
+            <View style={styles.swiper__descArea}>
+              <Text style={styles.swiper__headerInfo}>친절한 웨어비</Text>
+            </View>
+          </View>
+          <View style={styles.swiper__container}>
+            <View style={styles.swiper__imageArea}>
+              <Image
+                style={styles.guideImage}
+                resizeMode="contain"
+                source={require('./images/guide5.png')}
+              />
+            </View>
+            <View style={styles.swiper__descArea}>
+              <Text style={styles.swiper__headerInfo}>자동으로 치수 계산</Text>
               <FullWidthButton
-                onPress={this.navigateToCamera}
-                invert
-                content="촬영하기"
+                content="다음 단계"
               />
             </View>
           </View>

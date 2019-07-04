@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     paddingTop: TopBarHeight,
   },
   header: {
-    flex: 0.5,
+    flex: 0.2,
   },
   body: {
     flex: 1.5,
