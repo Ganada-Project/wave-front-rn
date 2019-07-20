@@ -11,14 +11,14 @@ import {
   keyboardVerticalOffset,
   gradientPreset,
   gradientSpeed,
-  AuthTopBarOption,
+  InvertOption,
 } from '../../constants';
 
 export class PasswordScreen extends Component {
   static options() {
     return {
       topBar: {
-        ...AuthTopBarOption,
+        ...InvertOption,
       },
     };
   }
@@ -31,17 +31,13 @@ export class PasswordScreen extends Component {
   }
 
   navigateToGender = () => {
-    const {
-      componentId, phone, name, nickname,
-    } = this.props;
+    const { componentId, phone } = this.props;
     const { password } = this.state;
     Navigation.push(componentId, {
       component: {
-        name: 'wave.gender',
+        name: 'wave.registerName',
         passProps: {
           phone,
-          name,
-          nickname,
           password,
         },
       },
@@ -67,6 +63,7 @@ export class PasswordScreen extends Component {
               비밀번호는 영문 숫자 혼합 8자 이상입니다.
             </Text>
             <RegisterForm
+              invert
               label="비밀번호"
               onChangeText={(text) => this.setState({ password: text })}
             />
@@ -86,8 +83,6 @@ export class PasswordScreen extends Component {
 
 PasswordScreen.propTypes = {
   componentId: PropTypes.string,
-  name: PropTypes.string,
-  nickname: PropTypes.string,
   phone: PropTypes.string,
 };
 

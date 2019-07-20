@@ -18,7 +18,6 @@ function* registerUserSaga(action) {
   const selectGlobal = (state) => state.get('global');
   const globalRedcuer = yield select(selectGlobal);
   const fcmToken = globalRedcuer.get('fcmToken');
-  console.log(fcmToken);
   const {
     password,
     weight,

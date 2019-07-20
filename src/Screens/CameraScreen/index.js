@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Text, View, StyleSheet, TouchableOpacity,
-} from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { RNCamera } from 'react-native-camera';
-import { gyroscope } from 'react-native-sensors';
+// import {
+//   gyroscope,
+//   setUpdateIntervalForType,
+//   SensorTypes,
+// } from 'react-native-sensors';
 import { Button } from 'react-native-elements';
 import { theme } from '../../constants';
 import { HeadLine, FootLine, TakeButtonWrapper } from './styles';
 
+function round(n) {
+  if (!n) {
+    return 0;
+  }
+
+  return Math.floor(n * 100) / 100;
+}
+
 class CameraScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
         title: {
@@ -24,7 +34,19 @@ class CameraScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { x: 0, y: 0, z: 0 };
+  }
+
+  componentDidMount() {
+    // setUpdateIntervalForType(SensorTypes.gyroscope, 1000);
+    // const subscription = gyroscope.subscribe(({ x, y, z }) => {
+    //   this.setState({ x, y, z });
+    // });
+    // this.setState({ subscription });
+  }
+
+  componentWillUnmount() {
+    // this.state.subscription.unsubscribe();
   }
 
   takePicture = async () => {
@@ -63,6 +85,8 @@ class CameraScreen extends Component {
   };
 
   render() {
+    const { x, y, z } = this.state;
+
     return (
       <View style={styles.container}>
         <RNCamera
@@ -81,6 +105,14 @@ class CameraScreen extends Component {
         <HeadLine />
         <FootLine />
         <TakeButtonWrapper>
+          <Text>
+            x:
+            {round(x)}
+            y:
+            {round(y)}
+            z:
+            {round(z)}
+          </Text>
           <Button title="촬영" onPress={this.takePicture} />
         </TakeButtonWrapper>
       </View>

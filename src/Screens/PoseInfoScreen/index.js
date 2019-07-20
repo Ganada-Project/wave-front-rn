@@ -160,6 +160,7 @@ class PoseInfoScreen extends Component {
               <Text style={styles.swiper__headerInfo}>자동으로 치수 계산</Text>
               <FullWidthButton
                 content="다음 단계"
+                onPress={this.navigateToCamera}
               />
             </View>
           </View>

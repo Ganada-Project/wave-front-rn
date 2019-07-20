@@ -23,7 +23,7 @@ export class Button extends Component {
     } else {
       Navigation.push(componentId, {
         component: {
-          name: 'wave.registerName',
+          name: 'wave.password',
           passProps: {
             phone,
           },

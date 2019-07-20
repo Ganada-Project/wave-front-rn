@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, Image } from 'react-native';
-import { Button } from 'react-native-elements';
 import { Navigation } from 'react-native-navigation';
 import AnimatedLinearGradient from 'react-native-animated-linear-gradient';
 import styles from './styles';
 import { FullWidthButton } from '../../Components';
 import { gradientPreset, gradientSpeed } from '../../constants';
 import WaveLogoWhite from '../../Assets/Logos/wave-logo-white.png';
-import SizeCardAddButton from './SizeCardAddButton';
 
 export class WelcomeScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
         visible: false,
@@ -28,16 +26,11 @@ export class WelcomeScreen extends Component {
     this.state = {};
   }
 
-  navigateToInfo1 = () => {
-    Navigation.showModal({
-      stack: {
-        children: [
-          {
-            component: {
-              name: 'wave.registerName',
-            },
-          },
-        ],
+  navigateToSignUp = () => {
+    const { componentId } = this.props;
+    Navigation.push(componentId, {
+      component: {
+        name: 'wave.phoneVerify',
       },
     });
   };
@@ -67,7 +60,19 @@ export class WelcomeScreen extends Component {
             </Text>
           </View>
           <View style={styles.footer}>
-            <SizeCardAddButton onPressAdd={this.navigateToInfo1} />
+            <FullWidthButton
+              transparent
+              content="로그인"
+              onPress={this.navigateToSignIn}
+            />
+            <FullWidthButton
+              invert
+              content="회원가입"
+              onPress={this.navigateToSignUp}
+            />
+            <FullWidthButton invert content="카카오로 회원가입" />
+
+            {/* <SizeCardAddButton onPressAdd={this.navigateToInfo1} /> */}
           </View>
         </View>
       </AnimatedLinearGradient>

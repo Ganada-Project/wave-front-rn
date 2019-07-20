@@ -20,6 +20,7 @@ class Form extends Component {
     const { errorText, userVerifyNumber } = this.props;
     return (
       <RegisterForm
+        invert
         label="인증 번호"
         keyboardType="numeric"
         value={userVerifyNumber}

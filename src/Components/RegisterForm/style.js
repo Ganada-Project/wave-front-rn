@@ -9,7 +9,16 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingLeft: 5,
     paddingBottom: 10,
-    color: 'black',
+    color: theme.textColor,
+  },
+  whiteInput: {
+    borderBottomWidth: 1,
+    fontSize: 24,
+    borderBottomColor: 'white',
+    paddingTop: 10,
+    paddingLeft: 5,
+    paddingBottom: 10,
+    color: 'white',
   },
 });
 

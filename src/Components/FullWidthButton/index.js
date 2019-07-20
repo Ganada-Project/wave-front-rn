@@ -8,7 +8,6 @@ import {
   Platform,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import AnimatedGradient from 'react-native-animated-linear-gradient';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './style';
 import { gradientPreset } from '../../constants';
@@ -22,7 +21,12 @@ export class FullWidthButton extends Component {
   render() {
     const Button = Platform.OS === 'ios' ? TouchableOpacity : TouchableWithoutFeedback;
     const {
-      content, invert, icon, onPress, disabled,
+      content,
+      invert,
+      icon,
+      onPress,
+      disabled,
+      transparent,
     } = this.props;
     if (disabled) {
       return (
@@ -37,7 +41,45 @@ export class FullWidthButton extends Component {
               name={icon}
             />
           ) : null}
-          <Text style={styles.invertText}>{content}</Text>
+          <Text style={styles.disabledInvertText}>{content}</Text>
+        </View>
+      );
+    }
+    if (invert) {
+      return (
+        <View style={styles.invertContainer}>
+          <Button
+            onPress={onPress}
+            style={{
+              width: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            {icon ? (
+              <Icon size={16} name={icon} style={styles.defaultIcon} />
+            ) : null}
+            <Text style={styles.invertText}>{content}</Text>
+          </Button>
+        </View>
+      );
+    }
+    if (transparent) {
+      return (
+        <View style={styles.transparentContainer}>
+          <Button
+            onPress={onPress}
+            style={{
+              width: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            {icon ? (
+              <Icon size={16} name={icon} style={styles.defaultIcon} />
+            ) : null}
+            <Text style={styles.defaultText}>{content}</Text>
+          </Button>
         </View>
       );
     }
@@ -57,15 +99,9 @@ export class FullWidthButton extends Component {
           }}
         >
           {icon ? (
-            <Icon
-              size={16}
-              name={icon}
-              style={invert ? styles.invertIcon : styles.defaultIcon}
-            />
+            <Icon size={16} name={icon} style={styles.defaultIcon} />
           ) : null}
-          <Text style={invert ? styles.invertText : styles.defaultText}>
-            {content}
-          </Text>
+          <Text style={styles.defaultText}>{content}</Text>
         </Button>
       </LinearGradient>
       // <Button >
@@ -86,6 +122,7 @@ FullWidthButton.propTypes = {
   invert: PropTypes.bool,
   onPress: PropTypes.func,
   disabled: PropTypes.bool,
+  transparent: PropTypes.bool,
 };
 
 export default FullWidthButton;

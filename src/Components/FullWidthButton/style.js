@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   invertContainer: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'white',
     borderWidth: 1,
     borderColor: theme.whiteColor,
     width: '100%',
@@ -70,9 +70,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   invertText: {
-    color: theme.pointColor,
+    color: theme.subColor,
     fontSize: 16,
     fontWeight: '700',
+  },
+  disabledInvertText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  transparentContainer: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: theme.whiteColor,
+    width: '100%',
+    borderRadius: 30,
+    marginBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    height: 55,
   },
 });
 

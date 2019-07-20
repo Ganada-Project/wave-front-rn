@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-  KeyboardAvoidingView, Platform, Text, View,
-} from 'react-native';
+import { KeyboardAvoidingView, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 // redux
@@ -10,8 +8,6 @@ import { connect } from 'react-redux';
 
 // reselect -> reducer에 있는 프로퍼티들 선택 툴
 import { createStructuredSelector } from 'reselect';
-
-import { Icon } from 'react-native-elements';
 
 // injectSaga
 import { Navigation } from 'react-native-navigation';
@@ -22,21 +18,15 @@ import injectReducer from '../../utils/injectReducer';
 import styles from './styles';
 
 // global components
-import {
-  RegisterForm,
-  FullWidthButton,
-  GenderBox,
-  ContainerButton,
-} from '../../Components';
+import { RegisterForm, FullWidthButton, GenderBox } from '../../Components';
 import {
   keyboardVerticalOffset,
   keyboardBehavior,
   AuthTopBarOption,
-  theme,
 } from '../../constants';
 
 // local actions
-import { checkNicknameAction } from './actions';
+import { checkNicknameAction, signUpRequestAction } from './actions';
 
 import saga from './saga';
 import reducer from './reducer';
@@ -46,14 +36,14 @@ const genderData = [
   {
     id: 2,
     name: '여성',
-    icon: require('../../Assets/Icons/Register/woman.png'),
-    iconWhite: require('../../Assets/Icons/Register/woman-white.png'),
+    icon: require('../../Assets/Icons/Register/woman.png'), //eslint-disable-line
+    iconWhite: require('../../Assets/Icons/Register/woman-white.png'), //eslint-disable-line
   },
   {
     id: 1,
     name: '남성',
-    icon: require('../../Assets/Icons/Register/man.png'),
-    iconWhite: require('../../Assets/Icons/Register/man-white.png'),
+    icon: require('../../Assets/Icons/Register/man.png'), //eslint-disable-line
+    iconWhite: require('../../Assets/Icons/Register/man-white.png'), //eslint-disable-line
   },
 ];
 
@@ -88,15 +78,14 @@ export class Info1Screen extends Component {
     };
   }
 
-  navigateToInfo2 = () => {
+  signUp = () => {
     const { name, age, selectedGenderId } = this.state;
-    const { componentId } = this.props;
-    Navigation.push(componentId, {
-      component: {
-        name: 'wave.bodySize',
-        passProps: { name, age, gender: selectedGenderId },
-      },
-    });
+    const { componentId, phone, password } = this.props;
+    console.log(`폰: ${phone}`);
+    console.log(`패스워드 : ${password}`);
+    console.log(`이름: ${name}`);
+    console.log(`나이 :${age}`);
+    console.log(`성별 : + ${selectedGenderId}`);
   };
 
   checkNickname = (text) => {
@@ -132,18 +121,18 @@ export class Info1Screen extends Component {
         keyboardVerticalOffset={keyboardVerticalOffset}
       >
         <View style={styles.header}>
-          <ContainerButton onPress={this.onPressClose}>
+          {/* <ContainerButton onPress={this.onPressClose}>
             <Icon
               name="close"
               size={30}
               type="simple-line-icon"
               color={theme.textColor}
             />
-          </ContainerButton>
+          </ContainerButton> */}
         </View>
         <View style={styles.body}>
           <RegisterForm
-            label="사이즈 카드 이름"
+            label="이름"
             onChangeText={(text) => this.setState({ name: text })}
             autoFocus={false}
           />
@@ -173,7 +162,7 @@ export class Info1Screen extends Component {
             disabled={
               !!(age === '' || name === '') || overlap || selectedGenderId === 0
             }
-            onPress={this.navigateToInfo2}
+            onPress={this.signUp}
             content="다음 단계"
           />
         </View>
@@ -188,6 +177,7 @@ Info1Screen.propTypes = {
   checking: PropTypes.bool,
   checkNickname: PropTypes.func,
   overlap: PropTypes.bool,
+  password: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -198,6 +188,9 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
   checkNickname: ({ nickname }) => {
     dispatch(checkNicknameAction({ nickname }));
+  },
+  signUp: ({ signUpObj }) => {
+    dispatch(signUpRequestAction({ signUpObj }));
   },
 });
 

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Text, View, TouchableOpacity, PermissionsAndroid,
-} from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
 class HomeScreen extends Component {
@@ -11,26 +9,9 @@ class HomeScreen extends Component {
     Navigation.events().bindComponent(this);
   }
 
-  componentDidMount() {
-    Navigation.events().registerBottomTabSelectedListener(
-      ({ selectedTabIndex, unselectedTabIndex }) => {
-        // console.log(selectedTabIndex);
-      },
-    );
-  }
+  componentDidMount() {}
 
-  componentWillUnmount() {
-    const bottomTabEventListener = Navigation.events().registerBottomTabSelectedListener();
-    bottomTabEventListener.remove();
-  }
-
-  navigationButtonPressed({ buttonId }) {
-    console.log(buttonId);
-  }
-
-  modalTabSelected() {
-    console.log('sdf');
-  }
+  componentWillUnmount() {}
 
   render() {
     return (

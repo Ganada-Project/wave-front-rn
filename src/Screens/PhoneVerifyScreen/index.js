@@ -20,7 +20,7 @@ import {
   keyboardVerticalOffset,
   gradientPreset,
   gradientSpeed,
-  AuthTopBarOption,
+  InvertOption,
 } from '../../constants';
 import saga from './saga';
 import reducer from './reducer';
@@ -38,7 +38,7 @@ export class PhoneVerifyScreen extends Component {
   static options() {
     return {
       topBar: {
-        ...AuthTopBarOption,
+        ...InvertOption,
       },
     };
   }
@@ -70,8 +70,8 @@ export class PhoneVerifyScreen extends Component {
   componentDidMount() {}
 
   sendPhoneNumber = () => {
-    const { phone } = this.state;
-    const { verifyPhoneNumber } = this.props;
+    // const { phone } = this.state;
+    // const { verifyPhoneNumber } = this.props;
     // verifyPhoneNumber({ number: phone });
     this.setState({ isSent: true });
   };
@@ -89,9 +89,7 @@ export class PhoneVerifyScreen extends Component {
 
   render() {
     const { checking, componentId } = this.props;
-    const {
-      isSent, number, errorText, phone,
-    } = this.state;
+    const { isSent, errorText, phone } = this.state;
     if (!isSent) {
       return (
         <AnimatedLinearGradient
@@ -115,6 +113,7 @@ export class PhoneVerifyScreen extends Component {
               </Text>
               <RegisterForm
                 phone
+                invert
                 label="휴대폰 번호"
                 phoneValue={phone}
                 loading={checking}
@@ -130,7 +129,7 @@ export class PhoneVerifyScreen extends Component {
               <FullWidthButton
                 onPress={this.sendPhoneNumber}
                 invert
-                disabled={number === ''}
+                disabled={phone === ''}
                 content="발송하기"
               />
             </View>
@@ -195,7 +194,7 @@ export class PhoneVerifyScreen extends Component {
 
 PhoneVerifyScreen.propTypes = {
   componentId: PropTypes.string,
-  verifyPhoneNumber: PropTypes.func,
+  // verifyPhoneNumber: PropTypes.func,
   checkPhoneNumber: PropTypes.func,
   overlap: PropTypes.bool,
   checking: PropTypes.bool,

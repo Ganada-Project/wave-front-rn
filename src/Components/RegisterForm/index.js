@@ -15,7 +15,6 @@ export class RegisterForm extends Component {
   render() {
     const {
       label,
-      placeholder,
       onChangeText,
       keyboardType,
       onChangePhoneText,
@@ -26,6 +25,7 @@ export class RegisterForm extends Component {
       phone,
       autoFocus,
       defaultRef,
+      invert,
     } = this.props;
     return (
       <View
@@ -39,7 +39,7 @@ export class RegisterForm extends Component {
         <View style={{ flexDirection: 'row' }}>
           <Text
             style={{
-              color: theme.textColor,
+              color: invert ? 'white' : theme.textColor,
               fontSize: 16,
               fontWeight: '700',
             }}
@@ -54,13 +54,13 @@ export class RegisterForm extends Component {
         </View>
         {phone ? (
           <TextInputMask
-            ref={(ref) => (this.myDateText = ref)}
+            ref={(ref) => (this.myDateText = ref)} //eslint-disable-line
             type="custom"
             keyboardType="numeric"
             value={phoneValue}
             autoFocus={autoFocus}
             onChangeText={onChangePhoneText}
-            style={styles.input}
+            style={invert ? styles.whiteInput : styles.input}
             options={{
               mask: '999-9999-9999',
             }}
@@ -74,7 +74,7 @@ export class RegisterForm extends Component {
             autoCapitalize="none"
             autoCorrect={false}
             keyboardType={keyboardType}
-            style={styles.input}
+            style={invert ? styles.whiteInput : styles.input}
           />
         )}
 
@@ -88,7 +88,7 @@ export class RegisterForm extends Component {
 
 RegisterForm.propTypes = {
   label: PropTypes.string,
-  placeholder: PropTypes.string,
+  // placeholder: PropTypes.string,
   onChangeText: PropTypes.func,
   onChangePhoneText: PropTypes.func,
   errorText: PropTypes.string,
@@ -98,7 +98,8 @@ RegisterForm.propTypes = {
   phone: PropTypes.bool,
   keyboardType: PropTypes.string,
   autoFocus: PropTypes.bool,
-  ref: PropTypes.object,
+  defaultRef: PropTypes.object,
+  invert: PropTypes.bool,
 };
 
 RegisterForm.defaultProps = {
