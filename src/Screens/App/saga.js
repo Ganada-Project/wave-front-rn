@@ -16,6 +16,30 @@ import {
 
 import { startTabScreens } from '../../index';
 
+const resetToWelcome = () => {
+  Navigation.setRoot({
+    root: {
+      stack: {
+        children: [
+          {
+            component: {
+              name: 'wave.welcome',
+              statusBar: {
+                style: 'light',
+              },
+              options: {
+                topBar: {
+                  visible: false,
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  });
+};
+
 const getUserToken = async () => {
   let idToken;
   try {
@@ -36,37 +60,32 @@ export function* fetchUserFlow({ token }) {
   if (!idToken || idToken === null || idToken === undefined) {
     user = { result: null };
     yield put({ type: FETCH_USER_REQUESTING_FAIL });
-    yield Navigation.setRoot({
-      root: {
-        stack: {
-          children: [
-            {
-              component: {
-                name: 'wave.welcome',
-                statusBar: {
-                  style: 'light',
-                },
-                options: {
-                  topBar: {
-                    visible: false,
-                  },
-                },
-              },
-            },
-          ],
-        },
-      },
-    });
+    yield resetToWelcome();
   } else {
     try {
-      user = yield call(getRequest, { url });
-      yield put({
-        type: FETCH_USER_REQUESTING_SUCCESS,
-        payload: { user, idToken },
-      });
-      yield startTabScreens();
+      // user = yield call(getRequest, { url });
+      // yield put({
+      //   type: FETCH_USER_REQUESTING_SUCCESS,
+      //   payload: { user, idToken },
+      // });
+      user = { result: null };
+      // yield Navigation.setRoot({
+      //   root: {
+      //     stack: {
+      //       children: [
+      //         {
+      //           component: {
+      //             name: 'wave.home',
+      //           },
+      //         },
+      //       ],
+      //     },
+      //   },
+      // });
+      yield resetToWelcome();
     } catch (error) {
       user = { result: null };
+      yield resetToWelcome();
       yield put({ type: FETCH_USER_REQUESTING_FAIL, error });
     }
   }

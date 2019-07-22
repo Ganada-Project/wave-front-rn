@@ -34,7 +34,7 @@ import { makeSelectChecking, makeSelectOverlap } from './selectors';
 
 const genderData = [
   {
-    id: 2,
+    id: 0,
     name: '여성',
     icon: require('../../Assets/Icons/Register/woman.png'), //eslint-disable-line
     iconWhite: require('../../Assets/Icons/Register/woman-white.png'), //eslint-disable-line
@@ -73,19 +73,26 @@ export class Info1Screen extends Component {
       name: '',
       age: '',
       overlap,
-      selectedGenderId: 0,
+      selectedGenderId: null,
       errorText: null,
     };
   }
 
   signUp = () => {
     const { name, age, selectedGenderId } = this.state;
-    const { componentId, phone, password } = this.props;
-    console.log(`폰: ${phone}`);
-    console.log(`패스워드 : ${password}`);
-    console.log(`이름: ${name}`);
-    console.log(`나이 :${age}`);
-    console.log(`성별 : + ${selectedGenderId}`);
+    const {
+      componentId, phone, password, signUp,
+    } = this.props;
+
+    const signUpObj = {
+      phone,
+      password,
+      name,
+      age,
+      gender: selectedGenderId,
+      componentId,
+    };
+    signUp({ signUpObj });
   };
 
   checkNickname = (text) => {
@@ -107,12 +114,7 @@ export class Info1Screen extends Component {
   render() {
     const { checking } = this.props;
     const {
-      nickname,
-      name,
-      errorText,
-      overlap,
-      age,
-      selectedGenderId,
+      name, errorText, overlap, age, selectedGenderId,
     } = this.state;
     return (
       <KeyboardAvoidingView
@@ -160,7 +162,9 @@ export class Info1Screen extends Component {
         <View style={styles.footer}>
           <FullWidthButton
             disabled={
-              !!(age === '' || name === '') || overlap || selectedGenderId === 0
+              !!(age === '' || name === '')
+              || overlap
+              || selectedGenderId === null
             }
             onPress={this.signUp}
             content="다음 단계"
@@ -178,6 +182,7 @@ Info1Screen.propTypes = {
   checkNickname: PropTypes.func,
   overlap: PropTypes.bool,
   password: PropTypes.string,
+  signUp: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

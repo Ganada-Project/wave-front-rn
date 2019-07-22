@@ -89,7 +89,7 @@ export class PhoneVerifyScreen extends Component {
 
   render() {
     const { checking, componentId } = this.props;
-    const { isSent, errorText, phone } = this.state;
+    const { isSent, errorText, phone, overlap } = this.state;
     if (!isSent) {
       return (
         <AnimatedLinearGradient
@@ -129,7 +129,7 @@ export class PhoneVerifyScreen extends Component {
               <FullWidthButton
                 onPress={this.sendPhoneNumber}
                 invert
-                disabled={phone === ''}
+                disabled={phone === '' || overlap === true}
                 content="발송하기"
               />
             </View>
