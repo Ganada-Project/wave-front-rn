@@ -6,8 +6,7 @@ import { ContainerButton } from '../../../Components';
 import { Wrapper, TitleText, DescText } from './styles';
 import styles from '../styles';
 
-function SizeCardAddButton({ onPressMe }) {
-  const { onPressAdd } = props;
+function SizeCardAddButton({ onPressAdd, onPressMe }) {
   return (
     <ContainerButton onPress={onPressAdd}>
       <Wrapper>
