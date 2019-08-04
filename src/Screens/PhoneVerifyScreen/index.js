@@ -89,7 +89,9 @@ export class PhoneVerifyScreen extends Component {
 
   render() {
     const { checking, componentId } = this.props;
-    const { isSent, errorText, phone, overlap } = this.state;
+    const {
+      isSent, errorText, phone, overlap,
+    } = this.state;
     if (!isSent) {
       return (
         <AnimatedLinearGradient

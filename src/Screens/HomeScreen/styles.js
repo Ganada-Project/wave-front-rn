@@ -1,14 +1,21 @@
 import { StyleSheet } from 'react-native';
+import { theme } from '../../constants';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: theme.pointColor,
-    padding: 25,
+    padding: 35,
   },
   header: {
-    flex: 0.6,
+    flex: 0.5,
     justifyContent: 'center',
+  },
+  header__menu__wrapper: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginBottom: 20,
   },
   header__title: {
     fontSize: 24,
@@ -22,8 +29,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   logo: {
-    width: 70,
-    height: 60,
+    width: 55,
+    height: 40,
   },
   header__subtitle: {
     fontSize: 16,
@@ -38,6 +45,32 @@ const styles = StyleSheet.create({
   footer__register: {
     color: '#ffffff',
     fontSize: 14,
+  },
+  confirmModal: {
+    flex: 0.4,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 25,
+  },
+  modalTitle: {
+    color: 'black',
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  modalText: {
+    marginBottom: 5,
+  },
+  hairline: {
+    borderColor: theme.grayColor,
+    borderBottomWidth: 0.5,
+    width: '100%',
+    height: 0.5,
+    marginVertical: 25,
+  },
+  actionButtonIcon: {
+    fontSize: 20,
+    height: 22,
+    color: 'white',
   },
 });
 

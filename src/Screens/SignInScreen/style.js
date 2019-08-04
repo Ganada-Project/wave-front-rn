@@ -9,11 +9,11 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   header: {
-    flex: 0.2,
+    flex: 0.1,
   },
   body: {
     flex: 1,
-    paddingBottom: 40,
+    paddingBottom: 10,
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
   },

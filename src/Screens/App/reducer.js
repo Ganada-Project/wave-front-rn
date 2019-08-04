@@ -26,13 +26,7 @@ const initialState = fromJS({
   error: false,
   idToken: '',
   fcmToken: null,
-  userData: {
-    auth: {},
-    bio: {
-      name: '',
-    },
-    body: {},
-  },
+  userData: null,
 });
 
 function appReducer(state = initialState, action) {
@@ -41,7 +35,7 @@ function appReducer(state = initialState, action) {
       return state.set('loading', true);
     case FETCH_USER_REQUESTING_SUCCESS:
       return state
-        .set('userData', fromJS({ ...action.payload.user.user }))
+        .set('userData', fromJS({ ...action.payload.user }))
         .set('idToken', action.payload.idToken)
         .set('loading', false);
     case GET_FCM_TOKEN_SUCCESS:

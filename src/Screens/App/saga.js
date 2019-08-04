@@ -63,26 +63,24 @@ export function* fetchUserFlow({ token }) {
     yield resetToWelcome();
   } else {
     try {
-      // user = yield call(getRequest, { url });
-      // yield put({
-      //   type: FETCH_USER_REQUESTING_SUCCESS,
-      //   payload: { user, idToken },
-      // });
-      user = { result: null };
-      // yield Navigation.setRoot({
-      //   root: {
-      //     stack: {
-      //       children: [
-      //         {
-      //           component: {
-      //             name: 'wave.home',
-      //           },
-      //         },
-      //       ],
-      //     },
-      //   },
-      // });
-      yield resetToWelcome();
+      user = yield call(getRequest, { url });
+      yield put({
+        type: FETCH_USER_REQUESTING_SUCCESS,
+        payload: { user, idToken },
+      });
+      yield Navigation.setRoot({
+        root: {
+          stack: {
+            children: [
+              {
+                component: {
+                  name: 'wave.home',
+                },
+              },
+            ],
+          },
+        },
+      });
     } catch (error) {
       user = { result: null };
       yield resetToWelcome();

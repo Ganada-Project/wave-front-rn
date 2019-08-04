@@ -27,13 +27,15 @@ export class FullWidthButton extends Component {
       onPress,
       disabled,
       transparent,
+      height,
     } = this.props;
     if (disabled) {
       return (
         <View
-          style={
-            invert ? styles.disabledInvertContainer : styles.disabledContainer
-          }
+          style={[
+            invert ? styles.disabledInvertContainer : styles.disabledContainer,
+            { height },
+          ]}
         >
           {icon ? (
             <Icon
@@ -41,13 +43,13 @@ export class FullWidthButton extends Component {
               name={icon}
             />
           ) : null}
-          <Text style={styles.disabledInvertText}>{content}</Text>
+          <Text style={styles.invertText}>{content}</Text>
         </View>
       );
     }
     if (invert) {
       return (
-        <View style={styles.invertContainer}>
+        <View style={[styles.invertContainer, { height }]}>
           <Button
             onPress={onPress}
             style={{
@@ -66,7 +68,7 @@ export class FullWidthButton extends Component {
     }
     if (transparent) {
       return (
-        <View style={styles.transparentContainer}>
+        <View style={[styles.transparentContainer, { height }]}>
           <Button
             onPress={onPress}
             style={{
@@ -85,7 +87,7 @@ export class FullWidthButton extends Component {
     }
     return (
       <LinearGradient
-        style={styles.defaultContainer}
+        style={[styles.defaultContainer, { height }]}
         colors={gradientPreset}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
@@ -115,8 +117,11 @@ export class FullWidthButton extends Component {
     );
   }
 }
-
+FullWidthButton.defaultProps = {
+  height: 55,
+};
 FullWidthButton.propTypes = {
+  height: PropTypes.number,
   content: PropTypes.string,
   icon: PropTypes.string,
   invert: PropTypes.bool,

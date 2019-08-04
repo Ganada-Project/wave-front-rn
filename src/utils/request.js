@@ -87,6 +87,8 @@ export async function postRequest({ url, payload }) {
     data: { ...payload },
   };
 
+  console.log(options);
+
   return axios(options)
     .then(checkStatus)
     .then(parseJSON);

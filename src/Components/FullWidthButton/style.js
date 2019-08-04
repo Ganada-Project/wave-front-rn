@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   disabledInvertText: {
-    color: 'white',
+    color: theme.pointColor,
     fontSize: 16,
     fontWeight: '700',
   },

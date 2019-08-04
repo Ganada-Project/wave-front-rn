@@ -167,7 +167,7 @@ export class Info1Screen extends Component {
               || selectedGenderId === null
             }
             onPress={this.signUp}
-            content="다음 단계"
+            content="가입하기"
           />
         </View>
       </KeyboardAvoidingView>

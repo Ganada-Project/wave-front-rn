@@ -78,7 +78,9 @@ class SignInScreen extends Component {
         <View style={styles.body}>
           <RegisterForm
             label="휴대폰번호"
-            onChangeText={(text) => this.setState({ phone: text })}
+            phone
+            phoneValue={phone}
+            onChangePhoneText={(text) => this.setState({ phone: text })}
           />
           <RegisterForm
             label="비밀번호"
@@ -91,7 +93,6 @@ class SignInScreen extends Component {
           <FullWidthButton
             disabled={!!(phone === '' || password === '')}
             onPress={this.onClickSignInWithphone}
-            invert
             content="로그인"
           />
         </View>

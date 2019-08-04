@@ -2,6 +2,7 @@
  * Gets the repositories of the user from Github
  */
 import AsyncStorage from '@react-native-community/async-storage';
+import { Navigation } from 'react-native-navigation';
 import {
   call, put, takeLatest, all,
 } from 'redux-saga/effects';
@@ -32,7 +33,7 @@ function* loginFlow(action) {
   const url = `${API_URL}/auth/login`;
   const { phone, password } = action.payload;
   const payload = {
-    username: phone,
+    phone,
     password,
   };
   let result;
@@ -42,7 +43,19 @@ function* loginFlow(action) {
     yield put({ type: LOGIN_SUCCESS });
     yield put({ type: FETCH_USER_REQUESTING });
     yield fetchUserFlow({ token: result.token });
-    yield startTabScreens();
+    yield Navigation.setRoot({
+      root: {
+        stack: {
+          children: [
+            {
+              component: {
+                name: 'wave.home',
+              },
+            },
+          ],
+        },
+      },
+    });
   } catch (error) {
     console.log(error);
     // error? send it to redux

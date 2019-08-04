@@ -43,9 +43,8 @@ function* registerUserSaga(action) {
   try {
     const result = yield call(postRequest, { url, payload });
     yield put({ type: SIGN_UP_SUCCESS, payload: { result } });
-    console.log(result);
     yield AsyncStorage.setItem('wave.idToken', result.token);
-    // yield fetchUserFlow({ token: result.token });
+    yield fetchUserFlow({ token: result.token });
     yield Navigation.push(signUpObj.componentId, {
       component: {
         name: 'wave.home',
