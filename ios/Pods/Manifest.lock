@@ -72,7 +72,7 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/Core
-  - Firebase/Messaging (~> 5.20.1)
+  - Firebase/Messaging (~> 5.20.2)
   - React (from `../node_modules/react-native`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -108,11 +108,11 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
   GoogleUtilities: 04fce34bcd5620c1ee76fb79172105c74a4df335
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
-  React: 1d605e098d69bdf08960787f3446f0a9dc2e2ccf
-  RNCAsyncStorage: 6ae5aba8a41bfe0a9f21885ec91faf23ca3fe7ee
-  yoga: 128daf064cacaede0c3bb27424b6b4c71052e6cd
+  Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
+  React: 76e6aa2b87d05eb6cccb6926d72685c9a07df152
+  RNCAsyncStorage: b82dc6e5b39a625d70e3b3492bff75c0de94ba71
+  yoga: 92b2102c3d373d1a790db4ab761d2b0ffc634f64
 
-PODFILE CHECKSUM: 027a87e7743c277d4ca2d6316a46340c3d32b540
+PODFILE CHECKSUM: 3294a30a7778f5e2e01b054b110e48da6a19461f
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1

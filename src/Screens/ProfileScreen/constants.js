@@ -14,6 +14,6 @@ import { BaseHeightOffset } from '../../constants';
 
 const window = Dimensions.get('window');
 
-export const IMAGE_WIDTH = 60;
-export const IMAGE_HEIGHT = 60;
-export const IMAGE_RADIUS = 30;
+export const IMAGE_WIDTH = 70;
+export const IMAGE_HEIGHT = 70;
+export const IMAGE_RADIUS = 35;

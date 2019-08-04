@@ -9,9 +9,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // react-native
-import { View, Text, Container } from 'react-native';
+import {
+  View, Text, Container, ScrollView,
+} from 'react-native';
 
-import { Button } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 
 // react-native-navigation
 import { Navigation } from 'react-native-navigation';
@@ -38,7 +40,7 @@ import { fetchUserAction } from '../App/actions';
 import saga from './saga';
 
 // local styles
-import styles, { ImageContainer } from './style';
+import styles, { ImageContainer, ListButton } from './style';
 
 class ProfileScreen extends Component {
   constructor(props) {
@@ -76,7 +78,7 @@ class ProfileScreen extends Component {
   render() {
     const { userData } = this.props;
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.header_profile}>
           <View style={styles.header_text_container}>
             <Text style={styles.header_text}>
@@ -100,39 +102,119 @@ class ProfileScreen extends Component {
             />
           </View>
         </View>
-        <View>
-          <Text>내 정보 수정</Text>
+        <View style={styles.button_container}>
+          <ListButton style={styles.buttons}>
+            <Text style={styles.button_text}>내 정보 수정</Text>
+            <Icon
+              name="user"
+              type="simple-line-icon"
+              size={20}
+              style={styles.button_icon}
+            />
+          </ListButton>
         </View>
-        <View>
-          <Text>내 신체치수</Text>
-          <Text>마지막 측정 : 2개월 전</Text>
+        <View style={styles.button_container}>
+          <ListButton style={styles.buttons}>
+            <Text style={styles.button_text}>내 신체치수</Text>
+            <Text>마지막 측정 : 2개월 전</Text>
+            <Icon
+              name="tape-measure"
+              type="material-community"
+              size={20}
+              style={styles.button_icon}
+            />
+          </ListButton>
         </View>
-        <View>
-          <Text>옷걸이 크레딧 & 쿠폰</Text>
-          <Text>보유중인 옷걸이 : 23</Text>
+        <View style={styles.button_container}>
+          <ListButton style={styles.buttons}>
+            <View style={styles.button_text}>
+              <Text>옷걸이 크레딧 & 쿠폰</Text>
+              <Text style={styles.button_textsub}>
+                보유중인 옷걸이 :
+                {userData.getIn(['shopping', 'hanger'])}
+              </Text>
+            </View>
+            <Icon
+              name="tape-measure"
+              type="material-community"
+              size={20}
+              style={styles.button_icon}
+            />
+          </ListButton>
         </View>
-        <View>
-          <Text>리뷰</Text>
+        <View style={styles.button_container}>
+          <ListButton style={styles.buttons}>
+            <Text style={styles.button_text}>리뷰</Text>
+            <Icon
+              name="tape-measure"
+              type="material-community"
+              size={20}
+              style={styles.button_icon}
+            />
+          </ListButton>
         </View>
-        <View>
-          <Text>알림</Text>
+        <View style={styles.button_container}>
+        <ListButton style={styles.buttons}>
+            <Text style={styles.button_text}>알림</Text>
+            <Icon
+              name="tape-measure"
+              type="material-community"
+              size={20}
+              style={styles.button_icon}
+            />
+          </ListButton>
         </View>
-        <View>
-          <Text>도움말</Text>
+        <View style={styles.button_container}>
+        <ListButton style={styles.buttons}>
+            <Text style={styles.button_text}>도움말</Text>
+            <Icon
+              name="tape-measure"
+              type="material-community"
+              size={20}
+              style={styles.button_icon}
+            />
+          </ListButton>
         </View>
-        <View>
-          <Text>친구 초대하기</Text>
+        <View style={styles.button_container}>
+        <ListButton style={styles.buttons}>
+            <Text style={styles.button_text}>친구 초대하기</Text>
+            <Icon
+              name="tape-measure"
+              type="material-community"
+              size={20}
+              style={styles.button_icon}
+            />
+          </ListButton>
         </View>
-        <View>
-          <Text>설정</Text>
+        <View style={styles.button_container}>
+        <ListButton style={styles.buttons}>
+            <Text style={styles.button_text}>설정</Text>
+            <Icon
+              name="tape-measure"
+              type="material-community"
+              size={20}
+              style={styles.button_icon}
+            />
+          </ListButton>
         </View>
-        <View>
-          <Text>라이센스 및 서비스 정보</Text>
+        <View style={styles.button_container}>
+        <ListButton style={styles.buttons}>
+            <Text style={styles.button_text}>라이센스 및 서비스 정보</Text>
+            <Icon
+              name="tape-measure"
+              type="material-community"
+              size={20}
+              style={styles.button_icon}
+            />
+          </ListButton>
         </View>
         <View style={styles.container}>
           <Button onPress={this.onPressSignOut} title="로그아웃" />
         </View>
-      </View>
+      </ScrollView>
+      // <View>
+
+    // </View>
     );
   }
 }
