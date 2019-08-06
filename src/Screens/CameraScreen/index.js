@@ -51,15 +51,7 @@ class CameraScreen extends Component {
 
   takePicture = async () => {
     const {
-      componentId,
-      name,
-      nickname,
-      phone,
-      gender,
-      password,
-      age,
-      height,
-      weight,
+      componentId, height, weight, isMe,
     } = this.props;
     if (this.camera) {
       const options = { quality: 0.1, base64: true };
@@ -69,15 +61,10 @@ class CameraScreen extends Component {
         component: {
           name: 'wave.heightSlide',
           passProps: {
-            phone,
-            gender,
-            age,
-            nickname,
-            name,
-            password,
             base64,
             height,
             weight,
+            isMe,
           },
         },
       });
@@ -142,6 +129,7 @@ CameraScreen.propTypes = {
   age: PropTypes.string,
   height: PropTypes.string,
   weight: PropTypes.string,
+  isMe: PropTypes.bool,
 };
 
 export default CameraScreen;

@@ -3,17 +3,14 @@
  *
  */
 
-import { POST_REGISTER_REQUESTING } from './constants';
+import { POST_SIZE_CARD_REQUESTING } from './constants';
 
-export function registerUserAction({
-  password,
+export function postSizeCardAction({
   weight,
   height,
-  phone,
   gender,
-  name,
+  sizeCardName,
   age,
-  nickname,
   imageBase,
   headOffset,
   footOffset,
@@ -37,16 +34,13 @@ export function registerUserAction({
   rightAnkleOffset,
 }) {
   return {
-    type: POST_REGISTER_REQUESTING,
+    type: POST_SIZE_CARD_REQUESTING,
     payload: {
-      password,
       weight,
       height,
       gender,
-      name,
-      phone,
+      sizeCardName,
       age,
-      nickname,
       imageBase,
       headOffset,
       footOffset,

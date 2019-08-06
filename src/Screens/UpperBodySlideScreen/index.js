@@ -540,12 +540,6 @@ export class UpperBodySlideScreen extends Component {
     if (buttonId === 'next') {
       const {
         componentId,
-        name,
-        nickname,
-        phone,
-        gender,
-        age,
-        password,
         base64,
         height,
         weight,
@@ -559,6 +553,7 @@ export class UpperBodySlideScreen extends Component {
         rightShulderOffset,
         rightElbowOffset,
         rightHandOffset,
+        isMe,
       } = this.props;
       const {
         leftChestOffset,
@@ -573,12 +568,7 @@ export class UpperBodySlideScreen extends Component {
         component: {
           name: 'wave.lowerBodySlide',
           passProps: {
-            phone,
-            gender,
-            nickname,
-            name,
-            age,
-            password,
+            isMe,
             base64,
             height,
             weight,
@@ -768,12 +758,6 @@ export class UpperBodySlideScreen extends Component {
 UpperBodySlideScreen.propTypes = {
   base64: PropTypes.string,
   componentId: PropTypes.string,
-  password: PropTypes.string,
-  phone: PropTypes.string,
-  age: PropTypes.string,
-  gender: PropTypes.number,
-  name: PropTypes.string,
-  nickname: PropTypes.string,
   height: PropTypes.string,
   weight: PropTypes.string,
   headOffset: PropTypes.object,

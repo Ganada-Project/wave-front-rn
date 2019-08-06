@@ -36,12 +36,29 @@ export class HomeScreen extends Component {
     this.setState({ modalOpen: true });
   };
 
-  navigateToPoseInfo = () => {
+  navigateToPoseInfoMe = () => {
     const { componentId } = this.props;
     this.setState({ modalOpen: false }, () => {
       Navigation.push(componentId, {
         component: {
           name: 'wave.poseInfo',
+          passProps: {
+            isMe: true,
+          },
+        },
+      });
+    });
+  };
+
+  navigateToPoseInfoOther = () => {
+    const { componentId } = this.props;
+    this.setState({ modalOpen: false }, () => {
+      Navigation.push(componentId, {
+        component: {
+          name: 'wave.poseInfo',
+          passProps: {
+            isMe: false,
+          },
         },
       });
     });
@@ -74,7 +91,7 @@ export class HomeScreen extends Component {
               </Text>
               <Text style={styles.modalText}>수월하게 진행됩니다</Text>
               <FullWidthButton
-                onPress={this.navigateToPoseInfo}
+                onPress={this.navigateToPoseInfoMe}
                 content="네"
                 height={40}
               />
@@ -99,7 +116,8 @@ export class HomeScreen extends Component {
           <View style={styles.footer}>
             <SizeCardAddButton
               onPressAdd={this.openModal}
-              onPressMe={this.navigateToPoseInfo}
+              onPressMe={this.navigateToPoseInfoMe}
+              onPressOther={this.navigateToPoseInfoOther}
             />
           </View>
         </View>

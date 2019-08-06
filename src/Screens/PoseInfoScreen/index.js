@@ -29,30 +29,13 @@ class PoseInfoScreen extends Component {
     Navigation.events().bindComponent(this);
   }
 
-  navigateToCamera = () => {
-    const {
-      componentId,
-      name,
-      nickname,
-      phone,
-      gender,
-      password,
-      height,
-      weight,
-      age,
-    } = this.props;
+  navigateToBodySize = () => {
+    const { componentId, isMe } = this.props;
     Navigation.push(componentId, {
       component: {
-        name: 'wave.camera',
+        name: 'wave.bodySize',
         passProps: {
-          phone,
-          gender,
-          nickname,
-          age,
-          name,
-          password,
-          height,
-          weight,
+          isMe,
         },
       },
     });
@@ -60,26 +43,10 @@ class PoseInfoScreen extends Component {
 
   navigationButtonPressed({ buttonId }) {
     if (buttonId === 'poseInfoSkipButton') {
-      const {
-        componentId,
-        name,
-        nickname,
-        phone,
-        age,
-        gender,
-        password,
-      } = this.props;
+      const { componentId } = this.props;
       Navigation.push(componentId, {
         component: {
           name: 'wave.bodySize',
-          passProps: {
-            phone,
-            gender,
-            age,
-            nickname,
-            name,
-            password,
-          },
         },
       });
     }
@@ -160,7 +127,7 @@ class PoseInfoScreen extends Component {
               <Text style={styles.swiper__headerInfo}>자동으로 치수 계산</Text>
               <FullWidthButton
                 content="다음 단계"
-                onPress={this.navigateToCamera}
+                onPress={this.navigateToBodySize}
               />
             </View>
           </View>
@@ -172,14 +139,7 @@ class PoseInfoScreen extends Component {
 
 PoseInfoScreen.propTypes = {
   componentId: PropTypes.string,
-  gender: PropTypes.number,
-  name: PropTypes.string,
-  nickname: PropTypes.string,
-  phone: PropTypes.string,
-  password: PropTypes.string,
-  height: PropTypes.string,
-  weight: PropTypes.string,
-  age: PropTypes.string,
+  isMe: PropTypes.bool,
 };
 
 export default PoseInfoScreen;

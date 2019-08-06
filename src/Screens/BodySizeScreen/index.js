@@ -31,27 +31,23 @@ export class BodySizeScreen extends Component {
     };
   }
 
-  navigateToPoseInfo = () => {
+  navigateCamera = () => {
     const { height, weight } = this.state;
-    const {
-      gender, name, age, componentId,
-    } = this.props;
+    const { componentId, isMe } = this.props;
     Navigation.push(componentId, {
       component: {
-        name: 'wave.poseInfo',
+        name: 'wave.camera',
         passProps: {
-          gender,
-          name,
-          age,
           height,
           weight,
+          isMe,
         },
       },
     });
   };
 
   render() {
-    const { height, weight, waist } = this.state;
+    const { height, weight } = this.state;
     return (
       <KeyboardAvoidingView
         style={styles.container}
@@ -77,7 +73,7 @@ export class BodySizeScreen extends Component {
         <View style={styles.footer}>
           <FullWidthButton
             disabled={!!height === '' || weight === ''}
-            onPress={this.navigateToPoseInfo}
+            onPress={this.navigateCamera}
             content="다음 단계"
           />
         </View>
@@ -88,12 +84,7 @@ export class BodySizeScreen extends Component {
 
 BodySizeScreen.propTypes = {
   componentId: PropTypes.string,
-  gender: PropTypes.number,
-  name: PropTypes.string,
-  nickname: PropTypes.string,
-  phone: PropTypes.string,
-  password: PropTypes.string,
-  age: PropTypes.string,
+  isMe: PropTypes.bool,
 };
 
 export default BodySizeScreen;

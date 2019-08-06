@@ -35,7 +35,7 @@ import DAEMON from '../../utils/constants';
 import { makeSelectRegisterLoading } from './selectors';
 
 // local action
-import { registerUserAction } from './actions';
+import { postSizeCardAction } from './actions';
 
 // local saga
 import saga from './saga';
@@ -45,6 +45,7 @@ import reducer from './reducer';
 import styles from './style';
 
 import { theme } from '../../constants';
+import { makeSelectUser } from '../App/selectors';
 
 class FinalRegisterScreen extends Component {
   static options() {
@@ -67,13 +68,11 @@ class FinalRegisterScreen extends Component {
 
   postRegister = () => {
     const {
-      registerUser,
+      postSizeCard,
       gender,
-      phone,
-      name,
+      sizeCardName,
       age,
-      nickname,
-      password,
+      user,
       weight,
       height,
       base64,
@@ -100,11 +99,7 @@ class FinalRegisterScreen extends Component {
       rightAnkleOffset,
     } = this.props;
 
-    console.log('성 :', gender);
-    console.log('휴대폰번호 :', phone);
-    console.log('이름 :', name);
-    console.log('닉네임 :', nickname);
-    console.log('패스워드 :', password);
+    console.log('이름 :', sizeCardName);
     console.log('키 :', height);
     console.log('몸무게 :', weight);
     console.log('나이: ', age);
@@ -130,13 +125,10 @@ class FinalRegisterScreen extends Component {
     console.log('오른쪽 허벅지', rightThighOffset);
     console.log('오른쪽 발목', rightAnkleOffset);
 
-    registerUser({
-      gender,
-      name,
-      phone,
-      age,
-      nickname,
-      password,
+    postSizeCard({
+      gender: gender || user.get('gender'),
+      sizeCardName,
+      age: age || user.get('age'),
       weight,
       height,
       headOffset,
@@ -175,16 +167,14 @@ class FinalRegisterScreen extends Component {
 
 FinalRegisterScreen.propTypes = {
   componentId: PropTypes.string,
-  registerUser: PropTypes.func,
+  sizeCardName: PropTypes.string,
+  postSizeCard: PropTypes.func,
   gender: PropTypes.number,
-  name: PropTypes.string,
-  password: PropTypes.string,
-  nickname: PropTypes.string,
   age: PropTypes.string,
-  phone: PropTypes.string,
   base64: PropTypes.string,
   height: PropTypes.string,
   weight: PropTypes.string,
+  user: PropTypes.object,
   headOffset: PropTypes.object,
   footOffset: PropTypes.object,
   leftNeckOffset: PropTypes.object,
@@ -209,15 +199,14 @@ FinalRegisterScreen.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   registerLoading: makeSelectRegisterLoading(),
+  user: makeSelectUser(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  registerUser: ({
-    phone,
+  postSizeCard: ({
     gender,
-    name,
+    sizeCardName,
     age,
-    nickname,
     password,
     headOffset,
     footOffset,
@@ -244,13 +233,11 @@ const mapDispatchToProps = (dispatch) => ({
     height,
     componentId,
   }) => dispatch(
-    registerUserAction({
-      phone,
+    postSizeCardAction({
       gender,
       password,
-      name,
+      sizeCardName,
       age,
-      nickname,
       headOffset,
       footOffset,
       leftNeckOffset,

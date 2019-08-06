@@ -6,7 +6,7 @@ import { ContainerButton } from '../../../Components';
 import { Wrapper, TitleText, DescText } from './styles';
 import styles from '../styles';
 
-function SizeCardAddButton({ onPressAdd, onPressMe }) {
+function SizeCardAddButton({ onPressAdd, onPressMe, onPressOther }) {
   return (
     <ContainerButton onPress={onPressAdd}>
       <Wrapper>
@@ -20,7 +20,7 @@ function SizeCardAddButton({ onPressAdd, onPressMe }) {
           <ActionButton.Item buttonColor="#9b59b6" onPress={onPressMe}>
             <Text>나</Text>
           </ActionButton.Item>
-          <ActionButton.Item buttonColor="#3498db" onPress={() => {}}>
+          <ActionButton.Item buttonColor="#3498db" onPress={onPressOther}>
             <Text>친구</Text>
           </ActionButton.Item>
         </ActionButton>
@@ -33,6 +33,7 @@ function SizeCardAddButton({ onPressAdd, onPressMe }) {
 SizeCardAddButton.propTypes = {
   onPressAdd: PropTypes.func,
   onPressMe: PropTypes.func,
+  onPressOther: PropTypes.func,
 };
 
 export default SizeCardAddButton;

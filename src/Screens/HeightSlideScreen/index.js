@@ -235,32 +235,22 @@ export class HeightSlideScreen extends Component {
     if (buttonId === 'next') {
       const {
         componentId,
-        name,
-        nickname,
-        phone,
-        gender,
-        password,
         base64,
-        age,
         height,
         weight,
+        isMe,
       } = this.props;
       const { headOffset, footOffset } = this.state;
       Navigation.push(componentId, {
         component: {
           name: 'wave.shulderArmSlide',
           passProps: {
-            phone,
-            gender,
-            nickname,
-            name,
-            password,
             height,
             weight,
             base64,
-            age,
             headOffset,
             footOffset,
+            isMe,
           },
         },
       });
@@ -362,14 +352,10 @@ export class HeightSlideScreen extends Component {
 HeightSlideScreen.propTypes = {
   base64: PropTypes.string,
   componentId: PropTypes.string,
-  password: PropTypes.string,
-  phone: PropTypes.string,
-  gender: PropTypes.number,
-  name: PropTypes.string,
-  age: PropTypes.string,
-  nickname: PropTypes.string,
   height: PropTypes.string,
   weight: PropTypes.string,
+  isMe: PropTypes.bool,
+
 };
 
 export default HeightSlideScreen;

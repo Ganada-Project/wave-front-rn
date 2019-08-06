@@ -12,9 +12,9 @@
 import { fromJS } from 'immutable';
 
 import {
-  POST_REGISTER_REQUESTING,
-  POST_REGISTER_REQUESTING_FAIL,
-  POST_REGISTER_REQUESTING_SUCCESS,
+  POST_SIZE_CARD_REQUESTING,
+  POST_SIZE_CARD_REQUESTING_FAIL,
+  POST_SIZE_CARD_REQUESTING_SUCCESS,
 } from './constants';
 
 // The initial state of the App
@@ -24,11 +24,11 @@ export const initialState = fromJS({
 
 function finalRegisterReducer(state = initialState, action) {
   switch (action.type) {
-    case POST_REGISTER_REQUESTING:
+    case POST_SIZE_CARD_REQUESTING:
       return state.set('registerLoading', true);
-    case POST_REGISTER_REQUESTING_SUCCESS:
+    case POST_SIZE_CARD_REQUESTING_SUCCESS:
       return state.set('registerLoading', false);
-    case POST_REGISTER_REQUESTING_FAIL:
+    case POST_SIZE_CARD_REQUESTING_FAIL:
       return state.set('registerLoading', false);
 
     default:

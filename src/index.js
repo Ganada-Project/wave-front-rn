@@ -32,6 +32,7 @@ import ShulderArmSlideScreen from './Screens/ShulderArmSlideScreen';
 import UpperBodySlideScreen from './Screens/UpperBodySlideScreen';
 import LowerBodySlideScreen from './Screens/LowerBodySlideScreen';
 import BodySizeScreen from './Screens/BodySizeScreen';
+import SizeCardInfoScreen from './Screens/SizeCardInfoScreen';
 import FinalRegisterScreen from './Screens/FinalRegisterScreen';
 import configureStore from './configureStore';
 import { theme } from './constants';
@@ -255,6 +256,15 @@ const registerScreens = () => {
       </Provider>
     ),
     () => FinalRegisterScreen,
+  );
+  Navigation.registerComponent(
+    'wave.sizeCardInfo',
+    () => (props) => (
+      <Provider store={store}>
+        <SizeCardInfoScreen {...props} />
+      </Provider>
+    ),
+    () => SizeCardInfoScreen,
   );
 };
 

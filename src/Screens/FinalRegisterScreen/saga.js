@@ -1,32 +1,23 @@
-import AsyncStorage from '@react-native-community/async-storage';
-
+import { Navigation } from 'react-native-navigation';
 import {
   call, put, takeLatest, all, select,
 } from 'redux-saga/effects';
 import {
-  POST_REGISTER_REQUESTING,
-  POST_REGISTER_REQUESTING_FAIL,
-  POST_REGISTER_REQUESTING_SUCCESS,
+  POST_SIZE_CARD_REQUESTING,
+  POST_SIZE_CARD_REQUESTING_FAIL,
+  POST_SIZE_CARD_REQUESTING_SUCCESS,
 } from './constants';
-import { fetchUserFlow } from '../App/saga';
 import { API_URL } from '../../constants';
 import { postRequest } from '../../utils/request';
-import { startTabScreens } from '../../index';
 
-function* registerUserSaga(action) {
-  const url = `${API_URL}/auth/register`;
-  const selectGlobal = (state) => state.get('global');
-  const globalRedcuer = yield select(selectGlobal);
-  const fcmToken = globalRedcuer.get('fcmToken');
+function* postSizeCardSaga(action) {
+  const url = `${API_URL}/card`;
+
   const {
-    password,
     weight,
-    name,
+    sizeCardName,
     gender,
     height,
-    imageBase,
-    nickname,
-    phone,
     age,
     headOffset,
     footOffset,
@@ -50,55 +41,61 @@ function* registerUserSaga(action) {
     rightAnkleOffset,
   } = action.payload;
   const payload = {
-    username: nickname,
-    password,
-    name,
-    phone,
+    name: sizeCardName,
     gender,
-    address: '',
-    base64: imageBase,
     weight,
     height,
-    foot: '',
-    fcm_token: fcmToken,
     age,
-    profile_img_url:
-      'https://s3.ap-northeast-2.amazonaws.com/wave-bucket-seoul/user+(1).svg',
-    body_points: [
-      { ...headOffset },
-      { ...footOffset },
-      { ...leftNeckOffset },
-      { ...leftShulderOffset },
-      { ...leftElbowOffset },
-      { ...leftHandOffset },
-      { ...rightNeckOffset },
-      { ...rightShulderOffset },
-      { ...rightElbowOffset },
-      { ...rightHandOffset },
-      { ...leftChestOffset },
-      { ...leftWaistOffset },
-      { ...leftPelvisOffset },
-      { ...rightChestOffset },
-      { ...rightWaistOffset },
-      { ...rightPelvisOffset },
-      { ...leftThighOffset },
-      { ...leftAnkleOffset },
-      { ...rightThighOffset },
-      { ...rightAnkleOffset },
-    ],
+    bodyPoints: {
+      head: headOffset,
+      foot: footOffset,
+      leftNeck: leftNeckOffset,
+      leftShoulder: leftShulderOffset,
+      leftElbow: leftElbowOffset,
+      leftHand: leftHandOffset,
+      rightNeck: rightNeckOffset,
+      rightShoulder: rightShulderOffset,
+      rightElbow: rightElbowOffset,
+      rightHand: rightHandOffset,
+      leftChest: leftChestOffset,
+      leftWaist: leftWaistOffset,
+      leftPelvis: leftPelvisOffset,
+      rightChest: rightChestOffset,
+      rightWaist: rightWaistOffset,
+      rightPelvis: rightPelvisOffset,
+      leftThigh: leftThighOffset,
+      leftAnkle: leftAnkleOffset,
+      rightThigh: rightThighOffset,
+      rightAnkle: rightAnkleOffset,
+    },
+    bodyShape: 'f',
+    preferColor: '#ffffff',
+    preferStyle: 'f',
+    preferSize: '3',
   };
   try {
+    console.log(JSON.stringify(payload));
     const result = yield call(postRequest, { url, payload });
-    yield put({ type: POST_REGISTER_REQUESTING_SUCCESS, payload: { result } });
-    yield AsyncStorage.setItem('wave.idToken', result.token);
-    yield fetchUserFlow({ token: result.token });
-    yield startTabScreens();
+    yield put({ type: POST_SIZE_CARD_REQUESTING_SUCCESS, payload: { result } });
+    yield Navigation.setRoot({
+      root: {
+        stack: {
+          children: [
+            {
+              component: {
+                name: 'wave.home',
+              },
+            },
+          ],
+        },
+      },
+    });
   } catch (error) {
     console.log(error);
-    yield put({ type: POST_REGISTER_REQUESTING_FAIL, error });
+    yield put({ type: POST_SIZE_CARD_REQUESTING_FAIL, error });
   }
 }
 
 export default function* rootSaga() {
-  yield all([takeLatest(POST_REGISTER_REQUESTING, registerUserSaga)]);
+  yield all([takeLatest(POST_SIZE_CARD_REQUESTING, postSizeCardSaga)]);
 }

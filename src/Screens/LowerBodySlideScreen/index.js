@@ -383,12 +383,6 @@ export class LowerBodySlideScreen extends Component {
     if (buttonId === 'next') {
       const {
         componentId,
-        name,
-        nickname,
-        phone,
-        gender,
-        age,
-        password,
         base64,
         height,
         weight,
@@ -408,6 +402,7 @@ export class LowerBodySlideScreen extends Component {
         rightChestOffset,
         rightWaistOffset,
         rightPelvisOffset,
+        isMe,
       } = this.props;
       const {
         leftThighOffset,
@@ -418,14 +413,8 @@ export class LowerBodySlideScreen extends Component {
 
       Navigation.push(componentId, {
         component: {
-          name: 'wave.finalRegister',
+          name: 'wave.sizeCardInfo',
           passProps: {
-            phone,
-            gender,
-            nickname,
-            name,
-            age,
-            password,
             height,
             weight,
             base64,
@@ -449,6 +438,7 @@ export class LowerBodySlideScreen extends Component {
             leftAnkleOffset,
             rightThighOffset,
             rightAnkleOffset,
+            isMe,
           },
         },
       });
@@ -586,14 +576,9 @@ export class LowerBodySlideScreen extends Component {
 }
 
 LowerBodySlideScreen.propTypes = {
+  isMe: PropTypes.bool,
   base64: PropTypes.string,
   componentId: PropTypes.string,
-  password: PropTypes.string,
-  phone: PropTypes.string,
-  gender: PropTypes.number,
-  name: PropTypes.string,
-  age: PropTypes.string,
-  nickname: PropTypes.string,
   height: PropTypes.string,
   weight: PropTypes.string,
   headOffset: PropTypes.object,

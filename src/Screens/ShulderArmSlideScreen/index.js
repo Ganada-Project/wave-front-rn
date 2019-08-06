@@ -687,6 +687,7 @@ export class ShulderArmSlideScreen extends Component {
         weight,
         headOffset,
         footOffset,
+        isMe,
       } = this.props;
       const {
         leftNeckOffset,
@@ -702,12 +703,8 @@ export class ShulderArmSlideScreen extends Component {
       Navigation.push(componentId, {
         component: {
           name: 'wave.upperBodySlide',
-          passProps: {            
-            phone,
+          passProps: {
             gender,
-            nickname,
-            name,
-            password,
             base64,
             height,
             age,
@@ -722,6 +719,7 @@ export class ShulderArmSlideScreen extends Component {
             rightShulderOffset,
             rightElbowOffset,
             rightHandOffset,
+            isMe,
           },
         },
       });
@@ -934,6 +932,7 @@ ShulderArmSlideScreen.propTypes = {
   nickname: PropTypes.string,
   headOffset: PropTypes.object,
   footOffset: PropTypes.object,
+  isMe: PropTypes.bool,
 };
 
 export default ShulderArmSlideScreen;
