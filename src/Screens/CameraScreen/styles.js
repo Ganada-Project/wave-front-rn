@@ -4,26 +4,67 @@ import { theme, BaseHeightOffset } from '../../constants';
 const window = Dimensions.get('window');
 export const IMAGE_WIDTH = window.width;
 export const IMAGE_HEIGHT = window.height - 44;
-export const HeadLine = styled.View`
-  width: 100px;
-  height: 14px;
+
+export const HeadLineWrapper = styled.View`
   position: absolute;
-  background-color: #ffffff;
-  border: 1px solid ${theme.pointColor};
-  border-radius: 5px;
   top: ${BaseHeightOffset.head};
-  left: ${IMAGE_WIDTH / 2 - 50};
 `;
 
-export const FootLine = styled.View`
-  width: 100px;
-  height: 14px;
+export const HeadLine = styled.View`
+  position: relative;
+  width: ${IMAGE_WIDTH};
+  height: 2px;
+  background-color: ${theme.guideColor};
+`;
+
+export const BellyLine = styled.View`
+  position: relative;
+  width: 1px;
+  height: ${BaseHeightOffset.foot - (BaseHeightOffset.head + 40)};
+  background-color: ${theme.guideColor};
+`;
+
+export const BellyLabel = styled.View`
   position: absolute;
-  background-color: #ffffff;
-  border: 1px solid ${theme.pointColor};
-  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  left: -53;
+  top: ${BaseHeightOffset.foot - (BaseHeightOffset.head + 120)};
+  width: 80px;
+  height: 30px;
+  background-color: ${theme.guideColor};
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+`;
+
+export const HeadLabel = styled.View`
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  left: 35;
+  top: -28;
+  width: 80px;
+  height: 30px;
+  background-color: ${theme.guideColor};
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+`;
+
+export const LabelText = styled.Text`
+  color: ${theme.textColor};
+  font-weight: bold;
+`;
+
+export const FootLineWrapper = styled.View`
+  position: absolute;
   top: ${BaseHeightOffset.foot};
-  left: ${IMAGE_WIDTH / 2 - 50};
+`;
+
+export const BellyCenterWrapper = styled.View`
+  position: absolute;
+  top: ${BaseHeightOffset.head + 20};
+  left: ${window.width / 2};
+  background-color: ${theme.guideColor};
 `;
 
 export const TakeButtonWrapper = styled.View`
