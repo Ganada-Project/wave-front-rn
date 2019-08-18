@@ -10,7 +10,17 @@ import { RNCamera } from 'react-native-camera';
 // } from 'react-native-sensors';
 import { Button } from 'react-native-elements';
 import { theme } from '../../constants';
-import { HeadLine, FootLine, TakeButtonWrapper } from './styles';
+import {
+  HeadLine,
+  TakeButtonWrapper,
+  HeadLabel,
+  LabelText,
+  HeadLineWrapper,
+  FootLineWrapper,
+  BellyCenterWrapper,
+  BellyLine,
+  BellyLabel,
+} from './styles';
 
 function round(n) {
   if (!n) {
@@ -89,8 +99,27 @@ class CameraScreen extends Component {
             console.log(barcodes);
           }}
         />
-        <HeadLine />
-        <FootLine />
+        <HeadLineWrapper>
+          <HeadLine>
+            <HeadLabel>
+              <LabelText>정수리</LabelText>
+            </HeadLabel>
+          </HeadLine>
+        </HeadLineWrapper>
+        <BellyCenterWrapper>
+          <BellyLine>
+            {/* <BellyLabel style={{ transform: [{ rotate: '-90deg' }] }}>
+              <LabelText>배꼽</LabelText>
+            </BellyLabel> */}
+          </BellyLine>
+        </BellyCenterWrapper>
+        <FootLineWrapper>
+          <HeadLine>
+            <HeadLabel>
+              <LabelText>발 끝</LabelText>
+            </HeadLabel>
+          </HeadLine>
+        </FootLineWrapper>
         <TakeButtonWrapper>
           <Text>
             x:

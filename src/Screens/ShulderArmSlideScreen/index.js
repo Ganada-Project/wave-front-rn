@@ -751,6 +751,9 @@ export class ShulderArmSlideScreen extends Component {
       magnifierOpacity,
     } = this;
 
+    console.log(this.props.headOffsetY);
+    console.log(this.props.footOffsetY);
+
     const { base64 } = this.props;
     const { typeText } = this.state;
     const leftNeckSlide = {

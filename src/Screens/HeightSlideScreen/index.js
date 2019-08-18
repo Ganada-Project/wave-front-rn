@@ -16,6 +16,15 @@ import {
   MagnifierText,
   HelpWrapper,
   GuideImage,
+  Sliderlabel,
+  SliderlabelText,
+  SliderBar,
+  HeadGuideWrapper,
+  FootGuideWrapper,
+  PartGuideImage,
+  BellySlider,
+  BellySliderBar,
+  BellyLabel,
 } from './styles';
 import { outputX, outputY, distanceBetween2Offset } from './utils/calculate';
 import {
@@ -24,8 +33,10 @@ import {
   IMAGE_HEIGHT,
   IMAGE_WIDTH,
   SLIDER_SCALE,
+  sampleImg,
+  BELLY_OFFSET,
 } from './constants';
-import { theme } from '../../constants';
+import { theme, BaseHeightOffset } from '../../constants';
 
 export class HeightSlideScreen extends Component {
   static options(passProps) {
@@ -49,7 +60,6 @@ export class HeightSlideScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: null,
       typeText: '',
       headOffset: {
         x: HEAD_OFFSET.x,
@@ -59,20 +69,33 @@ export class HeightSlideScreen extends Component {
         x: FOOT_OFFSET.x,
         y: FOOT_OFFSET.y,
       },
+      bellyOffset: {
+        x: BELLY_OFFSET.x,
+        y: 0,
+      },
     };
     Navigation.events().bindComponent(this);
     // 머리
     this.headPan = new Animated.ValueXY();
-    this.headSacle = new Animated.Value(1);
+    this.headOpacity = new Animated.Value(0.5);
     // 발
     this.footPan = new Animated.ValueXY();
-    this.footScale = new Animated.Value(1);
+    this.footOpacity = new Animated.Value(0.5);
+    // 배꼽
+    this.bellyPan = new Animated.ValueXY();
+    this.bellyOpacity = new Animated.Value(0.5);    
     // 돋보기 투명도
-    this.magnifierOpacity = new Animated.Value(0);
+    this.headGuideOpacity = new Animated.Value(0);
+    this.footGuideOpacity = new Animated.Value(0);
     // 가이드 투명도
     this.guideOpacity = new Animated.Value(0);
     const {
-      headSacle, footScale, magnifierOpacity, guideOpacity,
+      headGuideOpacity,
+      headOpacity,
+      footGuideOpacity,
+      footOpacity,
+      bellyOpacity,
+      guideOpacity,
     } = this;
     // 가이드 버튼
     this.guideResponder = PanResponder.create({
@@ -106,16 +129,15 @@ export class HeightSlideScreen extends Component {
       onMoveShouldSetPanResponderCapture: () => true,
       onPanResponderGrant: () => {
         this.headPan.setOffset({
-          x: this.headPan.x._value,
+          // x: this.headPan.x._value,
           y: this.headPan.y._value,
         });
         this.headPan.setValue({ x: 0, y: 0 });
         Animated.parallel([
-          Animated.spring(headSacle, {
-            toValue: SLIDER_SCALE,
-            friction: 3,
+          Animated.timing(headOpacity, {
+            toValue: 1,
           }),
-          Animated.timing(magnifierOpacity, {
+          Animated.timing(headGuideOpacity, {
             toValue: 1,
           }),
         ]).start();
@@ -126,8 +148,10 @@ export class HeightSlideScreen extends Component {
       onPanResponderRelease: (event) => {
         this.headPan.flattenOffset();
         Animated.parallel([
-          Animated.spring(headSacle, { toValue: 1, friction: 3 }),
-          Animated.timing(magnifierOpacity, {
+          Animated.timing(headOpacity, {
+            toValue: 0.5,
+          }),
+          Animated.timing(headGuideOpacity, {
             toValue: 0,
           }),
         ]).start();
@@ -149,16 +173,15 @@ export class HeightSlideScreen extends Component {
       onMoveShouldSetPanResponderCapture: () => true,
       onPanResponderGrant: () => {
         this.footPan.setOffset({
-          x: this.footPan.x._value,
+          // x: this.footPan.x._value,
           y: this.footPan.y._value,
         });
         this.footPan.setValue({ x: 0, y: 0 });
         Animated.parallel([
-          Animated.spring(footScale, {
-            toValue: SLIDER_SCALE,
-            friction: 3,
+          Animated.timing(footOpacity, {
+            toValue: 1,
           }),
-          Animated.timing(magnifierOpacity, {
+          Animated.timing(footGuideOpacity, {
             toValue: 1,
           }),
         ]).start();
@@ -169,8 +192,10 @@ export class HeightSlideScreen extends Component {
       onPanResponderRelease: (event) => {
         this.footPan.flattenOffset();
         Animated.parallel([
-          Animated.spring(footScale, { toValue: 1, friction: 3 }),
-          Animated.timing(magnifierOpacity, {
+          Animated.timing(footOpacity, {
+            toValue: 0.5,
+          }),
+          Animated.timing(footGuideOpacity, {
             toValue: 0,
           }),
         ]).start();
@@ -184,61 +209,100 @@ export class HeightSlideScreen extends Component {
       onPanResponderTerminate: () => {},
       onShouldBlockNativeResponder: () => true,
     });
+
+    // 배꼽 슬라이더 이벤트
+    this.bellyPanResponder = PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onStartShouldSetPanResponderCapture: () => true,
+      onMoveShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponderCapture: () => true,
+      onPanResponderGrant: () => {
+        this.bellyPan.setOffset({
+          x: this.bellyPan.x._value,
+          // y: this.bellyPan.y._value,
+        });
+        Animated.parallel([
+          Animated.timing(bellyOpacity, {
+            toValue: 1,
+          }),
+        ]).start();
+        this.bellyPan.setValue({ x: 0, y: 0 });
+      },
+      onPanResponderMove: this.onDraggingBelly(),
+      onPanResponderTerminationRequest: () => true,
+      onPanResponderRelease: (event) => {
+        this.bellyPan.flattenOffset();
+        Animated.parallel([
+          Animated.timing(bellyOpacity, {
+            toValue: 0.5,
+          }),
+        ]).start();
+        this.setState({
+          bellyOffset: {
+            x: event.nativeEvent.pageX,
+            // y: event.nativeEvent.pageY,
+          },
+        });
+      },
+      onPanResponderTerminate: () => {},
+      onShouldBlockNativeResponder: () => true,
+    });
   }
 
   onDraggingHead = () => {
     const { headPan } = this;
-    return Animated.event([null, { dx: headPan.x, dy: headPan.y }]);
+    return Animated.event([null, { dy: headPan.y }]);
   };
 
   onDraggingFoot = () => {
     const { footPan } = this;
-    return Animated.event([null, { dx: footPan.x, dy: footPan.y }]);
+    return Animated.event([null, { dy: footPan.y }]);
   };
 
-  adjustMagnifierOffset = () => {
-    const { type } = this.state;
-    if (type === 'head') {
-      this.reverseXValue = this.headPan.x.interpolate({
-        inputRange: [0, IMAGE_WIDTH],
-        outputRange: [
-          outputX({ xOffset: HEAD_OFFSET.x, isStart: true }),
-          outputX({ xOffset: HEAD_OFFSET.x }),
-        ],
-      });
-      this.reverseYValue = this.headPan.y.interpolate({
-        inputRange: [0, IMAGE_HEIGHT],
-        outputRange: [
-          outputY({ yOffset: HEAD_OFFSET.y, isStart: true }),
-          outputY({ yOffset: HEAD_OFFSET.y }),
-        ],
-      });
-    } else if (type === 'foot') {
-      this.reverseXValue = this.footPan.x.interpolate({
-        inputRange: [0, IMAGE_WIDTH],
-        outputRange: [
-          outputX({ xOffset: FOOT_OFFSET.x, isStart: true }),
-          outputX({ xOffset: FOOT_OFFSET.x }),
-        ],
-      });
-      this.reverseYValue = this.footPan.y.interpolate({
-        inputRange: [0, IMAGE_HEIGHT],
-        outputRange: [
-          outputY({ yOffset: FOOT_OFFSET.y, isStart: true }),
-          outputY({ yOffset: FOOT_OFFSET.y }),
-        ],
-      });
-    }
+  onDraggingBelly = () => {
+    const { bellyPan } = this;
+    return Animated.event([null, { dx: bellyPan.x }]);
   };
+
+  // adjustMagnifierOffset = () => {
+  //   const { type } = this.state;
+  //   if (type === 'head') {
+  //     this.reverseXValue = this.headPan.x.interpolate({
+  //       inputRange: [0, IMAGE_WIDTH],
+  //       outputRange: [
+  //         outputX({ xOffset: HEAD_OFFSET.x, isStart: true }),
+  //         outputX({ xOffset: HEAD_OFFSET.x }),
+  //       ],
+  //     });
+  //     this.reverseYValue = this.headPan.y.interpolate({
+  //       inputRange: [0, IMAGE_HEIGHT],
+  //       outputRange: [
+  //         outputY({ yOffset: HEAD_OFFSET.y, isStart: true }),
+  //         outputY({ yOffset: HEAD_OFFSET.y }),
+  //       ],
+  //     });
+  //   } else if (type === 'foot') {
+  //     this.reverseXValue = this.footPan.x.interpolate({
+  //       inputRange: [0, IMAGE_WIDTH],
+  //       outputRange: [
+  //         outputX({ xOffset: FOOT_OFFSET.x, isStart: true }),
+  //         outputX({ xOffset: FOOT_OFFSET.x }),
+  //       ],
+  //     });
+  //     this.reverseYValue = this.footPan.y.interpolate({
+  //       inputRange: [0, IMAGE_HEIGHT],
+  //       outputRange: [
+  //         outputY({ yOffset: FOOT_OFFSET.y, isStart: true }),
+  //         outputY({ yOffset: FOOT_OFFSET.y }),
+  //       ],
+  //     });
+  //   }
+  // };
 
   navigationButtonPressed({ buttonId }) {
     if (buttonId === 'next') {
       const {
-        componentId,
-        base64,
-        height,
-        weight,
-        isMe,
+        componentId, base64, height, weight, isMe,
       } = this.props;
       const { headOffset, footOffset } = this.state;
       Navigation.push(componentId, {
@@ -248,8 +312,8 @@ export class HeightSlideScreen extends Component {
             height,
             weight,
             base64,
-            headOffset,
-            footOffset,
+            headOffsetY: headOffset.y,
+            footOffsetY: footOffset.y,
             isMe,
           },
         },
@@ -259,15 +323,19 @@ export class HeightSlideScreen extends Component {
 
   render() {
     // 각 슬라이더에 따라 돋보기 오프셋 설정
-    this.adjustMagnifierOffset();
+    // this.adjustMagnifierOffset();
     const {
       headPan,
-      headSacle,
       footPan,
-      footScale,
-      reverseXValue,
-      reverseYValue,
-      magnifierOpacity,
+      bellyPan,
+      // footScale,
+      // reverseXValue,
+      // reverseYValue,
+      headOpacity,
+      footOpacity,
+      bellyOpacity,
+      headGuideOpacity,
+      footGuideOpacity,
     } = this;
 
     const { base64 } = this.props;
@@ -275,34 +343,42 @@ export class HeightSlideScreen extends Component {
 
     const headSlide = {
       transform: [
-        { translateX: headPan.x },
+        // { translateX: headPan.x },
         { translateY: headPan.y },
-        { scale: headSacle },
       ],
       top: HEAD_OFFSET.y,
-      left: HEAD_OFFSET.x,
+      opacity: headOpacity,
+      // left: HEAD_OFFSET.x,
     };
 
     const footSlide = {
       transform: [
-        { translateX: footPan.x },
+        // { translateX: footPan.x },
         { translateY: footPan.y },
-        { scale: footScale },
+        // { scale: footScale },
       ],
       top: FOOT_OFFSET.y,
-      left: FOOT_OFFSET.x,
+      // left: FOOT_OFFSET.x,
+      opacity: footOpacity,
+    };
+
+    const bellySlide = {
+      transform: [{ translateX: bellyPan.x }],
+      left: BELLY_OFFSET.x,
+      opacity: bellyOpacity
+      // top: 0,
     };
 
     const guideOpacity = {
       opacity: this.guideOpacity,
     };
 
-    const magnifierImageStyle = {
-      top: reverseYValue,
-      left: reverseXValue,
-      resizeMode: 'cover',
-      borderWidth: 1,
-    };
+    // const magnifierImageStyle = {
+    //   top: reverseYValue,
+    //   left: reverseXValue,
+    //   resizeMode: 'cover',
+    //   borderWidth: 1,
+    // };
 
     return (
       <Container>
@@ -316,9 +392,9 @@ export class HeightSlideScreen extends Component {
             //   'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=962&q=80',
           }}
         >
-          <MagnifierWrapper
+          {/* <MagnifierWrapper
             style={{
-              opacity: magnifierOpacity,
+              opacity: headGuideOpacity,
             }}
           >
             <MagnifierContainer>
@@ -333,9 +409,71 @@ export class HeightSlideScreen extends Component {
               />
             </MagnifierContainer>
             <MagnifierText>{typeText}</MagnifierText>
-          </MagnifierWrapper>
-          <Slider style={headSlide} {...this.headPanResponder.panHandlers} />
-          <Slider style={footSlide} {...this.footPanResponder.panHandlers} />
+          </MagnifierWrapper> */}
+          <Slider style={headSlide} {...this.headPanResponder.panHandlers}>
+            <SliderBar>
+              <Icon
+                type="antdesign"
+                name="caretup"
+                size={13}
+                color={theme.guideColor}
+                iconStyle={{ position: 'absolute', top: -14, left: 10 }}
+              />
+              <Icon
+                type="antdesign"
+                name="caretdown"
+                size={13}
+                color={theme.guideColor}
+                iconStyle={{ position: 'absolute', top: 3, left: 10 }}
+              />
+              <Sliderlabel>
+                <SliderlabelText>정수리</SliderlabelText>
+              </Sliderlabel>
+              <HeadGuideWrapper style={{ opacity: headGuideOpacity }}>
+                <PartGuideImage source={require('./images/headGuide.png')} />
+              </HeadGuideWrapper>
+            </SliderBar>
+          </Slider>
+          <Slider style={footSlide} {...this.footPanResponder.panHandlers}>
+            <SliderBar>
+              <Icon
+                type="antdesign"
+                name="caretup"
+                size={13}
+                color={theme.guideColor}
+                iconStyle={{ position: 'absolute', top: -14, left: 10 }}
+              />
+              <Icon
+                type="antdesign"
+                name="caretdown"
+                size={13}
+                color={theme.guideColor}
+                iconStyle={{ position: 'absolute', top: 3, left: 10 }}
+              />
+              <Sliderlabel>
+                <SliderlabelText>발 끝</SliderlabelText>
+              </Sliderlabel>
+              <FootGuideWrapper style={{ opacity: footGuideOpacity }}>
+                <PartGuideImage source={require('./images/headGuide.png')} />
+              </FootGuideWrapper>
+            </SliderBar>
+          </Slider>
+          <BellySlider
+            style={bellySlide}
+            {...this.bellyPanResponder.panHandlers}
+          >
+            <BellySliderBar>
+              <BellyLabel
+                style={{
+                  left: -54,
+                  top: BaseHeightOffset.foot - BaseHeightOffset.head,
+                  transform: [{ rotate: '-90deg' }],
+                }}
+              >
+                <SliderlabelText>배꼽</SliderlabelText>
+              </BellyLabel>
+            </BellySliderBar>
+          </BellySlider>
         </ImageContainer>
         <HelpWrapper {...this.guideResponder.panHandlers}>
           <Icon name="question" type="font-awesome" color="#ffffff" size={25} />
@@ -355,7 +493,10 @@ HeightSlideScreen.propTypes = {
   height: PropTypes.string,
   weight: PropTypes.string,
   isMe: PropTypes.bool,
+};
 
+HeightSlideScreen.defaultProps = {
+  base64: sampleImg,
 };
 
 export default HeightSlideScreen;

@@ -12,6 +12,7 @@ export const theme = {
   whiteColor: '#ffffff',
   grayColor: '#d8d8d8',
   textColor: '#5b5e6d',
+  guideColor: '#14ff1e',
 };
 
 export const TopBarHeight = 120;
