@@ -26,9 +26,12 @@ import PhoneVerifyScreen from './Screens/PhoneVerifyScreen';
 import PasswordScreen from './Screens/PasswordScreen';
 import FavStyleScreen from './Screens/FavStyleScreen';
 import BrandRecommendScreen from './Screens/BrandRecommendScreen';
+
+// Size Card Screens
 import PoseInfoScreen from './Screens/PoseInfoScreen';
 import HeightSlideScreen from './Screens/HeightSlideScreen';
-import ShulderArmSlideScreen from './Screens/ShulderArmSlideScreen';
+import UpperBodyWidthSlideScreen from './Screens/UpperBodyWidthSlideScreen';
+import PartialHeightSlideScreen from './Screens/PartialHeightSlideScreen';
 import UpperBodySlideScreen from './Screens/UpperBodySlideScreen';
 import LowerBodySlideScreen from './Screens/LowerBodySlideScreen';
 import BodySizeScreen from './Screens/BodySizeScreen';
@@ -213,13 +216,22 @@ const registerScreens = () => {
     () => HeightSlideScreen,
   );
   Navigation.registerComponent(
-    'wave.shulderArmSlide',
+    'wave.upperBodyWidthSlide',
     () => (props) => (
       <Provider store={store}>
-        <ShulderArmSlideScreen {...props} />
+        <UpperBodyWidthSlideScreen {...props} />
       </Provider>
     ),
-    () => ShulderArmSlideScreen,
+    () => UpperBodyWidthSlideScreen,
+  );
+  Navigation.registerComponent(
+    'wave.partialHeightSlide',
+    () => (props) => (
+      <Provider store={store}>
+        <PartialHeightSlideScreen {...props} />
+      </Provider>
+    ),
+    () => PartialHeightSlideScreen,
   );
   Navigation.registerComponent(
     'wave.upperBodySlide',

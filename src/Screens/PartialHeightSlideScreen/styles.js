@@ -13,7 +13,8 @@ import {
 const window = Dimensions.get('window');
 
 export const Container = styled.View`
-  flex: 1;
+  width: 100%;
+  height: 100%;
 `;
 
 export const ImageContainer = styled(ImageBackground)`
@@ -44,6 +45,7 @@ export const FootGuideWrapper = styled(Animated.View)`
   right: 10;
   width: 50px;
   height: 50px;
+  border: 1px blue solid;
 `;
 
 // export const MagnifierContainer = styled(Animated.View)`
@@ -79,6 +81,7 @@ export const Slider = styled(Animated.View)`
   position: absolute;
   justify-content: center;
   align-items: center;
+  background-color: transparent;
   width: ${SLIDER_SIZE};
   height: 30px;
 `;
@@ -87,15 +90,9 @@ export const BellySlider = styled(Animated.View)`
   position: absolute;
   justify-content: center;
   align-items: center;
+  background-color: transparent;
   width: 30px;
   height: ${window.height};
-`;
-
-export const BellySliderBar = styled.View`
-  position: relative;
-  width: 1px;
-  height: ${window.height};
-  background-color: ${theme.guideColor};
 `;
 
 export const BellyLabel = styled.View`
@@ -116,11 +113,31 @@ export const SliderBar = styled.View`
   background-color: ${theme.guideColor};
 `;
 
+export const BellySliderBar = styled.View`
+  position: relative;
+  width: 1px;
+  height: ${window.height};
+  background-color: ${theme.guideColor};
+`;
+
 export const Sliderlabel = styled.View`
   position: absolute;
   justify-content: center;
   align-items: center;
   left: 35;
+  top: -28;
+  width: 80px;
+  height: 30px;
+  background-color: ${theme.guideColor};
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+`;
+
+export const RightSliderlabel = styled.View`
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  right: 35;
   top: -28;
   width: 80px;
   height: 30px;

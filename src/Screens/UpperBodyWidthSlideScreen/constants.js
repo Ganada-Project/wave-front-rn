@@ -8,42 +8,21 @@ const window = Dimensions.get('window');
 export const IMAGE_WIDTH = window.width;
 export const IMAGE_HEIGHT = window.height - 44;
 
-export const LEFT_NECK_OFFSET = {
-  x: 130,
-  y: 140,
-};
-
 export const LEFT_SHULDER_OFFSET = {
-  x: 100,
-  y: 200,
+  x: 80,
+  y: 0,
 };
 
-export const LEFT_ELBOW_OFFSET = {
-  x: 100,
-  y: 280,
+export const LEFT_CHEST_OFFSET = {
+  x: 110,
+  y: 0,
 };
-
-export const LEFT_HAND_OFFSET = {
-  x: 100,
-  y: 360,
-};
-
-export const RIGHT_NECK_OFFSET = {
-  x: 200,
-  y: 140,
+export const RIGHT_CHEST_OFFSET = {
+  x: 210,
+  y: 0,
 };
 
 export const RIGHT_SHULDER_OFFSET = {
-  x: 230,
-  y: 200,
-};
-
-export const RIGHT_ELBOW_OFFSET = {
-  x: 230,
-  y: 280,
-};
-
-export const RIGHT_HAND_OFFSET = {
-  x: 230,
-  y: 360,
+  x: 240,
+  y: 0,
 };

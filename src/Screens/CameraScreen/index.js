@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, StyleSheet } from 'react-native';
+import {
+  Text, View, StyleSheet, Dimensions,
+} from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { RNCamera } from 'react-native-camera';
+import { Attitude, Barometer } from 'react-native-attitude';
 // import {
 //   gyroscope,
 //   setUpdateIntervalForType,
@@ -44,7 +47,7 @@ class CameraScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { x: 0, y: 0, z: 0 };
+    this.state = { pitch: 0 };
   }
 
   componentDidMount() {
@@ -53,10 +56,14 @@ class CameraScreen extends Component {
     //   this.setState({ x, y, z });
     // });
     // this.setState({ subscription });
+    this.attitudeWatchID = Attitude.watchAttitude((update) => {
+      this.setState({ pitch: update.attitude.pitch + 90 });
+    });
   }
 
   componentWillUnmount() {
     // this.state.subscription.unsubscribe();
+    Attitude.clearWatchAttitude(this.attitudeWatchID);
   }
 
   takePicture = async () => {
@@ -82,7 +89,9 @@ class CameraScreen extends Component {
   };
 
   render() {
-    const { x, y, z } = this.state;
+    const {
+      x, y, z, pitch,
+    } = this.state;
 
     return (
       <View style={styles.container}>
@@ -121,14 +130,7 @@ class CameraScreen extends Component {
           </HeadLine>
         </FootLineWrapper>
         <TakeButtonWrapper>
-          <Text>
-            x:
-            {round(x)}
-            y:
-            {round(y)}
-            z:
-            {round(z)}
-          </Text>
+          <Text>{pitch}</Text>
           <Button title="촬영" onPress={this.takePicture} />
         </TakeButtonWrapper>
       </View>
@@ -142,8 +144,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   preview: {
-    flex: 1,
-    justifyContent: 'flex-end',
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height - 44,
     alignItems: 'center',
   },
 });

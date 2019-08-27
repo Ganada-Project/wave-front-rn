@@ -83,7 +83,7 @@ export class HeightSlideScreen extends Component {
     this.footOpacity = new Animated.Value(0.5);
     // 배꼽
     this.bellyPan = new Animated.ValueXY();
-    this.bellyOpacity = new Animated.Value(0.5);    
+    this.bellyOpacity = new Animated.Value(0.5);
     // 돋보기 투명도
     this.headGuideOpacity = new Animated.Value(0);
     this.footGuideOpacity = new Animated.Value(0);
@@ -304,16 +304,17 @@ export class HeightSlideScreen extends Component {
       const {
         componentId, base64, height, weight, isMe,
       } = this.props;
-      const { headOffset, footOffset } = this.state;
+      const { headOffset, footOffset, bellyOffset } = this.state;
       Navigation.push(componentId, {
         component: {
-          name: 'wave.shulderArmSlide',
+          name: 'wave.partialHeightSlide',
           passProps: {
             height,
             weight,
             base64,
             headOffsetY: headOffset.y,
             footOffsetY: footOffset.y,
+            bellyOffsetX: bellyOffset.x,
             isMe,
           },
         },
@@ -346,7 +347,7 @@ export class HeightSlideScreen extends Component {
         // { translateX: headPan.x },
         { translateY: headPan.y },
       ],
-      top: HEAD_OFFSET.y,
+      top: HEAD_OFFSET.y - 14,
       opacity: headOpacity,
       // left: HEAD_OFFSET.x,
     };
@@ -357,15 +358,15 @@ export class HeightSlideScreen extends Component {
         { translateY: footPan.y },
         // { scale: footScale },
       ],
-      top: FOOT_OFFSET.y,
+      top: FOOT_OFFSET.y - 15,
       // left: FOOT_OFFSET.x,
       opacity: footOpacity,
     };
 
     const bellySlide = {
       transform: [{ translateX: bellyPan.x }],
-      left: BELLY_OFFSET.x,
-      opacity: bellyOpacity
+      left: BELLY_OFFSET.x - 14,
+      opacity: bellyOpacity,
       // top: 0,
     };
 
@@ -384,7 +385,7 @@ export class HeightSlideScreen extends Component {
       <Container>
         <ImageContainer
           imageStyle={{
-            resizeMode: 'cover',
+            resizeMode: 'contain',
           }}
           source={{
             uri: `data:image/gif;base64,${base64}`,

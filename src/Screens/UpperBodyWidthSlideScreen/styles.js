@@ -1,19 +1,19 @@
 import styled from 'styled-components/native';
 import { ImageBackground, Animated, Dimensions } from 'react-native';
-import { Icon } from 'react-native-elements';
-import { theme } from '../../constants';
+import { theme, BaseHeightOffset } from '../../constants';
 import {
   SLIDER_SIZE,
   HALF_SLIDER_SIZE,
   IMAGE_WIDTH,
   IMAGE_HEIGHT,
   ZOOM,
-  SLIDER_HEIGHT,
 } from './constants';
-const window = Dimensions.get('window');
+
+export const window = Dimensions.get('window');
 
 export const Container = styled.View`
-  flex: 1;
+  width: 100%;
+  height: 100%;
 `;
 
 export const ImageContainer = styled(ImageBackground)`
@@ -24,40 +24,27 @@ export const ImageContainer = styled(ImageBackground)`
   height: ${IMAGE_HEIGHT};
 `;
 
-export const HeadGuideWrapper = styled(Animated.View)`
-  position: absolute;
+export const MagnifierWrapper = styled(Animated.View)`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   top: 0;
-  right: 10;
-  width: 50px;
-  height: 50px;
+  left: 0;
 `;
 
-export const FootGuideWrapper = styled(Animated.View)`
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  right: 10;
-  width: 50px;
-  height: 50px;
+export const MagnifierContainer = styled(Animated.View)`
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border: 3px solid ${theme.pointColor};
+  background-color: black;
+  overflow: hidden;
 `;
-
-// export const MagnifierContainer = styled(Animated.View)`
-//   position: relative;
-//   width: 100px;
-//   height: 100px;
-//   border: 3px solid ${theme.pointColor};
-//   background-color: black;
-//   overflow: hidden;
-// `;
 
 export const MagnifierImage = styled(Animated.Image)`
-  /* width: ${IMAGE_WIDTH * ZOOM};
-  height: ${IMAGE_HEIGHT * ZOOM}; */
+  width: ${IMAGE_WIDTH * ZOOM};
+  height: ${IMAGE_HEIGHT * ZOOM};
 `;
 
 export const MagnifierText = styled.Text`
@@ -79,8 +66,16 @@ export const Slider = styled(Animated.View)`
   position: absolute;
   justify-content: center;
   align-items: center;
-  width: ${SLIDER_SIZE};
-  height: 30px;
+  background-color: transparent;
+  width: 30px;
+  height: ${window.height};
+`;
+
+export const SliderBar = styled.View`
+  position: relative;
+  width: 1px;
+  height: ${window.height};
+  background-color: ${theme.guideColor};
 `;
 
 export const BellySlider = styled(Animated.View)`
@@ -98,30 +93,20 @@ export const BellySliderBar = styled.View`
   background-color: ${theme.guideColor};
 `;
 
-export const BellyLabel = styled.View`
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  width: 80px;
-  height: 30px;
-  background-color: ${theme.guideColor};
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-`;
-
-export const SliderBar = styled.View`
+export const BellyLine = styled.View`
   position: relative;
-  width: ${SLIDER_SIZE};
-  height: ${SLIDER_HEIGHT};
-  background-color: ${theme.guideColor};
+  width: 1px;
+  height: ${window.height};
+  left: ${(props) => props.belly};
+  background-color: red;
 `;
 
-export const Sliderlabel = styled.View`
+export const SliderLabel = styled.View`
   position: absolute;
   justify-content: center;
   align-items: center;
-  left: 35;
-  top: -28;
+  left: -54;
+  top: ${(props) => (!props.isBottom ? 70 : 500)};
   width: 80px;
   height: 30px;
   background-color: ${theme.guideColor};
@@ -129,11 +114,22 @@ export const Sliderlabel = styled.View`
   border-top-right-radius: 10px;
 `;
 
-export const SliderlabelText = styled.Text`
-  color: ${theme.textColor};
-  font-weight: bold;
+export const RightSliderLabel = styled.View`
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  left: -24;
+  top: ${(props) => (!props.isBottom ? 70 : 500)};
+  width: 80px;
+  height: 30px;
+  background-color: ${theme.guideColor};
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 `;
 
+export const LabelText = styled.Text`
+  color: ${theme.textColor};
+`;
 export const HelpWrapper = styled.View`
   justify-content: center;
   align-items: center;
@@ -144,11 +140,6 @@ export const HelpWrapper = styled.View`
   width: 50px;
   background: ${theme.pointColor};
   border-radius: 25px;
-`;
-
-export const PartGuideImage = styled.Image`
-  width: 100%;
-  height: 100%;
 `;
 
 export const GuideImage = styled(Animated.Image)`
