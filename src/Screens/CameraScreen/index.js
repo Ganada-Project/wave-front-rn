@@ -56,14 +56,15 @@ class CameraScreen extends Component {
     //   this.setState({ x, y, z });
     // });
     // this.setState({ subscription });
-    // this.attitudeWatchID = Attitude.watchAttitude((update) => {
-    //   this.setState({ pitch: update.attitude.pitch + 90 });
-    // });
+    this.attitudeWatchID = Attitude.watchAttitude((update) => {
+      this.setState({ pitch: update.attitude.pitch + 90 });
+    });
   }
 
   componentWillUnmount() {
     // this.state.subscription.unsubscribe();
-    // Attitude.clearWatchAttitude(this.attitudeWatchID);
+    Attitude.clearWatchAttitude(this.attitudeWatchID);
+    Attitude.stopObserving();
   }
 
   takePicture = async () => {
