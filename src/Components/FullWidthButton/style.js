@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   disabledInvertContainer: {
-    backgroundColor: theme.pointColor,
+    backgroundColor: 'transparent',
     width: '100%',
     borderRadius: 30,
     marginBottom: 10,
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   defaultContainer: {
-    backgroundColor: '#ffffff',
     width: '100%',
     borderRadius: 30,
     marginBottom: 10,
@@ -40,7 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   defaultText: {
-    color: theme.pointColor,
+    color: theme.whiteColor,
     fontSize: 16,
     fontWeight: '700',
   },
@@ -53,9 +52,9 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   invertContainer: {
-    backgroundColor: theme.pointColor,
+    backgroundColor: 'white',
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: theme.whiteColor,
     width: '100%',
     borderRadius: 30,
     marginBottom: 10,
@@ -71,9 +70,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   invertText: {
-    color: '#ffffff',
+    color: theme.subColor,
     fontSize: 16,
     fontWeight: '700',
+  },
+  disabledInvertText: {
+    color: theme.pointColor,
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  transparentContainer: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: theme.whiteColor,
+    width: '100%',
+    borderRadius: 30,
+    marginBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    height: 55,
   },
 });
 

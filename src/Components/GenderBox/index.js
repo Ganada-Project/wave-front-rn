@@ -29,23 +29,20 @@ export class GenderBox extends Component {
         style={{
           ...styles.wrapper,
           width: window.width / divider,
-          height: window.width / divider,
+          height: 40,
           borderWidth: 1,
+          borderRadius: window.width / divider / 2,
           borderColor:
-            selectedGenderId !== id ? theme.grayColor : theme.pointColor,
+            selectedGenderId !== id ? theme.whiteColor : theme.whiteColor,
           backgroundColor:
-            selectedGenderId !== id ? theme.whiteColor : theme.pointColor,
+            selectedGenderId !== id ? 'transparent' : theme.whiteColor,
         }}
         onPress={() => onPress(id)}
       >
-        <Image
-          source={selectedGenderId !== id ? icon : iconWhite}
-          style={{ width: 60, height: 60 }}
-        />
         <Text
           style={{
             ...styles.text,
-            color: selectedGenderId !== id ? theme.textColor : theme.whiteColor,
+            color: selectedGenderId !== id ? theme.textColor : theme.pointColor,
           }}
         >
           {name}

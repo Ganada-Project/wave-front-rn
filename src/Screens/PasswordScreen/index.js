@@ -2,15 +2,23 @@ import React, { Component } from 'react';
 import { KeyboardAvoidingView, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Navigation } from 'react-native-navigation';
+import AnimatedLinearGradient from 'react-native-animated-linear-gradient';
+
 import styles from './styles';
 import { RegisterForm, FullWidthButton } from '../../Components';
-import { keyboardBehavior, keyboardVerticalOffset } from '../../constants';
+import {
+  keyboardBehavior,
+  keyboardVerticalOffset,
+  gradientPreset,
+  gradientSpeed,
+  InvertOption,
+} from '../../constants';
 
 export class PasswordScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
-        noBorder: true,
+        ...InvertOption,
       },
     };
   }
@@ -22,19 +30,14 @@ export class PasswordScreen extends Component {
     };
   }
 
-  navigateToFavStyle = () => {
-    const {
-      componentId, phone, gender, name, nickname,
-    } = this.props;
+  navigateToGender = () => {
+    const { componentId, phone } = this.props;
     const { password } = this.state;
     Navigation.push(componentId, {
       component: {
-        name: 'wave.favStyle',
+        name: 'wave.registerName',
         passProps: {
           phone,
-          gender,
-          name,
-          nickname,
           password,
         },
       },
@@ -43,40 +46,43 @@ export class PasswordScreen extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView
-        style={styles.container}
-        behavior={keyboardBehavior}
-        keyboardVerticalOffset={keyboardVerticalOffset}
+      <AnimatedLinearGradient
+        customColors={gradientPreset}
+        speed={gradientSpeed}
       >
-        <View style={styles.header}>
-          <Text style={styles.header__title}>비밀번호를 설정하세요.</Text>
-        </View>
-        <View style={styles.body}>
-          <Text style={styles.body__text}>
-            비밀번호를 8자 이상으로해주세요.
-          </Text>
-          <RegisterForm
-            label="비밀번호"
-            onChangeText={(text) => this.setState({ password: text })}
-          />
-        </View>
-        <View style={styles.footer}>
-          <FullWidthButton
-            onPress={this.navigateToFavStyle}
-            invert
-            content="다음 단계"
-          />
-        </View>
-      </KeyboardAvoidingView>
+        <KeyboardAvoidingView
+          style={styles.container}
+          behavior={keyboardBehavior}
+          keyboardVerticalOffset={keyboardVerticalOffset}
+        >
+          <View style={styles.header}>
+            <Text style={styles.header__title}>보안</Text>
+          </View>
+          <View style={styles.body}>
+            <Text style={styles.body__text}>
+              비밀번호는 영문 숫자 혼합 8자 이상입니다.
+            </Text>
+            <RegisterForm
+              invert
+              label="비밀번호"
+              onChangeText={(text) => this.setState({ password: text })}
+            />
+          </View>
+          <View style={styles.footer}>
+            <FullWidthButton
+              onPress={this.navigateToGender}
+              invert
+              content="다음 단계"
+            />
+          </View>
+        </KeyboardAvoidingView>
+      </AnimatedLinearGradient>
     );
   }
 }
 
 PasswordScreen.propTypes = {
   componentId: PropTypes.string,
-  gender: PropTypes.string,
-  name: PropTypes.string,
-  nickname: PropTypes.string,
   phone: PropTypes.string,
 };
 

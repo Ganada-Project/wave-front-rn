@@ -2,15 +2,23 @@ import React, { Component } from 'react';
 import { KeyboardAvoidingView, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Navigation } from 'react-native-navigation';
+import AnimatedGradient from 'react-native-animated-linear-gradient';
 import styles, { HeightWeightWrapper, Height, Weight } from './styles';
 import { RegisterForm, FullWidthButton } from '../../Components';
-import { keyboardVerticalOffset, keyboardBehavior } from '../../constants';
+import {
+  keyboardVerticalOffset,
+  keyboardBehavior,
+  theme,
+  gradientPreset,
+  gradientSpeed,
+  AuthTopBarOption,
+} from '../../constants';
 
 export class BodySizeScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
-        noBorder: true,
+        ...AuthTopBarOption,
       },
     };
   }
@@ -20,45 +28,26 @@ export class BodySizeScreen extends Component {
     this.state = {
       height: '',
       weight: '',
-      waist: '',
     };
   }
 
-  navigateTofinalRegister = () => {
-    const { height, weight, waist } = this.state;
-    const {
-      gender,
-      phone,
-      name,
-      nickname,
-      password,
-      stylesArray,
-      brandsArray,
-      base64,
-      componentId,
-    } = this.props;
+  navigateCamera = () => {
+    const { height, weight } = this.state;
+    const { componentId, isMe } = this.props;
     Navigation.push(componentId, {
       component: {
-        name: 'wave.finalRegister',
+        name: 'wave.camera',
         passProps: {
-          phone,
-          gender,
-          nickname,
-          name,
-          password,
-          stylesArray,
-          brandsArray,
-          base64,
           height,
           weight,
-          waist,
+          isMe,
         },
       },
     });
   };
 
   render() {
-    const { height, weight, waist } = this.state;
+    const { height, weight } = this.state;
     return (
       <KeyboardAvoidingView
         style={styles.container}
@@ -66,33 +55,25 @@ export class BodySizeScreen extends Component {
         keyboardVerticalOffset={keyboardVerticalOffset}
       >
         <View style={styles.header}>
-          <Text style={styles.header__title}>신체치수를 알려주세요.</Text>
+          <Text style={styles.header__title}>기본 신체정보</Text>
         </View>
         <View style={styles.body}>
-          <HeightWeightWrapper>
-            <Height>
-              <RegisterForm
-                label="신장(cm)"
-                onChangeText={(text) => this.setState({ height: text })}
-              />
-            </Height>
-            <Weight>
-              <RegisterForm
-                label="체중(kg)"
-                onChangeText={(text) => this.setState({ weight: text })}
-              />
-            </Weight>
-          </HeightWeightWrapper>
           <RegisterForm
-            label="허리둘레(cm)"
-            onChangeText={(text) => this.setState({ waist: text })}
+            label="신장(cm)"
+            keyboardType="numeric"
+            onChangeText={(text) => this.setState({ height: text })}
+          />
+          <RegisterForm
+            label="체중(kg)"
+            keyboardType="numeric"
+            autoFocus={false}
+            onChangeText={(text) => this.setState({ weight: text })}
           />
         </View>
         <View style={styles.footer}>
           <FullWidthButton
-            disabled={!!height === '' || weight === '' || waist === ''}
-            onPress={this.navigateTofinalRegister}
-            invert
+            disabled={!!height === '' || weight === ''}
+            onPress={this.navigateCamera}
             content="다음 단계"
           />
         </View>
@@ -103,14 +84,7 @@ export class BodySizeScreen extends Component {
 
 BodySizeScreen.propTypes = {
   componentId: PropTypes.string,
-  gender: PropTypes.string,
-  name: PropTypes.string,
-  nickname: PropTypes.string,
-  phone: PropTypes.string,
-  password: PropTypes.string,
-  stylesArray: PropTypes.array,
-  brandsArray: PropTypes.array,
-  base64: PropTypes.string,
+  isMe: PropTypes.bool,
 };
 
 export default BodySizeScreen;

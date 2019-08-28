@@ -104,6 +104,10 @@ android {
         missingDimensionStrategy "RNN.reactNativeVersion", "reactNative57_5"
         versionCode 1
         versionName "1.0"
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -150,6 +154,12 @@ configurations.all {
 }
 
 dependencies {
+    implementation project(':@react-native-community_geolocation')
+    implementation project(':react-native-firebase')
+    implementation project(':@react-native-community_async-storage')
+    compile project(':react-native-linear-gradient')
+    implementation project(':react-native-sensors')
+    implementation project(':rn-fetch-blob')
     implementation project(':react-native-fast-image')
     implementation project(':react-native-camera')
     implementation project(':react-native-vector-icons')

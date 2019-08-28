@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, Image } from 'react-native';
-import { Button } from 'react-native-elements';
 import { Navigation } from 'react-native-navigation';
+import AnimatedLinearGradient from 'react-native-animated-linear-gradient';
 import styles from './styles';
 import { FullWidthButton } from '../../Components';
-import { theme } from '../../constants';
+import { gradientPreset, gradientSpeed } from '../../constants';
 import WaveLogoWhite from '../../Assets/Logos/wave-logo-white.png';
 
 export class WelcomeScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
         visible: false,
         drawBehind: true,
+      },
+      statusBar: {
+        style: 'light',
       },
     };
   }
@@ -23,11 +26,11 @@ export class WelcomeScreen extends Component {
     this.state = {};
   }
 
-  navigateToGender = () => {
+  navigateToSignUp = () => {
     const { componentId } = this.props;
     Navigation.push(componentId, {
       component: {
-        name: 'wave.gender',
+        name: 'wave.phoneVerify',
       },
     });
   };
@@ -43,28 +46,36 @@ export class WelcomeScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Image style={styles.logo} source={WaveLogoWhite} />
-          <Text style={styles.header__title}>Surf in style.</Text>
-          <Text style={styles.header__subtitle}>세상의 스타일, 내 손안에.</Text>
+      <AnimatedLinearGradient
+        customColors={gradientPreset}
+        speed={gradientSpeed}
+      >
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Image style={styles.logo} source={WaveLogoWhite} />
+            {/* <Text style={styles.header__title}>웨어비</Text> */}
+            <Text style={styles.header__title}>혹시 아시나요?</Text>
+            <Text style={styles.header__subtitle}>
+              패션 브랜드마다 사이즈 측정법이 다르데요.
+            </Text>
+          </View>
+          <View style={styles.footer}>
+            <FullWidthButton
+              transparent
+              content="로그인"
+              onPress={this.navigateToSignIn}
+            />
+            <FullWidthButton
+              invert
+              content="회원가입"
+              onPress={this.navigateToSignUp}
+            />
+            <FullWidthButton invert content="카카오로 회원가입" />
+
+            {/* <SizeCardAddButton onPressAdd={this.navigateToInfo1} /> */}
+          </View>
         </View>
-        <View style={styles.footer}>
-          <FullWidthButton icon="facebook-f" content="페이스북으로 로그인" />
-          <FullWidthButton
-            icon="phone"
-            invert
-            content="휴대번호로 로그인"
-            onPress={this.navigateToSignIn}
-          />
-          <Button
-            onPress={this.navigateToGender}
-            title="회원가입"
-            type="clear"
-            titleStyle={styles.registerText}
-          />
-        </View>
-      </View>
+      </AnimatedLinearGradient>
     );
   }
 }

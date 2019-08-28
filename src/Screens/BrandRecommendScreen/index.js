@@ -35,7 +35,7 @@ import { makeSelectBrands, makeSelectRecommendLoading } from './selectors';
 import { FullWidthButton, BrandBox } from '../../Components';
 
 // local action
-import { getBrandRecommendAction } from './actions';
+import { getItemsAction } from './actions';
 
 // local saga, reducer
 import saga from './saga';
@@ -45,7 +45,7 @@ import reducer from './reducer';
 import styles from './style';
 
 class BrandRecommendScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
         noBorder: true,
@@ -70,8 +70,8 @@ class BrandRecommendScreen extends Component {
   }
 
   componentDidMount() {
-    const { getBrandRecommend, stylesArray } = this.props;
-    getBrandRecommend({ stylesArray });
+    const { getItems, stylesArray } = this.props;
+    // getItems({ stylesArray });
   }
 
   filterBrandList = () => {
@@ -86,10 +86,15 @@ class BrandRecommendScreen extends Component {
 
   navigateToPoseInfo = () => {
     const {
-      componentId, phone, gender, nickname, name, password, stylesArray,
+      componentId,
+      phone,
+      gender,
+      nickname,
+      name,
+      password,
+      stylesArray,
     } = this.props;
     const brandsArray = this.filterBrandList();
-    console.log(brandsArray);
     Navigation.push(componentId, {
       component: {
         name: 'wave.poseInfo',
@@ -117,12 +122,17 @@ class BrandRecommendScreen extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.header__title}>추천할 만한 브랜드를 모아봤어요!</Text>
-          <Text>브랜드를 팔로우 하면 최신 소식을 받아 볼 수 있습니다</Text>
+          <Text style={styles.header__title}>추천 브랜드</Text>
         </View>
-        <ScrollView style={styles.body}>
+        <ScrollView style={styles.body} showsScrollIndicator={false}>
           <View style={styles.body__stylesWrapper}>
-            {brands.map((brand, index) => <BrandBox onPress={this.onPressBrandBox(index)} key={brand.get('id')} brand={brand} />)}
+            {brands.map((brand, index) => (
+              <BrandBox
+                onPress={this.onPressBrandBox(index)}
+                key={`brandBox-${brand.get('id')}`}
+                brand={brand}
+              />
+            ))}
           </View>
         </ScrollView>
         <View style={styles.footer}>
@@ -139,9 +149,9 @@ class BrandRecommendScreen extends Component {
 
 BrandRecommendScreen.propTypes = {
   componentId: PropTypes.string,
-  getBrandRecommend: PropTypes.func,
+  getItems: PropTypes.func,
   phone: PropTypes.string,
-  gender: PropTypes.string,
+  gender: PropTypes.number,
   name: PropTypes.string,
   nickname: PropTypes.string,
   password: PropTypes.string,
@@ -154,7 +164,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getBrandRecommend: ({ stylesArray }) => dispatch(getBrandRecommendAction({ stylesArray })),
+  getItems: ({ stylesArray }) => dispatch(getItemsAction({ stylesArray })),
 });
 
 const withSaga = injectSaga({ key: 'brandRecommend', saga });

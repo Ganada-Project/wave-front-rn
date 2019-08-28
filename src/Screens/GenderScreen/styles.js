@@ -1,28 +1,37 @@
 import { StyleSheet } from 'react-native';
-import { theme } from '../../constants';
+import styled from 'styled-components/native';
+import { theme, TopBarHeight } from '../../constants';
+
+export const GenderWrapper = styled.View`
+  flex-direction: row;
+  margin-bottom: 10px;
+`;
+
+export const LabelText = styled.Text`
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #ffffff;
+`;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.whiteColor,
     paddingHorizontal: 25,
-    paddingTop: 10,
+    paddingTop: TopBarHeight,
   },
   header: {
-    flex: 1,
+    flex: 0.3,
   },
   body: {
     flex: 1.5,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   header__title: {
-    fontSize: 28,
-    color: theme.pointColor,
+    fontSize: 20,
+    color: theme.whiteColor,
     fontWeight: 'bold',
   },
   footer: {
-    flex: 1,
+    flex: 0.2,
     alignItems: 'center',
     justifyContent: 'center',
   },

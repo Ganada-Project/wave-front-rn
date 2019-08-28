@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { Navigation } from 'react-native-navigation';
+import AnimatedGradient from 'react-native-animated-linear-gradient';
+import Swiper from 'react-native-swiper';
+import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import { FullWidthButton } from '../../Components';
+import {
+  theme,
+  gradientPreset,
+  gradientSpeed,
+  InvertOption,
+} from '../../constants';
 
 class PoseInfoScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
-        noBorder: true,
+        ...InvertOption,
       },
     };
   }
@@ -17,80 +26,120 @@ class PoseInfoScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    Navigation.events().bindComponent(this);
   }
 
-  navigateToCamera = () => {
-    const {
-      componentId,
-      name,
-      nickname,
-      phone,
-      gender,
-      password,
-      stylesArray,
-      brandsArray,
-    } = this.props;
+  navigateToBodySize = () => {
+    const { componentId, isMe } = this.props;
     Navigation.push(componentId, {
       component: {
-        name: 'wave.camera',
+        name: 'wave.bodySize',
         passProps: {
-          phone,
-          gender,
-          nickname,
-          name,
-          password,
-          stylesArray,
-          brandsArray,
+          isMe,
         },
       },
     });
   };
 
+  navigationButtonPressed({ buttonId }) {
+    if (buttonId === 'poseInfoSkipButton') {
+      const { componentId } = this.props;
+      Navigation.push(componentId, {
+        component: {
+          name: 'wave.bodySize',
+        },
+      });
+    }
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.header__title}>마지막으로,</Text>
-        </View>
-        <View style={styles.body}>
-          <View style={{ marginBottom: 15 }}>
-            <Text style={styles.body__text}>
-              웨이브는 전신이 나온 이미지 한장으로 신체치수를 계산해주어요
-            </Text>
+      <AnimatedGradient customColors={gradientPreset} speed={gradientSpeed}>
+        <Swiper
+          activeDot={(
+            <LinearGradient
+              style={styles.activeDot}
+              colors={gradientPreset}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+            />
+          )}
+        >
+          <View style={styles.swiper__container}>
+            <View style={styles.swiper__imageArea}>
+              <Image
+                style={styles.guideImage}
+                resizeMode="contain"
+                source={require('./images/guide1.png')}
+              />
+            </View>
+            <View style={styles.swiper__descArea}>
+              <Text style={styles.swiper__headerInfo}>앞 모습 전신을 촬영</Text>
+            </View>
           </View>
-          <View style={{ marginBottom: 15 }}>
-            <Text style={styles.body__text}>
-              - 나중에 언제라도 재측정 할 수 있어요
-            </Text>
-            <Text style={styles.body__text}>
-              - 측정시 올린 이미지는 그 누구도 열람 불가능!
-            </Text>
-            <Text style={styles.body__text}>
-              - 나중에 언제라도 재측정 할 수 있어요
-            </Text>
+          <View style={styles.swiper__container}>
+            <View style={styles.swiper__imageArea}>
+              <Image
+                resizeMode="contain"
+                style={styles.guideImage}
+                source={require('./images/guide2.png')}
+              />
+            </View>
+            <View style={styles.swiper__descArea}>
+              <Text style={styles.swiper__headerInfo}>
+                카메라는 90으로 유지
+              </Text>
+            </View>
           </View>
-        </View>
-        <View style={styles.footer}>
-          <FullWidthButton
-            onPress={this.navigateToCamera}
-            invert
-            content="촬영하기"
-          />
-        </View>
-      </View>
+          <View style={styles.swiper__container}>
+            <View style={styles.swiper__imageArea}>
+              <Image
+                style={styles.guideImage}
+                resizeMode="contain"
+                source={require('./images/guide3.png')}
+              />
+            </View>
+            <View style={styles.swiper__descArea}>
+              <Text style={styles.swiper__headerInfo}>재미난 시간</Text>
+            </View>
+          </View>
+          <View style={styles.swiper__container}>
+            <View style={styles.swiper__imageArea}>
+              <Image
+                style={styles.guideImage}
+                resizeMode="contain"
+                source={require('./images/guide4.png')}
+              />
+            </View>
+            <View style={styles.swiper__descArea}>
+              <Text style={styles.swiper__headerInfo}>친절한 웨어비</Text>
+            </View>
+          </View>
+          <View style={styles.swiper__container}>
+            <View style={styles.swiper__imageArea}>
+              <Image
+                style={styles.guideImage}
+                resizeMode="contain"
+                source={require('./images/guide5.png')}
+              />
+            </View>
+            <View style={styles.swiper__descArea}>
+              <Text style={styles.swiper__headerInfo}>자동으로 치수 계산</Text>
+              <FullWidthButton
+                content="다음 단계"
+                onPress={this.navigateToBodySize}
+              />
+            </View>
+          </View>
+        </Swiper>
+      </AnimatedGradient>
     );
   }
 }
 
 PoseInfoScreen.propTypes = {
   componentId: PropTypes.string,
-  gender: PropTypes.string,
-  name: PropTypes.string,
-  nickname: PropTypes.string,
-  phone: PropTypes.string,
-  password: PropTypes.string,
-  stylesArray: PropTypes.array,
-  brandsArray: PropTypes.array,
+  isMe: PropTypes.bool,
 };
 
 export default PoseInfoScreen;

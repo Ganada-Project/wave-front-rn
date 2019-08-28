@@ -1,12 +1,11 @@
 import { StyleSheet } from 'react-native';
-import { theme } from '../../constants';
+import { theme, TopBarHeight } from '../../constants';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.whiteColor,
     paddingHorizontal: 25,
-    paddingTop: 10,
+    paddingTop: TopBarHeight,
   },
   header: {
     flex: 0.2,
@@ -17,10 +16,11 @@ const styles = StyleSheet.create({
   },
   body__text: {
     marginBottom: 30,
+    color: theme.whiteColor,
   },
   header__title: {
-    fontSize: 28,
-    color: theme.pointColor,
+    fontSize: 20,
+    color: theme.whiteColor,
     fontWeight: 'bold',
   },
   footer: {

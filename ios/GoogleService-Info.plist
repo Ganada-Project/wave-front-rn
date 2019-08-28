@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>628014710564-2lq0432ivssjivf7d8fhao7l2pmef6s5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.628014710564-2lq0432ivssjivf7d8fhao7l2pmef6s5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDpmg3e16n-UoM7HyWvWYD0TGRd6_Xo1I0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>628014710564</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ganadapj.wearbe</string>
+	<key>PROJECT_ID</key>
+	<string>wearbe-6b998</string>
+	<key>STORAGE_BUCKET</key>
+	<string>wearbe-6b998.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:628014710564:ios:ffed8b7d4808e28d</string>
+	<key>DATABASE_URL</key>
+	<string>https://wearbe-6b998.firebaseio.com</string>
+</dict>
+</plist>

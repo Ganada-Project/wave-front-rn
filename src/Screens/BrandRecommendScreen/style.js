@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   header: {
-    flex: 0.2,
+    flex: 0.1,
+    justifyContent: 'center',
   },
   body: {
     paddingTop: 10,
@@ -17,11 +18,10 @@ const styles = StyleSheet.create({
   },
   body__stylesWrapper: {
     flexDirection: 'column',
-    justifyContent: 'center',
   },
   header__title: {
-    fontSize: 24,
-    color: theme.pointColor,
+    fontSize: 20,
+    color: theme.textColor,
     fontWeight: 'bold',
     marginBottom: 10,
   },

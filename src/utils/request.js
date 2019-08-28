@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 const getUserToken = async () => {
   let idToken;
   try {
@@ -86,6 +86,8 @@ export async function postRequest({ url, payload }) {
     url,
     data: { ...payload },
   };
+
+  console.log(options);
 
   return axios(options)
     .then(checkStatus)

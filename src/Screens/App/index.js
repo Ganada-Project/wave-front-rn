@@ -14,6 +14,8 @@ import { View } from 'react-native';
 // react-native-navigation
 import { Navigation } from 'react-native-navigation';
 
+// import { firebase } from '@';
+
 // redux
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -22,6 +24,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 // injectSaga
+import { setCustomText } from 'react-native-global-props';
 import injectSaga from '../../utils/injectSaga';
 import DAEMON from '../../utils/constants';
 
@@ -32,6 +35,15 @@ import { fetchUserAction } from './actions';
 
 // local saga
 import saga from './saga';
+import { fonts, theme } from '../../constants';
+
+const customTextProps = {
+  style: {
+    fontFamily: fonts.NanumGothic,
+  },
+};
+
+setCustomText(customTextProps);
 
 class App extends Component {
   static options(passProps) {
@@ -48,7 +60,7 @@ class App extends Component {
     Navigation.events().bindComponent(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { fetchUser } = this.props;
     fetchUser();
   }

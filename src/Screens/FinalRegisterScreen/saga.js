@@ -1,64 +1,101 @@
-import { AsyncStorage } from 'react-native';
-
+import { Navigation } from 'react-native-navigation';
 import {
-  call, put, takeLatest, all,
+  call, put, takeLatest, all, select,
 } from 'redux-saga/effects';
 import {
-  POST_REGISTER_REQUESTING,
-  POST_REGISTER_REQUESTING_FAIL,
-  POST_REGISTER_REQUESTING_SUCCESS,
+  POST_SIZE_CARD_REQUESTING,
+  POST_SIZE_CARD_REQUESTING_FAIL,
+  POST_SIZE_CARD_REQUESTING_SUCCESS,
 } from './constants';
-import { FETCH_USER_REQUESTING } from '../App/constants';
-import { fetchUserFlow } from '../App/saga';
 import { API_URL } from '../../constants';
 import { postRequest } from '../../utils/request';
-import { startTabScreens } from '../../index';
 
-function* registerUserSaga(action) {
-  const url = `${API_URL}/auth/register`;
+function* postSizeCardSaga(action) {
+  const url = `${API_URL}/card`;
+
   const {
-    password,
     weight,
-    name,
+    sizeCardName,
     gender,
     height,
-    waist,
-    imageBase,
-    nickname,
-    stylesArray,
-    brandsArray,
-    phone,
+    age,
+    headOffset,
+    footOffset,
+    leftNeckOffset,
+    leftShulderOffset,
+    leftElbowOffset,
+    leftHandOffset,
+    rightNeckOffset,
+    rightShulderOffset,
+    rightElbowOffset,
+    rightHandOffset,
+    leftChestOffset,
+    leftWaistOffset,
+    leftPelvisOffset,
+    rightChestOffset,
+    rightWaistOffset,
+    rightPelvisOffset,
+    leftThighOffset,
+    leftAnkleOffset,
+    rightThighOffset,
+    rightAnkleOffset,
   } = action.payload;
   const payload = {
-    email: phone,
-    password,
-    sex: gender,
-    nickname,
-    name,
-    phone,
-    styles: stylesArray,
-    brands: brandsArray,
-    bodyImageBase64: imageBase,
+    name: sizeCardName,
+    gender,
     weight,
     height,
-    waist,
+    age,
+    bodyPoints: {
+      head: headOffset,
+      foot: footOffset,
+      leftNeck: leftNeckOffset,
+      leftShoulder: leftShulderOffset,
+      leftElbow: leftElbowOffset,
+      leftHand: leftHandOffset,
+      rightNeck: rightNeckOffset,
+      rightShoulder: rightShulderOffset,
+      rightElbow: rightElbowOffset,
+      rightHand: rightHandOffset,
+      leftChest: leftChestOffset,
+      leftWaist: leftWaistOffset,
+      leftPelvis: leftPelvisOffset,
+      rightChest: rightChestOffset,
+      rightWaist: rightWaistOffset,
+      rightPelvis: rightPelvisOffset,
+      leftThigh: leftThighOffset,
+      leftAnkle: leftAnkleOffset,
+      rightThigh: rightThighOffset,
+      rightAnkle: rightAnkleOffset,
+    },
+    bodyShape: 'f',
+    preferColor: '#ffffff',
+    preferStyle: 'f',
+    preferSize: '3',
   };
   try {
+    console.log(JSON.stringify(payload));
     const result = yield call(postRequest, { url, payload });
-    yield put({ type: POST_REGISTER_REQUESTING_SUCCESS, payload: { result } });
-    yield AsyncStorage.setItem('wave.idToken', result.token);
-    yield fetchUserFlow({ token: result.token });
-    yield startTabScreens();
+    yield put({ type: POST_SIZE_CARD_REQUESTING_SUCCESS, payload: { result } });
+    yield Navigation.setRoot({
+      root: {
+        stack: {
+          children: [
+            {
+              component: {
+                name: 'wave.home',
+              },
+            },
+          ],
+        },
+      },
+    });
   } catch (error) {
     console.log(error);
-    yield put({ type: POST_REGISTER_REQUESTING_FAIL, error });
+    yield put({ type: POST_SIZE_CARD_REQUESTING_FAIL, error });
   }
 }
 
 export default function* rootSaga() {
-  yield all([
-    takeLatest(POST_REGISTER_REQUESTING, registerUserSaga),
-    // takeLatest(LOGIN_ERROR, logout),
-    // loginWatcher(),
-  ]);
+  yield all([takeLatest(POST_SIZE_CARD_REQUESTING, postSizeCardSaga)]);
 }

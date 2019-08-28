@@ -1,9 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image';
+import { Button } from 'react-native-elements';
 import {
-  Wrapper, ImageArea, TextArea, BrandTitle,
+  Wrapper,
+  ImageArea,
+  BrandTitle,
+  Content,
+  ItemArea,
+  BrandInfo,
 } from './style';
+import { theme } from '../../constants';
+
+const styles = {
+  itemImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 20,
+  },
+  followText: {
+    color: theme.textColor,
+    fontSize: 15,
+  },
+  followedText: {
+    color: theme.pointColor,
+    fontSize: 15,
+  },
+};
 
 class BrandBox extends Component {
   constructor(props) {
@@ -14,22 +37,37 @@ class BrandBox extends Component {
 
   render() {
     const { brand, onPress } = this.props;
+
     return (
-      <Wrapper onPress={onPress}>
-        <ImageArea>
-          <FastImage
-            source={{
-              uri: brand.get('brand_profile_img'),
-            }}
-            style={{ width: '100%', height: '100%' }}
-            resizeMode={FastImage.resizeMode.cover}
-          />
-        </ImageArea>
-        <TextArea selected={brand.get('selected')}>
-          <BrandTitle selected={brand.get('selected')}>
-            {brand.get('brand_name')}
-          </BrandTitle>
-        </TextArea>
+      <Wrapper>
+        <Content>
+          <BrandInfo>
+            <BrandTitle selected={brand.get('selected')}>
+              {brand.get('brand_name')}
+            </BrandTitle>
+            <Button
+              title={brand.get('selected') ? '팔로우중' : '팔로우'}
+              onPress={onPress}
+              type="clear"
+              titleStyle={
+                brand.get('selected') ? styles.followedText : styles.followText
+              }
+            />
+          </BrandInfo>
+          <ItemArea horizontal showsHorizontalScrollIndicator={false}>
+            {brand.get('items').map((item) => (
+              <ImageArea key={`brandBox-itemImage-${item.get('id')}`}>
+                <FastImage
+                  source={{
+                    uri: item.getIn(['image', 0, 'img_url']),
+                  }}
+                  style={styles.itemImage}
+                  resizeMode={FastImage.resizeMode.cover}
+                />
+              </ImageArea>
+            ))}
+          </ItemArea>
+        </Content>
       </Wrapper>
     );
   }

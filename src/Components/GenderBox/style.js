@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     borderRadius: 10,
     overflow: 'hidden',
+    marginRight: 10,
   },
   overlay: {
     justifyContent: 'center',
@@ -19,7 +20,6 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: '600',
     fontSize: 16,
-    marginTop: 10,
   },
 });
 

@@ -5,9 +5,9 @@ import {
   call, put, takeLatest, all,
 } from 'redux-saga/effects';
 import {
-  GET_BRAND_RECOMMEND_FAIL,
-  GET_BRAND_RECOMMEND_REQUEST,
-  GET_BRAND_RECOMMEND_SUCCESS,
+  GET_ITEMS_FAIL,
+  GET_ITEMS_REQUEST,
+  GET_ITEMS_SUCCESS,
 } from './constants';
 import { API_URL } from '../../constants';
 import { postRequest } from '../../utils/request';
@@ -22,14 +22,14 @@ function* getBrandRecommendSaga(action) {
     const data = yield call(postRequest, { url, payload });
     const brands = data.result.map((brand) => ({ ...brand, selected: false }));
     yield put({
-      type: GET_BRAND_RECOMMEND_SUCCESS,
+      type: GET_ITEMS_SUCCESS,
       payload: { brands },
     });
   } catch (error) {
-    yield put({ type: GET_BRAND_RECOMMEND_FAIL, error });
+    yield put({ type: GET_ITEMS_FAIL, error });
   }
 }
 
 export default function* rootSaga() {
-  yield all([takeLatest(GET_BRAND_RECOMMEND_REQUEST, getBrandRecommendSaga)]);
+  yield all([takeLatest(GET_ITEMS_REQUEST, getBrandRecommendSaga)]);
 }

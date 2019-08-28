@@ -1,20 +1,20 @@
 import { StyleSheet } from 'react-native';
-import { theme } from '../../constants';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.pointColor,
+    // backgroundColor: theme.pointColor,
     padding: 25,
   },
   header: {
-    flex: 1,
+    flex: 0.6,
     justifyContent: 'center',
   },
   header__title: {
-    fontSize: 28,
+    fontSize: 24,
     color: '#ffffff',
     fontWeight: 'bold',
+    marginBottom: 10,
   },
   registerText: {
     color: 'white',
@@ -22,14 +22,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   logo: {
-    width: 100,
-    height: 70,
+    width: 70,
+    height: 60,
   },
   header__subtitle: {
-    fontSize: 20,
-    marginTop: 5,
+    fontSize: 16,
+    marginTop: 10,
     color: '#ffffff',
-    fontWeight: 'bold',
   },
   footer: {
     flex: 1,

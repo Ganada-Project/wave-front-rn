@@ -12,9 +12,9 @@
 import { fromJS, List } from 'immutable';
 
 import {
-  GET_BRAND_RECOMMEND_FAIL,
-  GET_BRAND_RECOMMEND_REQUEST,
-  GET_BRAND_RECOMMEND_SUCCESS,
+  GET_ITEMS_FAIL,
+  GET_ITEMS_REQUEST,
+  GET_ITEMS_SUCCESS,
 } from './constants';
 
 // The initial state of the App
@@ -27,14 +27,14 @@ export const initialState = fromJS({
 function brandRecommendReducer(state = initialState, action) {
   switch (action.type) {
     // start login
-    case GET_BRAND_RECOMMEND_REQUEST:
+    case GET_ITEMS_REQUEST:
       return state.set('recommendLoading', true);
-    case GET_BRAND_RECOMMEND_SUCCESS:
+    case GET_ITEMS_SUCCESS:
       return state
         .set('recommendLoading', false)
         .set('brands', fromJS(action.payload.brands));
 
-    case GET_BRAND_RECOMMEND_FAIL:
+    case GET_ITEMS_FAIL:
       return state.set('recommendLoading', false).set('error', action.error);
 
     default:

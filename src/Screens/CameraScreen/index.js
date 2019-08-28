@@ -1,53 +1,88 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Text, View, StyleSheet, TouchableOpacity,
+  Text, View, StyleSheet, Dimensions,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { RNCamera } from 'react-native-camera';
+import { Attitude, Barometer } from 'react-native-attitude';
+// import {
+//   gyroscope,
+//   setUpdateIntervalForType,
+//   SensorTypes,
+// } from 'react-native-sensors';
+import { Button } from 'react-native-elements';
+import { theme } from '../../constants';
+import {
+  HeadLine,
+  TakeButtonWrapper,
+  HeadLabel,
+  LabelText,
+  HeadLineWrapper,
+  FootLineWrapper,
+  BellyCenterWrapper,
+  BellyLine,
+  BellyLabel,
+} from './styles';
+
+function round(n) {
+  if (!n) {
+    return 0;
+  }
+
+  return Math.floor(n * 100) / 100;
+}
 
 class CameraScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
-        visible: false,
-        drawBehind: true,
+        title: {
+          text: '신장',
+          color: theme.pointColor,
+        },
       },
     };
   }
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { pitch: 0 };
+  }
+
+  componentDidMount() {
+    // setUpdateIntervalForType(SensorTypes.gyroscope, 1000);
+    // const subscription = gyroscope.subscribe(({ x, y, z }) => {
+    //   this.setState({ x, y, z });
+    // });
+    // this.setState({ subscription });
+    this.attitudeWatchID = Attitude.watchAttitude((update) => {
+      this.setState({ pitch: update.attitude.pitch + 90 });
+    });
+  }
+
+  componentWillUnmount() {
+    // this.state.subscription.unsubscribe();
+    Attitude.clearWatchAttitude(this.attitudeWatchID);
+    Attitude.stopObserving();
   }
 
   takePicture = async () => {
     const {
-      componentId,
-      name,
-      nickname,
-      phone,
-      gender,
-      password,
-      stylesArray,
-      brandsArray,
+      componentId, height, weight, isMe,
     } = this.props;
     if (this.camera) {
-      const options = { quality: 0.5, base64: true };
+      const options = { quality: 0.1, base64: true };
       const data = await this.camera.takePictureAsync(options);
       const { base64 } = data;
       Navigation.push(componentId, {
         component: {
-          name: 'wave.bodySize',
+          name: 'wave.heightSlide',
           passProps: {
-            phone,
-            gender,
-            nickname,
-            name,
-            password,
-            stylesArray,
-            brandsArray,
             base64,
+            height,
+            weight,
+            isMe,
           },
         },
       });
@@ -55,6 +90,10 @@ class CameraScreen extends Component {
   };
 
   render() {
+    const {
+      x, y, z, pitch,
+    } = this.state;
+
     return (
       <View style={styles.container}>
         <RNCamera
@@ -63,20 +102,38 @@ class CameraScreen extends Component {
           }}
           style={styles.preview}
           type={RNCamera.Constants.Type.back}
-          flashMode={RNCamera.Constants.FlashMode.on}
-          permissionDialogTitle="Permission to use camera"
-          permissionDialogMessage="We need your permission to use your camera phone"
+          flashMode={RNCamera.Constants.FlashMode.off}
+          permissionDialogTitle="카메라 접근 허용"
+          permissionDialogMessage="회원님의 휴대폰 카메라 사용을 위해 접근 허용이 필요합니다"
           onGoogleVisionBarcodesDetected={({ barcodes }) => {
             console.log(barcodes);
           }}
         />
-        <View
-          style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}
-        >
-          <TouchableOpacity onPress={this.takePicture} style={styles.capture}>
-            <Text style={{ fontSize: 14 }}> SNAP </Text>
-          </TouchableOpacity>
-        </View>
+        <HeadLineWrapper>
+          <HeadLine>
+            <HeadLabel>
+              <LabelText>정수리</LabelText>
+            </HeadLabel>
+          </HeadLine>
+        </HeadLineWrapper>
+        <BellyCenterWrapper>
+          <BellyLine>
+            {/* <BellyLabel style={{ transform: [{ rotate: '-90deg' }] }}>
+              <LabelText>배꼽</LabelText>
+            </BellyLabel> */}
+          </BellyLine>
+        </BellyCenterWrapper>
+        <FootLineWrapper>
+          <HeadLine>
+            <HeadLabel>
+              <LabelText>발 끝</LabelText>
+            </HeadLabel>
+          </HeadLine>
+        </FootLineWrapper>
+        <TakeButtonWrapper>
+          <Text>{pitch}</Text>
+          <Button title="촬영" onPress={this.takePicture} />
+        </TakeButtonWrapper>
       </View>
     );
   }
@@ -88,30 +145,23 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   preview: {
-    flex: 1,
-    justifyContent: 'flex-end',
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height - 44,
     alignItems: 'center',
-  },
-  capture: {
-    flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    padding: 15,
-    paddingHorizontal: 20,
-    alignSelf: 'center',
-    margin: 20,
   },
 });
 
 CameraScreen.propTypes = {
   componentId: PropTypes.string,
-  gender: PropTypes.string,
+  gender: PropTypes.number,
   name: PropTypes.string,
   nickname: PropTypes.string,
   phone: PropTypes.string,
   password: PropTypes.string,
-  stylesArray: PropTypes.array,
-  brandsArray: PropTypes.array,
+  age: PropTypes.string,
+  height: PropTypes.string,
+  weight: PropTypes.string,
+  isMe: PropTypes.bool,
 };
 
 export default CameraScreen;

@@ -15,12 +15,17 @@ export class RegisterForm extends Component {
   render() {
     const {
       label,
-      placeholder,
       onChangeText,
+      keyboardType,
+      onChangePhoneText,
       errorText,
       value,
+      phoneValue,
       loading,
       phone,
+      autoFocus,
+      defaultRef,
+      invert,
     } = this.props;
     return (
       <View
@@ -34,7 +39,7 @@ export class RegisterForm extends Component {
         <View style={{ flexDirection: 'row' }}>
           <Text
             style={{
-              color: theme.textColor,
+              color: invert ? 'white' : theme.textColor,
               fontSize: 16,
               fontWeight: '700',
             }}
@@ -49,10 +54,13 @@ export class RegisterForm extends Component {
         </View>
         {phone ? (
           <TextInputMask
-            ref={(ref) => (this.myDateText = ref)}
+            ref={(ref) => (this.myDateText = ref)} //eslint-disable-line
             type="custom"
             keyboardType="numeric"
-            style={styles.input}
+            value={phoneValue}
+            autoFocus={autoFocus}
+            onChangeText={onChangePhoneText}
+            style={invert ? styles.whiteInput : styles.input}
             options={{
               mask: '999-9999-9999',
             }}
@@ -61,7 +69,12 @@ export class RegisterForm extends Component {
           <TextInput
             onChangeText={onChangeText}
             value={value}
-            style={styles.input}
+            ref={defaultRef}
+            autoFocus={autoFocus}
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType={keyboardType}
+            style={invert ? styles.whiteInput : styles.input}
           />
         )}
 
@@ -75,12 +88,23 @@ export class RegisterForm extends Component {
 
 RegisterForm.propTypes = {
   label: PropTypes.string,
-  placeholder: PropTypes.string,
+  // placeholder: PropTypes.string,
   onChangeText: PropTypes.func,
+  onChangePhoneText: PropTypes.func,
   errorText: PropTypes.string,
   value: PropTypes.string,
+  phoneValue: PropTypes.string,
   loading: PropTypes.bool,
   phone: PropTypes.bool,
+  keyboardType: PropTypes.string,
+  autoFocus: PropTypes.bool,
+  defaultRef: PropTypes.object,
+  invert: PropTypes.bool,
+};
+
+RegisterForm.defaultProps = {
+  keyboardType: 'default',
+  autoFocus: true,
 };
 
 export default RegisterForm;

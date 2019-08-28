@@ -21,6 +21,7 @@ import { Navigation } from 'react-native-navigation';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
+
 // reselect -> reducer에 있는 프로퍼티들 선택 툴
 import { createStructuredSelector } from 'reselect';
 
@@ -32,7 +33,7 @@ import injectReducer from '../../utils/injectReducer';
 import { makeSelectStyles, makeSelectStylesLoading } from './selectors';
 
 // local components;
-import { FullWidthButton, StyleBox } from '../../Components';
+import { FullWidthButton, StyleBox, BarLoading } from '../../Components';
 
 // local action
 import { getAllStylesAction } from './actions';
@@ -43,9 +44,10 @@ import reducer from './reducer';
 
 // local styles
 import styles from './style';
+import { theme } from '../../constants';
 
 class FavStyleScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
         noBorder: true,
@@ -112,19 +114,17 @@ class FavStyleScreen extends Component {
   };
 
   render() {
+    const { stylesLoading } = this.props;
     const { stylesList } = this.state;
 
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.header__title}>선호하는 스타일은?</Text>
-          <Text style={styles.body__text}>
-            이후 프로필 설정에서 변경할 수 있습니다.
-          </Text>
+          <Text style={styles.header__title}>선호하는 스타일</Text>
         </View>
         <ScrollView style={styles.body}>
           <View style={styles.body__stylesWrapper}>
-            {stylesList.map((style, index) => (
+            {stylesLoading ? <BarLoading size={25} /> : stylesList.map((style, index) => (
               <StyleBox
                 key={`favStyle-${style.get('id')}`}
                 name={style.get('name')}
@@ -152,9 +152,9 @@ class FavStyleScreen extends Component {
 FavStyleScreen.propTypes = {
   componentId: PropTypes.string,
   getAllStyles: PropTypes.func,
-  stylesList: PropTypes.instanceOf(List),
+  stylesLoading: PropTypes.bool,
   phone: PropTypes.string,
-  gender: PropTypes.string,
+  gender: PropTypes.number,
   name: PropTypes.string,
   nickname: PropTypes.string,
   password: PropTypes.string,

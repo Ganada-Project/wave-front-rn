@@ -1,15 +1,14 @@
 import { StyleSheet } from 'react-native';
-import { theme } from '../../constants';
+import { theme, TopBarHeight } from '../../constants';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.whiteColor,
     paddingHorizontal: 25,
-    paddingTop: 10,
+    paddingTop: TopBarHeight,
   },
   header: {
-    flex: 0.2,
+    flex: 0.3,
   },
   body: {
     flex: 1.5,
@@ -17,20 +16,28 @@ const styles = StyleSheet.create({
   },
   body__text: {
     marginBottom: 10,
+    color: theme.whiteColor,
   },
   body__text__second: {
     marginBottom: 30,
+    color: theme.whiteColor,
   },
   body__text__third: {
     marginTop: 30,
+    color: theme.whiteColor,
   },
   header__title: {
-    fontSize: 28,
-    color: theme.pointColor,
+    fontSize: 20,
+    color: theme.whiteColor,
     fontWeight: 'bold',
   },
+  timerText: {
+    fontSize: 16,
+    color: theme.whiteColor,
+    alignSelf: 'flex-end',
+  },
   footer: {
-    flex: 0.5,
+    flex: 0.2,
     alignItems: 'center',
     justifyContent: 'center',
   },

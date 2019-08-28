@@ -1,21 +1,41 @@
 import React from 'react';
 import { Navigation } from 'react-native-navigation';
 import { Provider } from 'react-redux';
+
 import App from './Screens/App';
+// Tab Screens
 import HomeScreen from './Screens/HomeScreen';
-import BrandScreen from './Screens/BrandScreen';
+import CatalogScreen from './Screens/CatalogScreen';
 import ProfileScreen from './Screens/ProfileScreen';
+import StoryScreen from './Screens/StoryScreen';
+
+// Item Related Screens
+import ItemDetailScreen from './Screens/ItemDetailScreen';
+
+// Photo Related Screens
+import CameraScreen from './Screens/CameraScreen';
+import UploadInfoScreen from './Screens/UploadInfoScreen';
+import UploadScreen from './Screens/UploadScreen';
+
+// Auth Related Screens
 import SignInScreen from './Screens/SignInScreen';
 import WelcomeScreen from './Screens/WelcomeScreen';
 import GenderScreen from './Screens/GenderScreen';
-import RegisterNameScreen from './Screens/RegisterNameScreen';
+import Info1Screen from './Screens/Info1Screen';
 import PhoneVerifyScreen from './Screens/PhoneVerifyScreen';
 import PasswordScreen from './Screens/PasswordScreen';
 import FavStyleScreen from './Screens/FavStyleScreen';
 import BrandRecommendScreen from './Screens/BrandRecommendScreen';
+
+// Size Card Screens
 import PoseInfoScreen from './Screens/PoseInfoScreen';
-import CameraScreen from './Screens/CameraScreen';
+import HeightSlideScreen from './Screens/HeightSlideScreen';
+import UpperBodyWidthSlideScreen from './Screens/UpperBodyWidthSlideScreen';
+import PartialHeightSlideScreen from './Screens/PartialHeightSlideScreen';
+import UpperBodySlideScreen from './Screens/UpperBodySlideScreen';
+import LowerBodySlideScreen from './Screens/LowerBodySlideScreen';
 import BodySizeScreen from './Screens/BodySizeScreen';
+import SizeCardInfoScreen from './Screens/SizeCardInfoScreen';
 import FinalRegisterScreen from './Screens/FinalRegisterScreen';
 import configureStore from './configureStore';
 import { theme } from './constants';
@@ -44,10 +64,10 @@ const registerScreens = () => {
     'wave.brand',
     () => (props) => (
       <Provider store={store}>
-        <BrandScreen {...props} />
+        <CatalogScreen {...props} />
       </Provider>
     ),
-    () => BrandScreen,
+    () => CatalogScreen,
   );
   Navigation.registerComponent(
     'wave.profile',
@@ -57,6 +77,15 @@ const registerScreens = () => {
       </Provider>
     ),
     () => ProfileScreen,
+  );
+  Navigation.registerComponent(
+    'wave.story',
+    () => (props) => (
+      <Provider store={store}>
+        <StoryScreen {...props} />
+      </Provider>
+    ),
+    () => StoryScreen,
   );
 
   // // Auth Screens
@@ -91,10 +120,10 @@ const registerScreens = () => {
     'wave.registerName',
     () => (props) => (
       <Provider store={store}>
-        <RegisterNameScreen {...props} />
+        <Info1Screen {...props} />
       </Provider>
     ),
-    () => RegisterNameScreen,
+    () => Info1Screen,
   );
   Navigation.registerComponent(
     'wave.phoneVerify',
@@ -124,6 +153,15 @@ const registerScreens = () => {
     () => FavStyleScreen,
   );
   Navigation.registerComponent(
+    'wave.itemDetail',
+    () => (props) => (
+      <Provider store={store}>
+        <ItemDetailScreen {...props} />
+      </Provider>
+    ),
+    () => ItemDetailScreen,
+  );
+  Navigation.registerComponent(
     'wave.brandRecommend',
     () => (props) => (
       <Provider store={store}>
@@ -131,15 +169,6 @@ const registerScreens = () => {
       </Provider>
     ),
     () => BrandRecommendScreen,
-  );
-  Navigation.registerComponent(
-    'wave.poseInfo',
-    () => (props) => (
-      <Provider store={store}>
-        <PoseInfoScreen {...props} />
-      </Provider>
-    ),
-    () => PoseInfoScreen,
   );
   Navigation.registerComponent(
     'wave.poseInfo',
@@ -160,6 +189,69 @@ const registerScreens = () => {
     () => CameraScreen,
   );
   Navigation.registerComponent(
+    'wave.uploadInfo',
+    () => (props) => (
+      <Provider store={store}>
+        <UploadInfoScreen {...props} />
+      </Provider>
+    ),
+    () => UploadInfoScreen,
+  );
+  Navigation.registerComponent(
+    'wave.upload',
+    () => (props) => (
+      <Provider store={store}>
+        <UploadScreen {...props} />
+      </Provider>
+    ),
+    () => UploadScreen,
+  );
+  Navigation.registerComponent(
+    'wave.heightSlide',
+    () => (props) => (
+      <Provider store={store}>
+        <HeightSlideScreen {...props} />
+      </Provider>
+    ),
+    () => HeightSlideScreen,
+  );
+  Navigation.registerComponent(
+    'wave.upperBodyWidthSlide',
+    () => (props) => (
+      <Provider store={store}>
+        <UpperBodyWidthSlideScreen {...props} />
+      </Provider>
+    ),
+    () => UpperBodyWidthSlideScreen,
+  );
+  Navigation.registerComponent(
+    'wave.partialHeightSlide',
+    () => (props) => (
+      <Provider store={store}>
+        <PartialHeightSlideScreen {...props} />
+      </Provider>
+    ),
+    () => PartialHeightSlideScreen,
+  );
+  Navigation.registerComponent(
+    'wave.upperBodySlide',
+    () => (props) => (
+      <Provider store={store}>
+        <UpperBodySlideScreen {...props} />
+      </Provider>
+    ),
+    () => UpperBodySlideScreen,
+  );
+  Navigation.registerComponent(
+    'wave.lowerBodySlide',
+    () => (props) => (
+      <Provider store={store}>
+        <LowerBodySlideScreen {...props} />
+      </Provider>
+    ),
+    () => LowerBodySlideScreen,
+  );
+  Navigation.registerComponent(
     'wave.bodySize',
     () => (props) => (
       <Provider store={store}>
@@ -176,6 +268,15 @@ const registerScreens = () => {
       </Provider>
     ),
     () => FinalRegisterScreen,
+  );
+  Navigation.registerComponent(
+    'wave.sizeCardInfo',
+    () => (props) => (
+      <Provider store={store}>
+        <SizeCardInfoScreen {...props} />
+      </Provider>
+    ),
+    () => SizeCardInfoScreen,
   );
 };
 
@@ -218,25 +319,53 @@ export const startTabScreens = () => {
                 {
                   component: {
                     name: 'wave.brand',
-                    options: {
-                      bottomTab: {
-                        icon: require('./Assets/Icons/TabIcons/tab_2.png'),
-                        testID: 'SECOND_TAB_BAR_BUTTON',
-                        selectedIconColor: theme.pointColor,
-                        iconInsets: {
-                          top: 0,
-                          left: 0,
-                          bottom: -12,
-                          right: 0,
-                        },
-                      },
-                      bottomTabs: {
-                        titleDisplayMode: 'alwaysHide',
-                      },
-                    },
                   },
                 },
               ],
+              options: {
+                modalPresentationStyle: 'overCurrentContext',
+                bottomTab: {
+                  icon: require('./Assets/Icons/TabIcons/tab_2.png'),
+                  testID: 'SECOND_TAB_BAR_BUTTON',
+                  selectedIconColor: theme.pointColor,
+                  iconInsets: {
+                    top: 0,
+                    left: 0,
+                    bottom: -12,
+                    right: 0,
+                  },
+                },
+                bottomTabs: {
+                  titleDisplayMode: 'alwaysHide',
+                },
+              },
+            },
+          },
+          {
+            stack: {
+              children: [
+                {
+                  component: {
+                    name: 'wave.uploadInfo',
+                  },
+                },
+              ],
+              options: {
+                bottomTab: {
+                  icon: require('./Assets/Icons/TabIcons/post.png'),
+                  testID: 'THIRD_TAB_BAR_BUTTON',
+                  selectedIconColor: theme.pointColor,
+                  iconInsets: {
+                    top: 0,
+                    left: 0,
+                    bottom: -12,
+                    right: 0,
+                  },
+                },
+                bottomTabs: {
+                  titleDisplayMode: 'alwaysHide',
+                },
+              },
             },
           },
           {
@@ -245,25 +374,25 @@ export const startTabScreens = () => {
                 {
                   component: {
                     name: 'wave.profile',
-                    options: {
-                      bottomTab: {
-                        icon: require('./Assets/Icons/TabIcons/tab_5.png'),
-                        testID: 'THIRD_TAB_BAR_BUTTON',
-                        selectedIconColor: theme.pointColor,
-                        iconInsets: {
-                          top: 0,
-                          left: 0,
-                          bottom: -12,
-                          right: 0,
-                        },
-                      },
-                      bottomTabs: {
-                        titleDisplayMode: 'alwaysHide',
-                      },
-                    },
                   },
                 },
               ],
+              options: {
+                bottomTab: {
+                  icon: require('./Assets/Icons/TabIcons/tab_5.png'),
+                  testID: 'FIFTH_TAB_BAR_BUTTON',
+                  selectedIconColor: theme.pointColor,
+                  iconInsets: {
+                    top: 0,
+                    left: 0,
+                    bottom: -12,
+                    right: 0,
+                  },
+                },
+                bottomTabs: {
+                  titleDisplayMode: 'alwaysHide',
+                },
+              },
             },
           },
         ],

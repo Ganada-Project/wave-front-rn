@@ -3,9 +3,16 @@ package com.wavern;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.geolocation.GeolocationPackage;
+import io.invertase.firebase.RNFirebasePackage;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.BV.LinearGradient.LinearGradientPackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.sensors.RNSensorsPackage;
+
 import com.dylanvann.fastimage.FastImageViewPackage;
 import org.reactnative.camera.RNCameraPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -41,9 +48,15 @@ public class MainApplication extends NavigationApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new GeolocationPackage(),
+            new RNFirebasePackage(),
+            new AsyncStoragePackage(),
+            new LinearGradientPackage(),
+            new VectorIconsPackage(),
+            new RNSensorsPackage(),
+            new RNFetchBlobPackage(),
             new FastImageViewPackage(),
-            new RNCameraPackage(),
-            new VectorIconsPackage()
+            new RNCameraPackage()
       );
     }
 

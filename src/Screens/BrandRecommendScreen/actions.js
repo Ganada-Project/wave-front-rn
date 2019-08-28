@@ -3,11 +3,11 @@
  *
  */
 
-import { GET_BRAND_RECOMMEND_REQUEST } from './constants';
+import { GET_ITEMS_REQUEST } from './constants';
 
-export function getBrandRecommendAction({ stylesArray }) {
+export function getItemsAction({ stylesArray }) {
   return {
-    type: GET_BRAND_RECOMMEND_REQUEST,
+    type: GET_ITEMS_REQUEST,
     stylesArray,
   };
 }

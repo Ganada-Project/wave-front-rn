@@ -10,9 +10,29 @@ const makeSelectVerifyNumber = () => createSelector(
   selectPhoneVerification,
   (phoneVerification) => phoneVerification.get('verifyNumber'),
 );
+const makeSelectUserVerifyNumber = () => createSelector(
+  selectPhoneVerification,
+  (phoneVerification) => phoneVerification.get('userVerifyNumber'),
+);
 const makeSelectVerifyLoading = () => createSelector(
   selectPhoneVerification,
   (phoneVerification) => phoneVerification.get('verifyLoading'),
 );
 
-export { makeSelectVerifyNumber, makeSelectVerifyLoading };
+const makeSelectChecking = () => createSelector(
+  selectPhoneVerification,
+  (phoneVerification) => phoneVerification.get('checking'),
+);
+
+const makeSelectOverlap = () => createSelector(
+  selectPhoneVerification,
+  (phoneVerification) => phoneVerification.get('overlap'),
+);
+
+export {
+  makeSelectVerifyNumber,
+  makeSelectVerifyLoading,
+  makeSelectChecking,
+  makeSelectOverlap,
+  makeSelectUserVerifyNumber,
+};

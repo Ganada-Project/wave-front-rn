@@ -3,12 +3,12 @@
  * Application Name : Wave
  * Corpyright : Ganada Project
  */
+/* eslint-disable */
 import { YellowBox } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import registerScreens from './src';
 import { theme } from './src/constants';
 if (!global._babelPolyfill) {
-  // eslint-disable-line global-require
   require('babel-polyfill'); // eslint-disable-line global-require
 }
 YellowBox.ignoreWarnings(['Require cycle:']);
@@ -27,7 +27,7 @@ Navigation.events().registerAppLaunchedListener(() => {
         children: [
           {
             component: {
-              name: 'wave.app',
+              name: 'wave.bodySize',
             },
           },
         ],

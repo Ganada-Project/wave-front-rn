@@ -17,6 +17,7 @@ import {
   FETCH_USER_REQUESTING_FAIL,
   FETCH_USER_REQUESTING_SUCCESS,
   TRY_SIGN_OUT_SUCCESS,
+  GET_FCM_TOKEN_SUCCESS,
 } from './constants';
 
 // The initial state of the App
@@ -24,6 +25,7 @@ const initialState = fromJS({
   loading: false,
   error: false,
   idToken: '',
+  fcmToken: null,
   userData: null,
 });
 
@@ -36,10 +38,12 @@ function appReducer(state = initialState, action) {
         .set('userData', fromJS({ ...action.payload.user }))
         .set('idToken', action.payload.idToken)
         .set('loading', false);
+    case GET_FCM_TOKEN_SUCCESS:
+      return state.set('fcmToken', action.fcmToken);
     case FETCH_USER_REQUESTING_FAIL:
       return state.set('loading', false).set('error', action.error);
     case TRY_SIGN_OUT_SUCCESS:
-      return state.set('userData', null).set('idToken', null);
+      return state.set('userData', state.get('userData')).set('idToken', null);
     default:
       return state;
   }

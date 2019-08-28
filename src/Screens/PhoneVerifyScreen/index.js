@@ -5,25 +5,40 @@ import { KeyboardAvoidingView, Text, View } from 'react-native';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { TextInputMask } from 'react-native-masked-text';
 import PropTypes from 'prop-types';
+import AnimatedLinearGradient from 'react-native-animated-linear-gradient';
+
 // redux-saga things
 import { Navigation } from 'react-native-navigation';
+import TimerCountdown from 'react-native-timer-countdown';
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import styles from './styles';
 import { RegisterForm, FullWidthButton } from '../../Components';
-import { keyboardBehavior, keyboardVerticalOffset } from '../../constants';
+import {
+  keyboardBehavior,
+  keyboardVerticalOffset,
+  gradientPreset,
+  gradientSpeed,
+  InvertOption,
+} from '../../constants';
 import saga from './saga';
 import reducer from './reducer';
-import { makeSelectVerifyNumber, makeSelectVerifyLoading } from './selectors';
-import { verifyPhoneNumberAction } from './actions';
+import {
+  makeSelectVerifyNumber,
+  makeSelectVerifyLoading,
+  makeSelectChecking,
+  makeSelectOverlap,
+} from './selectors';
+import { verifyPhoneNumberAction, checkPhoneNumberAction } from './actions';
+import Form from './Form';
+import Button from './Button';
 
 export class PhoneVerifyScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
-        noBorder: true,
+        ...InvertOption,
       },
     };
   }
@@ -31,6 +46,12 @@ export class PhoneVerifyScreen extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (prevState.verifyLoading && !nextProps.verifyLoading) {
       return { isSent: true };
+    }
+    if (!prevState.overlap && nextProps.overlap) {
+      return { errorText: '휴대폰번호가 이미 존재합니다', overlap: true };
+    }
+    if (prevState.overlap && !nextProps.overlap) {
+      return { errorText: null, overlap: false };
     }
     return { verifyLoading: nextProps.verifyLoading };
   }
@@ -40,138 +61,157 @@ export class PhoneVerifyScreen extends Component {
     this.state = {
       isSent: false,
       phone: '',
-      userVerifyNumber: '',
       verifyLoading: false,
       errorText: null,
+      overlap: props.overlap,
     };
   }
 
+  componentDidMount() {}
+
   sendPhoneNumber = () => {
-    const { phone } = this.state;
-    const { verifyPhoneNumber } = this.props;
+    // const { phone } = this.state;
+    // const { verifyPhoneNumber } = this.props;
     // verifyPhoneNumber({ number: phone });
     this.setState({ isSent: true });
   };
 
-  navigateToPassword = () => {
-    const {
-      componentId, verifyNumber, name, nickname, gender,
-    } = this.props;
-    const { userVerifyNumber, phone } = this.state;
-    // Navigation.push(componentId, {
-    //   component: {
-    //     name: 'wave.password',
-    //   },
-    // });
-    if (verifyNumber !== userVerifyNumber) {
-      this.setState({ errorText: '인증번호가 올바르지 않습니다' });
-    } else {
-      Navigation.push(componentId, {
-        component: {
-          name: 'wave.password',
-          passProps: {
-            name,
-            nickname,
-            phone,
-            gender,
-          },
-        },
-      });
-    }
+  handlePhoneNumber = (text) => {
+    const { checkPhoneNumber } = this.props;
+    this.setState({ phone: text }, () => {
+      checkPhoneNumber({ number: text });
+    });
+  };
+
+  handleTimeOut = () => {
+    this.setState({ isSent: false, phone: '' });
   };
 
   render() {
+    const { checking, componentId } = this.props;
     const {
-      isSent, number, userVerifyNumber, errorText, phone,
+      isSent, errorText, phone, overlap,
     } = this.state;
     if (!isSent) {
       return (
+        <AnimatedLinearGradient
+          customColors={gradientPreset}
+          speed={gradientSpeed}
+        >
+          <KeyboardAvoidingView
+            behavior={keyboardBehavior}
+            style={styles.container}
+            keyboardVerticalOffset={keyboardVerticalOffset}
+          >
+            <View style={styles.header}>
+              <Text style={styles.header__title}>회원가입</Text>
+            </View>
+            <View style={styles.body}>
+              <Text style={styles.body__text}>
+                본인의 휴대폰번호를 입력하세요.
+              </Text>
+              <Text style={styles.body__text__second}>
+                헤당번호로 4자리의 인증번호가 발송됩니다.
+              </Text>
+              <RegisterForm
+                phone
+                invert
+                label="휴대폰 번호"
+                phoneValue={phone}
+                loading={checking}
+                onChangePhoneText={this.handlePhoneNumber}
+                errorText={errorText}
+              />
+              <Text style={styles.body__text__third}>
+                가입하면 웨이브의 약관, 데이터 정책 및 쿠키 정책에 동의하게
+                됩니다.
+              </Text>
+            </View>
+            <View style={styles.footer}>
+              <FullWidthButton
+                onPress={this.sendPhoneNumber}
+                invert
+                disabled={phone === '' || overlap === true}
+                content="발송하기"
+              />
+            </View>
+          </KeyboardAvoidingView>
+        </AnimatedLinearGradient>
+      );
+    }
+    return (
+      <AnimatedLinearGradient
+        customColors={gradientPreset}
+        speed={gradientSpeed}
+      >
         <KeyboardAvoidingView
           style={styles.container}
           behavior={keyboardBehavior}
           keyboardVerticalOffset={keyboardVerticalOffset}
         >
           <View style={styles.header}>
-            <Text style={styles.header__title}>휴대번호를 입력하세요.</Text>
+            <Text style={styles.header__title}>인증번호</Text>
           </View>
           <View style={styles.body}>
-            <Text style={styles.body__text}>진짜 사람인지만 판별해볼게요.</Text>
+            <Text style={styles.body__text}>{`${phone}에 전송받은`}</Text>
             <Text style={styles.body__text__second}>
-              인공지능은 우리만 필요해요.
+              4자리 인증번호를 입력하세요.
             </Text>
-            <RegisterForm
-              label="휴대폰 번호"
-              phone
-              value={number}
-              onChangeText={(text) => this.setState({ phone: text })}
+            <Form errorText={errorText} />
+            <TimerCountdown
+              initialSecondsRemaining={2000 * 60}
+              onTimeElapsed={this.handleTimeOut}
+              formatSecondsRemaining={(milliseconds) => {
+                const remainingSec = Math.round(milliseconds / 1000);
+                const seconds = parseInt((remainingSec % 60).toString(), 10);
+                const minutes = parseInt(
+                  ((remainingSec / 60) % 60).toString(),
+                  10,
+                );
+                const hours = parseInt((remainingSec / 3600).toString(), 10);
+                const s = seconds < 10 ? `0${seconds}` : seconds;
+                const m = minutes < 10 ? `0${minutes}` : minutes;
+                let h = hours < 10 ? `0${hours}` : hours;
+                h = h === '00' ? '' : `${h}:`;
+                return `${h + m}:${s}`;
+              }}
+              allowFontScaling
+              style={styles.timerText}
             />
-            <Text style={styles.body__text__third}>
-              해당번호를 4자리의 인증번호를 보내드립니다.
-            </Text>
+            <Text style={styles.body__text__third}>인증번호 다시받기</Text>
           </View>
           <View style={styles.footer}>
-            <FullWidthButton
-              onPress={this.sendPhoneNumber}
-              invert
-              disabled={number === ''}
-              content="발송하기"
+            <Button
+              Navigation={Navigation}
+              componentId={componentId}
+              phone={phone}
+              errotText={errorText}
             />
           </View>
         </KeyboardAvoidingView>
-      );
-    }
-    return (
-      <KeyboardAvoidingView
-        style={styles.container}
-        behavior={keyboardBehavior}
-        keyboardVerticalOffset={keyboardVerticalOffset}
-      >
-        <View style={styles.header}>
-          <Text style={styles.header__title}>인증번호를 입력하세요.</Text>
-        </View>
-        <View style={styles.body}>
-          <Text style={styles.body__text}>{`${phone}에 전송받은`}</Text>
-          <Text style={styles.body__text__second}>
-            4자리 인증번호를 입력하세요.
-          </Text>
-          <RegisterForm
-            label="인증 번호"
-            value={userVerifyNumber}
-            onChangeText={(text) => this.setState({ userVerifyNumber: text })}
-            errorText={errorText}
-          />
-          <Text style={styles.body__text__third}>인증번호가 안와요.</Text>
-        </View>
-        <View style={styles.footer}>
-          <FullWidthButton
-            onPress={this.navigateToPassword}
-            // disabled={userVerifyNumber === ''}
-            invert
-            content="다음 단계"
-          />
-        </View>
-      </KeyboardAvoidingView>
+      </AnimatedLinearGradient>
     );
   }
 }
 
 PhoneVerifyScreen.propTypes = {
   componentId: PropTypes.string,
-  verifyPhoneNumber: PropTypes.func,
-  verifyLoading: PropTypes.bool,
-  verifyNumber: PropTypes.string,
-  name: PropTypes.string,
-  gender: PropTypes.string,
-  nickname: PropTypes.string,
+  // verifyPhoneNumber: PropTypes.func,
+  checkPhoneNumber: PropTypes.func,
+  overlap: PropTypes.bool,
+  checking: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   verifyNumber: makeSelectVerifyNumber(),
   verifyLoading: makeSelectVerifyLoading(),
+  checking: makeSelectChecking(),
+  overlap: makeSelectOverlap(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   verifyPhoneNumber: ({ number }) => dispatch(verifyPhoneNumberAction({ number })),
+  checkPhoneNumber: ({ number }) => dispatch(checkPhoneNumberAction({ number })),
 });
 
 const withSaga = injectSaga({ key: 'phoneVerify', saga });
