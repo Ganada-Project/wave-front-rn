@@ -11,7 +11,6 @@ target 'WaveRn' do
   # use_frameworks!
 
   # Pods for WaveRn
-  pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
 
   target 'WaveRnTests' do
     inherit! :search_paths

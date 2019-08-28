@@ -21,7 +21,7 @@
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react": "^16.8.6",
-    "react-native": "^0.60.5",
+    "react-native": "^0.59.8",
     "react-native-action-button": "^2.8.5",
     "react-native-animated-linear-gradient": "^1.2.0",
     "react-native-attitude": "^1.0.7",
