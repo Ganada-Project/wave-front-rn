@@ -46,7 +46,7 @@ export class PartialHeightSlideScreen extends Component {
     return {
       topBar: {
         title: {
-          text: '부위별 높이',
+          text: '부위별 높이(2/5)',
           color: theme.pointColor,
         },
         noBorder: true,
@@ -385,7 +385,13 @@ export class PartialHeightSlideScreen extends Component {
         footOffsetY,
         bellyOffsetX,
       } = this.props;
-      const { shoulderOffset, pelvisOffset } = this.state;
+      const {
+        shoulderOffset,
+        pelvisOffset,
+        wristOffset,
+        crotchOffset,
+        ankleOffset,
+      } = this.state;
       Navigation.push(componentId, {
         component: {
           name: 'wave.upperBodyWidthSlide',
@@ -395,6 +401,9 @@ export class PartialHeightSlideScreen extends Component {
             base64,
             shoulderOffsetY: shoulderOffset.y,
             pelvisOffsetY: pelvisOffset.y,
+            wristOffsetY: wristOffset.y,
+            crotchOffsetY: crotchOffset.y,
+            ankleOffsetY: ankleOffset.y,
             headOffsetY,
             footOffsetY,
             bellyOffsetX,

@@ -43,7 +43,7 @@ export class HeightSlideScreen extends Component {
     return {
       topBar: {
         title: {
-          text: '신장',
+          text: '신장 조정(1/5)',
           color: theme.pointColor,
         },
         noBorder: true,

@@ -78,29 +78,6 @@ export const SliderBar = styled.View`
   background-color: ${theme.guideColor};
 `;
 
-export const BellySlider = styled(Animated.View)`
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  height: ${window.height};
-`;
-
-export const BellySliderBar = styled.View`
-  position: relative;
-  width: 1px;
-  height: ${window.height};
-  background-color: ${theme.guideColor};
-`;
-
-export const BellyLine = styled.View`
-  position: relative;
-  width: 1px;
-  height: ${window.height};
-  left: ${(props) => props.belly};
-  background-color: red;
-`;
-
 export const SliderLabel = styled.View`
   position: absolute;
   justify-content: center;
