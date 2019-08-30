@@ -40,13 +40,14 @@ import {
   WRIST_OFFSET,
 } from './constants';
 import { theme, BaseHeightOffset } from '../../constants';
+import { StepHeader } from '../../Components';
 
 export class PartialHeightSlideScreen extends Component {
   static options(passProps) {
     return {
       topBar: {
         title: {
-          text: '부위별 높이(2/5)',
+          text: '부위별 높이',
           color: theme.pointColor,
         },
         noBorder: true,
@@ -503,24 +504,7 @@ export class PartialHeightSlideScreen extends Component {
             //   'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=962&q=80',
           }}
         >
-          {/* <MagnifierWrapper
-            style={{
-              opacity: shoulderGuideOpacity,
-            }}
-          >
-            <MagnifierContainer>
-              <MagifierCross />
-              <MagnifierImage
-                source={{
-                  uri: `data:image/gif;base64,${base64}`,
-                  // uri:
-                  //   'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=962&q=80',
-                }}
-                style={magnifierImageStyle}
-              />
-            </MagnifierContainer>
-            <MagnifierText>{typeText}</MagnifierText>
-          </MagnifierWrapper> */}
+          <StepHeader position={1} />
           <Slider
             style={shoulderSlide}
             {...this.shoulderPanResponder.panHandlers}

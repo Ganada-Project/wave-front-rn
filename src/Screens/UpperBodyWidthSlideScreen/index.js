@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { PanResponder, Animated, Dimensions } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import FastImage from 'react-native-fast-image';
-import { Button, Icon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
+import { StepHeader } from '../../Components';
 import {
   Container,
   ImageContainer,
@@ -31,7 +32,7 @@ export class UppderBodyWidthSlideScreen extends Component {
     return {
       topBar: {
         title: {
-          text: '상반신 넓이(3/5)',
+          text: '상반신 넓이',
           color: theme.pointColor,
         },
         noBorder: true,
@@ -447,6 +448,7 @@ export class UppderBodyWidthSlideScreen extends Component {
             //   'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=962&q=80',
           }}
         >
+          <StepHeader position={2} />
           <Slider
             style={leftShulderSlide}
             {...this.leftShulderPanResponder.panHandlers}

@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { PanResponder, Animated } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import FastImage from 'react-native-fast-image';
-import { Button, Icon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
+import { StepHeader } from '../../Components';
 import {
   Container,
   ImageContainer,
@@ -25,6 +26,7 @@ import {
   BellySlider,
   BellySliderBar,
   BellyLabel,
+  StepHeadrWrapper,
 } from './styles';
 import { outputX, outputY, distanceBetween2Offset } from './utils/calculate';
 import {
@@ -43,7 +45,7 @@ export class HeightSlideScreen extends Component {
     return {
       topBar: {
         title: {
-          text: '신장 조정(1/5)',
+          text: '신장',
           color: theme.pointColor,
         },
         noBorder: true,
@@ -393,24 +395,7 @@ export class HeightSlideScreen extends Component {
             //   'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=962&q=80',
           }}
         >
-          {/* <MagnifierWrapper
-            style={{
-              opacity: headGuideOpacity,
-            }}
-          >
-            <MagnifierContainer>
-              <MagifierCross />
-              <MagnifierImage
-                source={{
-                  uri: `data:image/gif;base64,${base64}`,
-                  // uri:
-                  //   'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=962&q=80',
-                }}
-                style={magnifierImageStyle}
-              />
-            </MagnifierContainer>
-            <MagnifierText>{typeText}</MagnifierText>
-          </MagnifierWrapper> */}
+          <StepHeader position={0} />
           <Slider style={headSlide} {...this.headPanResponder.panHandlers}>
             <SliderBar>
               <Icon

@@ -82,7 +82,7 @@ export const SliderLabel = styled.View`
   justify-content: center;
   align-items: center;
   left: -64;
-  top: ${(props) => (!props.isBottom ? 70 : 500)};
+  top: ${(props) => (!props.isBottom ? 150 : 500)};
   width: 100px;
   height: 30px;
   background-color: ${theme.guideColor};
@@ -95,7 +95,7 @@ export const RightSliderLabel = styled.View`
   justify-content: center;
   align-items: center;
   left: -34;
-  top: ${(props) => (!props.isBottom ? 70 : 500)};
+  top: ${(props) => (!props.isBottom ? 150 : 500)};
   width: 100px;
   height: 30px;
   background-color: ${theme.guideColor};
