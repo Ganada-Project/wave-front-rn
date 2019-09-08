@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { PanResponder, Animated, Dimensions } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import FastImage from 'react-native-fast-image';
-import { Button, Icon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
+import { StepHeader } from '../../Components';
 import {
   Container,
   ImageContainer,
@@ -15,16 +16,17 @@ import {
   SliderLabel,
   LabelText,
   RightSliderLabel,
-  BellySlider,
-  BellySliderBar,
-  BellyLine,
+  PartGuideImage,
+  LeftShoulderGuideWrapper,
+  LeftChestGuideWrapper,
+  RightShoulderGuideWrapper,
+  RightChestGuideWrapper,
 } from './styles';
 import {
   LEFT_SHULDER_OFFSET,
   LEFT_CHEST_OFFSET,
   RIGHT_SHULDER_OFFSET,
   RIGHT_CHEST_OFFSET,
-  IMAGE_WIDTH,
 } from './constants';
 import { theme } from '../../constants';
 
@@ -35,7 +37,7 @@ export class UppderBodyWidthSlideScreen extends Component {
     return {
       topBar: {
         title: {
-          text: '상반신 너비',
+          text: '상반신 넓이',
           color: theme.pointColor,
         },
         noBorder: true,
@@ -64,11 +66,11 @@ export class UppderBodyWidthSlideScreen extends Component {
         y: LEFT_CHEST_OFFSET.y,
       },
       rightShulderOffset: {
-        x: centerOffset + 70,
+        x: centerOffset + 100,
         y: RIGHT_SHULDER_OFFSET.y,
       },
       rightChestOffset: {
-        x: centerOffset + 20,
+        x: centerOffset + 50,
         y: RIGHT_CHEST_OFFSET.y,
       },
     };
@@ -91,27 +93,22 @@ export class UppderBodyWidthSlideScreen extends Component {
     this.rightChest = new Animated.ValueXY();
     this.rightChestOpacity = new Animated.Value(0.5);
 
-    // 중앙선
-    this.centerPan = new Animated.ValueXY();
-
     // 돋보기 투명도
     this.magnifierOpacity = new Animated.Value(0);
     // 가이드 투명도
     this.guideOpacity = new Animated.Value(0);
-
-    const reverseRange = {
-      inputRange: [0, 1],
-      outputRange: [1, 0],
-    };
-
-    this.reverseLeftShulder = this.leftShulderPan.x.interpolate(reverseRange);
-    this.reverseRightShulder = this.rightShulderPan.x.interpolate(reverseRange);
-    this.reverseLeftChest = this.leftChestPan.x.interpolate(reverseRange);
-    this.reverseRightChest = this.rightChest.x.interpolate(reverseRange);
+    this.leftShoulderGuideOpacity = new Animated.Value(0);
+    this.leftChestGuideOpacity = new Animated.Value(0);
+    this.rightShoulderGuideOpacity = new Animated.Value(0);
+    this.rightChestGuideOpacity = new Animated.Value(0);
 
     const {
       leftShulderOpacity,
+      leftShoulderGuideOpacity,
       leftChestOpacity,
+      leftChestGuideOpacity,
+      rightShoulderGuideOpacity,
+      rightChestGuideOpacity,
       rightShulderOpacity,
       rightChestOpacity,
       guideOpacity,
@@ -158,6 +155,9 @@ export class UppderBodyWidthSlideScreen extends Component {
           Animated.timing(rightShulderOpacity, {
             toValue: 1,
           }),
+          Animated.timing(leftShoulderGuideOpacity, {
+            toValue: 1,
+          }),
         ]).start();
         this.setState({ type: 'leftShulder', typeText: '왼쪽 어깨' });
       },
@@ -171,6 +171,9 @@ export class UppderBodyWidthSlideScreen extends Component {
           }),
           Animated.timing(rightShulderOpacity, {
             toValue: 0.5,
+          }),
+          Animated.timing(leftShoulderGuideOpacity, {
+            toValue: 0,
           }),
         ]).start();
         this.setState({
@@ -201,6 +204,9 @@ export class UppderBodyWidthSlideScreen extends Component {
           Animated.timing(rightChestOpacity, {
             toValue: 1,
           }),
+          Animated.timing(leftChestGuideOpacity, {
+            toValue: 1,
+          }),
         ]).start();
         this.setState({ type: 'leftChest', typeText: '왼쪽 가슴' });
       },
@@ -214,6 +220,9 @@ export class UppderBodyWidthSlideScreen extends Component {
           }),
           Animated.timing(rightChestOpacity, {
             toValue: 0.5,
+          }),
+          Animated.timing(leftChestGuideOpacity, {
+            toValue: 0,
           }),
         ]).start();
         this.setState({
@@ -245,6 +254,9 @@ export class UppderBodyWidthSlideScreen extends Component {
           Animated.timing(rightShulderOpacity, {
             toValue: 1,
           }),
+          Animated.timing(rightShoulderGuideOpacity, {
+            toValue: 1,
+          }),
         ]).start();
         this.setState({ type: 'rightShulder', typeText: '오른쪽 어깨' });
       },
@@ -258,6 +270,9 @@ export class UppderBodyWidthSlideScreen extends Component {
           }),
           Animated.timing(leftShulderOpacity, {
             toValue: 0.5,
+          }),
+          Animated.timing(rightShoulderGuideOpacity, {
+            toValue: 0,
           }),
         ]).start();
         this.setState({
@@ -288,6 +303,9 @@ export class UppderBodyWidthSlideScreen extends Component {
           Animated.timing(leftChestOpacity, {
             toValue: 1,
           }),
+          Animated.timing(rightChestGuideOpacity, {
+            toValue: 1,
+          }),
         ]).start();
         this.setState({ type: 'rightChest', typeText: '오른쪽 가슴' });
       },
@@ -302,37 +320,12 @@ export class UppderBodyWidthSlideScreen extends Component {
           Animated.timing(leftChestOpacity, {
             toValue: 0.5,
           }),
+          Animated.timing(rightChestGuideOpacity, {
+            toValue: 0,
+          }),
         ]).start();
         this.setState({
           rightChestOffset: {
-            x: event.nativeEvent.pageX,
-          },
-        });
-      },
-      onPanResponderTerminate: () => {},
-      onShouldBlockNativeResponder: () => true,
-    });
-
-    // 중앙선
-    this.centerPanResponder = PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onStartShouldSetPanResponderCapture: () => true,
-      onMoveShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponderCapture: () => true,
-      onPanResponderGrant: () => {
-        this.setState({ type: 'center', typeText: '중앙' });
-
-        this.centerPan.setOffset({
-          x: this.centerPan.x._value,
-        });
-        this.centerPan.setValue({ x: 0, y: 0 });
-      },
-      onPanResponderMove: this.onDraggingCenter(),
-      onPanResponderTerminationRequest: () => true,
-      onPanResponderRelease: (event) => {
-        this.centerPan.flattenOffset();
-        this.setState({
-          centerPanOffset: {
             x: event.nativeEvent.pageX,
           },
         });
@@ -368,11 +361,6 @@ export class UppderBodyWidthSlideScreen extends Component {
     return Animated.event([null, { dx: rightChest.x, dy: rightChest.y }]);
   };
 
-  onDraggingCenter = () => {
-    const { centerPan } = this;
-    return Animated.event([null, { dx: centerPan.x, dy: centerPan.y }]);
-  };
-
   navigationButtonPressed({ buttonId }) {
     if (buttonId === 'next') {
       const {
@@ -382,8 +370,14 @@ export class UppderBodyWidthSlideScreen extends Component {
         base64,
         height,
         weight,
-        headOffset,
-        footOffset,
+        headOffsetY,
+        footOffsetY,
+        shoulderOffsetY,
+        pelvisOffsetY,
+        wristOffsetY,
+        crotchOffsetY,
+        ankleOffsetY,
+        bellyOffsetX,
         isMe,
       } = this.props;
       const {
@@ -395,19 +389,25 @@ export class UppderBodyWidthSlideScreen extends Component {
 
       Navigation.push(componentId, {
         component: {
-          name: 'wave.upperBodySlide',
+          name: 'wave.lowerBodySlide',
           passProps: {
             gender,
             base64,
             height,
             age,
             weight,
-            headOffset,
-            footOffset,
-            leftShulderOffset,
-            leftChestOffset,
-            rightShulderOffset,
-            rightChestOffset,
+            headOffsetY,
+            footOffsetY,
+            shoulderOffsetY,
+            pelvisOffsetY,
+            wristOffsetY,
+            crotchOffsetY,
+            ankleOffsetY,
+            bellyOffsetX,
+            leftShulderOffsetX: leftShulderOffset.x,
+            leftChestOffsetX: leftChestOffset.x,
+            rightShulderOffsetX: rightShulderOffset.x,
+            rightChestOffsetX: rightChestOffset.x,
             isMe,
           },
         },
@@ -418,7 +418,6 @@ export class UppderBodyWidthSlideScreen extends Component {
   render() {
     // 각 슬라이더에 따라 돋보기 오프셋 설정
     const {
-      centerPan,
       leftShulderPan,
       leftShulderOpacity,
       leftChestPan,
@@ -427,43 +426,24 @@ export class UppderBodyWidthSlideScreen extends Component {
       rightShulderOpacity,
       rightChest,
       rightChestOpacity,
-      reverseLeftChest,
-      reverseRightChest,
-      reverseLeftShulder,
-      reverseRightShulder,
+      leftShoulderGuideOpacity,
+      leftChestGuideOpacity,
+      rightShoulderGuideOpacity,
+      rightChestGuideOpacity,
     } = this;
 
-    const { base64, bellyOffsetX } = this.props;
-    const { typeText, type } = this.state;
+    const { base64 } = this.props;
+    const { typeText } = this.state;
 
-    console.log(this.state.leftShulderOffset.x);
-
-    const centerSlide = {
-      transform: [{ translateX: centerPan.x }],
-      left: centerOffset,
+    const leftShulderSlide = {
+      transform: [
+        {
+          translateX: leftShulderPan.x,
+        },
+      ],
+      left: centerOffset - 100,
+      opacity: leftShulderOpacity,
     };
-    let leftShulderSlide;
-    if (type === 'center') {
-      leftShulderSlide = {
-        transform: [
-          {
-            translateX: centerPan.x,
-          },
-        ],
-        // left: this.state.leftShulderOffset.x,
-        opacity: leftShulderOpacity,
-      };
-    } else {
-      leftShulderSlide = {
-        transform: [
-          {
-            translateX: leftShulderPan.x,
-          },
-        ],
-        left: centerOffset - 100,
-        opacity: leftShulderOpacity,
-      };
-    }
 
     const leftChestSlide = {
       transform: [
@@ -478,7 +458,7 @@ export class UppderBodyWidthSlideScreen extends Component {
     const rightShulderSlide = {
       transform: [
         {
-          translateX: reverseLeftShulder,
+          translateX: rightShulderPan.x,
         },
       ],
       left: centerOffset + 100,
@@ -488,7 +468,7 @@ export class UppderBodyWidthSlideScreen extends Component {
     const rightChestSlide = {
       transform: [
         {
-          translateX: reverseLeftChest,
+          translateX: rightChest.x,
         },
       ],
       left: centerOffset + 50,
@@ -511,6 +491,7 @@ export class UppderBodyWidthSlideScreen extends Component {
             //   'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=962&q=80',
           }}
         >
+          <StepHeader position={2} />
           <Slider
             style={leftShulderSlide}
             {...this.leftShulderPanResponder.panHandlers}
@@ -519,6 +500,13 @@ export class UppderBodyWidthSlideScreen extends Component {
               <SliderLabel style={{ transform: [{ rotate: '-90deg' }] }}>
                 <LabelText>왼쪽 어깨</LabelText>
               </SliderLabel>
+              <LeftShoulderGuideWrapper
+                style={{ opacity: leftShoulderGuideOpacity }}
+              >
+                <PartGuideImage
+                  source={require('./images/leftShoulderGuide.png')}
+                />
+              </LeftShoulderGuideWrapper>
             </SliderBar>
           </Slider>
           <Slider
@@ -532,14 +520,13 @@ export class UppderBodyWidthSlideScreen extends Component {
               >
                 <LabelText>왼쪽 가슴</LabelText>
               </SliderLabel>
+              <LeftChestGuideWrapper style={{ opacity: leftChestGuideOpacity }}>
+                <PartGuideImage
+                  source={require('./images/leftShoulderGuide.png')}
+                />
+              </LeftChestGuideWrapper>
             </SliderBar>
           </Slider>
-          <BellySlider
-            {...this.centerPanResponder.panHandlers}
-            style={centerSlide}
-          >
-            <BellySliderBar />
-          </BellySlider>
           <Slider
             style={rightChestSlide}
             {...this.rightChestResponder.panHandlers}
@@ -551,9 +538,14 @@ export class UppderBodyWidthSlideScreen extends Component {
               >
                 <LabelText>오른쪽 가슴</LabelText>
               </RightSliderLabel>
+              <RightChestGuideWrapper style={{ opacity: rightChestGuideOpacity }}>
+                <PartGuideImage
+                  source={require('./images/rightShoulderGuide.png')}
+                >
+                </PartGuideImage>
+              </RightChestGuideWrapper>
             </SliderBar>
           </Slider>
-
           <Slider
             style={rightShulderSlide}
             {...this.rightShulderPanResponder.panHandlers}
@@ -562,6 +554,12 @@ export class UppderBodyWidthSlideScreen extends Component {
               <RightSliderLabel style={{ transform: [{ rotate: '90deg' }] }}>
                 <LabelText>오른쪽 어깨</LabelText>
               </RightSliderLabel>
+              <RightShoulderGuideWrapper style={{ opacity: rightShoulderGuideOpacity }}>
+                <PartGuideImage
+                  source={require('./images/rightShoulderGuide.png')}
+                >
+                </PartGuideImage>
+              </RightShoulderGuideWrapper>
             </SliderBar>
           </Slider>
         </ImageContainer>
@@ -588,9 +586,15 @@ UppderBodyWidthSlideScreen.propTypes = {
   name: PropTypes.string,
   age: PropTypes.string,
   nickname: PropTypes.string,
-  headOffset: PropTypes.object,
-  footOffset: PropTypes.object,
+  headOffsetY: PropTypes.number,
+  footOffsetY: PropTypes.number,
+  bellyOffsetX: PropTypes.number,
   isMe: PropTypes.bool,
+  shoulderOffsetY: PropTypes.number,
+  pelvisOffsetY: PropTypes.number,
+  wristOffsetY: PropTypes.number,
+  crotchOffsetY: PropTypes.number,
+  ankleOffsetY: PropTypes.number,
 };
 
 export default UppderBodyWidthSlideScreen;

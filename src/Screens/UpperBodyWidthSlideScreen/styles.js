@@ -24,6 +24,50 @@ export const ImageContainer = styled(ImageBackground)`
   height: ${IMAGE_HEIGHT};
 `;
 
+export const LeftShoulderGuideWrapper = styled(Animated.View)`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 230;
+  left: -10;
+  width: 50px;
+  height: 50px;
+`;
+
+export const LeftChestGuideWrapper = styled(Animated.View)`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 230;
+  left: -17;
+  width: 50px;
+  height: 50px;
+`;
+
+export const RightShoulderGuideWrapper = styled(Animated.View)`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 230;
+  right: -10;
+  width: 50px;
+  height: 50px;
+`;
+
+export const RightChestGuideWrapper = styled(Animated.View)`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 230;
+  right: -17;
+  width: 50px;
+  height: 50px;
+`;
+
 export const MagnifierWrapper = styled(Animated.View)`
   position: relative;
   display: flex;
@@ -78,35 +122,12 @@ export const SliderBar = styled.View`
   background-color: ${theme.guideColor};
 `;
 
-export const BellySlider = styled(Animated.View)`
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  height: ${window.height};
-`;
-
-export const BellySliderBar = styled.View`
-  position: relative;
-  width: 1px;
-  height: ${window.height};
-  background-color: ${theme.guideColor};
-`;
-
-export const BellyLine = styled.View`
-  position: relative;
-  width: 1px;
-  height: ${window.height};
-  left: ${(props) => props.belly};
-  background-color: red;
-`;
-
 export const SliderLabel = styled.View`
   position: absolute;
   justify-content: center;
   align-items: center;
   left: -54;
-  top: ${(props) => (!props.isBottom ? 70 : 500)};
+  top: ${(props) => (!props.isBottom ? 150 : 500)};
   width: 80px;
   height: 30px;
   background-color: ${theme.guideColor};
@@ -119,7 +140,7 @@ export const RightSliderLabel = styled.View`
   justify-content: center;
   align-items: center;
   left: -24;
-  top: ${(props) => (!props.isBottom ? 70 : 500)};
+  top: ${(props) => (!props.isBottom ? 150 : 500)};
   width: 80px;
   height: 30px;
   background-color: ${theme.guideColor};
@@ -146,4 +167,9 @@ export const GuideImage = styled(Animated.Image)`
   position: absolute;
   width: ${IMAGE_WIDTH};
   height: ${IMAGE_HEIGHT};
+`;
+
+export const PartGuideImage = styled.Image`
+  width: 100%;
+  height: 100%;
 `;

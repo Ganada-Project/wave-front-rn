@@ -63,7 +63,7 @@ class FinalRegisterScreen extends Component {
   }
 
   componentDidMount() {
-    this.postRegister();
+    // this.postRegister();
   }
 
   postRegister = () => {
@@ -71,59 +71,28 @@ class FinalRegisterScreen extends Component {
       postSizeCard,
       gender,
       sizeCardName,
-      age,
       user,
-      weight,
+      age,
       height,
+      weight,
       base64,
-      componentId,
-      headOffset,
-      footOffset,
-      leftNeckOffset,
-      leftShulderOffset,
-      leftElbowOffset,
-      leftHandOffset,
-      rightNeckOffset,
-      rightShulderOffset,
-      rightElbowOffset,
-      rightHandOffset,
-      leftChestOffset,
-      leftWaistOffset,
-      leftPelvisOffset,
-      rightChestOffset,
-      rightWaistOffset,
-      rightPelvisOffset,
-      leftThighOffset,
-      leftAnkleOffset,
-      rightThighOffset,
-      rightAnkleOffset,
+      headOffsetY,
+      footOffsetY,
+      bellyOffsetX,
+      shulderOffsetY,
+      wristOffsetY,
+      crotchOffsetY,
+      pelvisOffsetY,
+      ankleOffsetY,
+      leftShulderOffsetX,
+      leftChestOffsetX,
+      leftWaistOffsetX,
+      leftPelvisOffsetX,
+      rightShulderOffsetX,
+      rightChestOffsetX,
+      rightWaistOffsetX,
+      rightPelvisOffsetX,
     } = this.props;
-
-    console.log('이름 :', sizeCardName);
-    console.log('키 :', height);
-    console.log('몸무게 :', weight);
-    console.log('나이: ', age);
-    console.log('이미지 :', base64.length);
-    console.log('정수리: ', headOffset);
-    console.log('발끝: ', footOffset);
-    console.log('왼쪽 목', leftNeckOffset);
-    console.log('왼쪽 어깨', leftShulderOffset);
-    console.log('왼쪽 팔꿈치', leftElbowOffset);
-    console.log('왼쪽 손', leftHandOffset);
-    console.log('오른쪽 목', rightNeckOffset);
-    console.log('오른쪽 어깨', rightShulderOffset);
-    console.log('오른쪽 팔꿈치', rightElbowOffset);
-    console.log('오른쪽 손', rightHandOffset);
-    console.log('왼쪽 가슴', leftChestOffset);
-    console.log('왼쪽 허리', leftWaistOffset);
-    console.log('왼쪽 골반', leftPelvisOffset);
-    console.log('오른쪽 가슴', rightChestOffset);
-    console.log('오른쪽 허리', rightWaistOffset);
-    console.log('오른쪽 골반', rightPelvisOffset);
-    console.log('왼쪽 허벅지', leftThighOffset);
-    console.log('왼쪽 발목', leftAnkleOffset);
-    console.log('오른쪽 허벅지', rightThighOffset);
-    console.log('오른쪽 발목', rightAnkleOffset);
 
     postSizeCard({
       gender: gender || user.get('gender'),
@@ -131,35 +100,87 @@ class FinalRegisterScreen extends Component {
       age: age || user.get('age'),
       weight,
       height,
-      headOffset,
-      footOffset,
-      leftNeckOffset,
-      leftShulderOffset,
-      leftElbowOffset,
-      leftHandOffset,
-      rightNeckOffset,
-      rightShulderOffset,
-      rightElbowOffset,
-      rightHandOffset,
-      leftChestOffset,
-      leftWaistOffset,
-      leftPelvisOffset,
-      rightChestOffset,
-      rightWaistOffset,
-      rightPelvisOffset,
-      leftThighOffset,
-      leftAnkleOffset,
-      rightThighOffset,
-      rightAnkleOffset,
-      componentId,
+      // headOffset,
+      // footOffset,
+      // leftShulderOffset,
+      // rightNeckOffset,
+      // rightShulderOffset,
+      // rightElbowOffset,
+      // rightHandOffset,
+      // leftChestOffset,
+      // leftWaistOffset,
+      // leftPelvisOffset,
+      // rightChestOffset,
+      // rightWaistOffset,
+      // rightPelvisOffset,
+      // leftThighOffset,
+      // leftAnkleOffset,
+      // rightThighOffset,
+      // rightAnkleOffset,
+      // componentId,
       imageBase: base64,
     });
   };
 
   render() {
+    const {
+      postSizeCard,
+      gender,
+      sizeCardName,
+      user,
+      age,
+      height,
+      weight,
+      base64,
+      headOffsetY,
+      footOffsetY,
+      bellyOffsetX,
+      shoulderOffsetY,
+      wristOffsetY,
+      crotchOffsetY,
+      pelvisOffsetY,
+      ankleOffsetY,
+      leftShulderOffsetX,
+      leftChestOffsetX,
+      leftWaistOffsetX,
+      leftPelvisOffsetX,
+      rightShulderOffsetX,
+      rightChestOffsetX,
+      rightWaistOffsetX,
+      rightPelvisOffsetX,
+    } = this.props;
+
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <BarIndicator size={40} color={theme.pointColor} count={6} />
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+        }}
+      >
+        <Text>{`성: ${gender || user.get('gender')}`}</Text>
+        <Text>{`사이즈카드이름: ${sizeCardName}`}</Text>
+        <Text>{`키: ${height}`}</Text>
+        <Text>{`체중: ${weight}`}</Text>
+        <Text>{`나이: ${age || user.get('age')}`}</Text>
+        <Text>{`머리: ${headOffsetY}`}</Text>
+        <Text>{`발: ${footOffsetY}`}</Text>
+        <Text>{`배꼽x: ${bellyOffsetX}`}</Text>
+        <Text>{`어깨y: ${shoulderOffsetY}`}</Text>
+        <Text>{`골반y: ${pelvisOffsetY}`}</Text>
+        <Text>{`손목: ${wristOffsetY}`}</Text>
+        <Text>{`밑위y: ${crotchOffsetY}`}</Text>
+        <Text>{`발목y:  ${ankleOffsetY}`}</Text>
+        <Text>{`왼쪽어깨X: ${leftShulderOffsetX}`}</Text>
+        <Text>{`오른쪽어깨X: ${rightShulderOffsetX}`}</Text>
+        <Text>{`왼쪽가슴X: ${leftChestOffsetX}`}</Text>
+        <Text>{`오른쪽가슴X: ${rightChestOffsetX}`}</Text>
+        <Text>{`왼쪽골반X: ${leftPelvisOffsetX}`}</Text>
+        <Text>{`오른쪽골반X: ${rightPelvisOffsetX}`}</Text>
+        <Text>{`왼쪽허리X: ${leftWaistOffsetX}`}</Text>
+        <Text>{`오른쪽허리X: ${rightWaistOffsetX}`}</Text>
+        {/* <BarIndicator size={40} color={theme.pointColor} count={6} /> */}
       </View>
     );
   }
@@ -175,26 +196,6 @@ FinalRegisterScreen.propTypes = {
   height: PropTypes.string,
   weight: PropTypes.string,
   user: PropTypes.object,
-  headOffset: PropTypes.object,
-  footOffset: PropTypes.object,
-  leftNeckOffset: PropTypes.object,
-  leftShulderOffset: PropTypes.object,
-  leftElbowOffset: PropTypes.object,
-  leftHandOffset: PropTypes.object,
-  rightNeckOffset: PropTypes.object,
-  rightShulderOffset: PropTypes.object,
-  rightElbowOffset: PropTypes.object,
-  rightHandOffset: PropTypes.object,
-  leftChestOffset: PropTypes.object,
-  leftWaistOffset: PropTypes.object,
-  leftPelvisOffset: PropTypes.object,
-  rightChestOffset: PropTypes.object,
-  rightWaistOffset: PropTypes.object,
-  rightPelvisOffset: PropTypes.object,
-  leftAnkleOffset: PropTypes.object,
-  leftThighOffset: PropTypes.object,
-  rightAnkleOffset: PropTypes.object,
-  rightThighOffset: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -32,7 +32,6 @@ import PoseInfoScreen from './Screens/PoseInfoScreen';
 import HeightSlideScreen from './Screens/HeightSlideScreen';
 import UpperBodyWidthSlideScreen from './Screens/UpperBodyWidthSlideScreen';
 import PartialHeightSlideScreen from './Screens/PartialHeightSlideScreen';
-import UpperBodySlideScreen from './Screens/UpperBodySlideScreen';
 import LowerBodySlideScreen from './Screens/LowerBodySlideScreen';
 import BodySizeScreen from './Screens/BodySizeScreen';
 import SizeCardInfoScreen from './Screens/SizeCardInfoScreen';
@@ -233,15 +232,7 @@ const registerScreens = () => {
     ),
     () => PartialHeightSlideScreen,
   );
-  Navigation.registerComponent(
-    'wave.upperBodySlide',
-    () => (props) => (
-      <Provider store={store}>
-        <UpperBodySlideScreen {...props} />
-      </Provider>
-    ),
-    () => UpperBodySlideScreen,
-  );
+
   Navigation.registerComponent(
     'wave.lowerBodySlide',
     () => (props) => (

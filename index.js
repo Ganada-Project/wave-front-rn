@@ -27,7 +27,7 @@ Navigation.events().registerAppLaunchedListener(() => {
         children: [
           {
             component: {
-              name: 'wave.bodySize',
+              name: 'wave.app',
             },
           },
         ],

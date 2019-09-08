@@ -48,8 +48,8 @@ class ProfileScreen extends Component {
   }
 
   componentDidMount() {
-    const { fetchUser } = this.props;
-    fetchUser();
+    // const { fetchUser } = this.props;
+    // fetchUser();
   }
 
   // navigateTo = () => {
@@ -79,14 +79,7 @@ class ProfileScreen extends Component {
       <View style={styles.container}>
         <View style={styles.header_profile}>
           <View style={styles.header_text_container}>
-            <Text style={styles.header_text}>
-              {userData.getIn(['bio', 'name'])}
-            </Text>
-            <Text style={styles.text_sub}>4회 이용 / 20</Text>
-
-            <Text style={styles.text_subsub}>
-              새로운 패션 소비 습관을 형성중이네요.
-            </Text>
+            <Text style={styles.header_text}>{userData.get('name')}</Text>
           </View>
           <View style={styles.profile_image_container}>
             <ImageContainer

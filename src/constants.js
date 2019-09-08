@@ -59,6 +59,13 @@ export const gradientPreset = [
   'rgb(106,130,251)',
 ];
 
+export const lightGradientPreset = [
+  'rgb(233, 134, 152)',
+  'rgb(222, 224, 227)',
+  // 'rgb(189, 60, 75)',
+  // 'rgb(177,113,166)',
+];
+
 export const gradientSpeed = 5000;
 export const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
 export const keyboardBehavior = Platform.OS === 'ios' ? 'padding' : null;

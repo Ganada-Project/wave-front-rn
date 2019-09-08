@@ -43,7 +43,7 @@ function appReducer(state = initialState, action) {
     case FETCH_USER_REQUESTING_FAIL:
       return state.set('loading', false).set('error', action.error);
     case TRY_SIGN_OUT_SUCCESS:
-      return state.set('userData', state.get('userData')).set('idToken', null);
+      return state.set('userData', null).set('idToken', null);
     default:
       return state;
   }

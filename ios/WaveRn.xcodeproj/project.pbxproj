@@ -68,9 +68,8 @@
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 		ED754DD6228BFD25003A9DAC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED754DD5228BFD25003A9DAC /* GoogleService-Info.plist */; };
-		EDA1778F23153E6600610882 /* libRNCGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDA1778E23153E5300610882 /* libRNCGeolocation.a */; };
-		EDA177962315412000610882 /* libRNAttitude.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDA177952315410700610882 /* libRNAttitude.a */; };
 		EDD30191222E6E5100DEE097 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDD3016B222E6E3D00DEE097 /* libRCTCameraRoll.a */; };
+		EDD36331231789610050E466 /* libRNAttitude.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDD36330231789480050E466 /* libRNAttitude.a */; };
 		EDD5D9EC2204898200C63784 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDD5D9E92204895600C63784 /* libReactNativeNavigation.a */; };
 		F654B419ADD3494385FA8DB5 /* libRNSensors.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45A9CEB3C52D4962A1A762A2 /* libRNSensors.a */; };
 /* End PBXBuildFile section */
@@ -335,20 +334,6 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNFirebase;
 		};
-		EDA1778D23153E5300610882 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EDA1778923153E5300610882 /* RNCGeolocation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = RNCGeolocation;
-		};
-		EDA177942315410700610882 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EDA177902315410600610882 /* RNAttitude.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = RNAttitude;
-		};
 		EDBF5C172205B873006FFEB8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C4687F04A57640518A0A7B4B /* RNVectorIcons.xcodeproj */;
@@ -391,6 +376,13 @@
 			remoteGlobalIDString = 58B5115D1A9E6B3D00147676;
 			remoteInfo = RCTCameraRoll;
 		};
+		EDD3632F231789480050E466 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EDD3632B231789480050E466 /* RNAttitude.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNAttitude;
+		};
 		EDD5D9E82204895600C63784 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EDD5D9B62204895500C63784 /* ReactNativeNavigation.xcodeproj */;
@@ -425,6 +417,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 64AA15081EF7F30100718508;
 			remoteInfo = "BVLinearGradient-tvOS";
+		};
+		EDF23F45231788A200D320FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3DBE0D001F3B181A0099AA32;
+			remoteInfo = fishhook;
+		};
+		EDF23F47231788A200D320FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3DBE0D0D1F3B181C0099AA32;
+			remoteInfo = "fishhook-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -499,9 +505,8 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		ED754DD5228BFD25003A9DAC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		EDA1778923153E5300610882 /* RNCGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCGeolocation.xcodeproj; path = "../node_modules/@react-native-community/geolocation/ios/RNCGeolocation.xcodeproj"; sourceTree = "<group>"; };
-		EDA177902315410600610882 /* RNAttitude.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNAttitude.xcodeproj; path = "../node_modules/react-native-attitude/ios/RNAttitude.xcodeproj"; sourceTree = "<group>"; };
 		EDD30160222E6E3C00DEE097 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
+		EDD3632B231789480050E466 /* RNAttitude.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNAttitude.xcodeproj; path = "../node_modules/react-native-attitude/ios/RNAttitude.xcodeproj"; sourceTree = "<group>"; };
 		EDD5D9B62204895500C63784 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		F11CC09D7F7DC4083509BF2E /* libPods-WaveRnTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WaveRnTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F34BEEC657A34F65AE56CE86 /* NanumGothic-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NanumGothic-Regular.ttf"; path = "../src/Assets/Fonts/NanumGothic-Regular.ttf"; sourceTree = "<group>"; };
@@ -526,7 +531,6 @@
 			files = (
 				EDD5D9EC2204898200C63784 /* libReactNativeNavigation.a in Frameworks */,
 				EDD30191222E6E5100DEE097 /* libRCTCameraRoll.a in Frameworks */,
-				EDA177962315412000610882 /* libRNAttitude.a in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
@@ -537,6 +541,7 @@
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
+				EDD36331231789610050E466 /* libRNAttitude.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				2A5B2A376067458DB34745B3 /* libFastImage.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
@@ -546,7 +551,6 @@
 				F654B419ADD3494385FA8DB5 /* libRNSensors.a in Frameworks */,
 				3297A7B61E114643AED69540 /* libBVLinearGradient.a in Frameworks */,
 				18FA5BA4AB3744F0874646F8 /* libRNFirebase.a in Frameworks */,
-				EDA1778F23153E6600610882 /* libRNCGeolocation.a in Frameworks */,
 				C08E8F1B10DD36BA9A47A84D /* libPods-WaveRn.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -644,7 +648,6 @@
 				C3828467C70D15057C3004D1 /* Pods-WaveRnTests.debug.xcconfig */,
 				A592EF1DE6A180CB052C1AE6 /* Pods-WaveRnTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -662,6 +665,8 @@
 			children = (
 				139FDEF41B06529B00C62182 /* libRCTWebSocket.a */,
 				3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */,
+				EDF23F46231788A200D320FA /* libfishhook.a */,
+				EDF23F48231788A200D320FA /* libfishhook-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -763,8 +768,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				EDA177902315410600610882 /* RNAttitude.xcodeproj */,
-				EDA1778923153E5300610882 /* RNCGeolocation.xcodeproj */,
+				EDD3632B231789480050E466 /* RNAttitude.xcodeproj */,
 				EDD30160222E6E3C00DEE097 /* RCTCameraRoll.xcodeproj */,
 				EDD5D9B62204895500C63784 /* ReactNativeNavigation.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -843,22 +847,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EDA1778A23153E5300610882 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EDA1778E23153E5300610882 /* libRNCGeolocation.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		EDA177912315410600610882 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EDA177952315410700610882 /* libRNAttitude.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		EDBF5BE32205B871006FFEB8 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -914,6 +902,14 @@
 			isa = PBXGroup;
 			children = (
 				EDD3016B222E6E3D00DEE097 /* libRCTCameraRoll.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EDD3632C231789480050E466 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EDD36330231789480050E466 /* libRNAttitude.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1126,16 +1122,12 @@
 					ProjectRef = EDD5D9B62204895500C63784 /* ReactNativeNavigation.xcodeproj */;
 				},
 				{
-					ProductGroup = EDA177912315410600610882 /* Products */;
-					ProjectRef = EDA177902315410600610882 /* RNAttitude.xcodeproj */;
+					ProductGroup = EDD3632C231789480050E466 /* Products */;
+					ProjectRef = EDD3632B231789480050E466 /* RNAttitude.xcodeproj */;
 				},
 				{
 					ProductGroup = EDBF5C6E2207525A006FFEB8 /* Products */;
 					ProjectRef = 4CCD5EC87AA6437EAE37C9CB /* RNCamera.xcodeproj */;
-				},
-				{
-					ProductGroup = EDA1778A23153E5300610882 /* Products */;
-					ProjectRef = EDA1778923153E5300610882 /* RNCGeolocation.xcodeproj */;
 				},
 				{
 					ProductGroup = EDE52C57223E17F70083F1F9 /* Products */;
@@ -1410,20 +1402,6 @@
 			remoteRef = ED754F07228C47FF003A9DAC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EDA1778E23153E5300610882 /* libRNCGeolocation.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNCGeolocation.a;
-			remoteRef = EDA1778D23153E5300610882 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		EDA177952315410700610882 /* libRNAttitude.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNAttitude.a;
-			remoteRef = EDA177942315410700610882 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		EDBF5C182205B873006FFEB8 /* libRNVectorIcons.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1466,6 +1444,13 @@
 			remoteRef = EDD3016A222E6E3D00DEE097 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		EDD36330231789480050E466 /* libRNAttitude.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNAttitude.a;
+			remoteRef = EDD3632F231789480050E466 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		EDD5D9E92204895600C63784 /* libReactNativeNavigation.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1499,6 +1484,20 @@
 			fileType = archive.ar;
 			path = libBVLinearGradient.a;
 			remoteRef = EDE88AA92279A4EB00798C61 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EDF23F46231788A200D320FA /* libfishhook.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libfishhook.a;
+			remoteRef = EDF23F45231788A200D320FA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EDF23F48231788A200D320FA /* libfishhook-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libfishhook-tvOS.a";
+			remoteRef = EDF23F47231788A200D320FA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

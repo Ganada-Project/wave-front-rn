@@ -40,8 +40,19 @@ export const FootGuideWrapper = styled(Animated.View)`
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 0;
+  bottom: -5;
   right: 10;
+  width: 50px;
+  height: 50px;
+`;
+
+export const BellyGuideWrapper = styled(Animated.View)`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 45;
+  left: -25;
   width: 50px;
   height: 50px;
 `;
@@ -86,7 +97,7 @@ export const Slider = styled(Animated.View)`
 export const BellySlider = styled(Animated.View)`
   position: absolute;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   width: 30px;
   height: ${window.height};
 `;

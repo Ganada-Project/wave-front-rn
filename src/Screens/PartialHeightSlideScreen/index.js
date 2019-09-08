@@ -20,12 +20,15 @@ import {
   RightSliderlabel,
   SliderlabelText,
   SliderBar,
-  HeadGuideWrapper,
-  FootGuideWrapper,
+  ShoulderGuideWrapper,
+  PelvisGuideWrapper,
   PartGuideImage,
   BellySlider,
   BellySliderBar,
   BellyLabel,
+  WristGuideWrapper,
+  CrotchGuideWrapper,
+  AnkleGuideWrapper,
 } from './styles';
 import { outputX, outputY, distanceBetween2Offset } from './utils/calculate';
 import {
@@ -40,6 +43,7 @@ import {
   WRIST_OFFSET,
 } from './constants';
 import { theme, BaseHeightOffset } from '../../constants';
+import { StepHeader } from '../../Components';
 
 export class PartialHeightSlideScreen extends Component {
   static options(passProps) {
@@ -107,6 +111,8 @@ export class PartialHeightSlideScreen extends Component {
     this.shoulderGuideOpacity = new Animated.Value(0);
     this.pelvisGuideOpacity = new Animated.Value(0);
     this.wristGuideOpacity = new Animated.Value(0);
+    this.crotchGuideOpacity = new Animated.Value(0);
+    this.ankleGuideOpacity = new Animated.Value(0);
 
     // 가이드 투명도
     this.guideOpacity = new Animated.Value(0);
@@ -114,8 +120,11 @@ export class PartialHeightSlideScreen extends Component {
       shoulderGuideOpacity,
       shoulderOpacity,
       pelvisGuideOpacity,
+      wristGuideOpacity,
       pelvisOpacity,
       wristOpacity,
+      crotchGuideOpacity,
+      ankleGuideOpacity,
       guideOpacity,
       crotchOpacity,
       ankleOpacity,
@@ -248,6 +257,9 @@ export class PartialHeightSlideScreen extends Component {
           Animated.timing(wristOpacity, {
             toValue: 1,
           }),
+          Animated.timing(wristGuideOpacity, {
+            toValue: 1,
+          }),
         ]).start();
         this.wristPan.setValue({ x: 0, y: 0 });
       },
@@ -258,6 +270,9 @@ export class PartialHeightSlideScreen extends Component {
         Animated.parallel([
           Animated.timing(wristOpacity, {
             toValue: 0.5,
+          }),
+          Animated.timing(wristGuideOpacity, {
+            toValue: 0,
           }),
         ]).start();
         this.setState({
@@ -286,6 +301,9 @@ export class PartialHeightSlideScreen extends Component {
           Animated.timing(crotchOpacity, {
             toValue: 1,
           }),
+          Animated.timing(crotchGuideOpacity, {
+            toValue: 1,
+          }),
         ]).start();
         this.crotchPan.setValue({ x: 0, y: 0 });
       },
@@ -296,6 +314,9 @@ export class PartialHeightSlideScreen extends Component {
         Animated.parallel([
           Animated.timing(crotchOpacity, {
             toValue: 0.5,
+          }),
+          Animated.timing(crotchGuideOpacity, {
+            toValue: 0,
           }),
         ]).start();
         this.setState({
@@ -324,6 +345,9 @@ export class PartialHeightSlideScreen extends Component {
           Animated.timing(ankleOpacity, {
             toValue: 1,
           }),
+          Animated.timing(ankleGuideOpacity, {
+            toValue: 1,
+          }),
         ]).start();
         this.anklePan.setValue({ x: 0, y: 0 });
       },
@@ -334,6 +358,9 @@ export class PartialHeightSlideScreen extends Component {
         Animated.parallel([
           Animated.timing(ankleOpacity, {
             toValue: 0.5,
+          }),
+          Animated.timing(ankleGuideOpacity, {
+            toValue: 0,
           }),
         ]).start();
         this.setState({
@@ -385,7 +412,13 @@ export class PartialHeightSlideScreen extends Component {
         footOffsetY,
         bellyOffsetX,
       } = this.props;
-      const { shoulderOffset, pelvisOffset } = this.state;
+      const {
+        shoulderOffset,
+        pelvisOffset,
+        wristOffset,
+        crotchOffset,
+        ankleOffset,
+      } = this.state;
       Navigation.push(componentId, {
         component: {
           name: 'wave.upperBodyWidthSlide',
@@ -395,6 +428,9 @@ export class PartialHeightSlideScreen extends Component {
             base64,
             shoulderOffsetY: shoulderOffset.y,
             pelvisOffsetY: pelvisOffset.y,
+            wristOffsetY: wristOffset.y,
+            crotchOffsetY: crotchOffset.y,
+            ankleOffsetY: ankleOffset.y,
             headOffsetY,
             footOffsetY,
             bellyOffsetX,
@@ -424,6 +460,9 @@ export class PartialHeightSlideScreen extends Component {
       ankleOpacity,
       shoulderGuideOpacity,
       pelvisGuideOpacity,
+      wristGuideOpacity,
+      crotchGuideOpacity,
+      ankleGuideOpacity,
     } = this;
 
     const { base64 } = this.props;
@@ -494,24 +533,7 @@ export class PartialHeightSlideScreen extends Component {
             //   'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=962&q=80',
           }}
         >
-          {/* <MagnifierWrapper
-            style={{
-              opacity: shoulderGuideOpacity,
-            }}
-          >
-            <MagnifierContainer>
-              <MagifierCross />
-              <MagnifierImage
-                source={{
-                  uri: `data:image/gif;base64,${base64}`,
-                  // uri:
-                  //   'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=962&q=80',
-                }}
-                style={magnifierImageStyle}
-              />
-            </MagnifierContainer>
-            <MagnifierText>{typeText}</MagnifierText>
-          </MagnifierWrapper> */}
+          <StepHeader position={1} />
           <Slider
             style={shoulderSlide}
             {...this.shoulderPanResponder.panHandlers}
@@ -534,9 +556,11 @@ export class PartialHeightSlideScreen extends Component {
               <Sliderlabel>
                 <SliderlabelText>어깨높이</SliderlabelText>
               </Sliderlabel>
-              <HeadGuideWrapper style={{ opacity: shoulderGuideOpacity }}>
-                <PartGuideImage source={require('./images/headGuide.png')} />
-              </HeadGuideWrapper>
+              <ShoulderGuideWrapper style={{ opacity: shoulderGuideOpacity }}>
+                <PartGuideImage
+                  source={require('./images/shoulderGuide.png')}
+                />
+              </ShoulderGuideWrapper>
             </SliderBar>
           </Slider>
           <Slider style={pelvisSlide} {...this.pelvisPanResponder.panHandlers}>
@@ -558,9 +582,11 @@ export class PartialHeightSlideScreen extends Component {
               <RightSliderlabel>
                 <SliderlabelText>골반높이</SliderlabelText>
               </RightSliderlabel>
-              <FootGuideWrapper style={{ opacity: pelvisGuideOpacity }}>
-                <PartGuideImage source={require('./images/headGuide.png')} />
-              </FootGuideWrapper>
+              <PelvisGuideWrapper style={{ opacity: pelvisGuideOpacity }}>
+                <PartGuideImage
+                  source={require('./images/pelvisCrotchGuide.png')}
+                />
+              </PelvisGuideWrapper>
             </SliderBar>
           </Slider>
           <Slider style={wristSlide} {...this.wristPanResponder.panHandlers}>
@@ -582,6 +608,9 @@ export class PartialHeightSlideScreen extends Component {
               <Sliderlabel>
                 <SliderlabelText>손목높이</SliderlabelText>
               </Sliderlabel>
+              <WristGuideWrapper style={{ opacity: wristGuideOpacity }}>
+                <PartGuideImage source={require('./images/wristGuide.png')} />
+              </WristGuideWrapper>
             </SliderBar>
           </Slider>
           <Slider style={crotchSlide} {...this.crotchPanResponder.panHandlers}>
@@ -603,6 +632,11 @@ export class PartialHeightSlideScreen extends Component {
               <RightSliderlabel>
                 <SliderlabelText>밑위</SliderlabelText>
               </RightSliderlabel>
+              <CrotchGuideWrapper style={{ opacity: crotchGuideOpacity }}>
+                <PartGuideImage
+                  source={require('./images/pelvisCrotchGuide.png')}
+                />
+              </CrotchGuideWrapper>
             </SliderBar>
           </Slider>
           <Slider style={ankleSlide} {...this.anklePanResponder.panHandlers}>
@@ -624,6 +658,9 @@ export class PartialHeightSlideScreen extends Component {
               <Sliderlabel>
                 <SliderlabelText>발목높이</SliderlabelText>
               </Sliderlabel>
+              <AnkleGuideWrapper style={{ opacity: ankleGuideOpacity }}>
+                <PartGuideImage source={require('./images/footGuide.png')} />
+              </AnkleGuideWrapper>
             </SliderBar>
           </Slider>
         </ImageContainer>
