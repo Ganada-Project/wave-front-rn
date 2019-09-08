@@ -1,10 +1,17 @@
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet,
+  Platform,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import { theme } from '../../constants';
+
+export const IconWrapper = Platform.OS === 'ios' ? TouchableOpacity : TouchableWithoutFeedback;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: theme.pointColor,
+    backgroundColor: 'rgba(255,255,255,0.7)',
     padding: 35,
   },
   header: {

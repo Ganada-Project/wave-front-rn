@@ -59,11 +59,11 @@ class CameraScreen extends Component {
   constructor(props) {
     super(props);
     this.state = { pitch: 0 };
-    this.textOpacityLoop = new Animated.Value(0.6);
+    this.textOpacityLoop = new Animated.Value(0.2);
   }
 
   startAnimation = () => {
-    this.textOpacityLoop.setValue(0);
+    this.textOpacityLoop.setValue(0.2);
     Animated.timing(this.textOpacityLoop, {
       toValue: 1,
       duration: 1500,
@@ -137,7 +137,7 @@ class CameraScreen extends Component {
         <GuideWrapper allowed={allowed}>
           <GuideText
             style={{
-              opacity: this.textOpacityLoop,
+              opacity: allowed ? 1 : this.textOpacityLoop,
             }}
           >
             {allowed

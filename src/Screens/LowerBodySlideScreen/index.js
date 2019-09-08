@@ -15,6 +15,11 @@ import {
   SliderLabel,
   LabelText,
   RightSliderLabel,
+  LeftPelvisGuideWrapper,
+  LeftWaistGuideWrapper,
+  PartGuideImage,
+  RightPelvisGuideWrapper,
+  RightWaistGuideWrapper,
 } from './styles';
 import {
   LEFT_WAIST_OFFSET,
@@ -24,6 +29,7 @@ import {
   RIGHT_WAIST_OFFSET,
 } from './constants';
 import { theme } from '../../constants';
+import { StepHeader } from '../../Components';
 
 export class LowerBodySlideScreen extends Component {
   static options(passProps) {
@@ -84,10 +90,20 @@ export class LowerBodySlideScreen extends Component {
     this.magnifierOpacity = new Animated.Value(0);
     // 가이드 투명도
     this.guideOpacity = new Animated.Value(0);
+
+    this.leftPelvisGuideOpacity = new Animated.Value(0);
+    this.leftWaistGuideOpacity = new Animated.Value(0);
+    this.rightPelvisGuideOpacity = new Animated.Value(0);
+    this.rightWaistGuideOpacity = new Animated.Value(0);
+
     const {
       leftPelvisOpacity,
       leftWaistOpacity,
+      leftPelvisGuideOpacity,
+      leftWaistGuideOpacity,
       rightPelvisOpacity,
+      rightPelvisGuideOpacity,
+      rightWaistGuideOpacity,
       rightWaistOpacity,
       magnifierOpacity,
       guideOpacity,
@@ -131,14 +147,20 @@ export class LowerBodySlideScreen extends Component {
           Animated.timing(leftPelvisOpacity, {
             toValue: 1,
           }),
+          Animated.timing(leftPelvisGuideOpacity, {
+            toValue: 1,
+          }),
         ]).start();
         this.setState({ type: 'leftPelvis', typeText: '왼쪽 골반' });
       },
-      onPanResponderMove: this.onDraggingLeftThigh(),
+      onPanResponderMove: this.onDraggingLeftPelvis(),
       onPanResponderTerminationRequest: () => true,
       onPanResponderRelease: (event) => {
         this.leftPelvisPan.flattenOffset();
         Animated.parallel([
+          Animated.timing(leftPelvisGuideOpacity, {
+            toValue: 0,
+          }),
           Animated.timing(leftPelvisOpacity, {
             toValue: 0.5,
           }),
@@ -168,16 +190,22 @@ export class LowerBodySlideScreen extends Component {
           Animated.timing(leftWaistOpacity, {
             toValue: 1,
           }),
+          Animated.timing(leftWaistGuideOpacity, {
+            toValue: 1,
+          }),
         ]).start();
         this.setState({ type: 'leftWaist', typeText: '왼쪽 허리' });
       },
-      onPanResponderMove: this.onDraggingLeftAnkle(),
+      onPanResponderMove: this.onDraggingLeftWaist(),
       onPanResponderTerminationRequest: () => true,
       onPanResponderRelease: (event) => {
         this.leftWaistPan.flattenOffset();
         Animated.parallel([
           Animated.timing(leftWaistOpacity, {
             toValue: 0.5,
+          }),
+          Animated.timing(leftWaistGuideOpacity, {
+            toValue: 0,
           }),
         ]).start();
         this.setState({
@@ -205,16 +233,22 @@ export class LowerBodySlideScreen extends Component {
           Animated.timing(rightPelvisOpacity, {
             toValue: 1,
           }),
+          Animated.timing(rightPelvisGuideOpacity, {
+            toValue: 1,
+          }),
         ]).start();
         this.setState({ type: 'rightPelvis', typeText: '오른쪽 골반' });
       },
-      onPanResponderMove: this.onDraggingRightThigh(),
+      onPanResponderMove: this.onDraggingRightPelvis(),
       onPanResponderTerminationRequest: () => true,
       onPanResponderRelease: (event) => {
         this.rightPelvisPan.flattenOffset();
         Animated.parallel([
           Animated.timing(rightPelvisOpacity, {
             toValue: 0.5,
+          }),
+          Animated.timing(rightPelvisGuideOpacity, {
+            toValue: 0,
           }),
         ]).start();
         this.setState({
@@ -242,16 +276,22 @@ export class LowerBodySlideScreen extends Component {
           Animated.timing(rightWaistOpacity, {
             toValue: 1,
           }),
+          Animated.timing(rightWaistGuideOpacity, {
+            toValue: 1,
+          }),
         ]).start();
         this.setState({ type: 'rightWaist', typeText: '오른쪽 허리' });
       },
-      onPanResponderMove: this.onDraggingRightAnkle(),
+      onPanResponderMove: this.onDraggingRightWaist(),
       onPanResponderTerminationRequest: () => true,
       onPanResponderRelease: (event) => {
         this.rightWaistPan.flattenOffset();
         Animated.parallel([
           Animated.timing(rightWaistOpacity, {
             toValue: 0.5,
+          }),
+          Animated.timing(rightWaistGuideOpacity, {
+            toValue: 0,
           }),
         ]).start();
         this.setState({
@@ -266,17 +306,17 @@ export class LowerBodySlideScreen extends Component {
     });
   }
 
-  onDraggingLeftThigh = () => {
+  onDraggingLeftPelvis = () => {
     const { leftPelvisPan } = this;
     return Animated.event([null, { dx: leftPelvisPan.x, dy: leftPelvisPan.y }]);
   };
 
-  onDraggingLeftAnkle = () => {
+  onDraggingLeftWaist = () => {
     const { leftWaistPan } = this;
     return Animated.event([null, { dx: leftWaistPan.x, dy: leftWaistPan.y }]);
   };
 
-  onDraggingRightThigh = () => {
+  onDraggingRightPelvis = () => {
     const { rightPelvisPan } = this;
     return Animated.event([
       null,
@@ -284,7 +324,7 @@ export class LowerBodySlideScreen extends Component {
     ]);
   };
 
-  onDraggingRightAnkle = () => {
+  onDraggingRightWaist = () => {
     const { rightWaistPan } = this;
     return Animated.event([null, { dx: rightWaistPan.x, dy: rightWaistPan.y }]);
   };
@@ -296,9 +336,19 @@ export class LowerBodySlideScreen extends Component {
         base64,
         height,
         weight,
-        headOffset,
-        footOffset,
+        headOffsetY,
+        footOffsetY,
+        bellyOffsetX,
         isMe,
+        shoulderOffsetY,
+        pelvisOffsetY,
+        wristOffsetY,
+        crotchOffsetY,
+        ankleOffsetY,
+        leftShulderOffsetX,
+        leftChestOffsetX,
+        rightShulderOffsetX,
+        rightChestOffsetX,
       } = this.props;
       const {
         leftPelvisOffset,
@@ -314,12 +364,22 @@ export class LowerBodySlideScreen extends Component {
             height,
             weight,
             base64,
-            headOffset,
-            footOffset,
-            leftWaistOffset,
-            leftPelvisOffset,
-            rightWaistOffset,
-            rightPelvisOffset,
+            headOffsetY,
+            footOffsetY,
+            bellyOffsetX,
+            shoulderOffsetY,
+            pelvisOffsetY,
+            wristOffsetY,
+            crotchOffsetY,
+            ankleOffsetY,
+            leftShulderOffsetX,
+            leftChestOffsetX,
+            rightShulderOffsetX,
+            rightChestOffsetX,
+            leftWaistOffsetX: leftWaistOffset.x,
+            leftPelvisOffsetX: leftPelvisOffset.x,
+            rightWaistOffsetX: rightWaistOffset.x,
+            rightPelvisOffsetX: rightPelvisOffset.x,
             isMe,
           },
         },
@@ -335,9 +395,13 @@ export class LowerBodySlideScreen extends Component {
       rightPelvisPan,
       rightWaistPan,
       leftPelvisOpacity,
+      leftPelvisGuideOpacity,
+      leftWaistGuideOpacity,
       leftWaistOpacity,
       rightPelvisOpacity,
+      rightPelvisGuideOpacity,
       rightWaistOpacity,
+      rightWaistGuideOpacity,
     } = this;
 
     const { base64 } = this.props;
@@ -373,9 +437,10 @@ export class LowerBodySlideScreen extends Component {
 
     return (
       <Container>
+        <StepHeader position={3} />
         <ImageContainer
           imageStyle={{
-            resizeMode: 'cover',
+            resizeMode: 'contain',
           }}
           source={{
             uri: `data:image/gif;base64,${base64}`,
@@ -394,6 +459,13 @@ export class LowerBodySlideScreen extends Component {
               >
                 <LabelText>왼쪽 골반</LabelText>
               </SliderLabel>
+              <LeftPelvisGuideWrapper
+                style={{ opacity: leftPelvisGuideOpacity }}
+              >
+                <PartGuideImage
+                  source={require('./images/leftPelvisGuide.png')}
+                />
+              </LeftPelvisGuideWrapper>
             </SliderBar>
           </Slider>
           <Slider
@@ -404,6 +476,11 @@ export class LowerBodySlideScreen extends Component {
               <SliderLabel style={{ transform: [{ rotate: '-90deg' }] }}>
                 <LabelText>왼쪽 허리</LabelText>
               </SliderLabel>
+              <LeftWaistGuideWrapper style={{ opacity: leftWaistGuideOpacity }}>
+                <PartGuideImage
+                  source={require('./images/leftWaistGuide.png')}
+                />
+              </LeftWaistGuideWrapper>
             </SliderBar>
           </Slider>
           <Slider
@@ -417,6 +494,13 @@ export class LowerBodySlideScreen extends Component {
               >
                 <LabelText>오른쪽 골반</LabelText>
               </RightSliderLabel>
+              <RightPelvisGuideWrapper
+                style={{ opacity: rightPelvisGuideOpacity }}
+              >
+                <PartGuideImage
+                  source={require('./images/rightPelvisGuide.png')}
+                />
+              </RightPelvisGuideWrapper>
             </SliderBar>
           </Slider>
           <Slider
@@ -427,6 +511,13 @@ export class LowerBodySlideScreen extends Component {
               <RightSliderLabel style={{ transform: [{ rotate: '90deg' }] }}>
                 <LabelText>오른쪽 허리</LabelText>
               </RightSliderLabel>
+              <RightWaistGuideWrapper
+                style={{ opacity: rightWaistGuideOpacity }}
+              >
+                <PartGuideImage
+                  source={require('./images/rightWaistGuide.png')}
+                />
+              </RightWaistGuideWrapper>
             </SliderBar>
           </Slider>
         </ImageContainer>
@@ -448,8 +539,18 @@ LowerBodySlideScreen.propTypes = {
   componentId: PropTypes.string,
   height: PropTypes.string,
   weight: PropTypes.string,
-  headOffset: PropTypes.object,
-  footOffset: PropTypes.object,
+  headOffsetY: PropTypes.number,
+  footOffsetY: PropTypes.number,
+  bellyOffsetX: PropTypes.number,
+  shoulderOffsetY: PropTypes.number,
+  pelvisOffsetY: PropTypes.number,
+  wristOffsetY: PropTypes.number,
+  crotchOffsetY: PropTypes.number,
+  ankleOffsetY: PropTypes.number,
+  leftShulderOffsetX: PropTypes.number,
+  leftChestOffsetX: PropTypes.number,
+  rightShulderOffsetX: PropTypes.number,
+  rightChestOffsetX: PropTypes.number,
 };
 
 export default LowerBodySlideScreen;

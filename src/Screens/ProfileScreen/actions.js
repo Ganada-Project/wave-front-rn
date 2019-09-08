@@ -15,5 +15,5 @@ export function trySignOutAction({ componentId }) {
 export function fetchUserAction() {
   return {
     type: FETCH_USER_REQUESTING,
-  }
+  };
 }

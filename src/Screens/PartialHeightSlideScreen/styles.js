@@ -25,27 +25,59 @@ export const ImageContainer = styled(ImageBackground)`
   height: ${IMAGE_HEIGHT};
 `;
 
-export const HeadGuideWrapper = styled(Animated.View)`
+export const ShoulderGuideWrapper = styled(Animated.View)`
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 0;
+  top: -20;
   right: 10;
   width: 50px;
   height: 50px;
 `;
 
-export const FootGuideWrapper = styled(Animated.View)`
+export const WristGuideWrapper = styled(Animated.View)`
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 0;
+  bottom: -23;
   right: 10;
   width: 50px;
   height: 50px;
-  border: 1px blue solid;
+`;
+
+export const PelvisGuideWrapper = styled(Animated.View)`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -20;
+  left: 10;
+  width: 50px;
+  height: 50px;
+`;
+
+export const CrotchGuideWrapper = styled(Animated.View)`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: -15;
+  left: 10;
+  width: 50px;
+  height: 50px;
+`;
+
+export const AnkleGuideWrapper = styled(Animated.View)`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: -10;
+  right: 10;
+  width: 50px;
+  height: 50px;
 `;
 
 // export const MagnifierContainer = styled(Animated.View)`

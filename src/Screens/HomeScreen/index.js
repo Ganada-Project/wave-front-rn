@@ -6,9 +6,13 @@ import { Navigation } from 'react-native-navigation';
 import AnimatedLinearGradient from 'react-native-animated-linear-gradient';
 import ActionButton from 'react-native-action-button';
 import Modal from 'react-native-modal';
-import styles from './styles';
+import styles, { IconWrapper } from './styles';
 import { FullWidthButton } from '../../Components';
-import { gradientPreset, gradientSpeed } from '../../constants';
+import {
+  gradientPreset,
+  gradientSpeed,
+  lightGradientPreset,
+} from '../../constants';
 import WaveLogoWhite from '../../Assets/Logos/wave-logo-white.png';
 import SizeCardAddButton from './SizeCardAddButton';
 
@@ -64,11 +68,11 @@ export class HomeScreen extends Component {
     });
   };
 
-  navigateToSignIn = () => {
+  navigateToProfile = () => {
     const { componentId } = this.props;
     Navigation.push(componentId, {
       component: {
-        name: 'wave.signIn',
+        name: 'wave.profile',
       },
     });
   };
@@ -100,12 +104,14 @@ export class HomeScreen extends Component {
           <View style={styles.header}>
             <View style={styles.header__menu__wrapper}>
               <Image style={styles.logo} source={WaveLogoWhite} />
-              <Icon
-                type="entypo"
-                name="dots-three-vertical"
-                color="white"
-                size={30}
-              />
+              <IconWrapper onPress={this.navigateToProfile}>
+                <Icon
+                  type="simple-line-icon"
+                  name="settings"
+                  color="white"
+                  size={30}
+                />
+              </IconWrapper>
             </View>
             {/* <Text style={styles.header__title}>웨어비</Text> */}
             <Text style={styles.header__title}>안녕하세요.</Text>

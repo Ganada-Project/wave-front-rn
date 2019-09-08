@@ -23,6 +23,50 @@ export const ImageContainer = styled(ImageBackground)`
   height: ${IMAGE_HEIGHT};
 `;
 
+export const LeftWaistGuideWrapper = styled(Animated.View)`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 280;
+  left: -23;
+  width: 50px;
+  height: 50px;
+`;
+
+export const LeftPelvisGuideWrapper = styled(Animated.View)`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 400;
+  left: -15;
+  width: 50px;
+  height: 50px;
+`;
+
+export const RightWaistGuideWrapper = styled(Animated.View)`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 280;
+  left: -24;
+  width: 50px;
+  height: 50px;
+`;
+
+export const RightPelvisGuideWrapper = styled(Animated.View)`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 400;
+  right: -15;
+  width: 50px;
+  height: 50px;
+`;
+
 export const MagnifierWrapper = styled(Animated.View)`
   position: relative;
   display: flex;
@@ -123,4 +167,9 @@ export const GuideImage = styled(Animated.Image)`
   position: absolute;
   width: ${IMAGE_WIDTH};
   height: ${IMAGE_HEIGHT};
+`;
+
+export const PartGuideImage = styled.Image`
+  width: 100%;
+  height: 100%;
 `;

@@ -27,6 +27,7 @@ import {
   BellySliderBar,
   BellyLabel,
   StepHeadrWrapper,
+  BellyGuideWrapper,
 } from './styles';
 import { outputX, outputY, distanceBetween2Offset } from './utils/calculate';
 import {
@@ -89,6 +90,7 @@ export class HeightSlideScreen extends Component {
     // 돋보기 투명도
     this.headGuideOpacity = new Animated.Value(0);
     this.footGuideOpacity = new Animated.Value(0);
+    this.bellyGuideOpacity = new Animated.Value(0);
     // 가이드 투명도
     this.guideOpacity = new Animated.Value(0);
     const {
@@ -97,6 +99,7 @@ export class HeightSlideScreen extends Component {
       footGuideOpacity,
       footOpacity,
       bellyOpacity,
+      bellyGuideOpacity,
       guideOpacity,
     } = this;
     // 가이드 버튼
@@ -227,6 +230,9 @@ export class HeightSlideScreen extends Component {
           Animated.timing(bellyOpacity, {
             toValue: 1,
           }),
+          Animated.timing(bellyGuideOpacity, {
+            toValue: 1,
+          }),
         ]).start();
         this.bellyPan.setValue({ x: 0, y: 0 });
       },
@@ -237,6 +243,9 @@ export class HeightSlideScreen extends Component {
         Animated.parallel([
           Animated.timing(bellyOpacity, {
             toValue: 0.5,
+          }),
+          Animated.timing(bellyGuideOpacity, {
+            toValue: 0,
           }),
         ]).start();
         this.setState({
@@ -266,40 +275,7 @@ export class HeightSlideScreen extends Component {
     return Animated.event([null, { dx: bellyPan.x }]);
   };
 
-  // adjustMagnifierOffset = () => {
-  //   const { type } = this.state;
-  //   if (type === 'head') {
-  //     this.reverseXValue = this.headPan.x.interpolate({
-  //       inputRange: [0, IMAGE_WIDTH],
-  //       outputRange: [
-  //         outputX({ xOffset: HEAD_OFFSET.x, isStart: true }),
-  //         outputX({ xOffset: HEAD_OFFSET.x }),
-  //       ],
-  //     });
-  //     this.reverseYValue = this.headPan.y.interpolate({
-  //       inputRange: [0, IMAGE_HEIGHT],
-  //       outputRange: [
-  //         outputY({ yOffset: HEAD_OFFSET.y, isStart: true }),
-  //         outputY({ yOffset: HEAD_OFFSET.y }),
-  //       ],
-  //     });
-  //   } else if (type === 'foot') {
-  //     this.reverseXValue = this.footPan.x.interpolate({
-  //       inputRange: [0, IMAGE_WIDTH],
-  //       outputRange: [
-  //         outputX({ xOffset: FOOT_OFFSET.x, isStart: true }),
-  //         outputX({ xOffset: FOOT_OFFSET.x }),
-  //       ],
-  //     });
-  //     this.reverseYValue = this.footPan.y.interpolate({
-  //       inputRange: [0, IMAGE_HEIGHT],
-  //       outputRange: [
-  //         outputY({ yOffset: FOOT_OFFSET.y, isStart: true }),
-  //         outputY({ yOffset: FOOT_OFFSET.y }),
-  //       ],
-  //     });
-  //   }
-  // };
+
 
   navigationButtonPressed({ buttonId }) {
     if (buttonId === 'next') {
@@ -339,6 +315,7 @@ export class HeightSlideScreen extends Component {
       bellyOpacity,
       headGuideOpacity,
       footGuideOpacity,
+      bellyGuideOpacity,
     } = this;
 
     const { base64 } = this.props;
@@ -367,7 +344,7 @@ export class HeightSlideScreen extends Component {
 
     const bellySlide = {
       transform: [{ translateX: bellyPan.x }],
-      left: BELLY_OFFSET.x - 14,
+      left: BELLY_OFFSET.x,
       opacity: bellyOpacity,
       // top: 0,
     };
@@ -440,7 +417,7 @@ export class HeightSlideScreen extends Component {
                 <SliderlabelText>발 끝</SliderlabelText>
               </Sliderlabel>
               <FootGuideWrapper style={{ opacity: footGuideOpacity }}>
-                <PartGuideImage source={require('./images/headGuide.png')} />
+                <PartGuideImage source={require('./images/footGuide.png')} />
               </FootGuideWrapper>
             </SliderBar>
           </Slider>
@@ -458,6 +435,9 @@ export class HeightSlideScreen extends Component {
               >
                 <SliderlabelText>배꼽</SliderlabelText>
               </BellyLabel>
+              <BellyGuideWrapper style={{ opacity: bellyGuideOpacity }}>
+                <PartGuideImage source={require('./images/bellyGuide.png')} />
+              </BellyGuideWrapper>
             </BellySliderBar>
           </BellySlider>
         </ImageContainer>
