@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import App from './Screens/App';
 // Tab Screens
 import HomeScreen from './Screens/HomeScreen';
+import SizeCardScreen from './Screens/SizeCardListScreen';
+
 import CatalogScreen from './Screens/CatalogScreen';
 import ProfileScreen from './Screens/ProfileScreen';
 import StoryScreen from './Screens/StoryScreen';
@@ -33,11 +35,13 @@ import HeightSlideScreen from './Screens/HeightSlideScreen';
 import UpperBodyWidthSlideScreen from './Screens/UpperBodyWidthSlideScreen';
 import PartialHeightSlideScreen from './Screens/PartialHeightSlideScreen';
 import LowerBodySlideScreen from './Screens/LowerBodySlideScreen';
+import ThighSlideScreen from './Screens/ThighSlideScreen';
 import BodySizeScreen from './Screens/BodySizeScreen';
 import SizeCardInfoScreen from './Screens/SizeCardInfoScreen';
 import FinalRegisterScreen from './Screens/FinalRegisterScreen';
 import configureStore from './configureStore';
 import { theme } from './constants';
+import SizeCardListScreen from './Screens/SizeCardListScreen';
 
 const registerScreens = () => {
   const store = configureStore({});
@@ -58,6 +62,15 @@ const registerScreens = () => {
       </Provider>
     ),
     () => HomeScreen,
+  );
+  Navigation.registerComponent(
+    'wave.sizeCardList',
+    () => (props) => (
+      <Provider store={store}>
+        <SizeCardListScreen {...props} />
+      </Provider>
+    ),
+    () => SizeCardListScreen,
   );
   Navigation.registerComponent(
     'wave.brand',
@@ -238,6 +251,15 @@ const registerScreens = () => {
     () => (props) => (
       <Provider store={store}>
         <LowerBodySlideScreen {...props} />
+      </Provider>
+    ),
+    () => LowerBodySlideScreen,
+  );
+  Navigation.registerComponent(
+    'wave.thighSlide',
+    () => (props) => (
+      <Provider store={store}>
+        <ThighSlideScreen {...props} />
       </Provider>
     ),
     () => LowerBodySlideScreen,

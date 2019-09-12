@@ -50,10 +50,10 @@ import { makeSelectUser } from '../App/selectors';
 class FinalRegisterScreen extends Component {
   static options() {
     return {
-      topBar: {
-        visible: false,
-        drawBehind: true,
-      },
+      // topBar: {
+      //   visible: false,
+      //   drawBehind: true,
+      // },
     };
   }
 
@@ -63,66 +63,10 @@ class FinalRegisterScreen extends Component {
   }
 
   componentDidMount() {
-    // this.postRegister();
+    this.postRegister();
   }
 
   postRegister = () => {
-    const {
-      postSizeCard,
-      gender,
-      sizeCardName,
-      user,
-      age,
-      height,
-      weight,
-      base64,
-      headOffsetY,
-      footOffsetY,
-      bellyOffsetX,
-      shulderOffsetY,
-      wristOffsetY,
-      crotchOffsetY,
-      pelvisOffsetY,
-      ankleOffsetY,
-      leftShulderOffsetX,
-      leftChestOffsetX,
-      leftWaistOffsetX,
-      leftPelvisOffsetX,
-      rightShulderOffsetX,
-      rightChestOffsetX,
-      rightWaistOffsetX,
-      rightPelvisOffsetX,
-    } = this.props;
-
-    postSizeCard({
-      gender: gender || user.get('gender'),
-      sizeCardName,
-      age: age || user.get('age'),
-      weight,
-      height,
-      // headOffset,
-      // footOffset,
-      // leftShulderOffset,
-      // rightNeckOffset,
-      // rightShulderOffset,
-      // rightElbowOffset,
-      // rightHandOffset,
-      // leftChestOffset,
-      // leftWaistOffset,
-      // leftPelvisOffset,
-      // rightChestOffset,
-      // rightWaistOffset,
-      // rightPelvisOffset,
-      // leftThighOffset,
-      // leftAnkleOffset,
-      // rightThighOffset,
-      // rightAnkleOffset,
-      // componentId,
-      imageBase: base64,
-    });
-  };
-
-  render() {
     const {
       postSizeCard,
       gender,
@@ -148,6 +92,132 @@ class FinalRegisterScreen extends Component {
       rightChestOffsetX,
       rightWaistOffsetX,
       rightPelvisOffsetX,
+      leftThighOffsetX,
+      rightThighOffsetX,
+    } = this.props;
+
+    postSizeCard({
+      gender: gender || user.get('gender'),
+      sizeCardName,
+      age: age || user.get('age'),
+      weight,
+      height,
+      headOffset: {
+        x: 0,
+        y: headOffsetY,
+      },
+      footOffset: {
+        x: 0,
+        y: footOffsetY,
+      },
+      leftShulderOffset: {
+        x: leftShulderOffsetX,
+        y: shoulderOffsetY,
+      },
+      rightShulderOffset: {
+        x: rightShulderOffsetX,
+        y: shoulderOffsetY,
+      },
+      leftChestOffset: {
+        x: leftChestOffsetX,
+        y: 0,
+      },
+      leftWaistOffset: {
+        x: leftWaistOffsetX,
+        y: 0,
+      },
+      leftPelvisOffset: {
+        x: leftPelvisOffsetX,
+        y: pelvisOffsetY,
+      },
+      rightChestOffset: {
+        x: rightChestOffsetX,
+        y: 0,
+      },
+      rightWaistOffset: {
+        x: rightWaistOffsetX,
+        y: 0,
+      },
+      rightPelvisOffset: {
+        x: rightPelvisOffsetX,
+        y: pelvisOffsetY,
+      },
+      leftThighOffset: {
+        x: leftThighOffsetX,
+        y: 0,
+      },
+      leftAnkleOffset: {
+        x: 0,
+        y: ankleOffsetY,
+      },
+      rightThighOffset: {
+        x: rightThighOffsetX,
+        y: 0,
+      },
+      rightAnkleOffset: {
+        x: 0,
+        y: ankleOffsetY,
+      },
+      crotchOffset: {
+        x: bellyOffsetX,
+        y: crotchOffsetY,
+      },
+      leftNeckOffset: {
+        x: 0,
+        y: 0,
+      },
+      rightNeckOffset: {
+        x: 0,
+        y: 0,
+      },
+      leftHandOffset: {
+        x: leftShulderOffsetX,
+        y: wristOffsetY,
+      },
+      rightHandOffset: {
+        x: rightShulderOffsetX,
+        y: wristOffsetY,
+      },
+      rightElbowOffset: {
+        x: rightShulderOffsetX,
+        y: wristOffsetY,
+      },
+      leftElbowOffset: {
+        x: leftShulderOffsetX,
+        y: wristOffsetY,
+      },
+      // componentId,
+      imageBase: base64,
+    });
+  };
+
+  render() {
+    const {
+      gender,
+      sizeCardName,
+      user,
+      age,
+      height,
+      weight,
+      base64,
+      headOffsetY,
+      footOffsetY,
+      bellyOffsetX,
+      shoulderOffsetY,
+      wristOffsetY,
+      crotchOffsetY,
+      pelvisOffsetY,
+      ankleOffsetY,
+      leftShulderOffsetX,
+      leftChestOffsetX,
+      leftWaistOffsetX,
+      leftPelvisOffsetX,
+      rightShulderOffsetX,
+      rightChestOffsetX,
+      rightWaistOffsetX,
+      rightPelvisOffsetX,
+      leftThighOffsetX,
+      rightThighOffsetX,
     } = this.props;
 
     return (
@@ -159,7 +229,7 @@ class FinalRegisterScreen extends Component {
           flexDirection: 'column',
         }}
       >
-        <Text>{`성: ${gender || user.get('gender')}`}</Text>
+        {/* <Text>{`성: ${gender || user.get('gender')}`}</Text>
         <Text>{`사이즈카드이름: ${sizeCardName}`}</Text>
         <Text>{`키: ${height}`}</Text>
         <Text>{`체중: ${weight}`}</Text>
@@ -180,7 +250,9 @@ class FinalRegisterScreen extends Component {
         <Text>{`오른쪽골반X: ${rightPelvisOffsetX}`}</Text>
         <Text>{`왼쪽허리X: ${leftWaistOffsetX}`}</Text>
         <Text>{`오른쪽허리X: ${rightWaistOffsetX}`}</Text>
-        {/* <BarIndicator size={40} color={theme.pointColor} count={6} /> */}
+        <Text>{`왼쪽허벅지X: ${leftThighOffsetX}`}</Text>
+        <Text>{`오른쪽허벅지X: ${rightThighOffsetX}`}</Text> */}
+        <BarIndicator size={40} color={theme.pointColor} count={6} />
       </View>
     );
   }
@@ -266,6 +338,31 @@ const mapDispatchToProps = (dispatch) => ({
     }),
   ),
 });
+
+FinalRegisterScreen.propTypes = {
+  componentId: PropTypes.string,
+  base64: PropTypes.string,
+  height: PropTypes.string,
+  weight: PropTypes.string,
+  headOffsetY: PropTypes.number,
+  footOffsetY: PropTypes.number,
+  bellyOffsetX: PropTypes.number,
+  shoulderOffsetY: PropTypes.number,
+  wristOffsetY: PropTypes.number,
+  crotchOffsetY: PropTypes.number,
+  pelvisOffsetY: PropTypes.number,
+  ankleOffsetY: PropTypes.number,
+  leftShulderOffsetX: PropTypes.number,
+  leftChestOffsetX: PropTypes.number,
+  leftWaistOffsetX: PropTypes.number,
+  leftPelvisOffsetX: PropTypes.number,
+  rightShulderOffsetX: PropTypes.number,
+  rightChestOffsetX: PropTypes.number,
+  rightWaistOffsetX: PropTypes.number,
+  rightPelvisOffsetX: PropTypes.number,
+  rightThighOffsetX: PropTypes.number,
+  leftThighOffsetX: PropTypes.number,
+};
 
 const withSaga = injectSaga({ key: 'finalRegister', saga });
 const withReducer = injectReducer({ key: 'finalRegister', reducer });

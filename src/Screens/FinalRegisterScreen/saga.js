@@ -1,6 +1,6 @@
 import { Navigation } from 'react-native-navigation';
 import {
-  call, put, takeLatest, all, select,
+  call, put, takeLatest, all,
 } from 'redux-saga/effects';
 import {
   POST_SIZE_CARD_REQUESTING,

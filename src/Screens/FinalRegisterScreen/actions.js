@@ -1,5 +1,5 @@
 /*
- * Register Actions
+ * Post Size Card Actions
  *
  */
 

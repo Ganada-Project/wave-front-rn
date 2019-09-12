@@ -1,6 +1,6 @@
 /*
  * Author: ShinHyunJong
- * Application Name : Wave
+ * Application Name : WearBe
  * Corpyright : Ganada Project
  */
 /* eslint-disable */

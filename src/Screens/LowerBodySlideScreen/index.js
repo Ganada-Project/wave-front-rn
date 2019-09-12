@@ -359,7 +359,7 @@ export class LowerBodySlideScreen extends Component {
 
       Navigation.push(componentId, {
         component: {
-          name: 'wave.sizeCardInfo',
+          name: 'wave.thighSlide',
           passProps: {
             height,
             weight,

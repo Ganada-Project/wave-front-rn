@@ -68,6 +68,8 @@ export class SizeCardInfoScreen extends Component {
       rightChestOffsetX,
       rightWaistOffsetX,
       rightPelvisOffsetX,
+      leftThighOffsetX,
+      rightThighOffsetX,
     } = this.props;
     const { sizeCardName, selectedGenderId, age } = this.state;
     Navigation.push(componentId, {
@@ -96,6 +98,8 @@ export class SizeCardInfoScreen extends Component {
           rightChestOffsetX,
           rightWaistOffsetX,
           rightPelvisOffsetX,
+          rightThighOffsetX,
+          leftThighOffsetX,
         },
       },
     });
@@ -189,6 +193,8 @@ SizeCardInfoScreen.propTypes = {
   rightChestOffsetX: PropTypes.number,
   rightWaistOffsetX: PropTypes.number,
   rightPelvisOffsetX: PropTypes.number,
+  rightThighOffsetX: PropTypes.number,
+  leftThighOffsetX: PropTypes.number,
 };
 
 export default SizeCardInfoScreen;
