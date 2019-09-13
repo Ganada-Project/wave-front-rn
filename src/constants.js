@@ -10,7 +10,8 @@ export const theme = {
   pointColor: '#dd6770',
   subColor: 'rgb(106,130,251)',
   whiteColor: '#ffffff',
-  grayColor: '#d8d8d8',
+  grayColor: '#dee0e3',
+  darkGray: '#88929c',
   textColor: '#5b5e6d',
   guideColor: '#14ff1e',
 };

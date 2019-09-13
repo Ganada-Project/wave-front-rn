@@ -1,10 +1,13 @@
 import {
-  call, put, takeLatest, all,
+  call, put, takeLatest, all, take,
 } from 'redux-saga/effects';
+import { Navigation } from 'react-native-navigation';
 import {
   GET_SIZE_CARDS_FAIL,
   GET_SIZE_CARDS_REQUEST,
   GET_SIZE_CARDS_SUCCESS,
+  SET_SIZE_CARD_REQUEST,
+  SET_SIZE_CARD_SUCCESS,
 } from './constants';
 import { API_URL } from '../../constants';
 import { getRequest } from '../../utils/request';
@@ -30,6 +33,20 @@ function* getSizeCardsSaga() {
   }
 }
 
+function* setSizeCardSaga(action) {
+  const { sizeCard, componentId } = action;
+  console.log(sizeCard);
+  console.log(componentId);
+  yield put({
+    type: SET_SIZE_CARD_SUCCESS,
+    sizeCard,
+  });
+  yield Navigation.dismissModal(componentId);
+}
+
 export default function* rootSaga() {
-  yield all([takeLatest(GET_SIZE_CARDS_REQUEST, getSizeCardsSaga)]);
+  yield all([
+    takeLatest(GET_SIZE_CARDS_REQUEST, getSizeCardsSaga),
+    takeLatest(SET_SIZE_CARD_REQUEST, setSizeCardSaga),
+  ]);
 }

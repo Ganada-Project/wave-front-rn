@@ -27,6 +27,7 @@ const initialState = fromJS({
   idToken: '',
   fcmToken: null,
   userData: {
+    id: null,
     name: '',
   },
 });

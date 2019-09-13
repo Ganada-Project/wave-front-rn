@@ -42,10 +42,10 @@ import {
 } from '../../constants';
 import WaveLogoWhite from '../../Assets/Logos/wave-logo-color.png';
 import InitialImage from './Images/initial.png';
-import SizeCardAddButton from './SizeCardAddButton';
-import { getSizeCardRequestAction } from './actions';
+import { getSizeCardRequestAction, setSizeCardRequestAction } from './actions';
 import { makeSelectSizeCards, makeSelectSelectedSizeCard } from './selectors';
 import SelectedSizeCard from './SelectedSizeCard';
+import { makeSelectUser } from '../App/selectors';
 
 export class HomeScreen extends Component {
   static options() {
@@ -114,7 +114,9 @@ export class HomeScreen extends Component {
   };
 
   navigateToSizeCardList = () => {
-    const { selectedSizeCard, sizeCards } = this.props;
+    const {
+      selectedSizeCard, sizeCards, user, setSizeCard,
+    } = this.props;
     Navigation.showModal({
       stack: {
         children: [
@@ -124,6 +126,8 @@ export class HomeScreen extends Component {
               passProps: {
                 selectedSizeCard,
                 sizeCards,
+                user,
+                setSizeCard,
               },
             },
           },
@@ -169,7 +173,7 @@ export class HomeScreen extends Component {
           <Header>
             <View style={styles.header__selected_card}>
               <SelectedSizeCard
-                name={selectedSizeCard.name}
+                sizeCard={selectedSizeCard}
                 empty={sizeCards.size === 0}
                 onPress={this.onPressSelectedSizeCard}
               />
@@ -219,19 +223,23 @@ export class HomeScreen extends Component {
 }
 
 HomeScreen.propTypes = {
+  user: PropTypes.instanceOf(Object),
   componentId: PropTypes.string,
   getSizeCards: PropTypes.func,
+  setSizeCard: PropTypes.func,
   selectedSizeCard: PropTypes.object,
   sizeCards: PropTypes.instanceOf(List),
 };
 
 const mapStateToProps = createStructuredSelector({
+  user: makeSelectUser(),
   sizeCards: makeSelectSizeCards(),
   selectedSizeCard: makeSelectSelectedSizeCard(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getSizeCards: () => dispatch(getSizeCardRequestAction()),
+  setSizeCard: ({ sizeCard, componentId }) => dispatch(setSizeCardRequestAction({ sizeCard, componentId })),
 });
 
 const withSaga = injectSaga({ key: 'home', saga });

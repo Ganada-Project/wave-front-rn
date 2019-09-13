@@ -15,6 +15,7 @@ import {
   GET_SIZE_CARDS_FAIL,
   GET_SIZE_CARDS_REQUEST,
   GET_SIZE_CARDS_SUCCESS,
+  SET_SIZE_CARD_SUCCESS,
 } from './constants';
 
 // The initial state of the App
@@ -37,6 +38,8 @@ function homeReducer(state = initialState, action) {
         .set('selectedSizeCard', action.selectedSizeCard);
     case GET_SIZE_CARDS_FAIL:
       return state.set('sizeCardLoading', false);
+    case SET_SIZE_CARD_SUCCESS:
+      return state.set('selectedSizeCard', action.sizeCard);
 
     default:
       return state;
