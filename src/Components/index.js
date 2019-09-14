@@ -7,6 +7,7 @@ import BrandTile from './BrandTile';
 import BarLoading from './BarLoading';
 import ItemFlatList from './ItemFlatList';
 import ContainerButton from './ContainerButton';
+import ColorBar from './ColorBar';
 export {
   FullWidthButton,
   RegisterForm,
@@ -17,4 +18,5 @@ export {
   BarLoading,
   ItemFlatList,
   ContainerButton,
+  ColorBar,
 };
