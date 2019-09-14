@@ -7,6 +7,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
 import 'moment/src/locale/ko';
 
+import { fromJS } from 'immutable';
 import {
   Wrapper,
   ProfileWrapper,
@@ -29,12 +30,16 @@ import {
 } from '../../../utils/functions/renderSizeCard';
 import { theme } from '../../../constants';
 
-const SizeCard = ({ sizeCard, isMe, onPressSelectCard }) => (
+const SizeCard = ({
+  sizeCard, isMe, onPressSelectCard, isSelected,
+}) => (
   <Wrapper>
     <ProfileWrapper>
-      <ProfileImageBg color={renderProfileBgColor({ sizeCard })}>
+      <ProfileImageBg
+        color={renderProfileBgColor({ sizeCard: fromJS(sizeCard) })}
+      >
         <Icon
-          name={renderIconImage({ sizeCard })}
+          name={renderIconImage({ sizeCard: fromJS(sizeCard) })}
           type="antdesign"
           size={16}
           color="white"
@@ -70,11 +75,18 @@ const SizeCard = ({ sizeCard, isMe, onPressSelectCard }) => (
       <CreatedAt>1달 전에 생성됨</CreatedAt>
     </ContentWrapper>
     <ButtonWrapper>
-      <TouchableOpacity style={{ width: '100%' }} onPress={onPressSelectCard}>
+      <TouchableOpacity
+        style={{ width: '100%' }}
+        onPress={isSelected ? null : onPressSelectCard}
+      >
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          colors={[theme.pointColor, theme.subColor]}
+          colors={
+            isSelected
+              ? [theme.grayColor, theme.grayColor]
+              : [theme.pointColor, theme.subColor]
+          }
           style={{
             borderRadius: 10,
             height: 30,
@@ -86,7 +98,9 @@ const SizeCard = ({ sizeCard, isMe, onPressSelectCard }) => (
           }}
         >
           <ButtonInner>
-            <ButtonText>카드선택</ButtonText>
+            <ButtonText isSelected>
+              {isSelected ? '선택된 카드' : '선택하기'}
+            </ButtonText>
           </ButtonInner>
         </LinearGradient>
       </TouchableOpacity>
@@ -97,6 +111,7 @@ const SizeCard = ({ sizeCard, isMe, onPressSelectCard }) => (
 SizeCard.propTypes = {
   sizeCard: PropTypes.object,
   isMe: PropTypes.bool,
+  isSelected: PropTypes.bool,
   onPressSelectCard: PropTypes.func,
 };
 

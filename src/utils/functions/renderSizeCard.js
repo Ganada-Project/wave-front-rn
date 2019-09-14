@@ -4,14 +4,14 @@ export function renderIconImage({ empty, sizeCard }) {
   if (empty) {
     return 'plus';
   }
-  if (sizeCard.gender === 1) {
+  if (sizeCard.get('gender') === 1) {
     return 'man';
   }
   return 'woman';
 }
 
 export function renderProfileBgColor({ sizeCard }) {
-  const modular = sizeCard.id % 5;
+  const modular = sizeCard.get('id') % 5;
   if (modular === 0) {
     return theme.pointColor;
   }

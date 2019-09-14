@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Dimensions,
+  Animated,
 } from 'react-native';
 import styled from 'styled-components/native';
 import { theme } from '../../constants';
@@ -20,6 +21,7 @@ export const Header = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  z-index: 100;
 `;
 
 export const Body = styled.View`

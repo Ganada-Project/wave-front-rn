@@ -62,6 +62,7 @@ class SizeCardListScreen extends Component {
               key={sizeCard.id}
               sizeCard={sizeCard}
               isMe={user.get('id') === sizeCard.user_id}
+              isSelected={selectedSizeCard.get('id') === sizeCard.id}
               selectedSizeCard={selectedSizeCard}
               onPressSelectCard={() => setSizeCard({ sizeCard, componentId })}
             />

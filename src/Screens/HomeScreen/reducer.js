@@ -23,6 +23,7 @@ export const initialState = fromJS({
   sizeCardsLoading: false,
   sizeCards: [],
   selectedSizeCard: {
+    id: null,
     name: '',
   },
 });
@@ -35,11 +36,11 @@ function homeReducer(state = initialState, action) {
       return state
         .set('sizeCardLoading', false)
         .set('sizeCards', List(action.cards))
-        .set('selectedSizeCard', action.selectedSizeCard);
+        .set('selectedSizeCard', fromJS(action.selectedSizeCard));
     case GET_SIZE_CARDS_FAIL:
       return state.set('sizeCardLoading', false);
     case SET_SIZE_CARD_SUCCESS:
-      return state.set('selectedSizeCard', action.sizeCard);
+      return state.set('selectedSizeCard', fromJS(action.sizeCard));
 
     default:
       return state;

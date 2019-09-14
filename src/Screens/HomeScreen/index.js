@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { List } from 'immutable';
 import PropTypes from 'prop-types';
-import { Text, View, Image } from 'react-native';
+import { View, Animated, Easing } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Navigation } from 'react-native-navigation';
 import AnimatedLinearGradient from 'react-native-animated-linear-gradient';
-import Modal from 'react-native-modal';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 // redux
 import { compose } from 'redux';
@@ -18,6 +18,7 @@ import ActionButton from 'react-native-action-button';
 
 // injectSaga
 import FastImage from 'react-native-fast-image';
+import LinearGradient from 'react-native-linear-gradient';
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import styles, {
@@ -27,6 +28,8 @@ import styles, {
   Wrapper,
   Header,
   Body,
+  SizeCardAlertWrapper,
+  SizeCardAlertText,
 } from './styles';
 import { FullWidthButton } from '../../Components';
 
@@ -46,6 +49,13 @@ import { getSizeCardRequestAction, setSizeCardRequestAction } from './actions';
 import { makeSelectSizeCards, makeSelectSelectedSizeCard } from './selectors';
 import SelectedSizeCard from './SelectedSizeCard';
 import { makeSelectUser } from '../App/selectors';
+import { alertSetSizeCard } from './utils/alert';
+import { SizeCardAlert } from './SizeCardAlert';
+
+const options = {
+  enableVibrateFallback: true,
+  ignoreAndroidSystemSettings: false,
+};
 
 export class HomeScreen extends Component {
   static options() {
@@ -65,11 +75,23 @@ export class HomeScreen extends Component {
     this.state = {
       modalOpen: false,
     };
+    this.sizeCardAlertTop = new Animated.Value(-20);
+    this.sizeCardAlertOpacity = new Animated.Value(0);
   }
 
   componentDidMount() {
     const { getSizeCards } = this.props;
     getSizeCards();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { selectedSizeCard } = this.props;
+    if (
+      prevProps.selectedSizeCard.get('id') !== null
+      && selectedSizeCard.get('id') !== prevProps.selectedSizeCard.get('id')
+    ) {
+      this.alertSizeCardChanged();
+    }
   }
 
   openModal = () => {
@@ -136,6 +158,12 @@ export class HomeScreen extends Component {
     });
   };
 
+  alertSizeCardChanged = () => {
+    const { sizeCardAlertOpacity, sizeCardAlertTop } = this;
+    ReactNativeHapticFeedback.trigger('impactMedium', options);
+    alertSetSizeCard({ sizeCardAlertOpacity, sizeCardAlertTop });
+  };
+
   onPressSelectedSizeCard = () => {
     const { sizeCards } = this.props;
     if (sizeCards.size === 0) {
@@ -147,29 +175,12 @@ export class HomeScreen extends Component {
 
   render() {
     const { selectedSizeCard, sizeCards } = this.props;
-    const { modalOpen } = this.state;
     return (
       <AnimatedLinearGradient
         customColors={gradientPreset}
         speed={gradientSpeed}
       >
         <Wrapper>
-          <Modal isVisible={modalOpen}>
-            <View style={styles.confirmModal}>
-              <Text style={styles.modalTitle}>준비되셨나요?</Text>
-              <View style={styles.hairline} />
-              <Text style={styles.modalText}>내가 서 있을 때 착한 친구와</Text>
-              <Text style={styles.modalText}>
-                너무 두껍지 않은 옷만 입고 있으면
-              </Text>
-              <Text style={styles.modalText}>수월하게 진행됩니다</Text>
-              <FullWidthButton
-                onPress={this.navigateToPoseInfoMe}
-                content="네"
-                height={40}
-              />
-            </View>
-          </Modal>
           <Header>
             <View style={styles.header__selected_card}>
               <SelectedSizeCard
@@ -207,6 +218,10 @@ export class HomeScreen extends Component {
             {/* <Text style={styles.header__title}>웨어비</Text> */}
           </Header>
           <Body>
+            <SizeCardAlert
+              sizeCardAlertOpacity={this.sizeCardAlertOpacity}
+              sizeCardAlertTop={this.sizeCardAlertTop}
+            />
             <FastImage
               source={InitialImage}
               style={styles.initialImage}
@@ -227,7 +242,7 @@ HomeScreen.propTypes = {
   componentId: PropTypes.string,
   getSizeCards: PropTypes.func,
   setSizeCard: PropTypes.func,
-  selectedSizeCard: PropTypes.object,
+  selectedSizeCard: PropTypes.instanceOf(Object),
   sizeCards: PropTypes.instanceOf(List),
 };
 

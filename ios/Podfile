@@ -12,6 +12,8 @@ target 'WaveRn' do
 
   # Pods for WaveRn
 
+  pod 'RNReactNativeHapticFeedback', :path => '../node_modules/react-native-haptic-feedback'
+
   target 'WaveRnTests' do
     inherit! :search_paths
     # Pods for testing

@@ -50,7 +50,7 @@ const SelectedSizeCard = ({ sizeCard, empty, onPress }) => (
                 color="white"
               />
             </ProfileWrapper>
-            <SizeCardName>{sizeCard.name}</SizeCardName>
+            <SizeCardName>{sizeCard.get('name')}</SizeCardName>
           </InfoWrapper>
           <Icon
             name="arrow-right"

@@ -154,6 +154,7 @@ configurations.all {
 }
 
 dependencies {
+    implementation project(':react-native-haptic-feedback')
     implementation project(':@react-native-community_geolocation')
     implementation project(':react-native-firebase')
     implementation project(':@react-native-community_async-storage')

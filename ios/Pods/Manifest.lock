@@ -68,6 +68,8 @@ PODS:
     - yoga (= 0.59.8.React)
   - RNCAsyncStorage (1.4.0):
     - React
+  - RNReactNativeHapticFeedback (1.8.2):
+    - React
   - yoga (0.59.8.React)
 
 DEPENDENCIES:
@@ -75,6 +77,7 @@ DEPENDENCIES:
   - Firebase/Messaging (~> 5.20.1)
   - React (from `../node_modules/react-native`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
+  - RNReactNativeHapticFeedback (from `../node_modules/react-native-haptic-feedback`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -95,6 +98,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
+  RNReactNativeHapticFeedback:
+    :path: "../node_modules/react-native-haptic-feedback"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -111,8 +116,9 @@ SPEC CHECKSUMS:
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
   React: 76e6aa2b87d05eb6cccb6926d72685c9a07df152
   RNCAsyncStorage: b82dc6e5b39a625d70e3b3492bff75c0de94ba71
+  RNReactNativeHapticFeedback: e11a4da0ce174e9f88b03cbaf5d76d94633cdee2
   yoga: 92b2102c3d373d1a790db4ab761d2b0ffc634f64
 
-PODFILE CHECKSUM: 110a4eb5b773cbb1f7f60eff78a6802387343862
+PODFILE CHECKSUM: 55bec2f776a0b9a108fe8f156b5eb528ac459aba
 
 COCOAPODS: 1.7.5

@@ -62,17 +62,6 @@ class CameraScreen extends Component {
     this.textOpacityLoop = new Animated.Value(0.2);
   }
 
-  startAnimation = () => {
-    this.textOpacityLoop.setValue(0.2);
-    Animated.timing(this.textOpacityLoop, {
-      toValue: 1,
-      duration: 1500,
-      easing: Easing.linear,
-    }).start(() => {
-      this.startAnimation();
-    });
-  };
-
   componentDidMount() {
     // setUpdateIntervalForType(SensorTypes.gyroscope, 1000);
     // const subscription = gyroscope.subscribe(({ x, y, z }) => {
@@ -90,6 +79,17 @@ class CameraScreen extends Component {
     Attitude.clearWatchAttitude(this.attitudeWatchID);
     Attitude.stopObserving();
   }
+
+  startAnimation = () => {
+    this.textOpacityLoop.setValue(0.2);
+    Animated.timing(this.textOpacityLoop, {
+      toValue: 1,
+      duration: 1500,
+      easing: Easing.linear,
+    }).start(() => {
+      this.startAnimation();
+    });
+  };
 
   takePicture = async () => {
     const {

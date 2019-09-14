@@ -78,7 +78,7 @@ export const ButtonInner = styled.View`
 
 export const ButtonText = styled.Text`
   font-size: 12px;
-  color: ${theme.pointColor};
+  color: ${(props) => (props.isSelected ? theme.darkGray : theme.pointColor)};
 `;
 
 export const MyCardWrapper = styled.View`
