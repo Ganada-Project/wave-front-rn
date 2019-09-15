@@ -1,5 +1,5 @@
 /*
- * Sample Screen Actions
+ * SampleScreen Actions
  *
  * Actions change things in your application
  * Since this boilerplate uses a uni-directional data flow, specifically redux,
@@ -14,11 +14,10 @@
  *        return { type: YOUR_ACTION_CONSTANT, var: var }
  *    }
  */
+import { GET_SAMPLE_REQUEST } from './constants';
 
-import { FETCH_USER_REQUESTING } from './constants';
-
-export function fetchUserAction() {
+export function sampleRequestAction() {
   return {
-    type: FETCH_USER_REQUESTING,
+    type: GET_SAMPLE_REQUEST,
   };
 }

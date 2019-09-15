@@ -37,6 +37,8 @@ import { FullWidthButton } from '../../Components';
 import saga from './saga';
 import reducer from './reducer';
 
+import randomColor from 'randomcolor';
+
 import {
   gradientPreset,
   gradientSpeed,
@@ -190,7 +192,7 @@ export class HomeScreen extends Component {
               />
             </View>
             <View style={styles.header__menu__wrapper}>
-              <NavItemWrapper onPress={this.navigateToProfile}>
+              <NavItemWrapper onPress={this.navigateToPoseInfoMe}>
                 <Icon
                   type="octicons"
                   name="search"
@@ -198,7 +200,7 @@ export class HomeScreen extends Component {
                   size={20}
                 />
               </NavItemWrapper>
-              <NavItemWrapper onPress={this.navigateToProfile}>
+              <NavItemWrapper onPress={this.navigateToPoseInfoOther}>
                 <Icon
                   type="simple-line-icon"
                   name="bell"
@@ -215,7 +217,6 @@ export class HomeScreen extends Component {
                 />
               </NavItemWrapper>
             </View>
-            {/* <Text style={styles.header__title}>웨어비</Text> */}
           </Header>
           <Body>
             <SizeCardAlert

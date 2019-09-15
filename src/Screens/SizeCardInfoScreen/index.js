@@ -70,6 +70,7 @@ export class SizeCardInfoScreen extends Component {
       rightPelvisOffsetX,
       leftThighOffsetX,
       rightThighOffsetX,
+      isMe,
     } = this.props;
     const { sizeCardName, selectedGenderId, age } = this.state;
     Navigation.push(componentId, {
@@ -100,6 +101,7 @@ export class SizeCardInfoScreen extends Component {
           rightPelvisOffsetX,
           rightThighOffsetX,
           leftThighOffsetX,
+          isMe,
         },
       },
     });

@@ -32,6 +32,7 @@ export function postSizeCardAction({
   leftAnkleOffset,
   rightThighOffset,
   rightAnkleOffset,
+  isMe,
 }) {
   return {
     type: POST_SIZE_CARD_REQUESTING,
@@ -62,6 +63,7 @@ export function postSizeCardAction({
       leftAnkleOffset,
       rightThighOffset,
       rightAnkleOffset,
+      isMe,
     },
   };
 }

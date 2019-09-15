@@ -1,4 +1,5 @@
 import { Navigation } from 'react-native-navigation';
+import randomColor from 'randomcolor';
 import {
   call, put, takeLatest, all,
 } from 'redux-saga/effects';
@@ -39,7 +40,12 @@ function* postSizeCardSaga(action) {
     leftAnkleOffset,
     rightThighOffset,
     rightAnkleOffset,
+    isMe,
   } = action.payload;
+  const cardColor = randomColor({
+    luminosity: 'light',
+    hue: 'pink',
+  });
   const payload = {
     name: sizeCardName,
     gender,
@@ -72,9 +78,11 @@ function* postSizeCardSaga(action) {
     preferColor: '#ffffff',
     preferStyle: 'f',
     preferSize: '3',
+    cardColor,
+    mine: isMe ? 1 : 0,
   };
   try {
-    console.log(JSON.stringify(payload));
+    console.log(payload);
     const result = yield call(postRequest, { url, payload });
     yield put({ type: POST_SIZE_CARD_REQUESTING_SUCCESS, payload: { result } });
     yield Navigation.setRoot({

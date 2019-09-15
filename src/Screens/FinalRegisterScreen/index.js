@@ -218,6 +218,7 @@ class FinalRegisterScreen extends Component {
       rightPelvisOffsetX,
       leftThighOffsetX,
       rightThighOffsetX,
+      isMe,
     } = this.props;
 
     return (
@@ -305,6 +306,7 @@ const mapDispatchToProps = (dispatch) => ({
     weight,
     height,
     componentId,
+    isMe,
   }) => dispatch(
     postSizeCardAction({
       gender,
@@ -335,6 +337,7 @@ const mapDispatchToProps = (dispatch) => ({
       weight,
       height,
       componentId,
+      isMe,
     }),
   ),
 });
@@ -362,6 +365,7 @@ FinalRegisterScreen.propTypes = {
   rightPelvisOffsetX: PropTypes.number,
   rightThighOffsetX: PropTypes.number,
   leftThighOffsetX: PropTypes.number,
+  isMe: PropTypes.bool,
 };
 
 const withSaga = injectSaga({ key: 'finalRegister', saga });
