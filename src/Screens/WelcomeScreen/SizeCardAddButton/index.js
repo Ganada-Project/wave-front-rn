@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from 'react-native-elements';
 import { ContainerButton } from '../../../Components';
 import { Wrapper, TitleText, DescText } from './styles';
 
 function SizeCardAddButton(props) {
-  const { onPressAdd } = props;
+  const { onPressAdd } = props;  
   return (
     <ContainerButton onPress={onPressAdd}>
       <Wrapper>

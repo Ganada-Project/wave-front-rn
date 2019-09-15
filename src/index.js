@@ -38,6 +38,7 @@ import LowerBodySlideScreen from './Screens/LowerBodySlideScreen';
 import ThighSlideScreen from './Screens/ThighSlideScreen';
 import BodySizeScreen from './Screens/BodySizeScreen';
 import SizeCardInfoScreen from './Screens/SizeCardInfoScreen';
+import BodyStyleScreen from './Screens/BodyStyleScreen';
 import FinalRegisterScreen from './Screens/FinalRegisterScreen';
 import configureStore from './configureStore';
 import { theme } from './constants';
@@ -273,6 +274,17 @@ const registerScreens = () => {
     ),
     () => BodySizeScreen,
   );
+
+  Navigation.registerComponent(
+    'wave.bodyStyle',
+    () => (props) => (
+      <Provider store={store}>
+        <BodyStyleScreen {...props} />
+      </Provider>
+    ),
+    () => BodyStyleScreen,
+  );
+
   Navigation.registerComponent(
     'wave.finalRegister',
     () => (props) => (

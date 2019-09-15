@@ -8,6 +8,7 @@ import BarLoading from './BarLoading';
 import ItemFlatList from './ItemFlatList';
 import ContainerButton from './ContainerButton';
 import StepHeader from './StepHeader';
+import ColorBar from './ColorBar';
 export {
   FullWidthButton,
   RegisterForm,
@@ -19,4 +20,5 @@ export {
   ItemFlatList,
   ContainerButton,
   StepHeader,
+  ColorBar,
 };
