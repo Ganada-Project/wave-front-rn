@@ -29,6 +29,19 @@ class SizeCardListScreen extends Component {
     Navigation.dismissModal(componentId);
   };
 
+  navigateToSizeCardDetail = ({ sizeCardId, sizeCardName }) => {
+    const { componentId } = this.props;
+    Navigation.push(componentId, {
+      component: {
+        name: 'wave.sizeCardDetail',
+        passProps: {
+          sizeCardId,
+          sizeCardName,
+        },
+      },
+    });
+  };
+
   render() {
     const {
       sizeCards,
@@ -64,6 +77,11 @@ class SizeCardListScreen extends Component {
               isMe={user.get('id') === sizeCard.user_id}
               isSelected={selectedSizeCard.get('id') === sizeCard.id}
               selectedSizeCard={selectedSizeCard}
+              onPressCard={() => this.navigateToSizeCardDetail({
+                sizeCardId: sizeCard.id,
+                sizeCardName: sizeCard.name,
+              })
+              }
               onPressSelectCard={() => setSizeCard({ sizeCard, componentId })}
             />
           ))}
