@@ -29,14 +29,13 @@ class SizeCardListScreen extends Component {
     Navigation.dismissModal(componentId);
   };
 
-  navigateToSizeCardDetail = ({ sizeCardId, sizeCardName }) => {
+  navigateToSizeCardDetail = ({ sizeCard }) => {
     const { componentId } = this.props;
     Navigation.push(componentId, {
       component: {
         name: 'wave.sizeCardDetail',
         passProps: {
-          sizeCardId,
-          sizeCardName,
+          sizeCard,
         },
       },
     });
@@ -67,7 +66,7 @@ class SizeCardListScreen extends Component {
         </Header>
         <View>
           <HeadderText>사이즈 카드</HeadderText>
-          <SubText>{`총 ${sizeCards.size}개 의 사이즈카드`}</SubText>
+          <SubText>{`총 ${sizeCards.size}개의 사이즈카드`}</SubText>
         </View>
         <Body showsVerticalScrollIndicator={false}>
           {sizeCards.map((sizeCard) => (
@@ -78,8 +77,7 @@ class SizeCardListScreen extends Component {
               isSelected={selectedSizeCard.get('id') === sizeCard.id}
               selectedSizeCard={selectedSizeCard}
               onPressCard={() => this.navigateToSizeCardDetail({
-                sizeCardId: sizeCard.id,
-                sizeCardName: sizeCard.name,
+                sizeCard,
               })
               }
               onPressSelectCard={() => setSizeCard({ sizeCard, componentId })}

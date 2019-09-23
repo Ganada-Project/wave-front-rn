@@ -24,7 +24,7 @@ function* getSizeDetailSaga(action) {
       sizeCard: mergedSizeCardDetail,
     });
   } catch (error) {
-    yield put({ type: GET_SIZE_DETAIL_FAIL });
+    yield put({ type: GET_SIZE_DETAIL_FAIL, error });
   }
 }
 

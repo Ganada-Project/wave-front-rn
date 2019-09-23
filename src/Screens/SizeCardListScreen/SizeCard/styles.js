@@ -6,19 +6,23 @@ const window = Dimensions.get('window');
 export const Wrapper = styled.View`
   flex-direction: row;
   width: 100%;
-  height: ${window.height / 8};
+  height: ${window.height / 8.5};
   padding: 10px 15px;
-  border-radius: 10px;
-  border: 1px solid ${theme.grayColor};
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-  background-color: white;
-  margin-bottom: 10px;
+  border-radius: 20px;
+  /* border: 1px solid ${theme.grayColor}; */
+  /* box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2); */
+  box-shadow:${(props) => props.isSelected
+    ? '0px 25px 20px rgba(106, 130, 251, 0.4)'
+    : '0px 10px 10px rgba(232,232,232,0.1)'} ;
+    z-index: ${(props) => (props.isSelected ? 20 : 0)};
+  background-color:${(props) => props.isSelected ? theme.pointColor : 'rgba(255,255,255,0.9)'} ;
+  margin-bottom: 20px;
 `;
 
 export const ProfileWrapper = styled.View`
   flex: 1;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 export const ProfileImageBg = styled.View`
@@ -28,10 +32,11 @@ export const ProfileImageBg = styled.View`
   align-items: center;
   justify-content: center;
   background-color: ${(props) => props.color};
+  border: ${(props) => props.isSelected ? '1px solid white' : '1px solid transparent'};
 `;
 
 export const ContentWrapper = styled.View`
-  flex: 4;
+  flex: 3;
   padding-left: 15px;
   justify-content: space-between;
 `;
@@ -47,17 +52,17 @@ export const DescWrapper = styled.View`
 export const DescText = styled.Text`
   margin: 0 2px;
   font-size: 14px;
-  color: ${theme.darkGray};
+  color: ${(props) => (props.isSelected ? 'white' : theme.textColor)};
 `;
 
 export const SizeCardName = styled.Text`
-  color: ${theme.textColor};
+  color: ${(props) => (props.isSelected ? 'white' : theme.textColor)};
   font-weight: bold;
   font-size: 16px;
 `;
 
 export const CreatedAt = styled.Text`
-  color: ${theme.darkGray};
+  color: ${(props) => (props.isSelected ? 'white' : theme.textColor)};
   font-size: 12px;
 `;
 
@@ -68,7 +73,6 @@ export const ButtonWrapper = styled.View`
 `;
 
 export const ButtonInner = styled.View`
-  background-color: white;
   border-radius: 9px;
   width: 100%;
   height: 100%;
@@ -76,21 +80,12 @@ export const ButtonInner = styled.View`
   justify-content: center;
 `;
 
-export const ButtonText = styled.Text`
-  font-size: 12px;
-  color: ${(props) => (props.isSelected ? theme.darkGray : theme.pointColor)};
-`;
-
 export const MyCardWrapper = styled.View`
-  padding: 2px 1px;
-  border: 1px solid ${theme.grayColor};
-  border-radius: 10px;
-  width: 80%;
   justify-content: center;
   align-items: center;
 `;
 
 export const MyCardText = styled.Text`
-  color: ${theme.darkGray};
-  font-size: 10px;
+  color: ${(props) => (props.isSelected ? 'white' : theme.pointColor)};
+  font-size: 12px;
 `;

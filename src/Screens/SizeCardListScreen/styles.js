@@ -5,7 +5,7 @@ import { theme } from '../../constants';
 export const Wrapper = styled.View`
   flex: 1;
   /* height: 500px; */
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: ${theme.backgroundColor};
   padding: 80px 25px 0px 25px;
 `;
 

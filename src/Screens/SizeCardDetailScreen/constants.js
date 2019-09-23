@@ -9,6 +9,11 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
+export const sizeDetailTab = [
+  { id: 0, name: '카드정보' },
+  { id: 1, name: '신체치수' },
+];
+
 export const sizeDetail = [
   {
     id: 0,
@@ -37,7 +42,7 @@ export const sizeDetail = [
   },
   {
     id: 4,
-    key: 'pelvis',
+    key: 'hip',
     name: '골반너비',
     url:
       'https://static.jumia.co.ke/cms/external/pet/GE840AA0ESCENNAFAMZ/0ce09af41c157cf5f7fce184a9becd48.jpg',

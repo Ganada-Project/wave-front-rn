@@ -31,18 +31,12 @@ import {
 import { theme } from '../../../constants';
 
 const SizeCard = ({
-  sizeCard,
-  isMe,
-  onPressSelectCard,
-  isSelected,
-  onPressCard,
+  sizeCard, onPressSelectCard, isSelected, onPressCard,
 }) => (
   <TouchableWithoutFeedback onPress={onPressCard}>
-    <Wrapper>
+    <Wrapper isSelected={isSelected}>
       <ProfileWrapper>
-        <ProfileImageBg
-          color={renderProfileBgColor({ sizeCard: fromJS(sizeCard) })}
-        >
+        <ProfileImageBg color={sizeCard.card_color} isSelected={isSelected}>
           <Icon
             name={renderIconImage({ sizeCard: fromJS(sizeCard) })}
             type="antdesign"
@@ -50,64 +44,44 @@ const SizeCard = ({
             color="white"
           />
         </ProfileImageBg>
-        {isMe ? (
-          <MyCardWrapper>
-            <MyCardText>본인</MyCardText>
-          </MyCardWrapper>
-        ) : null}
       </ProfileWrapper>
       <ContentWrapper>
         <TopWrapper>
-          <SizeCardName>{sizeCard.name}</SizeCardName>
+          <SizeCardName isSelected={isSelected}>{sizeCard.name}</SizeCardName>
           <DescWrapper>
-            <DescText>{sizeCard.age}</DescText>
+            <DescText isSelected={isSelected}>{sizeCard.age}</DescText>
             <Icon
               name="dot-single"
               type="entypo"
-              color={theme.darkGray}
+              color={isSelected ? 'white' : theme.darkGray}
               size={10}
             />
-            <DescText>{sizeCard.gender === 1 ? 'M' : 'W '}</DescText>
+            <DescText isSelected={isSelected}>
+              {sizeCard.gender === 1 ? 'M' : 'W '}
+            </DescText>
             <Icon
               name="dot-single"
               type="entypo"
-              color={theme.darkGray}
+              color={isSelected ? 'white' : theme.darkGray}
               size={10}
             />
-            <DescText>{sizeCard.body_shape}</DescText>
+            <DescText isSelected={isSelected}>{sizeCard.body_shape}</DescText>
           </DescWrapper>
         </TopWrapper>
-        <CreatedAt>1달 전에 생성됨</CreatedAt>
+        <CreatedAt isSelected={isSelected}>1달 전에 생성됨</CreatedAt>
       </ContentWrapper>
       <ButtonWrapper>
         <TouchableOpacity
           style={{ width: '100%' }}
           onPress={isSelected ? null : onPressSelectCard}
         >
-          <LinearGradient
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            colors={
-              isSelected
-                ? [theme.grayColor, theme.grayColor]
-                : [theme.pointColor, theme.subColor]
-            }
-            style={{
-              borderRadius: 10,
-              height: 30,
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '85%',
-              padding: 1,
-              // opacity: 0.9,
-            }}
-          >
-            <ButtonInner>
-              <ButtonText isSelected>
-                {isSelected ? '선택된 카드' : '선택하기'}
-              </ButtonText>
-            </ButtonInner>
-          </LinearGradient>
+          <ButtonInner>
+            {sizeCard.mine === 1 ? (
+              <MyCardWrapper>
+                <MyCardText isSelected={isSelected}>본인</MyCardText>
+              </MyCardWrapper>
+            ) : null}
+          </ButtonInner>
         </TouchableOpacity>
       </ButtonWrapper>
     </Wrapper>

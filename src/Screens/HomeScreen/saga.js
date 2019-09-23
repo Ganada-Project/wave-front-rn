@@ -1,5 +1,5 @@
 import {
-  call, put, takeLatest, all, take,
+  call, put, takeLatest, all, delay,
 } from 'redux-saga/effects';
 import { Navigation } from 'react-native-navigation';
 import {
@@ -35,8 +35,6 @@ function* getSizeCardsSaga() {
 
 function* setSizeCardSaga(action) {
   const { sizeCard, componentId } = action;
-  console.log(sizeCard);
-  console.log(componentId);
   yield put({
     type: SET_SIZE_CARD_SUCCESS,
     sizeCard,

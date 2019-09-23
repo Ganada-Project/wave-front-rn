@@ -7,13 +7,14 @@ export const fonts = {
   NanumGothic: 'NanumGothic',
 };
 export const theme = {
-  pointColor: '#dd6770',
-  subColor: 'rgb(106,130,251)',
+  pointColor: 'rgb(106,130,251)',
+  subColor: 'rgb(220, 103, 112)',
   whiteColor: '#ffffff',
   grayColor: '#dee0e3',
   darkGray: '#88929c',
   textColor: '#5b5e6d',
   guideColor: '#14ff1e',
+  backgroundColor: '#f9f7f9',
 };
 
 export const TopBarHeight = 120;

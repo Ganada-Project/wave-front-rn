@@ -7,17 +7,19 @@ import React, { Component } from 'react';
 // prop-types
 import PropTypes from 'prop-types';
 
-import { is } from 'immutable';
+import { is, fromJS } from 'immutable';
 // react-native
 import { View, Text, TouchableOpacity } from 'react-native';
 // react-native-navigation
 import { Navigation } from 'react-native-navigation';
+
 // redux
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 // reselect -> reducer에 있는 프로퍼티들 선택 툴
 import { createStructuredSelector } from 'reselect';
 import FastImage from 'react-native-fast-image';
+import { Icon } from 'react-native-elements';
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 
@@ -27,7 +29,7 @@ import {} from '../../Components';
 import { makeSelectUser } from '../App/selectors';
 
 // local selectors
-import { makeSelectSizeDetail } from './selectors';
+import { makeSelectSizeDetail, makeSelectSizeDetailLoading } from './selectors';
 
 // local actions
 import { getSizeDetailRequestAction } from './actions';
@@ -36,6 +38,8 @@ import { getSizeDetailRequestAction } from './actions';
 import saga from './saga';
 // local reducer
 import reducer from './reducer';
+
+import { sizeDetailTab } from './constants';
 
 import { theme, AuthTopBarOption } from '../../constants';
 // local styles
@@ -62,6 +66,7 @@ import {
   TapIndicatorBlank,
   SubTapIndicatorBlank,
 } from './styles';
+import { renderIconImage } from '../../utils/functions/renderSizeCard';
 
 class SizeCardDetailScreen extends Component {
   static options() {
@@ -77,80 +82,96 @@ class SizeCardDetailScreen extends Component {
 
   constructor(props) {
     super(props);
-    const { sizeDetail } = props;
     this.state = {
-      selectedTap: sizeDetail.get(0),
+      selectedTap: 0,
     };
   }
 
   componentDidMount() {
-    const { sizeCardId, getSizeCardDetail } = this.props;
-    getSizeCardDetail({ sizeCardId });
+    const { sizeCard, getSizeCardDetail } = this.props;
+    getSizeCardDetail({ sizeCardId: sizeCard.id });
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props.sizeDetail.get(0).toJS());
-    console.log(nextProps.sizeDetail.get(0).toJS());
-    if (
-      !this.props.sizeDetail.getIn([0, 'measurement'])
-      && nextProps.sizeDetail.getIn([0, 'measurement'])
-    ) {
-      this.setState({ selectedTap: nextProps.sizeDetail.get(0) });
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   console.log(this.props.sizeDetail.get(0).toJS());
+  //   console.log(nextProps.sizeDetail.get(0).toJS());
+  //   if (
+  //     !this.props.sizeDetail.getIn([0, 'measurement'])
+  //     && nextProps.sizeDetail.getIn([0, 'measurement'])
+  //   ) {
+  //     this.setState({ selectedTap: nextProps.sizeDetail.get(0) });
+  //   }
+  // }
 
   handleMainTap = (tap) => {
     this.setState({ selectedTap: tap });
   };
 
+  renderBySelectedTap = () => {
+    const { sizeDetail, sizeDetailLoading } = this.props;
+    const { selectedTap } = this.state;
+    if (selectedTap === 0) {
+      return <View></View>;
+    }
+    return sizeDetail.map((sTap) => (
+      <SubTapItem key={`sizeDetail-list-${sTap.get('id')}`}>
+        <TouchableOpacity
+          onPress={() => this.handleMainTap(sTap)}
+          style={{
+            width: '100%',
+          }}
+        >
+          <SubTapTextWrapper>
+            <View>
+              <SubTapText>{sTap.get('name')}</SubTapText>
+              <SubTapItem.SizeText>
+                {sizeDetailLoading ? '로딩중' : sTap.get('measurement')}
+              </SubTapItem.SizeText>
+            </View>
+            <Icon
+              name="arrow-right"
+              type="simple-line-icon"
+              size={16}
+              color={theme.grayColor}
+            >
+            </Icon>
+          </SubTapTextWrapper>
+        </TouchableOpacity>
+      </SubTapItem>
+    ));
+  };
+
   render() {
-    const { sizeCardName, sizeDetail } = this.props;
+    const { sizeCard, sizeDetail, sizeDetailLoading } = this.props;
     const { selectedTap } = this.state;
     return (
-      <Wrapper>
+      <Wrapper contentContainerStyle={{ justifyContent: 'center' }}>
         <Header>
-          <HeaderText>{sizeCardName}</HeaderText>
-        </Header>
-        <Body>
-          <BodyContent>
-            <SubTapWrapper>
-              {sizeDetail.map((sTap) => (
-                <TouchableOpacity
-                  key={sTap.get('id')}
-                  onPress={() => this.handleMainTap(sTap)}
-                  style={{
-                    width: '100%',
-                    height: '10%',
-                  }}
-                >
-                  <SubTapItem>
-                    <SubTapTextWrapper>
-                      <SubTapText
-                        isSelected={selectedTap.get('id') === sTap.get('id')}
-                      >
-                        {sTap.get('name')}
-                      </SubTapText>
-                    </SubTapTextWrapper>
-                  </SubTapItem>
+          <Header.Profile>
+            <Header.Image color={sizeCard.card_color}>
+              <Icon
+                name={renderIconImage({ sizeCard: fromJS(sizeCard) })}
+                type="antdesign"
+                size={30}
+                color="white"
+              />
+            </Header.Image>
+            <Header.Text>{sizeCard.name}</Header.Text>
+          </Header.Profile>
+          <Header.Tab>
+            {sizeDetailTab.map((sDtab) => (
+              <Header.TabItemWrapper>
+                <TouchableOpacity>
+                  <Header.TabItem>
+                    <Header.TabItemText>{sDtab.name}</Header.TabItemText>
+                  </Header.TabItem>
                 </TouchableOpacity>
-              ))}
-            </SubTapWrapper>
-            <DetailWrapper>
-              <ImageWrapper>
-                <FastImage
-                  source={{
-                    uri: selectedTap.get('url'),
-                  }}
-                  style={{ width: 200, height: 200, borderRadius: 20 }}
-                />
-              </ImageWrapper>
-              <MeasurementWrapper>
-                <MeasurementText>
-                  {selectedTap.get('measurement')}
-                </MeasurementText>
-              </MeasurementWrapper>
-            </DetailWrapper>
-          </BodyContent>
+              </Header.TabItemWrapper>
+            ))}
+          </Header.Tab>
+        </Header>
+        <Body showsVerticalScrollIndicator={false}>
+          <BodyContent>{this.renderBySelectedTap()}</BodyContent>
         </Body>
       </Wrapper>
     );
@@ -160,14 +181,15 @@ class SizeCardDetailScreen extends Component {
 SizeCardDetailScreen.propTypes = {
   componentId: PropTypes.string,
   user: PropTypes.instanceOf(Object),
-  sizeCardName: PropTypes.string,
-  sizeCardId: PropTypes.number,
+  sizeCard: PropTypes.object,
   sizeDetail: PropTypes.instanceOf(Object),
+  sizeDetailLoading: PropTypes.bool,
   getSizeCardDetail: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   sizeDetail: makeSelectSizeDetail(),
+  sizeDetailLoading: makeSelectSizeDetailLoading(),
   user: makeSelectUser(),
 });
 

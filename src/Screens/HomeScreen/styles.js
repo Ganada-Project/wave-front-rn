@@ -12,7 +12,7 @@ const window = Dimensions.get('window');
 
 export const Wrapper = styled.View`
   flex: 1;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: ${theme.backgroundColor};
   padding: 60px 25px 20px 25px;
 `;
 

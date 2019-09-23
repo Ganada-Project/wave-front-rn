@@ -13,7 +13,7 @@ export const SizeCardAlert = ({ sizeCardAlertTop, sizeCardAlertOpacity }) => (
     <LinearGradient
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 0 }}
-      colors={[theme.pointColor, theme.subColor]}
+      colors={[theme.pointColor, theme.pointColor]}
       style={{
         width: '100%',
         height: '100%',

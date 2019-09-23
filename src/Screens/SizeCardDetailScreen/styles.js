@@ -4,28 +4,64 @@ import { theme } from '../../constants';
 const window = Dimensions.get('window');
 export const Wrapper = styled.View`
   flex: 1;
-  /* height: 500px; */
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: ${theme.backgroundColor};
   padding: 100px 25px 10px 25px;
+  flex-direction: column;
 `;
 
 export const Header = styled.View`
+  flex: 0.3;
+  flex-direction: column;
+`;
+
+Header.Profile = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
 `;
 
-export const HeaderText = styled.Text`
-  font-size: 32px;
+Header.Image = styled.View`
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background-color: ${(props) => props.color};
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+`;
+
+Header.Text = styled.Text`
+  font-size: 24px;
   font-weight: bold;
-  color: black;
+  color: ${theme.textColor};
 `;
 
-export const Body = styled.View`
-  flex: 3;
+Header.Tab = styled.View`
+  flex: 1;
+  flex-direction: row;
+  margin-top: 10px;
+`;
+
+Header.TabItemWrapper = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+Header.TabItem = styled.View`
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 40px;
+  border-radius: 15px;
+  box-shadow: 0px 10px 10px rgba(136, 146, 156, 0.2);
+`;
+
+Header.TabItemText = styled.Text``;
+
+export const Body = styled.ScrollView`
+  flex: 1;
   /* padding: 15px 0; */
-  /* border: 1px red solid; */
 `;
 
 export const TapWrapper = styled.View`
@@ -59,18 +95,17 @@ export const TapIndicatorBlank = styled.View`
 export const TapText = styled.Text`
   font-weight: bold;
   font-size: 24px;
-  color: ${(props) => (props.isSelected ? theme.textColor : theme.grayColor)};
+  color: ${(props) => (props.isSelected ? theme.textColor : theme.textColor)};
 `;
 
 export const BodyContent = styled.View`
   flex: 1;
   padding-top: 15px;
-  flex-direction: row;
+  flex-direction: column;
 `;
 
 export const SubTapWrapper = styled.View`
   flex: 1;
-  flex-direction: column;
 `;
 
 export const DetailWrapper = styled.View`
@@ -99,11 +134,22 @@ export const SubTapItem = styled.View`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 80px;
+  padding: 0px 10px;
+  border-bottom-width: 1px;
+  border-bottom-color: ${theme.grayColor};
+`;
+
+SubTapItem.SizeText = styled.Text`
+  color: ${theme.pointColor};
+  margin-top: 5px;
 `;
 
 export const SubTapTextWrapper = styled.View`
   flex: 2;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
 `;
 
 export const SubTapIndicatorWrapper = styled.View`
@@ -112,7 +158,7 @@ export const SubTapIndicatorWrapper = styled.View`
 
 export const SubTapText = styled.Text`
   font-weight: bold;
-  color: ${(props) => (props.isSelected ? theme.pointColor : theme.grayColor)};
+  color: ${theme.textColor};
 `;
 
 export const SubTapIndicator = styled.View`

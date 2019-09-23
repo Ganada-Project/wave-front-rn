@@ -24,7 +24,7 @@ export const initialState = fromJS({
 function sizeDetailReducer(state = initialState, action) {
   switch (action.type) {
     case GET_SIZE_DETAIL_REQUEST:
-      return state.set('sizDetailLoading', true);
+      return state.set('sizeDetailLoading', true);
     case GET_SIZE_DETAIL_SUCCESS:
       return state
         .set('sizeDetailLoading', false)

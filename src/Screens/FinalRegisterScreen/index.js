@@ -94,6 +94,7 @@ class FinalRegisterScreen extends Component {
       rightPelvisOffsetX,
       leftThighOffsetX,
       rightThighOffsetX,
+      isMe,
     } = this.props;
 
     postSizeCard({
@@ -188,6 +189,7 @@ class FinalRegisterScreen extends Component {
       },
       // componentId,
       imageBase: base64,
+      isMe,
     });
   };
 

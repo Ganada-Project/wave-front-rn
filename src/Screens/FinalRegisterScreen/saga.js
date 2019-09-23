@@ -8,7 +8,7 @@ import {
   POST_SIZE_CARD_REQUESTING_FAIL,
   POST_SIZE_CARD_REQUESTING_SUCCESS,
 } from './constants';
-import { API_URL } from '../../constants';
+import { API_URL, theme } from '../../constants';
 import { postRequest } from '../../utils/request';
 
 function* postSizeCardSaga(action) {
@@ -44,7 +44,7 @@ function* postSizeCardSaga(action) {
   } = action.payload;
   const cardColor = randomColor({
     luminosity: 'light',
-    hue: 'pink',
+    hue: theme.subColor,
   });
   const payload = {
     name: sizeCardName,

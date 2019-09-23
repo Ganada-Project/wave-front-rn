@@ -18,17 +18,17 @@ import {
 
 const SelectedSizeCard = ({ sizeCard, empty, onPress }) => (
   <TouchableWithoutFeedback onPress={onPress}>
-    <ShadowBox>
+    <ShadowBox empty={empty}>
       <LinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         colors={
           empty
-            ? [theme.grayColor, theme.grayColor]
-            : [theme.pointColor, theme.subColor]
+            ? [theme.whiteColor, theme.whiteColor]
+            : [theme.pointColor, theme.pointColor]
         }
         style={{
-          borderRadius: 10,
+          borderRadius: 15,
           height: 45,
           justifyContent: 'center',
           alignItems: 'center',
@@ -39,9 +39,7 @@ const SelectedSizeCard = ({ sizeCard, empty, onPress }) => (
         <Wrapper>
           <InfoWrapper>
             <ProfileWrapper
-              color={
-                empty ? theme.grayColor : renderProfileBgColor({ sizeCard })
-              }
+              color={empty ? theme.grayColor : sizeCard.get('card_color')}
             >
               <Icon
                 name={renderIconImage({ empty, sizeCard })}
@@ -50,7 +48,7 @@ const SelectedSizeCard = ({ sizeCard, empty, onPress }) => (
                 color="white"
               />
             </ProfileWrapper>
-            <SizeCardName>{sizeCard.get('name')}</SizeCardName>
+            <SizeCardName empty={empty}>{sizeCard.get('name')}</SizeCardName>
           </InfoWrapper>
           <Icon
             name="arrow-right"
