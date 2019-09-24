@@ -14,6 +14,17 @@ export const sizeDetailTab = [
   { id: 1, name: '신체치수' },
 ];
 
+export const basicInfo = [
+  {
+    id: 0,
+    name: '신장',
+  },
+  {
+    id: 1,
+    name: '체중',
+  },
+];
+
 export const sizeDetail = [
   {
     id: 0,

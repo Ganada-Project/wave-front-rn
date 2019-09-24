@@ -103,8 +103,8 @@ class SizeCardDetailScreen extends Component {
   //   }
   // }
 
-  handleMainTap = (tap) => {
-    this.setState({ selectedTap: tap });
+  handleSizeDetailTab = (id) => {
+    this.setState({ selectedTap: id });
   };
 
   renderBySelectedTap = () => {
@@ -142,7 +142,7 @@ class SizeCardDetailScreen extends Component {
   };
 
   render() {
-    const { sizeCard, sizeDetail, sizeDetailLoading } = this.props;
+    const { sizeCard } = this.props;
     const { selectedTap } = this.state;
     return (
       <Wrapper contentContainerStyle={{ justifyContent: 'center' }}>
@@ -160,10 +160,14 @@ class SizeCardDetailScreen extends Component {
           </Header.Profile>
           <Header.Tab>
             {sizeDetailTab.map((sDtab) => (
-              <Header.TabItemWrapper>
-                <TouchableOpacity>
-                  <Header.TabItem>
-                    <Header.TabItemText>{sDtab.name}</Header.TabItemText>
+              <Header.TabItemWrapper key={`sizeDetail-tab-${sDtab.id}`}>
+                <TouchableOpacity
+                  onPress={() => this.handleSizeDetailTab(sDtab.id)}
+                >
+                  <Header.TabItem isSelected={sDtab.id === selectedTap}>
+                    <Header.TabItemText isSelected={sDtab.id === selectedTap}>
+                      {sDtab.name}
+                    </Header.TabItemText>
                   </Header.TabItem>
                 </TouchableOpacity>
               </Header.TabItemWrapper>

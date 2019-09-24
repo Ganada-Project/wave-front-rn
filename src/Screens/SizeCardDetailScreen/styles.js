@@ -49,7 +49,7 @@ Header.TabItemWrapper = styled.View`
 `;
 
 Header.TabItem = styled.View`
-  background-color: white;
+  background-color: ${(props) => props.isSelected ? theme.pointColor : 'white'};
   justify-content: center;
   align-items: center;
   padding: 15px 40px;
@@ -57,7 +57,9 @@ Header.TabItem = styled.View`
   box-shadow: 0px 10px 10px rgba(136, 146, 156, 0.2);
 `;
 
-Header.TabItemText = styled.Text``;
+Header.TabItemText = styled.Text`
+  color: ${(props) => (props.isSelected ? 'white' : theme.textColor)};
+`;
 
 export const Body = styled.ScrollView`
   flex: 1;

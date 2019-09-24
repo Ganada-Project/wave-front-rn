@@ -61,16 +61,16 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - Protobuf (3.9.0)
-  - React (0.59.8):
-    - React/Core (= 0.59.8)
-  - React/Core (0.59.8):
-    - yoga (= 0.59.8.React)
+  - Protobuf (3.9.2)
+  - React (0.59.10):
+    - React/Core (= 0.59.10)
+  - React/Core (0.59.10):
+    - yoga (= 0.59.10.React)
   - RNCAsyncStorage (1.4.0):
     - React
   - RNReactNativeHapticFeedback (1.8.2):
     - React
-  - yoga (0.59.8.React)
+  - yoga (0.59.10.React)
 
 DEPENDENCIES:
   - Firebase/Core
@@ -113,11 +113,11 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
   GoogleUtilities: 04fce34bcd5620c1ee76fb79172105c74a4df335
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
-  React: 76e6aa2b87d05eb6cccb6926d72685c9a07df152
+  Protobuf: 67fb42ba613def994e61854de2b3164f13790cc4
+  React: 36d0768f9e93be2473b37e7fa64f92c1d5341eef
   RNCAsyncStorage: b82dc6e5b39a625d70e3b3492bff75c0de94ba71
   RNReactNativeHapticFeedback: e11a4da0ce174e9f88b03cbaf5d76d94633cdee2
-  yoga: 92b2102c3d373d1a790db4ab761d2b0ffc634f64
+  yoga: 684513b14b03201579ba3cee20218c9d1298b0cc
 
 PODFILE CHECKSUM: 55bec2f776a0b9a108fe8f156b5eb528ac459aba
 
