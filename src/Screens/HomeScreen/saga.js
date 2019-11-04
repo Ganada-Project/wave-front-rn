@@ -1,6 +1,4 @@
-import {
-  call, put, takeLatest, all, delay,
-} from 'redux-saga/effects';
+import { call, put, takeLatest, all, delay } from 'redux-saga/effects';
 import { Navigation } from 'react-native-navigation';
 import {
   GET_SIZE_CARDS_FAIL,
@@ -8,6 +6,9 @@ import {
   GET_SIZE_CARDS_SUCCESS,
   SET_SIZE_CARD_REQUEST,
   SET_SIZE_CARD_SUCCESS,
+  GET_ITEMS_REQUEST,
+  GET_ITEMS_SUCCESS,
+  GET_ITEMS_FAIL,
 } from './constants';
 import { API_URL } from '../../constants';
 import { getRequest } from '../../utils/request';
@@ -33,6 +34,20 @@ function* getSizeCardsSaga() {
   }
 }
 
+function* getItemsSaga(action) {
+  const url = `${API_URL}/item/all?gender=m`;
+  try {
+    const { filtered } = yield call(getRequest, { url });
+    const transformed = filtered.map(x => {
+      return { ...x, uri: x.main_img };
+    });
+    yield put({ type: GET_ITEMS_SUCCESS, items: transformed });
+  } catch (error) {
+    yield put({ type: GET_ITEMS_FAIL, error });
+    console.log(error);
+  }
+}
+
 function* setSizeCardSaga(action) {
   const { sizeCard, componentId } = action;
   yield put({
@@ -46,5 +61,6 @@ export default function* rootSaga() {
   yield all([
     takeLatest(GET_SIZE_CARDS_REQUEST, getSizeCardsSaga),
     takeLatest(SET_SIZE_CARD_REQUEST, setSizeCardSaga),
+    takeLatest(GET_ITEMS_REQUEST, getItemsSaga),
   ]);
 }

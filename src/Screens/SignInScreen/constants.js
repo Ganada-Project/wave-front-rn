@@ -9,6 +9,6 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const LOGIN_REQUESTING = 'Wave/SignIn/LOGIN_REQUESTING';
-export const LOGIN_ERROR = 'Wave/SignIn/LOGIN_ERROR';
-export const LOGIN_SUCCESS = 'Wave/SignIn/LOGIN_SUCCESS';
+export const LOGIN_REQUESTING = 'WearBe/SignIn/LOGIN_REQUESTING';
+export const LOGIN_ERROR = 'WearBe/SignIn/LOGIN_ERROR';
+export const LOGIN_SUCCESS = 'WearBe/SignIn/LOGIN_SUCCESS';

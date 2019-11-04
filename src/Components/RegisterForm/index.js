@@ -54,7 +54,7 @@ export class RegisterForm extends Component {
         </View>
         {phone ? (
           <TextInputMask
-            ref={(ref) => (this.myDateText = ref)} //eslint-disable-line
+            ref={ref => (this.myDateText = ref)} //eslint-disable-line
             type="custom"
             keyboardType="numeric"
             value={phoneValue}

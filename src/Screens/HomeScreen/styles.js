@@ -30,7 +30,8 @@ export const Body = styled.View`
   align-items: center;
 `;
 
-export const IconWrapper = Platform.OS === 'ios' ? TouchableOpacity : TouchableWithoutFeedback;
+export const IconWrapper =
+  Platform.OS === 'ios' ? TouchableOpacity : TouchableWithoutFeedback;
 
 export const NavItemWrapper = styled(IconWrapper)`
   width: 45px;
@@ -40,12 +41,30 @@ export const NavItemWrapper = styled(IconWrapper)`
   padding: 5px;
   justify-content: center;
   align-items: center;
-  margin-right: ${(props) => (props.last ? '0px' : '5px')};
+  margin-right: ${props => (props.last ? '0px' : '5px')};
 `;
 
 export const InitialText = styled.Text`
   color: ${theme.textColor};
   margin-bottom: 5px;
+`;
+
+export const ItemInfo = styled.View`
+  padding: 10px;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+ItemInfo.Maker = styled.Text`
+  font-weight: bold;
+  color: ${theme.textColor};
+  font-size: 12px;
+  margin-bottom: 5px;
+`;
+
+ItemInfo.Price = styled.Text`
+  color: ${theme.textColor};
+  font-size: 12px;
 `;
 
 const styles = StyleSheet.create({

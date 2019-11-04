@@ -12,40 +12,43 @@ export const theme = {
   whiteColor: '#ffffff',
   grayColor: '#dee0e3',
   darkGray: '#88929c',
-  textColor: '#5b5e6d',
+  textColor: '#111314',
   guideColor: '#14ff1e',
   backgroundColor: '#f9f7f9',
 };
 
 export const TopBarHeight = 120;
-export const AuthTopBarOption = Platform.OS === 'ios'
-  ? {
-    noBorder: true,
-    background: {
-      translucent: true,
-    },
-    drawBehind: true,
-    backButton: {
-      color: theme.pointColor,
-    },
-  }
-  : {
-    noBorder: true,
-    drawBehind: true,
-    backButton: {
-      color: theme.pointColor,
-    },
-  };
+export const AuthTopBarOption =
+  Platform.OS === 'ios'
+    ? {
+        noBorder: true,
+        background: {
+          color: theme.backgroundColor,
+        },
+        drawBehind: true,
+        backButton: {
+          color: theme.pointColor,
+        },
+      }
+    : {
+        noBorder: true,
+        drawBehind: true,
+        backButton: {
+          color: theme.pointColor,
+        },
+      };
 
 export const InvertOption = {
   noBorder: true,
   background: {
     translucent: true,
+    color: 'transparent',
   },
   drawBehind: true,
   backButton: {
     color: 'white',
   },
+  blur: false,
 };
 
 export const BaseHeightOffset = {

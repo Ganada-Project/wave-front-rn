@@ -9,10 +9,12 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const CHECK_NICKNAME_REQUEST = 'Wave/RegisterName/CHECK_NICKNAME_REQUEST';
-export const CHECK_NICKNAME_FAIL = 'Wave/RegisterName/CHECK_NICKNAME_FAIL';
-export const CHECK_NICKNAME_SUCCESS = 'Wave/RegisterName/CHECK_NICKNAME_SUCCESS';
+export const CHECK_NICKNAME_REQUEST =
+  'WearBe/RegisterName/CHECK_NICKNAME_REQUEST';
+export const CHECK_NICKNAME_FAIL = 'WearBe/RegisterName/CHECK_NICKNAME_FAIL';
+export const CHECK_NICKNAME_SUCCESS =
+  'WearBe/RegisterName/CHECK_NICKNAME_SUCCESS';
 
-export const SIGN_UP_REQUEST = 'Wave/RegisterName/SIGN_UP_REQUEST';
-export const SIGN_UP_FAIL = 'Wave/RegisterName/SIGN_UP_FAIL';
-export const SIGN_UP_SUCCESS = 'Wave/RegisterName/SIGN_UP_SUCCESS';
+export const SIGN_UP_REQUEST = 'WearBe/RegisterName/SIGN_UP_REQUEST';
+export const SIGN_UP_FAIL = 'WearBe/RegisterName/SIGN_UP_FAIL';
+export const SIGN_UP_SUCCESS = 'WearBe/RegisterName/SIGN_UP_SUCCESS';

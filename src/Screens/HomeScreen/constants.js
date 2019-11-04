@@ -9,9 +9,13 @@
  * Corpyright : Ganada Project
  */
 
-export const GET_SIZE_CARDS_REQUEST = 'Wave/Home/GET_SIZE_CARDS_REQUEST';
-export const GET_SIZE_CARDS_FAIL = 'Wave/Home/GET_SIZE_CARDS_FAIL';
-export const GET_SIZE_CARDS_SUCCESS = 'Wave/Home/GET_SIZE_CARDS_SUCCESS';
+export const GET_SIZE_CARDS_REQUEST = 'WearBe/Home/GET_SIZE_CARDS_REQUEST';
+export const GET_SIZE_CARDS_FAIL = 'WearBe/Home/GET_SIZE_CARDS_FAIL';
+export const GET_SIZE_CARDS_SUCCESS = 'WearBe/Home/GET_SIZE_CARDS_SUCCESS';
 
-export const SET_SIZE_CARD_REQUEST = 'Wave/Home/SET_SIZE_CARD_REQUEST';
-export const SET_SIZE_CARD_SUCCESS = 'Wave/Home/SET_SIZE_CARD_SUCCESS';
+export const SET_SIZE_CARD_REQUEST = 'WearBe/Home/SET_SIZE_CARD_REQUEST';
+export const SET_SIZE_CARD_SUCCESS = 'WearBe/Home/SET_SIZE_CARD_SUCCESS';
+
+export const GET_ITEMS_REQUEST = 'WearBe/Home/GET_ITEMS_REQUEST';
+export const GET_ITEMS_FAIL = 'WearBe/Home/GET_ITEMS_FAIL';
+export const GET_ITEMS_SUCCESS = 'WearBe/Home/GET_ITEMS_SUCCESS';

@@ -75,7 +75,7 @@ class SizeCardDetailScreen extends Component {
         ...AuthTopBarOption,
       },
       statusBar: {
-        style: 'light',
+        style: 'dark',
       },
     };
   }
@@ -103,7 +103,7 @@ class SizeCardDetailScreen extends Component {
   //   }
   // }
 
-  handleSizeDetailTab = (id) => {
+  handleSizeDetailTab = id => {
     this.setState({ selectedTap: id });
   };
 
@@ -113,7 +113,7 @@ class SizeCardDetailScreen extends Component {
     if (selectedTap === 0) {
       return <View></View>;
     }
-    return sizeDetail.map((sTap) => (
+    return sizeDetail.map(sTap => (
       <SubTapItem key={`sizeDetail-list-${sTap.get('id')}`}>
         <TouchableOpacity
           onPress={() => this.handleMainTap(sTap)}
@@ -133,8 +133,7 @@ class SizeCardDetailScreen extends Component {
               type="simple-line-icon"
               size={16}
               color={theme.grayColor}
-            >
-            </Icon>
+            ></Icon>
           </SubTapTextWrapper>
         </TouchableOpacity>
       </SubTapItem>
@@ -159,7 +158,7 @@ class SizeCardDetailScreen extends Component {
             <Header.Text>{sizeCard.name}</Header.Text>
           </Header.Profile>
           <Header.Tab>
-            {sizeDetailTab.map((sDtab) => (
+            {sizeDetailTab.map(sDtab => (
               <Header.TabItemWrapper key={`sizeDetail-tab-${sDtab.id}`}>
                 <TouchableOpacity
                   onPress={() => this.handleSizeDetailTab(sDtab.id)}
@@ -197,7 +196,7 @@ const mapStateToProps = createStructuredSelector({
   user: makeSelectUser(),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   getSizeCardDetail: ({ componentId, sizeCardId }) => {
     dispatch(getSizeDetailRequestAction({ componentId, sizeCardId }));
   },

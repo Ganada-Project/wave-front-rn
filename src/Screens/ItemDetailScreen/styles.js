@@ -1,38 +1,37 @@
-import { StyleSheet, Dimensions } from 'react-native';
-import { theme, TopBarHeight } from '../../constants';
-const window = Dimensions.get('window');
+import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
+import { theme } from '../../constants';
 
-const styles = StyleSheet.create({
-  container: {
-    // paddingTop: TopBarHeight,
-    backgroundColor: 'blue',
-  },
-  swiper__container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(255,255,255,0.9)',
-    borderWidth: 1,
-    borderColor: 'red',
-  },
-  body: {},
-  body__text: {
-    marginBottom: 30,
-    color: theme.whiteColor,
-  },
-  header__title: {
-    fontSize: 20,
-    color: theme.whiteColor,
-    fontWeight: 'bold',
-  },
-  guideImage: {
-    width: window.width,
-    height: 200,
-  },
-  footer: {
-    flex: 0.5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export const Wrapper = styled.View`
+  flex: 1;
+  /* height: 500px; */
+  background-color: ${theme.backgroundColor};
+  padding: 80px 25px 0px 25px;
+`;
 
-export default styles;
+export const Header = styled.View`
+  flex: 0.1;
+  padding-top: 15px;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+export const Body = styled.ScrollView`
+  flex: 1;
+  /* padding: 15px 0; */
+  /* border: 1px red solid; */
+`;
+
+export const HeaderText = styled.Text`
+  font-size: 14px;
+  color: ${theme.darkGray};
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
+export const SubText = styled.Text`
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: ${theme.textColor};
+`;

@@ -36,7 +36,7 @@ import {} from './actions';
 import saga from './saga';
 
 // local styles
-import styles from './style';
+import { Wrapper, Header, Body } from './styles';
 
 class DefaultScreen extends Component {
   constructor(props) {
@@ -62,7 +62,12 @@ class DefaultScreen extends Component {
   };
 
   render() {
-    return <View />;
+    return (
+      <Wrapper>
+        <Header></Header>
+        <Body></Body>
+      </Wrapper>
+    );
   }
 }
 
@@ -72,7 +77,7 @@ DefaultScreen.propTypes = {
 
 const mapStateToProps = createStructuredSelector({});
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = dispatch => ({});
 
 const withSaga = injectSaga({ key: 'default', saga });
 

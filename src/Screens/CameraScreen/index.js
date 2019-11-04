@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { RNCamera } from 'react-native-camera';
-import { Attitude, Barometer } from 'react-native-attitude';
+import { Attitude } from 'react-native-attitude';
 // import {
 //   gyroscope,
 //   setUpdateIntervalForType,
@@ -68,8 +68,8 @@ class CameraScreen extends Component {
     //   this.setState({ x, y, z });
     // });
     // this.setState({ subscription });
-    this.attitudeWatchID = Attitude.watchAttitude((update) => {
-      this.setState({ pitch: update.attitude.pitch + 90 });
+    this.attitudeWatchID = Attitude.watch(update => {
+      this.setState({ pitch: update.pitch + 90 });
     });
     this.startAnimation();
   }
@@ -92,9 +92,7 @@ class CameraScreen extends Component {
   };
 
   takePicture = async () => {
-    const {
-      componentId, height, weight, isMe,
-    } = this.props;
+    const { componentId, height, weight, isMe } = this.props;
     if (this.camera) {
       const options = { quality: 0.1, base64: true };
       const data = await this.camera.takePictureAsync(options);
@@ -114,15 +112,13 @@ class CameraScreen extends Component {
   };
 
   render() {
-    const {
-      x, y, z, pitch,
-    } = this.state;
+    const { x, y, z, pitch } = this.state;
     const allowed = pitch < 100 && pitch > 80;
 
     return (
       <View style={styles.container}>
         <RNCamera
-          ref={(ref) => {
+          ref={ref => {
             this.camera = ref;
           }}
           style={styles.preview}

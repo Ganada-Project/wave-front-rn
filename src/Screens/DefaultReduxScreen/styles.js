@@ -1,3 +1,5 @@
+import { StyleSheet } from 'react-native';
+
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
 import { theme } from '../../constants';
@@ -23,7 +25,7 @@ export const Body = styled.ScrollView`
   /* border: 1px red solid; */
 `;
 
-export const HeadderText = styled.Text`
+export const HeaderText = styled.Text`
   font-size: 20px;
   color: ${theme.textColor};
   font-weight: bold;

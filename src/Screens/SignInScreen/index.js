@@ -38,6 +38,12 @@ class SignInScreen extends Component {
     return {
       topBar: {
         noBorder: true,
+        background: {
+          color: 'white',
+        },
+      },
+      statusBar: {
+        style: 'dark',
       },
     };
   }
@@ -80,11 +86,11 @@ class SignInScreen extends Component {
             label="휴대폰번호"
             phone
             phoneValue={phone}
-            onChangePhoneText={(text) => this.setState({ phone: text })}
+            onChangePhoneText={text => this.setState({ phone: text })}
           />
           <RegisterForm
             label="비밀번호"
-            onChangeText={(text) => this.setState({ password: text })}
+            onChangeText={text => this.setState({ password: text })}
             autoFocus={false}
           />
           <Text>계정을 잊으셨나요?</Text>
@@ -108,13 +114,14 @@ SignInScreen.propTypes = {
 const mapStateToProps = createStructuredSelector({
   erros: makeSelectErrors(),
 });
-const mapDispatchToProps = (dispatch) => ({
-  onClickTryLoginBtn: ({ phone, password }) => dispatch(
-    requestLoginAction({
-      phone,
-      password,
-    }),
-  ),
+const mapDispatchToProps = dispatch => ({
+  onClickTryLoginBtn: ({ phone, password }) =>
+    dispatch(
+      requestLoginAction({
+        phone,
+        password,
+      }),
+    ),
 });
 const withSaga = injectSaga({ key: 'signIn', saga, mode: DAEMON });
 const withReducer = injectReducer({ key: 'signIn', reducer });

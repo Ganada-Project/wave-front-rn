@@ -12,6 +12,22 @@ import {
 } from './style';
 import { theme } from '../../constants';
 
+const event = [
+  {
+    title: '예술을 이해하기 위한 바른 자세',
+    subTitle: '#갤러리룩',
+    imgUrl: 'https://s3...',
+    outer: [
+      {
+        id: 0,
+        name: '점퍼',
+      },
+    ],
+    top: [],
+    bottom: [],
+  },
+];
+
 const styles = {
   itemImage: {
     width: '100%',
@@ -55,7 +71,7 @@ class BrandBox extends Component {
             />
           </BrandInfo>
           <ItemArea horizontal showsHorizontalScrollIndicator={false}>
-            {brand.get('items').map((item) => (
+            {brand.get('items').map(item => (
               <ImageArea key={`brandBox-itemImage-${item.get('id')}`}>
                 <FastImage
                   source={{

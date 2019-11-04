@@ -76,7 +76,7 @@ export class PhoneVerifyScreen extends Component {
     this.setState({ isSent: true });
   };
 
-  handlePhoneNumber = (text) => {
+  handlePhoneNumber = text => {
     const { checkPhoneNumber } = this.props;
     this.setState({ phone: text }, () => {
       checkPhoneNumber({ number: text });
@@ -89,9 +89,7 @@ export class PhoneVerifyScreen extends Component {
 
   render() {
     const { checking, componentId } = this.props;
-    const {
-      isSent, errorText, phone, overlap,
-    } = this.state;
+    const { isSent, errorText, phone, overlap } = this.state;
     if (!isSent) {
       return (
         <AnimatedLinearGradient
@@ -161,7 +159,7 @@ export class PhoneVerifyScreen extends Component {
             <TimerCountdown
               initialSecondsRemaining={2000 * 60}
               onTimeElapsed={this.handleTimeOut}
-              formatSecondsRemaining={(milliseconds) => {
+              formatSecondsRemaining={milliseconds => {
                 const remainingSec = Math.round(milliseconds / 1000);
                 const seconds = parseInt((remainingSec % 60).toString(), 10);
                 const minutes = parseInt(
@@ -209,9 +207,11 @@ const mapStateToProps = createStructuredSelector({
   overlap: makeSelectOverlap(),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  verifyPhoneNumber: ({ number }) => dispatch(verifyPhoneNumberAction({ number })),
-  checkPhoneNumber: ({ number }) => dispatch(checkPhoneNumberAction({ number })),
+const mapDispatchToProps = dispatch => ({
+  verifyPhoneNumber: ({ number }) =>
+    dispatch(verifyPhoneNumberAction({ number })),
+  checkPhoneNumber: ({ number }) =>
+    dispatch(checkPhoneNumberAction({ number })),
 });
 
 const withSaga = injectSaga({ key: 'phoneVerify', saga });

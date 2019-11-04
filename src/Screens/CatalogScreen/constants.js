@@ -9,6 +9,6 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const GET_ITEMS_REQUESTING = 'Wave/Catalog/GET_ITEMS';
-export const GET_ITEMS_FAIL = 'Wave/Catalog/GET_ITEMS_REQUESTING_FAIL';
-export const GET_ITEMS_SUCCESS = 'Wave/Catalog/GET_ITEMS_SUCCESS';
+export const GET_ITEMS_REQUESTING = 'WearBe/Catalog/GET_ITEMS';
+export const GET_ITEMS_FAIL = 'WearBe/Catalog/GET_ITEMS_REQUESTING_FAIL';
+export const GET_ITEMS_SUCCESS = 'WearBe/Catalog/GET_ITEMS_SUCCESS';

@@ -16,6 +16,9 @@ import {
   GET_SIZE_CARDS_REQUEST,
   GET_SIZE_CARDS_SUCCESS,
   SET_SIZE_CARD_SUCCESS,
+  GET_ITEMS_REQUEST,
+  GET_ITEMS_FAIL,
+  GET_ITEMS_SUCCESS,
 } from './constants';
 
 // The initial state of the App
@@ -26,6 +29,10 @@ export const initialState = fromJS({
     id: null,
     name: '',
   },
+  items: [],
+  itemsLoading: false,
+  sizeCardError: null,
+  itemError: null,
 });
 
 function homeReducer(state = initialState, action) {
@@ -38,9 +45,17 @@ function homeReducer(state = initialState, action) {
         .set('sizeCards', List(action.cards))
         .set('selectedSizeCard', fromJS(action.selectedSizeCard));
     case GET_SIZE_CARDS_FAIL:
-      return state.set('sizeCardLoading', false);
+      return state
+        .set('sizeCardLoading', false)
+        .set('sizeCardError', action.error);
     case SET_SIZE_CARD_SUCCESS:
       return state.set('selectedSizeCard', fromJS(action.sizeCard));
+    case GET_ITEMS_REQUEST:
+      return state.set('itemsLoading', true);
+    case GET_ITEMS_SUCCESS:
+      return state.set('itemsLoading', false).set('items', List(action.items));
+    case GET_ITEMS_FAIL:
+      return state.set('itemsLoading', false).set('itemError', action.error);
 
     default:
       return state;

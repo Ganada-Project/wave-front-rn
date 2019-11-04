@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { List } from 'immutable';
 import PropTypes from 'prop-types';
-import { View, Animated, Easing } from 'react-native';
+import { View, Animated, Easing, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
+// navigation
 import { Navigation } from 'react-native-navigation';
+// 움직이즌 그라데이션
 import AnimatedLinearGradient from 'react-native-animated-linear-gradient';
+// 햅틱 효과
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-
+// pinterest ui
+import Masonry from 'react-native-masonry';
 // redux
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -28,6 +32,7 @@ import styles, {
   Wrapper,
   Header,
   Body,
+  ItemInfo,
   SizeCardAlertWrapper,
   SizeCardAlertText,
 } from './styles';
@@ -47,8 +52,16 @@ import {
 } from '../../constants';
 import WaveLogoWhite from '../../Assets/Logos/wave-logo-color.png';
 import InitialImage from './Images/initial.png';
-import { getSizeCardRequestAction, setSizeCardRequestAction } from './actions';
-import { makeSelectSizeCards, makeSelectSelectedSizeCard } from './selectors';
+import {
+  getSizeCardRequestAction,
+  setSizeCardRequestAction,
+  getItemsRequestAction,
+} from './actions';
+import {
+  makeSelectSizeCards,
+  makeSelectSelectedSizeCard,
+  makeSelectItems,
+} from './selectors';
 import SelectedSizeCard from './SelectedSizeCard';
 import { makeSelectUser } from '../App/selectors';
 import { alertSetSizeCard } from './utils/alert';
@@ -59,6 +72,11 @@ const options = {
   ignoreAndroidSystemSettings: false,
 };
 
+const fastProps = {
+  // onProgress: { e => console.log(e.nativeEvent.loaded / e.nativeEvent.total) },
+  resizeMode: FastImage.resizeMode.cover,
+};
+
 export class HomeScreen extends Component {
   static options() {
     return {
@@ -67,7 +85,7 @@ export class HomeScreen extends Component {
         drawBehind: true,
       },
       statusBar: {
-        style: 'light',
+        style: 'dark',
       },
     };
   }
@@ -82,17 +100,23 @@ export class HomeScreen extends Component {
   }
 
   componentDidMount() {
-    const { getSizeCards } = this.props;
+    const { getSizeCards, getItems } = this.props;
     getSizeCards();
+    getItems();
   }
 
   componentDidUpdate(prevProps) {
-    const { selectedSizeCard } = this.props;
+    const { selectedSizeCard, getItems } = this.props;
+
+    if (!prevProps.selectedSizeCard.get('id') && selectedSizeCard.get('id')) {
+      console.log('init');
+    }
     if (
-      prevProps.selectedSizeCard.get('id') !== null
-      && selectedSizeCard.get('id') !== prevProps.selectedSizeCard.get('id')
+      prevProps.selectedSizeCard.get('id') !== null &&
+      selectedSizeCard.get('id') !== prevProps.selectedSizeCard.get('id')
     ) {
       this.alertSizeCardChanged();
+      console.log(selectedSizeCard.toJS());
     }
   }
 
@@ -138,9 +162,7 @@ export class HomeScreen extends Component {
   };
 
   navigateToSizeCardList = () => {
-    const {
-      selectedSizeCard, sizeCards, user, setSizeCard,
-    } = this.props;
+    const { selectedSizeCard, sizeCards, user, setSizeCard } = this.props;
     Navigation.showModal({
       stack: {
         children: [
@@ -176,7 +198,32 @@ export class HomeScreen extends Component {
   };
 
   render() {
-    const { selectedSizeCard, sizeCards } = this.props;
+    const { selectedSizeCard, sizeCards, items, componentId } = this.props;
+    const isEmpty = sizeCards.size === 0;
+    const renderedItems = items.toJS().map(x => {
+      return {
+        ...x,
+        onPress: () => {
+          Navigation.push(componentId, {
+            component: {
+              name: 'wave.itemDetail',
+              passProps: {
+                item: x,
+              },
+            },
+          });
+        },
+        renderFooter: () => {
+          return (
+            <ItemInfo>
+              <ItemInfo.Maker>{x.maker}</ItemInfo.Maker>
+              <ItemInfo.Price>{x.price}</ItemInfo.Price>
+            </ItemInfo>
+          );
+        },
+      };
+    });
+
     return (
       <AnimatedLinearGradient
         customColors={gradientPreset}
@@ -187,7 +234,7 @@ export class HomeScreen extends Component {
             <View style={styles.header__selected_card}>
               <SelectedSizeCard
                 sizeCard={selectedSizeCard}
-                empty={sizeCards.size === 0}
+                empty={isEmpty}
                 onPress={this.onPressSelectedSizeCard}
               />
             </View>
@@ -223,14 +270,29 @@ export class HomeScreen extends Component {
               sizeCardAlertOpacity={this.sizeCardAlertOpacity}
               sizeCardAlertTop={this.sizeCardAlertTop}
             />
-            <FastImage
-              source={InitialImage}
-              style={styles.initialImage}
-              resizeMode="contain"
-            />
-            <InitialText>사이즈 카드가 아직 없어요.</InitialText>
-            <InitialText>신체치수를 측정해서 </InitialText>
-            <InitialText>편리한 쇼핑을 즐겨보세요</InitialText>
+            {isEmpty ? (
+              <Fragment>
+                <FastImage
+                  source={InitialImage}
+                  style={styles.initialImage}
+                  resizeMode="contain"
+                />
+                <InitialText>사이즈 카드가 아직 없어요.</InitialText>
+                <InitialText>신체치수를 측정해서 </InitialText>
+                <InitialText>편리한 쇼핑을 즐겨보세요</InitialText>
+              </Fragment>
+            ) : (
+              <Masonry
+                bricks={renderedItems}
+                coloums={2}
+                spacing={2}
+                customImageComponent={FastImage}
+                customImageProps={fastProps}
+                imageContainerStyle={{ borderRadius: 20 }}
+                onPress={this.onPressItem}
+              />
+              // <View />
+            )}
           </Body>
         </Wrapper>
       </AnimatedLinearGradient>
@@ -245,17 +307,21 @@ HomeScreen.propTypes = {
   setSizeCard: PropTypes.func,
   selectedSizeCard: PropTypes.instanceOf(Object),
   sizeCards: PropTypes.instanceOf(List),
+  items: PropTypes.instanceOf(List),
 };
 
 const mapStateToProps = createStructuredSelector({
   user: makeSelectUser(),
   sizeCards: makeSelectSizeCards(),
   selectedSizeCard: makeSelectSelectedSizeCard(),
+  items: makeSelectItems(),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   getSizeCards: () => dispatch(getSizeCardRequestAction()),
-  setSizeCard: ({ sizeCard, componentId }) => dispatch(setSizeCardRequestAction({ sizeCard, componentId })),
+  setSizeCard: ({ sizeCard, componentId }) =>
+    dispatch(setSizeCardRequestAction({ sizeCard, componentId })),
+  getItems: () => dispatch(getItemsRequestAction()),
 });
 
 const withSaga = injectSaga({ key: 'home', saga });

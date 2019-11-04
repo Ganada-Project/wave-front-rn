@@ -1,4 +1,8 @@
-import { GET_SIZE_CARDS_REQUEST, SET_SIZE_CARD_REQUEST } from './constants';
+import {
+  GET_SIZE_CARDS_REQUEST,
+  SET_SIZE_CARD_REQUEST,
+  GET_ITEMS_REQUEST,
+} from './constants';
 
 /**
  * Home Actions
@@ -15,5 +19,11 @@ export function setSizeCardRequestAction({ sizeCard, componentId }) {
     type: SET_SIZE_CARD_REQUEST,
     sizeCard,
     componentId,
+  };
+}
+
+export function getItemsRequestAction() {
+  return {
+    type: GET_ITEMS_REQUEST,
   };
 }
